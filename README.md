@@ -1,5 +1,17 @@
 # rtex — o reel de "N peças" do INEMA
 
+[![rtex](capa/capa.png)](https://inematds.github.io/rtex/guia/)
+
+**🇧🇷 [Português](README.md) · 🇺🇸 [English](README.en.md) · 🇪🇸 [Español](README.es.md)**
+
+## O que é
+
+O rtex é o motor que o Nei usa para fazer reels (vídeos curtos verticais) do INEMA com o próprio rosto: o avatar dele no HeyGen fala o roteiro, e o motor desenha por cima as telas, a legenda palavra por palavra e o cartão final. Cada vídeo segue um formato fixo de "N peças", do quadro de abertura com a tese até o pedido "comenta PALAVRA". Um validador, um crítico automático e um QA conferem o formato antes de publicar. O código é aberto para estudar e adaptar; para gerar o seu vídeo, você precisa do seu próprio avatar no HeyGen, além de Python, Node, ffmpeg e Whisper.
+
+## 📖 Guia de uso
+
+Guia completo (landing + passo a passo + o que muda em relação ao r7ex): **https://inematds.github.io/rtex/guia/** · vídeo exemplo: https://www.youtube.com/watch?v=vLOgLCVs7gg
+
 **rtex = o que o INEMA já tem (motor r7ex v1.1.0) + o padrão rtex de roteiro e tela.**
 Um reel vertical (9:16, 60–90 s) com o avatar real do Nei falando em 1ª pessoa: a tese escrita no quadro 0, uma prova social
 com número e fonte, "N peças" anunciadas com índice, o método numerado, uma prova com fonte, a ressalva honesta, a máxima em
