@@ -82,7 +82,7 @@ def medir(p, r):
     css = (R / "motor/palco.html").read_text()
     amarelo = len(re.findall(r"background:(?:var\(--am\)|#FACC15)", css))
     item("amarelo sólido só na isca", f"{amarelo} superfície(s)", "1 (a pílula da palavra)", amarelo == 1)
-    px = {k: int(re.search(sel + r"\{[^}]*?(\d+)px", css).group(1)) for k, sel in
+    px = {k: int(re.search(sel + r"\{[^}]*?font:[^;}]*?(\d+)px", css).group(1)) for k, sel in
           (("ressalva", r"\.res \.it"), ("linha-fonte", r"#fonte"), ("legenda", r"#leg"))}
     item("legibilidade", f"ressalva {px['ressalva']} px · fonte {px['linha-fonte']} px · legenda {px['legenda']} px", "≥ 40 · ≥ 32 · ≥ 64",
          px["ressalva"] >= 40 and px["linha-fonte"] >= 32 and px["legenda"] >= 64)

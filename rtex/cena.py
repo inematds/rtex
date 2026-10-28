@@ -105,6 +105,10 @@ def montar(pasta, r, falas):
             d["rotulo"] = f"{b['n']:02d} / {b['nome']}"; d["n"] = b["n"]
         blocos.append(d)
         eventos.append(ini)
+        if o["comp"] == "repo":            # estrelas contando (ini+0,5) e a frase entrando (ini+1,6), além da palavra marcada
+            eventos += [ini + .5, min(pr.get("marca_em", ini + 1.9) - .3, ini + 1.6)]
+        if o["comp"] == "contador":        # o número começa a correr 0,9 s antes da palavra e pousa nela
+            eventos.append(pr["em"] - .9)
         for v in pr.values():
             if isinstance(v, (int, float)) and not isinstance(v, bool) and ini < v < fim and v != pr.get("ate") and v != pr.get("de"):
                 eventos.append(v)

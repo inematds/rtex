@@ -21,10 +21,10 @@ a, b = z.get("ini"), z.get("fim")
 print("0.2" if a is None else f"'0.2*clip(max(({a:.3f}-t)/0.08,(t-{b:.3f})/0.08),0,1)':eval=frame")
 PY
 )
-# rosto: recorte 1350x800 do 1920x1080 (cabeça e ombros), escala 1080x640
+# rosto: recorte 1620x960 (cabeça inteira; 1350x800 cortava a testa, 28/10/2026) do 1920x1080 (cabeça e ombros), escala 1080x640
 ffmpeg -v error -y -i "$E/build/palco.mp4" -i "$A" -stream_loop -1 -i "$MUSICA" -filter_complex \
-  "[1:v]crop=1350:800:285:30,scale=1080:640,setsar=1,fps=30[av];[0:v][av]overlay=0:1280:shortest=1,
-   drawbox=x=40:y=1846:w=420:h=46:color=0x0c0c10@0.85:t=fill,drawtext=fontfile=$FONTE:textfile=$TAG:x=58:y=1858:fontsize=22:fontcolor=0xe9e9ee[v];
+  "[1:v]crop=1620:960:150:0,scale=1080:640,setsar=1,fps=30[av];[0:v][av]overlay=0:1280:shortest=1,
+   drawbox=x=40:y=1846:w=470:h=46:color=0x0c0c10@0.85:t=fill,drawtext=fontfile=$FONTE:textfile=$TAG:x=58:y=1858:fontsize=22:fontcolor=0xe9e9ee[v];
    [1:a]aresample=48000,loudnorm=I=-14:TP=-1.5:LRA=11,aresample=48000,asplit=2[voz][sc];[2:a]volume=$VOLM,aresample=48000[m];
    [m][sc]sidechaincompress=threshold=0.03:ratio=8:attack=20:release=300,afade=t=out:st=$FADE:d=1.6[md];
    [voz][md]amix=inputs=2:duration=first:normalize=0[a]" \

@@ -67,7 +67,7 @@ html,body{width:1080px;height:1920px;overflow:hidden;background:var(--bg);color:
 .repo .bar{height:62px;background:#1c1c24;display:flex;align-items:center;gap:12px;padding:0 24px}
 .repo .bar i{width:18px;height:18px;border-radius:50%;background:#3a3a46}
 .repo .bar span{margin-left:12px;font:800 28px 'JetBrains Mono';color:#cfd0d8;background:#0f0f14;border-radius:10px;padding:6px 16px;flex:1;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
-.repo .win img{display:block;width:100%;height:540px;object-fit:cover;object-position:top}
+.repo .win img{display:block;width:100%;height:430px;object-fit:cover;object-position:top}
 .repo .st{display:flex;align-items:baseline;gap:18px;margin-top:30px}
 .repo .st b{font:800 120px/1 Sora;color:#fff;letter-spacing:-3px}.repo .st span{font:800 44px Sora;color:var(--tx2)}
 .repo .fr{font:700 48px/1.2 Inter;color:#fff;margin-top:18px}.repo .fr em{font-style:normal;color:var(--am)}
@@ -136,6 +136,7 @@ const vis=(t,a,b,d=.3)=>(t<a||t>b)?0:Math.min(a<=0?1:clamp((t-a)/d),clamp((b-t)/
 const lerp=(a,b,k)=>a+(b-a)*k;
 const fmt=(v,dec)=>v.toLocaleString('pt-BR',{minimumFractionDigits:dec,maximumFractionDigits:dec});
 const ent=(t,a,dy=34,d=.4)=>{const k=prog(t,a,d);return `opacity:${k};transform:translateY(${(1-k)*dy}px)`;};
+const dim=(t,a,dx=-24,d=.35)=>{const k=prog(t,a,d);return `opacity:${.2+.8*k};transform:translateX(${(1-k)*dx}px)`;};
 const realce=(txt,w)=>w?txt.replace(new RegExp(`(${w})`,'i'),'<em>$1</em>'):txt;
 document.getElementById('marca').textContent=C.marca;
 const IMGS=[];C.blocos.forEach(b=>{if(b.p.img)IMGS.push(b.p.img);if(b.p.logo)IMGS.push(b.p.logo);});
@@ -152,7 +153,7 @@ const COMP={
     <g style="transform-origin:20px 110px;transform:skewX(${-18*k}deg) scaleY(${1-.35*k})"><path d="M20 110 h360 v170 h-360z" fill="#2a2414" stroke="#FACC15" stroke-width="6"/></g>
     <rect x="70" y="${120-60*k}" width="260" height="14" rx="7" fill="#e9e9ee" opacity="${k}"/><rect x="70" y="${150-60*k}" width="200" height="14" rx="7" fill="#9a9aa6" opacity="${k}"/>
    </svg></div>`;},
- contador(b,t){const p=b.p,k=prog(t,p.em-.9,1.1),v=lerp(p.de,p.ate,k);
+ contador(b,t){const p=b.p,a0=b.ini+.3,k=prog(t,a0,p.em-a0+.1),v=lerp(p.de,p.ate,k);
   return `<div class="cx cont" style="${ent(t,b.ini+.05)}"><div class="k">${p.rotulo}</div><div class="n">${fmt(v,p.dec)}</div><div class="u">${p.unid}</div>
    <div class="pc">${p.parcelas.map((x,i)=>`<div style="${ent(t,p.em+.25+i*.3,20)}"><span>${x[0]}</span><b>${x[1]} ⭐</b></div>`).join('')}</div></div>`;},
  chat_riscado(b,t){const p=b.p;
@@ -164,22 +165,22 @@ const COMP={
  pasta(b,t){const p=b.p;
   return `<div class="cx pasta"><div class="hd" style="${ent(t,b.ini+.05)}">${p.logo?`<img src="${p.logo}">`:''}<span>${p.titulo}</span></div>
    <div class="fold" style="${ent(t,b.ini+.25)}"><div class="nm">📁 uma-tarefa/</div>
-   ${p.itens.map((x,i)=>`<div class="it" style="${ent(t,x.t-.15,24,.3)}"><i>0${i+1}</i>${x.txt}${i===p.itens.length-1?`<span class="ok" style="opacity:${prog(t,x.t+.3,.3)}">✓</span>`:''}</div>`).join('')}</div></div>`;},
+   ${p.itens.map((x,i)=>`<div class="it" style="${dim(t,x.t-.15)}"><i>0${i+1}</i>${x.txt}${i===p.itens.length-1?`<span class="ok" style="opacity:${prog(t,x.t+.3,.3)}">✓</span>`:''}</div>`).join('')}</div></div>`;},
  repo(b,t){const p=b.p,ks=prog(t,b.ini+.5,1.0),n=parseFloat(p.estrelas.replace(',','.')),dec=p.estrelas.includes(',')?1:0;
   return `<div class="cx repo"><div class="win" style="${ent(t,b.ini+.05,40)}"><div class="bar"><i></i><i></i><i></i><span>${p.dominio}</span></div><img src="${p.img}"></div>
    <div class="st" style="${ent(t,b.ini+.4)}"><b>★ ${fmt(n*ks,dec)} mil</b><span>estrelas</span></div>
-   <div class="fr" style="${ent(t,(p.marca_em||b.ini)-.3)}">${realce(p.frase,t>=(p.marca_em||0)?(p.frase.match(/menos|mapa|time/i)||[''])[0]:'')}</div>
+   <div class="fr" style="${ent(t,Math.min((p.marca_em||b.ini)-.3,b.ini+1.6))}">${realce(p.frase,t>=(p.marca_em||0)?(p.frase.match(/menos|mapa|time/i)||[''])[0]:'')}</div>
    ${p.papeis?`<div class="pp">${p.papeis.map(x=>`<div style="${ent(t,x.t-.15,20,.3)}">${x.txt}</div>`).join('')}</div>`:''}</div>`;},
  manchete(b,t){const p=b.p;
   return `<div class="cx card man" style="${ent(t,b.ini+.05)}"><div class="ch">● ${p.chapeu}</div><div class="ic" style="transform:translateY(${-30*prog(t,b.ini+.3,1.2)}px)">🚀</div><div class="tt">${p.titulo}</div>
-   ${p.linhas.map((x,i)=>`<div class="ln ${i===p.linhas.length-1?'d':''}" style="${ent(t,x.t-.15,20,.3)}">${x.txt}</div>`).join('')}</div>`;},
+   ${p.linhas.map((x,i)=>`<div class="ln ${i===p.linhas.length-1?'d':''}" style="${dim(t,x.t-.15)}">${x.txt}</div>`).join('')}</div>`;},
  selo_prova(b,t){const p=b.p,k=prog(t,p.em-.15,.45);
   return `<div class="cx prova"><div class="tr" style="opacity:${.45+.55*k};transform:scale(${.85+.15*k})">🏆</div>
    <div class="tt" style="opacity:${.25+.75*k}">${realce(p.titulo,t>=p.em-.15?'VENCEU':'')}</div><div class="sb" style="${ent(t,b.ini+.2,20)}">${p.sub}</div></div>`;},
  ressalva(b,t){const p=b.p;
   return `<div class="cx"><div class="res" style="${ent(t,b.ini+.05)}"><div class="hd">⚠ ATENÇÃO</div>
-   ${p.itens.map(x=>`<div class="it" style="${ent(t,x.t-.2,20,.3)}">${x.txt}</div>`).join('')}
-   <div class="dc" style="${ent(t,p.dica.t-.15,24,.35)}"><b>→</b> ${p.dica.txt}</div></div></div>`;},
+   ${p.itens.map(x=>`<div class="it" style="${dim(t,x.t-.2)}">${x.txt}</div>`).join('')}
+   <div class="dc" style="${dim(t,p.dica.t-.15)}"><b>→</b> ${p.dica.txt}</div></div></div>`;},
  maxima(b,t){const p=b.p;
   return `<div class="cx max"><div class="a" style="${ent(t,b.ini+.1,20,.35)}">${p.linha1}</div><div class="b" style="${ent(t,p.linha2_em-.25,30,.35)}">${realce(p.linha2,p.destaque)}</div></div>`;},
  isca(b,t){const p=b.p,k=prog(t,p.em-.2,.4);
