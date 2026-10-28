@@ -116,6 +116,7 @@
   .cmp th{font-family:Sora;font-size:.8rem;letter-spacing:.08em;text-transform:uppercase;color:var(--mut)}
   .cmp td:first-child{color:var(--txt);font-weight:600;white-space:nowrap}
   .cmp td{color:var(--mut)} .cmp td.new{color:var(--txt)}
+  @media(max-width:600px){.cmp tr:first-child{display:none} .cmp tr{display:block;padding:.6em 0;border-bottom:1px solid var(--line)} .cmp td{display:block;border:none;padding:.15em 0;white-space:normal} .cmp td:first-child{white-space:normal;margin-bottom:.2em} .cmp td:nth-child(2)::before{content:"r7ex: ";font-weight:600} .cmp td:nth-child(3)::before{content:"rtex: ";font-weight:600;color:var(--amb)}}
   .tbl{overflow-x:auto;background:var(--card);border:1px solid var(--line);border-radius:14px;padding:6px 14px}
   .wide{margin:0 0 26px;border-radius:16px;overflow:hidden;border:1px solid var(--line);box-shadow:0 30px 80px -30px #000}
   .wide img{width:100%;height:auto;display:block}
@@ -182,7 +183,7 @@
   <div class="grid g3">
     <div class="card"><h3>🎙️ Avatar real do Nei</h3><p>A fala vai ao estúdio do HeyGen pela assinatura; o vídeo do avatar volta, o Whisper marca o tempo de cada palavra e o motor encaixa telas e legenda nesse tempo.</p></div>
     <div class="card"><h3>🧩 Padrão de peças</h3><p>Tese no quadro 0, prova social com número, "N peças" com índice visível, método numerado, prova, ressalva, máxima depois de um silêncio e "comenta PALAVRA".</p></div>
-    <div class="card"><h3>✅ Três conferências</h3><p>O validador cobra a regra; um crítico (<code>claude -p</code>) dá nota ao roteiro; o QA mede duração, ritmo, volume, trocas por minuto, silêncio, cartão final e o amarelo.</p></div>
+    <div class="card"><h3>✅ Três conferências</h3><p>O validador cobra a regra; um crítico (<code>claude -p</code>) dá nota ao roteiro; o QA mede duração, ritmo, volume, mudanças de tela por minuto, silêncio, cartão final e o amarelo.</p></div>
   </div>
 </div></section>
 
@@ -232,7 +233,7 @@
     <tr><td>Honestidade</td><td>—</td><td class="new">ressalva obrigatória antes da máxima; todo número com fonte conferida há ≤ 7 dias</td></tr>
     <tr><td>Fecho</td><td>comentário "tá tudo no inema.club"</td><td class="new">silêncio, máxima em antítese, "comenta PALAVRA" (a palavra = a tese), cartão de 9 s</td></tr>
     <tr><td>Cor</td><td>preto + amarelo de telejornal</td><td class="new">preto INEMA com amarelo racionado: uma única superfície amarela, a pílula da isca (o QA conta)</td></tr>
-    <tr><td>Mantido</td><td colspan="2">avatar pelo estúdio do HeyGen, legenda karaokê, ritmo da fala, Whisper, crítico + revisor independente, fila com timer e envio ao bot</td></tr>
+    <tr><td>Mantido</td><td colspan="2">avatar pelo estúdio do HeyGen, legenda karaokê, ritmo da fala, Whisper, crítico + revisor independente, fila de publicação com timer e envio ao bot do Telegram (esses dois, só na máquina do Nei)</td></tr>
   </table></div>
 </div></section>
 
@@ -264,15 +265,21 @@
   <h2>O que precisa estar na máquina</h2>
   <p class="sub">O motor foi feito para a máquina do Nei (Linux). Os caminhos abaixo estão no código; numa máquina diferente, use as variáveis citadas ou ajuste o arquivo.</p>
   <div class="grid g3">
-    <div class="card"><h3>Avatar: HeyGen pelo estúdio</h3><p>Uma conta HeyGen com o seu avatar e a sua voz, e um projeto modelo no estúdio (<code>RTEX_HEYGEN_TEMPLATE</code>, padrão <code>TEMPLATE-AVATAR16</code>). O navegador abre na tela virtual <code>:99</code> com um perfil já logado (<code>RTEX_HEYGEN_PERFIL</code>). O download lê <code>HEYGEN_API_KEY</code> de <code>~/projetos/openpcbotv2/.env</code> (só status e download). Se o vídeo do avatar já existe, use <code>avatar --de &lt;mp4&gt;</code> e pule o estúdio.</p></div>
-    <div class="card"><h3>Whisper (inemavox)</h3><p>O <a href="https://github.com/inematds/inemavox" target="_blank" rel="noopener">inematds/inemavox</a> em <code>~/projetos/inemavox</code> (ou <code>CS_INEMAVOX</code>). O rtex tenta o Whisper residente na porta 7871 (Python em <code>CS_WHISPER_PY</code>) e, sem ele, roda o <code>transcrever_v1.py</code> do inemavox com o large-v3 (cerca de 10 GB na placa de vídeo NVIDIA).</p></div>
-    <div class="card"><h3>Node, ffmpeg, Python</h3><p>Node 18+, ffmpeg com ffprobe, Python 3, um servidor X virtual na tela <code>:99</code> (ex.: Xvfb) para o render, e a CLI <code>claude</code> logada para o crítico.</p><pre><span class="k">git clone</span> <span class="s">https://github.com/inematds/rtex</span>
+    <div class="card"><h3>Avatar: HeyGen pelo estúdio</h3><p>Uma conta HeyGen com o seu avatar e a sua voz. Uma vez só: (1) faça login num perfil do navegador do Playwright; (2) no estúdio, crie um projeto de vídeo com o nome exato <code>TEMPLATE-AVATAR16</code> (ou outro em <code>RTEX_HEYGEN_TEMPLATE</code>), com o seu avatar e a sua voz: o motor abre esse projeto, faz "editar como novo" e troca a fala; (3) ponha a sua chave da API do HeyGen no arquivo que o download lê (caminho fixo no <code>heygen/heygen-estudio-baixar.mjs</code>; ela só consulta o status e baixa o vídeo).</p><pre><span class="k">npx playwright open</span> --user-data-dir ~/.cache/inemaccbot/perfil-heygen <span class="s">https://app.heygen.com</span>   <span class="c"># login; ou outro dir em RTEX_HEYGEN_PERFIL</span>
+<span class="k">mkdir -p</span> ~/projetos/openpcbotv2
+<span class="k">echo</span> <span class="s">"HEYGEN_API_KEY=sua-chave"</span> &gt;&gt; ~/projetos/openpcbotv2/.env</pre></div>
+    <div class="card"><h3>Whisper (inemavox)</h3><p>O <a href="https://github.com/inematds/inemavox" target="_blank" rel="noopener">inematds/inemavox</a> em <code>~/projetos/inemavox</code> (ou outro caminho em <code>CS_INEMAVOX</code>). O rtex tenta o Whisper residente na porta 7871 e, sem ele, roda o <code>transcrever_v1.py</code> do inemavox com o large-v3 (cerca de 10 GB na placa de vídeo NVIDIA). O Python do Whisper residente vem de <code>CS_WHISPER_PY</code>; o padrão aponta para um ambiente conda <code>chatterbox</code> da máquina do Nei, então aponte para o seu.</p><pre><span class="k">git clone</span> <span class="s">https://github.com/inematds/inemavox</span> ~/projetos/inemavox
+<span class="c"># dependências: ver o README do inemavox</span>
+<span class="k">export</span> CS_WHISPER_PY=<span class="s">/caminho/do/seu/python3</span></pre></div>
+    <div class="card"><h3>Node, ffmpeg, Python</h3><p>Node 18+, ffmpeg com ffprobe, Python 3 com Pillow e numpy, um servidor X virtual na tela <code>:99</code> (ex.: Xvfb) para o render, e a CLI <code>claude</code> logada para o crítico.</p><pre><span class="k">git clone</span> <span class="s">https://github.com/inematds/rtex</span>
 <span class="k">cd</span> rtex
 <span class="k">npm i</span>
 <span class="k">npx playwright install</span> chromium
+<span class="k">pip install --user</span> pillow numpy   <span class="c"># ou dentro de um venv</span>
 <span class="k">Xvfb</span> :99 -screen 0 1920x1080x24 &amp;   <span class="c"># se ainda não houver</span></pre></div>
   </div>
-  <div class="note" style="margin-top:18px"><b>Opcionais:</b> <code>enviar</code> manda o vídeo ao bot do Telegram do Nei (<code>bin/enviar_bot_v3.mjs</code>) e <code>fila</code> põe o vídeo na fila de publicação do r7ex (<code>~/projetos/r7ex/fila/fila.py</code>, ou <code>RTEX_FILA</code>). Fora da máquina do Nei, pare no <code>qa</code> e publique como preferir.</div>
+  <div class="note" style="margin-top:18px"><b>Caminho mais curto, sem o estúdio:</b> se você já tem um vídeo 16:9 (1920×1080) de você ou do seu avatar falando o roteiro, pule o HeyGen inteiro: <code>python3 rtex.py fazer &lt;pasta&gt; --de seu-video.mp4</code>. A fala do vídeo precisa bater com a do roteiro em pelo menos 85% (o motor confere com o Whisper).</div>
+  <div class="note" style="margin-top:12px"><b>Opcionais:</b> <code>enviar</code> manda o vídeo ao bot do Telegram do Nei (<code>bin/enviar_bot_v3.mjs</code>) e <code>fila</code> põe o vídeo na fila de publicação do r7ex (<code>~/projetos/r7ex/fila/fila.py</code>, ou <code>RTEX_FILA</code>). Fora da máquina do Nei, pare no <code>qa</code> e publique como preferir.</div>
 </div></section>
 
 <section id="guia"><div class="wrap">
@@ -293,14 +300,14 @@
 
   <div class="step"><div class="b">3</div><div>
     <h3>Valide e passe no crítico</h3>
-    <p><code>checar</code> é regra pura. <code>critico</code> pede nota a um <code>claude -p</code> pela assinatura: passa sem bloqueio, tese ≥ 8, média ≥ 7,5 e nenhum bloco abaixo de 6. Grava <code>critica.json</code>.</p>
+    <p><code>checar</code> é regra pura. <code>critico</code> pede nota a um <code>claude -p</code> pela assinatura: passa sem bloqueio, tese (o gancho) ≥ 8, média ≥ 7,5 e nenhum bloco abaixo de 6. Grava <code>critica.json</code>.</p>
 <pre><span class="k">python3 rtex.py checar</span>  edicoes/AAAA-MM-DD-minha-edicao
 <span class="k">python3 rtex.py critico</span> edicoes/AAAA-MM-DD-minha-edicao</pre>
   </div></div>
 
   <div class="step"><div class="b">4</div><div>
     <h3>Libere e envie o avatar <span class="who">você</span></h3>
-    <p>O envio só sai com um OK escrito para esta produção em <code>avatar/APROVADO_HEYGEN</code> (um avatar por reel). Depois do envio a fala fica congelada: erro de texto se corrige na legenda (<code>trocas</code>), não num segundo avatar.</p>
+    <p>O envio só sai com um OK escrito para esta produção em <code>avatar/APROVADO_HEYGEN</code> (um avatar por reel). Depois do envio a fala fica congelada: erro de texto se corrige na legenda (campo <code>trocas</code> do roteiro), não num segundo avatar.</p>
 <pre><span class="k">mkdir -p</span> edicoes/AAAA-MM-DD-minha-edicao/avatar
 <span class="k">echo</span> <span class="s">"ok para este reel"</span> &gt; edicoes/AAAA-MM-DD-minha-edicao/avatar/APROVADO_HEYGEN
 <span class="k">python3 rtex.py avatar-enviar</span> edicoes/AAAA-MM-DD-minha-edicao   <span class="c"># grava avatar/video_id.txt</span></pre>
@@ -314,7 +321,7 @@
 
   <div class="step"><div class="b">6</div><div>
     <h3>Prévia sem avatar <span class="who">opcional</span></h3>
-    <p>Enquanto o estúdio trabalha, numa cópia da pasta: tempos sintéticos, cena e alguns quadros soltos (em segundos). Acha erro de layout antes do avatar chegar.</p>
+    <p>Enquanto o estúdio trabalha, numa cópia da pasta: tempos sintéticos, cena e alguns quadros soltos (em segundos). Acha erro de layout antes do avatar chegar. A prévia não chama o estúdio nem gasta outro avatar.</p>
 <pre><span class="k">cp -r</span> edicoes/AAAA-MM-DD-minha-edicao /tmp/previa
 <span class="k">python3 ferramentas/tempos_sinteticos.py</span> /tmp/previa
 <span class="k">python3 rtex.py cena</span> /tmp/previa
@@ -393,7 +400,7 @@
         <tr><td>Resolução</td><td>1080×1920 · 30 fps</td></tr>
         <tr><td>Ritmo da fala</td><td>180 palavras/min</td></tr>
         <tr><td>Volume</td><td>−14,0 LUFS</td></tr>
-        <tr><td>Trocas visuais</td><td>36 por minuto</td></tr>
+        <tr><td>Mudanças de tela</td><td>36 por minuto</td></tr>
         <tr><td>Maior trecho parado</td><td>3,5 s</td></tr>
         <tr><td>Silêncio antes da máxima</td><td>0,58 s</td></tr>
         <tr><td>Cartão final</td><td>9,0 s</td></tr>
