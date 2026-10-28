@@ -202,7 +202,7 @@
     <div class="card"><ol class="esq" start="6">
       <li><b>prova</b>: um fato com fonte que confirma o que veio antes.</li>
       <li><b>ressalva</b>: as limitações, faladas e legíveis, viradas em instrução.</li>
-      <li><b>maxima</b>: antítese curta, depois de 0,6–0,75 s de silêncio (voz e trilha somem).</li>
+      <li><b>maxima</b>: antítese curta, depois de 0,5–0,9 s de silêncio (voz e trilha somem).</li>
       <li><b>cta</b>: "comenta PALAVRA", a mesma palavra da tese; o cartão fica 9 s depois da última palavra.</li>
     </ol></div>
   </div>
@@ -258,7 +258,7 @@
   </div>
   <div class="grid g3" style="margin-top:26px">
     <div class="card"><span class="num">1</span><h3>Roteiro conferido</h3><p><code>checar</code> cobra ordem dos blocos, índice = método, fala sem algarismo nem "!", fonte em todo número, isca = tese e duração estimada de 60–90 s. <code>critico</code> dá a nota.</p></div>
-    <div class="card"><span class="num">2</span><h3>Avatar e tempo</h3><p>A fala vai ao estúdio; o vídeo volta, o Whisper marca as palavras, a fala é acelerada até ~182 palavras/min (no máximo 12%) e entra o silêncio antes da máxima.</p></div>
+    <div class="card"><span class="num">2</span><h3>Avatar e tempo</h3><p>A fala vai ao estúdio; o vídeo volta, o Whisper marca as palavras, a fala (o HeyGen fala rápido) é esticada até ~182 palavras/min (no máximo 12%) e entra o silêncio antes da máxima.</p></div>
     <div class="card"><span class="num">3</span><h3>Cena, render e QA</h3><p><code>cena</code> liga cada tela a uma palavra da fala; <code>render</code> filma o palco, põe o avatar embaixo e a trilha; <code>qa</code> mede tudo e monta a folha.</p></div>
   </div>
 </div></section>
@@ -334,7 +334,7 @@
 
   <div class="step"><div class="b">7</div><div>
     <h3>Baixe o avatar e acerte o ritmo</h3>
-    <p><code>avatar-conferir</code> faz uma consulta (pronto ou processando). <code>avatar</code> espera, baixa, marca as palavras com o Whisper, acelera a fala até ~182 palavras/min, põe o silêncio antes da máxima e os 9 s de cartão.</p>
+    <p><code>avatar-conferir</code> faz uma consulta (pronto ou processando). <code>avatar</code> espera, baixa, marca as palavras com o Whisper, estica a fala até ~182 palavras/min (o HeyGen fala rápido), põe o silêncio antes da máxima e os 9 s de cartão.</p>
 <pre><span class="k">python3 rtex.py avatar-conferir</span> edicoes/AAAA-MM-DD-minha-edicao
 <span class="k">python3 rtex.py avatar</span> edicoes/AAAA-MM-DD-minha-edicao
 <span class="k">python3 rtex.py avatar</span> edicoes/AAAA-MM-DD-minha-edicao --de avatar.mp4   <span class="c"># reaproveitar um mp4</span></pre>

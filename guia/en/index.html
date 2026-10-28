@@ -202,7 +202,7 @@
     <div class="card"><ol class="esq" start="6">
       <li><b>prova</b> (proof): a fact with a source that confirms what came before.</li>
       <li><b>ressalva</b> (caveat): limitations, spoken and readable, turned into an instruction.</li>
-      <li><b>maxima</b> (maxim): a short antithesis, after 0.6–0.75 s of silence (voice and music disappear).</li>
+      <li><b>maxima</b> (maxim): a short antithesis, after 0.5–0.9 s of silence (voice and music disappear).</li>
       <li><b>cta</b> (call to action): “comment WORD,” the same word as the thesis; the card stays up for 9 s after the last word.</li>
     </ol></div>
   </div>
@@ -258,7 +258,7 @@
   </div>
   <div class="grid g3" style="margin-top:26px">
     <div class="card"><span class="num">1</span><h3>Script checked</h3><p><code>checar</code> enforces block order, index = method, speech without numerals or “!”, a source for every number, hook = thesis, and an estimated duration of 60–90 s. <code>critico</code> assigns a score.</p></div>
-    <div class="card"><span class="num">2</span><h3>Avatar and timing</h3><p>The speech goes to the studio; the video comes back, Whisper timestamps the words, the speech is sped up to ~182 words/min (by no more than 12%), and silence is added before the maxim.</p></div>
+    <div class="card"><span class="num">2</span><h3>Avatar and timing</h3><p>The speech goes to the studio; the video comes back, Whisper timestamps the words, the speech (HeyGen talks fast) is slowed down to ~182 words/min (by no more than 12%), and silence is added before the maxim.</p></div>
     <div class="card"><span class="num">3</span><h3>Scene, render, and QA</h3><p><code>cena</code> links each screen to a spoken word; <code>render</code> records the stage, places the avatar at the bottom, and adds the music; <code>qa</code> measures everything and creates the contact sheet.</p></div>
   </div>
 </div></section>
@@ -334,7 +334,7 @@
 
   <div class="step"><div class="b">7</div><div>
     <h3>Download the avatar and adjust the pacing</h3>
-    <p><code>avatar-conferir</code> checks once (ready or processing). <code>avatar</code> waits, downloads, timestamps the words with Whisper, speeds up the speech to ~182 words/min, adds silence before the maxim, and keeps the end card up for 9 s.</p>
+    <p><code>avatar-conferir</code> checks once (ready or processing). <code>avatar</code> waits, downloads, timestamps the words with Whisper, slows the speech down to ~182 words/min (HeyGen talks fast), adds silence before the maxim, and keeps the end card up for 9 s.</p>
 <pre><span class="k">python3 rtex.py avatar-conferir</span> edicoes/AAAA-MM-DD-minha-edicao
 <span class="k">python3 rtex.py avatar</span> edicoes/AAAA-MM-DD-minha-edicao
 <span class="k">python3 rtex.py avatar</span> edicoes/AAAA-MM-DD-minha-edicao --de avatar.mp4   <span class="c"># reuse an mp4</span></pre>

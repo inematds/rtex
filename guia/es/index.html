@@ -202,7 +202,7 @@
     <div class="card"><ol class="esq" start="6">
       <li><b>prova</b> (prueba): un dato con fuente que confirma lo anterior.</li>
       <li><b>ressalva</b> (salvedad): las limitaciones, dichas y legibles, convertidas en una instrucción.</li>
-      <li><b>maxima</b> (máxima): una antítesis breve, después de 0,6–0,75 s de silencio (desaparecen la voz y la música).</li>
+      <li><b>maxima</b> (máxima): una antítesis breve, después de 0,5–0,9 s de silencio (desaparecen la voz y la música).</li>
       <li><b>cta</b> (CTA): «comenta PALABRA», la misma palabra de la tesis; la tarjeta permanece 9 s después de la última palabra.</li>
     </ol></div>
   </div>
@@ -258,7 +258,7 @@
   </div>
   <div class="grid g3" style="margin-top:26px">
     <div class="card"><span class="num">1</span><h3>Guion verificado</h3><p><code>checar</code> exige el orden de los bloques, índice = método, voz sin cifras ni «!», fuente para cada número, gancho = tesis y duración estimada de 60–90 s. <code>critico</code> lo califica.</p></div>
-    <div class="card"><span class="num">2</span><h3>Avatar y ritmo</h3><p>La voz se envía al estudio; vuelve el video, Whisper marca las palabras, la voz se acelera hasta ~182 palabras/min (como máximo 12 %) y se añade el silencio antes de la máxima.</p></div>
+    <div class="card"><span class="num">2</span><h3>Avatar y ritmo</h3><p>La voz se envía al estudio; vuelve el video, Whisper marca las palabras, la voz (HeyGen habla rápido) se ralentiza hasta ~182 palabras/min (como máximo 12 %) y se añade el silencio antes de la máxima.</p></div>
     <div class="card"><span class="num">3</span><h3>Escena, render y QA</h3><p><code>cena</code> vincula cada pantalla con una palabra de la voz; <code>render</code> filma el escenario, pone el avatar abajo y añade la música; <code>qa</code> lo mide todo y crea la hoja.</p></div>
   </div>
 </div></section>
@@ -334,7 +334,7 @@
 
   <div class="step"><div class="b">7</div><div>
     <h3>Descarga el avatar y ajusta el ritmo</h3>
-    <p><code>avatar-conferir</code> hace una consulta (listo o procesando). <code>avatar</code> espera, descarga, marca las palabras con Whisper, acelera la voz hasta ~182 palabras/min, añade el silencio antes de la máxima y los 9 s de tarjeta.</p>
+    <p><code>avatar-conferir</code> hace una consulta (listo o procesando). <code>avatar</code> espera, descarga, marca las palabras con Whisper, ralentiza la voz hasta ~182 palabras/min (HeyGen habla rápido), añade el silencio antes de la máxima y los 9 s de tarjeta.</p>
 <pre><span class="k">python3 rtex.py avatar-conferir</span> edicoes/AAAA-MM-DD-minha-edicao
 <span class="k">python3 rtex.py avatar</span> edicoes/AAAA-MM-DD-minha-edicao
 <span class="k">python3 rtex.py avatar</span> edicoes/AAAA-MM-DD-minha-edicao --de avatar.mp4   <span class="c"># reaproveitar um mp4</span></pre>
