@@ -1,0 +1,219 @@
+<!doctype html>
+<html lang="pt-BR"><head><meta charset="utf-8">
+<link href="https://fonts.googleapis.com/css2?family=Sora:wght@600;800&family=Inter:wght@500;700;900&family=JetBrains+Mono:wght@500;800&family=Montserrat:wght@900&display=swap" rel="stylesheet">
+<script src="cena.js"></script>
+<!-- palco do rtex (28/10/2026): composição única 1080x1920, zero cortes; só o objeto troca, no tempo da palavra.
+     Contrato com motor/render.mjs: window.pronto (Promise) + window.render(t) → Promise. Avatar no terço de baixo
+     (y 1280–1920) entra no ffmpeg (motor/mix.sh); aqui essa faixa fica livre. Paleta INEMA: amarelo #FACC15 só como LETRA,
+     exceto a pílula da palavra-isca (a única superfície amarela sólida do vídeo). -->
+<style>
+:root{--bg:#0c0c10;--card:#16161e;--line:#272730;--tx:#e9e9ee;--tx2:#9a9aa6;--am:#FACC15;--ok:#2bff88;--bad:#ff2a1f;--warn:#F2B45C;--sky:#38bdf8}
+*{box-sizing:border-box;margin:0;padding:0}
+html,body{width:1080px;height:1920px;overflow:hidden;background:var(--bg);color:var(--tx);font-family:Inter,sans-serif}
+#fundo{position:absolute;inset:0;background:radial-gradient(ellipse at 50% 30%,rgba(250,204,21,.07),transparent 62%),
+ linear-gradient(rgba(255,255,255,.028) 1px,transparent 1px),linear-gradient(90deg,rgba(255,255,255,.028) 1px,transparent 1px);background-size:100% 100%,60px 60px,60px 60px}
+#base{position:absolute;left:0;right:0;top:1280px;height:640px;background:#000;border-top:3px solid var(--line)}
+#topo{position:absolute;left:60px;right:60px;top:64px;height:56px;display:flex;align-items:center;justify-content:space-between}
+#marca{font:800 26px 'JetBrains Mono';letter-spacing:4px;color:var(--tx2);white-space:nowrap}
+#pil{display:flex;gap:10px}
+#pil b{font:800 24px 'JetBrains Mono';padding:8px 12px;border:2px solid var(--line);border-radius:10px;color:var(--tx2);min-width:62px;text-align:center}
+#pil b.at{border-color:var(--am);color:var(--am)}#pil b.ok{color:var(--ok);border-color:rgba(43,255,136,.35)}
+#rot{position:absolute;left:60px;top:150px;font:800 36px 'JetBrains Mono';letter-spacing:3px;color:var(--am)}
+#obj{position:absolute;left:60px;right:60px;top:215px;height:840px}
+#fonte{position:absolute;left:60px;right:60px;top:1062px;font:500 32px 'JetBrains Mono';color:var(--tx2);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+#fonte:before{content:'FONTE · ';color:#6d6d78}
+#leg{position:absolute;left:30px;right:30px;bottom:676px;text-align:center;font:900 70px/1.08 Montserrat;text-transform:uppercase;letter-spacing:1px;
+ -webkit-text-stroke:8px #000;paint-order:stroke fill}
+#leg span{margin:0 9px}
+.cx{position:absolute;inset:0}
+.card{background:var(--card);border:2px solid var(--line);border-radius:28px}
+.mono{font-family:'JetBrains Mono'}
+/* tese */
+.tese .l{font:800 96px/1.04 Sora;letter-spacing:-2px;color:#fff}
+.tese .l em{font-style:normal;color:var(--am)}
+.tese .sub{font:800 30px 'JetBrains Mono';letter-spacing:5px;color:var(--tx2);margin-top:26px}
+.tese .dots{display:flex;gap:16px;margin-top:22px}.tese .dots i{width:30px;height:30px;border-radius:50%;border:3px solid var(--am)}
+/* contador */
+.cont .k{font:800 30px 'JetBrains Mono';letter-spacing:3px;color:var(--tx2)}
+.cont .n{font:800 230px/1 Sora;letter-spacing:-6px;color:var(--am);margin-top:30px;white-space:nowrap}
+.cont .u{font:800 64px Sora;color:#fff;margin-top:6px}
+.cont .pc{margin-top:40px;display:flex;flex-direction:column;gap:14px}
+.cont .pc div{font:700 40px Inter;display:flex;justify-content:space-between;border-bottom:2px solid var(--line);padding-bottom:10px}
+.cont .pc div b{font:800 40px 'JetBrains Mono';color:#fff}
+/* chat */
+.chat{padding:30px 34px}
+.chat .hd{font:800 28px 'JetBrains Mono';color:var(--tx2);letter-spacing:2px;margin-bottom:26px}
+.chat .m{position:relative;align-self:flex-end;background:#23232d;border-radius:30px 30px 8px 30px;padding:24px 34px;font:700 50px Inter;margin:0 0 26px auto;width:fit-content;max-width:90%}
+.chat .m s{text-decoration:none;position:relative}
+.chat .m .r{position:absolute;left:-6px;right:-6px;top:50%;height:7px;background:var(--bad);transform-origin:left;border-radius:4px}
+.chat .m .x{position:absolute;left:-74px;top:50%;transform:translateY(-50%);font:900 52px Inter;color:var(--bad)}
+.chat .ia{background:#1a1a22;border:2px dashed #3a3a46;border-radius:30px 30px 30px 8px;padding:20px 30px;font:600 40px Inter;color:var(--tx2);width:fit-content;margin-bottom:26px}
+/* índice */
+.ind .k{font:800 30px 'JetBrains Mono';letter-spacing:3px;color:var(--tx2);margin-bottom:24px}
+.ind .r{display:flex;align-items:center;gap:30px;padding:20px 30px;border:2px solid var(--line);border-radius:22px;margin-bottom:18px;background:var(--card)}
+.ind .r b{font:800 50px 'JetBrains Mono';color:var(--tx2)}.ind .r span{font:800 66px Sora;color:#fff;letter-spacing:-1px}
+.ind .r.at{border-color:var(--am)}.ind .r.at b,.ind .r.at span{color:var(--am)}
+/* pasta */
+.pasta .hd{display:flex;align-items:center;gap:26px;margin-bottom:30px}.pasta .hd img{width:96px;height:96px;object-fit:contain}
+.pasta .hd span{font:800 64px Sora;color:#fff;letter-spacing:-1px}
+.pasta .fold{position:relative;padding:76px 40px 36px;background:#1d1a12;border:3px solid rgba(250,204,21,.55);border-radius:12px 32px 32px 32px}
+.pasta .fold:before{content:'';position:absolute;left:-3px;top:-46px;width:300px;height:50px;background:#1d1a12;border:3px solid rgba(250,204,21,.55);border-bottom:0;border-radius:18px 18px 0 0}
+.pasta .fold .nm{position:absolute;left:30px;top:-34px;font:800 30px 'JetBrains Mono';color:var(--am)}
+.pasta .it{display:flex;align-items:center;gap:24px;background:var(--card);border:2px solid var(--line);border-radius:18px;padding:22px 26px;margin-top:20px;font:700 46px Inter}
+.pasta .it i{font-style:normal;font:800 34px 'JetBrains Mono';color:var(--tx2)}
+.pasta .it .ok{margin-left:auto;color:var(--ok);font:900 46px Inter}
+/* repo */
+.repo .win{overflow:hidden;border-radius:26px;border:2px solid var(--line);background:#fff}
+.repo .bar{height:62px;background:#1c1c24;display:flex;align-items:center;gap:12px;padding:0 24px}
+.repo .bar i{width:18px;height:18px;border-radius:50%;background:#3a3a46}
+.repo .bar span{margin-left:12px;font:800 28px 'JetBrains Mono';color:#cfd0d8;background:#0f0f14;border-radius:10px;padding:6px 16px;flex:1;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.repo .win img{display:block;width:100%;height:540px;object-fit:cover;object-position:top}
+.repo .st{display:flex;align-items:baseline;gap:18px;margin-top:30px}
+.repo .st b{font:800 120px/1 Sora;color:#fff;letter-spacing:-3px}.repo .st span{font:800 44px Sora;color:var(--tx2)}
+.repo .fr{font:700 48px/1.2 Inter;color:#fff;margin-top:18px}.repo .fr em{font-style:normal;color:var(--am)}
+.repo .pp{display:flex;gap:18px;margin-top:20px}.repo .pp div{font:800 40px Inter;border:2px solid var(--line);border-radius:999px;padding:12px 28px;background:var(--card)}
+/* manchete */
+.man{padding:44px 44px 40px}
+.man .ch{font:800 30px 'JetBrains Mono';letter-spacing:4px;color:var(--warn)}
+.man .ic{font-size:150px;line-height:1;margin:26px 0 16px}
+.man .tt{font:800 80px/1.04 Sora;letter-spacing:-2px;color:#fff}
+.man .ln{font:700 44px/1.25 Inter;color:#d8d8e0;margin-top:22px;padding-left:26px;border-left:6px solid var(--line)}
+.man .ln.d{color:var(--warn);border-left-color:var(--warn)}
+/* selo prova */
+.prova{display:flex;flex-direction:column;align-items:center;text-align:center;padding-top:40px}
+.prova .tr{width:340px;height:340px;border-radius:50%;display:grid;place-items:center;font-size:170px;border:4px solid rgba(250,204,21,.6);
+ background:radial-gradient(circle,rgba(250,204,21,.16),rgba(22,22,30,.95) 70%)}
+.prova .tt{font:800 92px/1.02 Sora;letter-spacing:-2px;margin-top:46px;color:#fff}.prova .tt em{font-style:normal;color:var(--am)}
+.prova .sb{font:800 46px 'JetBrains Mono';color:var(--tx2);margin-top:22px}
+/* ressalva */
+.res{background:#14141b;border:2px solid var(--line);border-left:12px solid var(--warn);border-radius:24px;padding:38px 40px}
+.res .hd{font:800 40px 'JetBrains Mono';letter-spacing:4px;color:var(--warn);margin-bottom:24px}
+.res .it{font:700 50px/1.22 Inter;color:#fff;margin-bottom:22px;display:flex;gap:20px}.res .it:before{content:'—';color:var(--warn)}
+.res .dc{margin-top:34px;padding:28px 30px;border-radius:20px;background:#0f1a14;border:2px solid rgba(43,255,136,.4);font:800 50px/1.2 Inter;color:#fff}
+.res .dc b{color:var(--ok)}
+/* máxima */
+#flash{position:absolute;left:0;right:0;top:0;height:1280px;background:#050507;opacity:0}
+.max{display:flex;flex-direction:column;justify-content:center;height:100%;text-align:center}
+.max .a{font:800 92px/1.06 Sora;letter-spacing:-2px;color:#8d8d98}.max .b{font:800 112px/1.04 Sora;letter-spacing:-3px;color:#fff;margin-top:56px}
+.max .b em{font-style:normal;color:var(--am)}
+/* isca + comentário */
+.isca{text-align:center;padding-top:20px}
+.isca .a{font:800 76px Sora;color:#fff;letter-spacing:-1px}
+.isca .pill{display:inline-block;margin:26px 0;background:var(--am);color:#1a1206;font:800 150px/1 Sora;letter-spacing:2px;border-radius:999px;padding:30px 80px}
+.isca .c{font:800 54px/1.15 Sora;color:#fff}
+.isca .club{display:inline-block;margin-top:34px;font:800 44px 'JetBrains Mono';color:var(--sky);border:3px solid rgba(56,189,248,.55);border-radius:999px;padding:12px 34px}
+#com{position:absolute;left:60px;right:60px;top:800px;padding:28px 32px;opacity:0}
+#com .h{font:800 28px 'JetBrains Mono';letter-spacing:3px;color:var(--tx2);margin-bottom:18px}
+#com .lin{display:flex;align-items:center;gap:20px}
+#com .av{flex:0 0 76px;height:76px;border-radius:50%;background:#2a2a33;display:grid;place-items:center;font-size:40px}
+#com .ip{flex:1;min-height:80px;border-bottom:3px solid #4a4a56;font:800 52px Inter;display:flex;align-items:center}
+#com .ph{color:rgba(255,255,255,.38);font:700 40px Inter}
+#com .cur{display:inline-block;width:5px;height:54px;background:#fff;margin-left:6px}
+#com .bt{display:flex;justify-content:flex-end;margin-top:20px;position:relative}
+#com .pub{background:#fff;color:#0c0c10;font:900 38px Inter;border-radius:999px;padding:14px 40px}
+#com .mao{position:absolute;font-size:72px}
+#com .ok{color:var(--ok);font:900 32px Inter;margin-top:6px}
+#com .pos{display:flex;gap:18px;margin-top:22px;padding-top:20px;border-top:1px solid var(--line)}
+#com .pos b{display:block;font:800 26px Inter;color:var(--tx2)}#com .pos span{font:800 50px Inter}
+#com .pos em{font-style:normal;color:var(--am)}
+</style></head>
+<body>
+<div id="fundo"></div>
+<div id="topo"><div id="marca"></div><div id="pil"></div></div>
+<div id="rot"></div>
+<div id="flash"></div>
+<div id="obj"></div>
+<div id="fonte"></div>
+<div id="com" class="card"></div>
+<div id="base"></div>
+<div id="leg"></div>
+<script>
+const C=window.CENA;
+const clamp=(x,a=0,b=1)=>Math.max(a,Math.min(b,x));
+const ease=x=>1-Math.pow(1-x,3);                       // ease out em todo movimento
+const prog=(t,a,d=.4)=>ease(clamp((t-a)/d));
+const vis=(t,a,b,d=.3)=>(t<a||t>b)?0:Math.min(a<=0?1:clamp((t-a)/d),clamp((b-t)/d));
+const lerp=(a,b,k)=>a+(b-a)*k;
+const fmt=(v,dec)=>v.toLocaleString('pt-BR',{minimumFractionDigits:dec,maximumFractionDigits:dec});
+const ent=(t,a,dy=34,d=.4)=>{const k=prog(t,a,d);return `opacity:${k};transform:translateY(${(1-k)*dy}px)`;};
+const realce=(txt,w)=>w?txt.replace(new RegExp(`(${w})`,'i'),'<em>$1</em>'):txt;
+document.getElementById('marca').textContent=C.marca;
+const IMGS=[];C.blocos.forEach(b=>{if(b.p.img)IMGS.push(b.p.img);if(b.p.logo)IMGS.push(b.p.logo);});
+const pre=IMGS.map(s=>{const im=new Image();im.src=s;return im.decode().catch(()=>null);});
+
+const COMP={
+ tese(b,t){const p=b.p,L=b.tela.linhas;
+  const dots=[0,1,2,3,4].map(i=>`<i style="background:${t>=.12+i*.14?'var(--am)':'transparent'}"></i>`).join('');   // algo se move no 1º segundo
+  const k=p.pasta_abre_em?prog(t,p.pasta_abre_em-.1,.5):0;
+  return `<div class="cx tese" style="padding-top:40px">${L.map((l,i)=>`<div class="l">${realce(l,b.tela.destaque)}</div>`).join('')}
+   <div class="dots">${dots}</div><div class="sub">${b.tela.sub||''}</div>
+   <svg viewBox="0 0 400 300" style="position:absolute;left:220px;top:470px;width:520px;filter:drop-shadow(0 0 ${30+50*k}px rgba(250,204,21,${.25+.35*k}))">
+    <path d="M20 60 h120 l30 30 h210 v190 h-360z" fill="#1d1a12" stroke="#FACC15" stroke-width="6"/>
+    <g style="transform-origin:20px 110px;transform:skewX(${-18*k}deg) scaleY(${1-.35*k})"><path d="M20 110 h360 v170 h-360z" fill="#2a2414" stroke="#FACC15" stroke-width="6"/></g>
+    <rect x="70" y="${120-60*k}" width="260" height="14" rx="7" fill="#e9e9ee" opacity="${k}"/><rect x="70" y="${150-60*k}" width="200" height="14" rx="7" fill="#9a9aa6" opacity="${k}"/>
+   </svg></div>`;},
+ contador(b,t){const p=b.p,k=prog(t,p.em-.9,1.1),v=lerp(p.de,p.ate,k);
+  return `<div class="cx cont" style="${ent(t,b.ini+.05)}"><div class="k">${p.rotulo}</div><div class="n">${fmt(v,p.dec)}</div><div class="u">${p.unid}</div>
+   <div class="pc">${p.parcelas.map((x,i)=>`<div style="${ent(t,p.em+.25+i*.3,20)}"><span>${x[0]}</span><b>${x[1]} ⭐</b></div>`).join('')}</div></div>`;},
+ chat_riscado(b,t){const p=b.p;
+  return `<div class="cx card chat" style="${ent(t,b.ini+.05)}"><div class="hd">● CHAT COM A IA</div><div class="ia">pronto! fiz do meu jeito 🙂</div>
+   ${p.msgs.map((m,i)=>{if(t<m.t-.2)return'';const kr=prog(t,m.t+.45,.3);return `<div class="m" style="${ent(t,m.t-.2,24,.3)}"><span class="x" style="opacity:${kr}">✗</span><s>${m.txt}<i class="r" style="transform:scaleX(${kr})"></i></s></div>`;}).join('')}</div>`;},
+ indice(b,t){const p=b.p;
+  return `<div class="cx ind"><div class="k" style="${ent(t,b.ini+.05)}">AS ${p.itens.length} PEÇAS</div>
+   ${p.itens.map((x,i)=>{const k=prog(t,p.em-.15+i*.12,.3);return `<div class="r ${p.ativa_em&&t>=p.ativa_em&&i===0?'at':''}" style="opacity:${.18+.82*k};transform:translateX(${(1-k)*-30}px)"><b>${String(i+1).padStart(2,'0')}</b><span>${x}</span></div>`;}).join('')}</div>`;},
+ pasta(b,t){const p=b.p;
+  return `<div class="cx pasta"><div class="hd" style="${ent(t,b.ini+.05)}">${p.logo?`<img src="${p.logo}">`:''}<span>${p.titulo}</span></div>
+   <div class="fold" style="${ent(t,b.ini+.25)}"><div class="nm">📁 uma-tarefa/</div>
+   ${p.itens.map((x,i)=>`<div class="it" style="${ent(t,x.t-.15,24,.3)}"><i>0${i+1}</i>${x.txt}${i===p.itens.length-1?`<span class="ok" style="opacity:${prog(t,x.t+.3,.3)}">✓</span>`:''}</div>`).join('')}</div></div>`;},
+ repo(b,t){const p=b.p,ks=prog(t,b.ini+.5,1.0),n=parseFloat(p.estrelas.replace(',','.')),dec=p.estrelas.includes(',')?1:0;
+  return `<div class="cx repo"><div class="win" style="${ent(t,b.ini+.05,40)}"><div class="bar"><i></i><i></i><i></i><span>${p.dominio}</span></div><img src="${p.img}"></div>
+   <div class="st" style="${ent(t,b.ini+.4)}"><b>★ ${fmt(n*ks,dec)} mil</b><span>estrelas</span></div>
+   <div class="fr" style="${ent(t,(p.marca_em||b.ini)-.3)}">${realce(p.frase,t>=(p.marca_em||0)?(p.frase.match(/menos|mapa|time/i)||[''])[0]:'')}</div>
+   ${p.papeis?`<div class="pp">${p.papeis.map(x=>`<div style="${ent(t,x.t-.15,20,.3)}">${x.txt}</div>`).join('')}</div>`:''}</div>`;},
+ manchete(b,t){const p=b.p;
+  return `<div class="cx card man" style="${ent(t,b.ini+.05)}"><div class="ch">● ${p.chapeu}</div><div class="ic" style="transform:translateY(${-30*prog(t,b.ini+.3,1.2)}px)">🚀</div><div class="tt">${p.titulo}</div>
+   ${p.linhas.map((x,i)=>`<div class="ln ${i===p.linhas.length-1?'d':''}" style="${ent(t,x.t-.15,20,.3)}">${x.txt}</div>`).join('')}</div>`;},
+ selo_prova(b,t){const p=b.p,k=prog(t,p.em-.15,.45);
+  return `<div class="cx prova"><div class="tr" style="opacity:${.45+.55*k};transform:scale(${.85+.15*k})">🏆</div>
+   <div class="tt" style="opacity:${.25+.75*k}">${realce(p.titulo,t>=p.em-.15?'VENCEU':'')}</div><div class="sb" style="${ent(t,b.ini+.2,20)}">${p.sub}</div></div>`;},
+ ressalva(b,t){const p=b.p;
+  return `<div class="cx"><div class="res" style="${ent(t,b.ini+.05)}"><div class="hd">⚠ ATENÇÃO</div>
+   ${p.itens.map(x=>`<div class="it" style="${ent(t,x.t-.2,20,.3)}">${x.txt}</div>`).join('')}
+   <div class="dc" style="${ent(t,p.dica.t-.15,24,.35)}"><b>→</b> ${p.dica.txt}</div></div></div>`;},
+ maxima(b,t){const p=b.p;
+  return `<div class="cx max"><div class="a" style="${ent(t,b.ini+.1,20,.35)}">${p.linha1}</div><div class="b" style="${ent(t,p.linha2_em-.25,30,.35)}">${realce(p.linha2,p.destaque)}</div></div>`;},
+ isca(b,t){const p=b.p,k=prog(t,p.em-.2,.4);
+  return `<div class="cx isca"><div class="a" style="${ent(t,p.em-.2)}">${p.antes}</div>
+   <div class="pill" style="opacity:${k};transform:scale(${.85+.15*k})">${p.palavra}</div><div class="c" style="${ent(t,p.em+.6)}">${p.depois}</div>
+   <div class="club" style="${ent(t,p.em+1.2,20)}">inema.club</div></div>`;}
+};
+
+function comenta(t){const c=C.comenta,CM=document.getElementById('com');
+ if(!c||t<c.fala_fim+.2){CM.style.opacity=0;return;}
+ const e=c.fala_fim,txt=[...c.texto],t1=e+1.0,cps=8,t2=t1+txt.length/cps,tk=t2+.8,tpub=tk+.3;
+ const k=prog(t,e+.2,.5);CM.style.opacity=k;CM.style.transform=`translateY(${(1-k)*40}px)`;
+ const nn=Math.max(0,Math.min(txt.length,Math.floor((t-t1)*cps))),dig=t>=tpub?'':txt.slice(0,nn).join(''),pis=Math.floor(t*2.5)%2===0;
+ const campo=dig?`<em style="font-style:normal;color:#FACC15">${dig}</em>${t<t2+.5||pis?'<i class="cur"></i>':''}`:`<span class="ph">Adicione um comentário…</span>${t<t1&&pis?'<i class="cur"></i>':''}`;
+ const km=prog(t,t2+.1,.5),ap=t>=tk&&t<tpub;
+ const mao=t>=t2+.1&&t<tpub+.5?`<div class="mao" style="right:${lerp(-40,80,km)}px;top:${lerp(130,30,km)}px;opacity:${Math.min(km*2,1-prog(t,tpub+.1,.4))}">👆</div>`:'';
+ const kp=prog(t,tpub,.4);
+ const pos=t>=tpub?`<div class="pos" style="opacity:${kp}"><div class="av">🙋</div><div><b>você · agora</b><span><em>${txt.join('')}</em></span><div class="ok">✓ publicado</div></div></div>`:'';
+ CM.innerHTML=`<div class="h">💬 COMENTA AQUI</div><div class="lin"><div class="av">🙋</div><div class="ip">${campo}</div></div><div class="bt"><div class="pub" style="transform:scale(${ap?.92:1})">Publicar</div>${mao}</div>${pos}`;}
+
+function render_(t){
+ const b=C.blocos.find(x=>t>=x.ini&&t<x.fim)||C.blocos[C.blocos.length-1];
+ const O=document.getElementById('obj');O.innerHTML=COMP[b.comp](b,t);
+ document.getElementById('flash').style.opacity=b.tipo==='maxima'?.92*prog(t,b.ini,.3):0;
+ const R=document.getElementById('rot');R.textContent=b.rotulo||'';R.style.opacity=b.rotulo?prog(t,b.ini,.3):0;
+ const F=document.getElementById('fonte');F.textContent=b.fonte||'';F.style.opacity=b.fonte?prog(t,b.ini+.3,.4):0;
+ const P=C.pilulas,PL=document.getElementById('pil');
+ if(t>=P.ini&&t<P.fim){const at=P.ativa.reduce((m,[n,a])=>t>=a?n:m,0);
+  PL.innerHTML=P.nomes.map((x,i)=>`<b class="${i+1===at?'at':(i+1<at?'ok':'')}">${i+1<at?'✓':String(i+1).padStart(2,'0')}</b>`).join('');PL.style.opacity=prog(t,P.ini,.3);}
+ else PL.style.opacity=0;
+ comenta(t);
+ const B=(C.legenda||[]).find(x=>t>=x.ini&&t<x.fim),Lg=document.getElementById('leg');
+ Lg.innerHTML=B?B.palavras.map(w=>`<span style="color:${t>=w.t?(w.cor||'#fff'):'rgba(255,255,255,.4)'}">${w.w}</span>`).join(''):'';
+}
+window.render=t=>new Promise(r=>{render_(t);requestAnimationFrame(()=>r(true));});
+window.pronto=Promise.all([document.fonts.ready,...pre]).then(()=>{render_(0);return document.fonts.ready;});
+</script></body></html>

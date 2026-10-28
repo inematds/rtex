@@ -1,0 +1,72 @@
+{
+ "blocos": [
+  {
+   "n": 1,
+   "nota": 8,
+   "porque": "O quadro 0 tem 9 palavras ('5 PEÇAS DO MÊS. A MELHOR É UMA PASTA.'). O gancho é contrário à expectativa: a melhor peça de IA é só uma pasta. A 1ª frase diz a mesma tese e não é 'eu fiz'. A palavra PASTA já aparece aqui, então o CTA fica plantado.",
+   "melhorar": "'E tem mais quatro' esfria o fim da frase. Trocar por algo que crie dívida, como 'e a pior delas nem é de IA', ou cortar e ir direto para a autoridade."
+  },
+  {
+   "n": 2,
+   "nota": 6,
+   "porque": "O número tem fonte: 179 + 88,7 + 291 dá 558,7 mil. A voz diz 'mais de 550 mil', abaixo da tela, então não infla. Só que a prova social é de três repositórios que não são a tese: a pasta (Skills) fica fora da soma. Quem rola o feed ouve um número grande sem saber por que ele importa.",
+   "melhorar": "Ligar o número à tese: 'quem usa essas pastas já soma 550 mil estrelas'. Outra saída é dizer que as três ferramentas giram em torno de pastas ou agentes. A fonte 'soma' aponta para https://github.com genérico; na tela, mostrar as 3 parcelas com os 3 repositórios, como o contador já prevê."
+  },
+  {
+   "n": 3,
+   "nota": 7,
+   "porque": "A dor é concreta e de todo dia: corrigir a IA no chat, sempre a mesma coisa. O objeto visual (chat riscado) é claro, e 'toda vez a mesma coisa' já prepara a pasta como resposta.",
+   "melhorar": "Uma mensagem do chat poderia ser bem reconhecível, como 'eu já te falei o formato'. Isso aumenta a identificação do público geral."
+  },
+  {
+   "n": 4,
+   "nota": 7,
+   "porque": "Anuncia 'cinco peças', e o índice tem 5 nomes iguais aos 5 itens do método (PASTA, PONYTAIL, MAPA, ROADSTER, TIME), mostrado antes do item 1. 'A primeira muda o seu dia' segura a atenção.",
+   "melhorar": "'ROADSTER' no índice entrega cedo que uma das peças foge do tema. Avaliar se isso gera curiosidade ou quebra a promessa de 'peças de IA'."
+  },
+  {
+   "n": 5,
+   "nota": 6,
+   "porque": "Os 5 itens são numerados, cada um com um objeto, e ocupam cerca de 40% das palavras (dentro da faixa de 30–60%). Cada número tem fonte. Mas o item 4 (Tesla Roadster) é 'fora da IA' e quebra 'uma ideia por reel'. O título e a tese prometem '5 peças de IA' e entregam 4. Itens 2 e 3 dizem o que a ferramenta faz, não o que muda para quem usa IA no trabalho.",
+   "melhorar": "Trocar o Roadster por uma 5ª peça de IA, de preferência ligada à pasta, ou tirá-lo e anunciar 4 peças. Se ficar, o título de publicação '5 peças de IA' tem de mudar. No Roadster, 'testado num campo da SpaceX' sugere teste, mas a fonte (Electrek) fala em apresentação/demonstração; usar 'apresentado num campo de testes da SpaceX'. No item 2, trocar 'escreve menos código' por um ganho que o público geral entenda."
+  },
+  {
+   "n": 6,
+   "nota": 6,
+   "porque": "Conecta com o método: o ECC, cheio de pastas, venceu um hackathon. Mas a única fonte é o próprio repositório do ECC, que fala de si mesmo e não traz data. E 'cheio dessas pastas' não está em nenhum `fontes[].valor`.",
+   "melhorar": "Colocar no `fontes[]` uma fonte independente do hackathon Anthropic × Forum Ventures (página do evento ou post), com data, e o fato de o ECC ser feito de skills/pastas. Na tela, mostrar a fonte embaixo do selo."
+  },
+  {
+   "n": 7,
+   "nota": 7,
+   "porque": "As limitações são honestas (gasta muito token na 1ª leitura, explica em inglês) e viram instrução ('comece por uma pasta só'), o que reforça a tese.",
+   "melhorar": "A ressalva é só do item 3 e a instrução fala da pasta, então a ligação fica meio solta. Dizer 'por isso, comece pela peça 1: uma pasta só' fecha melhor."
+  },
+  {
+   "n": 8,
+   "nota": 9,
+   "porque": "Antítese curta e citável ('Não é a IA que é burra. É a pasta que está vazia.') com a palavra PASTA. A pausa antes está marcada (parte 12, de 'Não'). É o melhor momento do reel para compartilhar.",
+   "melhorar": ""
+  },
+  {
+   "n": 9,
+   "nota": 8,
+   "porque": "'Comenta PASTA': a palavra é a tese, plantada no quadro 0. O entregável existe hoje: os 5 links estão nas fontes e no comentário fixado, e o curso tem URL em `isca.destino`. A fala não promete 'grátis'.",
+   "melhorar": "Dizer o que a pessoa ganha com a palavra, como 'a pasta pronta e os 5 links'. Só funciona se uma pasta-modelo existir de fato; se não existir, manter como está."
+  }
+ ],
+ "bloqueios": [],
+ "resumo": "Estrutura correta, números com fonte e uma máxima forte. Mas o Roadster quebra 'uma ideia por reel' e a promessa de '5 peças de IA', e a prova do hackathon depende só do próprio repositório do ECC; trocar a 4ª peça e trazer fonte independente do hackathon antes de publicar.",
+ "notas": [
+  8,
+  6,
+  7,
+  7,
+  6,
+  6,
+  7,
+  9,
+  8
+ ],
+ "hash": "bf6190b351893b095bf32dc212b6866e683767e7"
+}

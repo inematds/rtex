@@ -1,0 +1,10 @@
+{
+  "name": "rtex",
+  "version": "1.0.0",
+  "private": true,
+  "description": "rtex: reel 9:16 do INEMA no padrão rtex (tese no quadro 0, N peças com índice, prova com fonte, ressalva, máxima, comenta PALAVRA) com o avatar do Nei; base copiada do r7ex v1.1.0",
+  "type": "module",
+  "dependencies": {
+    "playwright": "1.64.0"
+  }
+}
