@@ -1,0 +1,459 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>rtex — el reel de "N piezas" de INEMA, con el avatar real de Nei</title>
+<meta name="description" content="rtex: motor de reels 9:16 de INEMA. Tesis escrita en el cuadro 0, prueba con fuente, N piezas con índice, salvedad honesta, máxima y &quot;comenta PALABRA&quot;, con el avatar real de Nei en HeyGen y subtítulos karaoke.">
+<meta name="theme-color" content="#0c0c10">
+<meta property="og:title" content="rtex — el reel de &quot;N piezas&quot; de INEMA">
+<meta property="og:description" content="Del roteiro.json al reel vertical con el avatar real de Nei, revisado por un validador, un crítico y QA.">
+<meta property="og:image" content="https://inematds.github.io/rtex/capa/capa.png">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Ctext y='.9em' font-size='90'%3E🎬%3C/text%3E%3C/svg%3E">
+<link rel="alternate" hreflang="pt-BR" href="https://inematds.github.io/rtex/guia/">
+<link rel="alternate" hreflang="en" href="https://inematds.github.io/rtex/guia/en/">
+<link rel="alternate" hreflang="es" href="https://inematds.github.io/rtex/guia/es/">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Sora:wght@400;600;800&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet">
+<style>
+  /* Paleta INEMA (inema-design DESIGN.md, seção 2): preto #0c0c10 + amarelo #FACC15 como acento único. */
+  :root{
+    --bg:#0c0c10; --bg2:#14141b; --card:#16161e; --line:#272730;
+    --txt:#e9e9ee; --mut:#9a9aa6; --amb:#FACC15; --amb2:#f0c070; --amb-ink:#1a1206; --amb-rgb:250,204,21;
+    --sky:#38bdf8; --pro:#cbd5e1; --navbg:rgba(12,12,16,.82);
+    color-scheme:dark;
+  }
+  body.light{
+    --bg:#f6f7f9; --bg2:#eceef2; --card:#ffffff; --line:#e1e3ea;
+    --txt:#1a1a22; --mut:#5b5b68; --amb:#a16207; --amb2:#a16207; --amb-ink:#ffffff; --amb-rgb:161,98,7;
+    --sky:#0369a1; --pro:#b45309; --navbg:rgba(246,247,249,.86);
+    color-scheme:light;
+  }
+  body.light .hero .glow{opacity:.45}
+  body.light pre{background:#101016;color:#d6d6e0}
+  body.light pre .c{color:#8a8a98}
+  body.light pre .k{color:#FACC15}
+  body.light .step .b{background:#FACC15;color:#1a1206}
+  body.light .btn{background:#FACC15;color:#1a1206}
+  body.light .btn.ghost{background:transparent;color:var(--txt)}
+  *{box-sizing:border-box}
+  html{scroll-behavior:smooth}
+  body{margin:0;background:var(--bg);color:var(--txt);font:16px/1.65 Inter,system-ui,sans-serif;-webkit-font-smoothing:antialiased}
+  h1,h2,h3{font-family:Sora,sans-serif;line-height:1.15;margin:0}
+  a{color:var(--amb);text-decoration:none}
+  code,pre{font-family:"JetBrains Mono",monospace}
+  .wrap{max-width:1160px;margin:0 auto;padding:0 22px}
+  .mut{color:var(--mut)} .amb{color:var(--amb)}
+  .chip{display:inline-block;font-size:.75rem;letter-spacing:.14em;text-transform:uppercase;color:var(--amb);font-weight:600;font-family:Sora}
+  nav{position:sticky;top:0;z-index:30;backdrop-filter:blur(12px);background:var(--navbg);border-bottom:1px solid var(--line)}
+  nav .wrap{display:flex;align-items:center;gap:22px;height:60px}
+  nav .brand{display:flex;align-items:center;gap:8px;font-family:Sora;font-weight:800;letter-spacing:-.02em;color:var(--amb)}
+  nav .brand .emoji{font-size:1.25rem}
+  nav .sep{color:var(--mut);opacity:.45}
+  nav .inema{color:var(--sky);font-weight:600;font-size:.88rem;font-family:Sora}
+  nav .inema:hover{filter:brightness(1.15)}
+  nav .pro{color:var(--pro);font-weight:600;font-size:.88rem;font-family:Sora}
+  nav .pro:hover{filter:brightness(1.15)}
+  nav .clubpro{display:inline-flex;align-items:center;gap:6px}
+  nav .links{margin-left:auto;display:flex;align-items:center;gap:20px;font-size:.92rem}
+  nav .links a.sec{color:var(--mut)} nav .links a.sec:hover{color:var(--txt)}
+  .lang{display:inline-flex;gap:2px;font-family:Sora;font-size:.78rem}
+  .lang a{color:var(--mut);padding:.2em .45em;border-radius:6px} .lang a.on{color:var(--amb);background:rgba(var(--amb-rgb),.14)}
+  .tgl{background:var(--bg2);border:1px solid var(--line);color:var(--txt);width:38px;height:38px;border-radius:10px;cursor:pointer;display:inline-flex;align-items:center;justify-content:center;font-size:1.05rem}
+  .tgl:hover{border-color:var(--amb)}
+  .btn{display:inline-block;background:var(--amb);color:var(--amb-ink);font-weight:600;padding:.6em 1.05em;border-radius:10px;font-family:Sora}
+  .btn.ghost{background:transparent;color:var(--txt);border:1px solid var(--line)}
+  @media(max-width:760px){nav .links a.sec{display:none}}
+  @media(max-width:520px){nav .wrap{gap:8px;padding:8px 14px;height:auto;flex-wrap:wrap} nav .links{gap:8px;margin-left:0;width:100%;justify-content:space-between} nav .btn{padding:.45em .7em;font-size:.82rem} .tgl{width:34px;height:34px}}
+  .hero{position:relative;overflow:hidden;border-bottom:1px solid var(--line)}
+  .hero .glow{position:absolute;inset:-40% -20% auto auto;width:70%;height:600px;background:radial-gradient(closest-side,rgba(var(--amb-rgb),.16),transparent 70%);pointer-events:none}
+  .hero .wrap{display:grid;grid-template-columns:1.3fr .7fr;gap:40px;align-items:center;padding:74px 22px}
+  .hero h1{font-size:clamp(2.2rem,5vw,3.5rem);font-weight:800;letter-spacing:-.025em}
+  .hero p.lead{font-size:1.18rem;color:var(--mut);margin:1.1em 0 1.6em;max-width:42ch}
+  .hero .cta{display:flex;gap:12px;flex-wrap:wrap}
+  .hero figure{margin:0 auto;max-width:300px;border-radius:16px;overflow:hidden;border:1px solid var(--line);box-shadow:0 30px 80px -30px #000}
+  .hero figure img{width:100%;height:auto;display:block}
+  .resumo{padding:38px 0 34px;border-bottom:1px solid var(--line)}
+  .resumo p{font-size:1.12rem;line-height:1.7;max-width:74ch;margin:.55em 0 0}
+  @media(max-width:780px){.hero .wrap{grid-template-columns:1fr;padding:48px 22px}}
+  section{padding:62px 0;border-bottom:1px solid var(--line)}
+  section h2{font-size:clamp(1.5rem,3.4vw,2.1rem);font-weight:800;letter-spacing:-.02em}
+  section .sub{color:var(--mut);margin:.6em 0 2em;max-width:62ch}
+  .grid{display:grid;gap:16px}
+  .g3{grid-template-columns:repeat(3,1fr)} .g4{grid-template-columns:repeat(4,1fr)} .g2{grid-template-columns:repeat(2,1fr)}
+  @media(max-width:820px){.g3,.g4{grid-template-columns:1fr 1fr}}
+  @media(max-width:540px){.g2,.g3,.g4{grid-template-columns:1fr}}
+  .card{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:20px}
+  .card h3{font-size:1.05rem;margin-bottom:.4em}
+  .card p{color:var(--mut);font-size:.92rem;margin:0}
+  .num{display:inline-flex;width:30px;height:30px;align-items:center;justify-content:center;border-radius:8px;background:rgba(var(--amb-rgb),.16);color:var(--amb);font-family:Sora;font-weight:800;font-size:.9rem;margin-bottom:.7em}
+  .flow{display:flex;flex-wrap:wrap;gap:8px;align-items:center;margin-top:10px}
+  .flow span{background:var(--bg2);border:1px solid var(--line);border-radius:999px;padding:.45em .9em;font-size:.85rem;font-family:Sora;font-weight:600}
+  .flow .arr{color:var(--amb);border:none;background:none;padding:0 .1em}
+  pre{background:#101016;border:1px solid var(--line);border-radius:12px;padding:16px 18px;overflow:auto;font-size:.86rem;line-height:1.6;color:#d6d6e0}
+  pre .c{color:#77778a} pre .k{color:#FACC15} pre .s{color:#9ece6a}
+  .step{display:grid;grid-template-columns:46px minmax(0,1fr);gap:16px;margin-bottom:26px}
+  .step>div,.card{min-width:0}
+  p code,li code,td code{overflow-wrap:anywhere}
+  .step .b{width:46px;height:46px;border-radius:12px;background:var(--amb);color:var(--amb-ink);font-family:Sora;font-weight:800;font-size:1.25rem;display:flex;align-items:center;justify-content:center}
+  .step h3{font-size:1.12rem;margin-bottom:.3em}
+  .step p{color:var(--mut);margin:.2em 0 .7em}
+  .who{display:inline-block;font-size:.75rem;font-family:Sora;font-weight:600;letter-spacing:.06em;color:var(--mut);border:1px solid var(--line);border-radius:999px;padding:.1em .6em;margin-left:.5em;vertical-align:middle}
+  .ex{display:grid;grid-template-columns:repeat(4,1fr);gap:16px}
+  @media(max-width:880px){.ex{grid-template-columns:repeat(2,1fr)}}
+  .ex figure{margin:0;border-radius:14px;overflow:hidden;border:1px solid var(--line)}
+  .ex figure img{width:100%;height:auto;display:block}
+  .ex figcaption{padding:12px 14px;font-size:.88rem;color:var(--mut);background:var(--card)}
+  .video{display:grid;grid-template-columns:minmax(0,360px) minmax(0,1fr);gap:36px;align-items:start}
+  @media(max-width:780px){.video{grid-template-columns:1fr}}
+  .yt{position:relative;width:100%;max-width:360px;aspect-ratio:9/16;border-radius:16px;overflow:hidden;border:1px solid var(--line);background:#000;margin:0 auto}
+  .yt iframe{position:absolute;inset:0;width:100%;height:100%;border:0}
+  .qa{width:100%;border-collapse:collapse;font-size:.92rem}
+  .qa td{padding:.45em .3em;border-bottom:1px solid var(--line)} .qa td:last-child{text-align:right;font-family:"JetBrains Mono",monospace;color:var(--amb)}
+  .cmp{width:100%;border-collapse:collapse;font-size:.92rem}
+  .cmp th,.cmp td{padding:.6em .5em;border-bottom:1px solid var(--line);text-align:left;vertical-align:top}
+  .cmp th{font-family:Sora;font-size:.8rem;letter-spacing:.08em;text-transform:uppercase;color:var(--mut)}
+  .cmp td:first-child{color:var(--txt);font-weight:600;white-space:nowrap}
+  .cmp td{color:var(--mut)} .cmp td.new{color:var(--txt)}
+  .tbl{overflow-x:auto;background:var(--card);border:1px solid var(--line);border-radius:14px;padding:6px 14px}
+  .wide{margin:0 0 26px;border-radius:16px;overflow:hidden;border:1px solid var(--line);box-shadow:0 30px 80px -30px #000}
+  .wide img{width:100%;height:auto;display:block}
+  ol.esq{margin:0;padding-left:1.3em} ol.esq li{margin:.35em 0;color:var(--mut)} ol.esq li b{color:var(--txt)}
+  .note{background:var(--card);border:1px solid var(--line);border-left:3px solid var(--amb);border-radius:12px;padding:14px 16px;font-size:.95rem;color:var(--mut)}
+  .note b{color:var(--txt)}
+  .phase{display:flex;gap:14px;padding:16px 0;border-bottom:1px solid var(--line)}
+  .phase:last-child{border:none}
+  .phase .tag{flex:0 0 92px;font-family:Sora;font-weight:800;color:var(--amb)}
+  .phase .d strong{display:block;margin-bottom:.2em}
+  .phase .d span{color:var(--mut);font-size:.92rem}
+  footer{padding:46px 0;text-align:center;color:var(--mut);font-size:.9rem}
+  .pill{display:inline-block;border:1px solid var(--line);border-radius:999px;padding:.3em .8em;font-size:.78rem;color:var(--mut);margin:4px}
+</style>
+</head>
+<body>
+
+<nav><div class="wrap">
+  <a class="brand" href="#top"><span class="emoji">🎬</span> rtex</a>
+  <span class="sep">|</span>
+  <span class="clubpro">
+    <a class="inema" href="https://inema.club" target="_blank" rel="noopener">INEMA.CLUB</a>
+    <span class="sep">-</span>
+    <a class="pro" href="https://inema.pro" target="_blank" rel="noopener">PRO</a>
+  </span>
+  <div class="links">
+    <a class="sec" href="#oque">Qué es</a>
+    <a class="sec" href="#r7ex">rtex × r7ex</a>
+    <a class="sec" href="#guia">Guía de uso</a>
+    <a class="sec" href="#exemplos">Ejemplo</a>
+    <span class="lang"><a href="../">PT</a><a href="../en/">EN</a><a class="on" href="./">ES</a></span>
+    <button class="tgl" id="themeToggle" aria-label="Cambiar tema" title="Cambiar tema">🌙</button>
+    <a class="btn" href="https://github.com/inematds/rtex" target="_blank" rel="noopener">GitHub</a>
+  </div>
+</div></nav>
+
+<main>
+<header class="hero" id="top">
+  <div class="glow"></div>
+  <div class="wrap">
+    <div>
+      <span class="chip">Motor de reels · v1.0.0 · avatar real</span>
+      <h1>El reel de "N piezas", con el <span class="amb">rostro real</span> de Nei</h1>
+      <p class="lead">Escribes un <code>roteiro.json</code>; rtex te devuelve un reel vertical 1080×1920: la tesis escrita en el cuadro 0, las piezas numeradas con índice, prueba con fuente, la salvedad honesta y un único pedido: "comenta <span class="amb">PALAVRA</span>". Quien habla es el avatar de Nei en HeyGen.</p>
+      <div class="cta">
+        <a class="btn" href="#guia">Empezar la guía</a>
+        <a class="btn ghost" href="#exemplos">Ver el video de ejemplo</a>
+      </div>
+    </div>
+    <figure><img src="../assets/q-01_5.jpg" width="540" height="960" alt="Cuadro de apertura del reel de ejemplo: la tesis escrita, &quot;5 peças do mês. A melhor é uma pasta.&quot; (5 piezas del mes. La mejor es una carpeta.), con PASTA en amarillo, una carpeta dibujada y Nei hablando en el tercio inferior"></figure>
+  </div>
+</header>
+
+<section id="resumo" class="resumo"><div class="wrap">
+  <span class="chip">En resumen</span>
+  <p>rtex es el motor que Nei usa para hacer reels (videos cortos verticales) de INEMA con su propio rostro: su avatar en HeyGen narra el guion y el motor dibuja encima las pantallas, los subtítulos palabra por palabra y la tarjeta final. Cada video sigue un formato fijo de "N piezas", desde el cuadro de apertura con la tesis hasta el pedido "comenta PALAVRA". Un validador, un crítico automático y QA revisan el formato antes de publicar. El código es abierto para estudiar y adaptar; para generar tu video necesitas tu propio avatar en HeyGen, además de Python, Node, ffmpeg y Whisper.</p>
+</div></section>
+
+<section id="oque"><div class="wrap">
+  <span class="chip">Qué es</span>
+  <h2>Un formato fijo, con el presentador de verdad</h2>
+  <p class="sub">Los dos tercios de arriba son para el contenido; el tercio de abajo es para Nei hablando durante todo el reel. Cada cifra tiene su fuente en pantalla, y el amarillo aparece como superficie una sola vez: en la palabra que el video pide comentar.</p>
+  <figure class="wide" style="max-width:760px"><img src="../assets/triptico.jpg" width="900" height="533" loading="lazy" alt="Tres cuadros del reel de ejemplo lado a lado: la tesis de apertura, la pieza 01 (Skills de Claude) y la tarjeta final &quot;Comenta PASTA&quot;, siempre con Nei en el tercio inferior"></figure>
+  <div class="grid g3">
+    <div class="card"><h3>🎙️ Avatar real de Nei</h3><p>La voz se envía al estudio de HeyGen con la suscripción; el video del avatar regresa, Whisper marca el tiempo de cada palabra y el motor ajusta las pantallas y los subtítulos a ese tiempo.</p></div>
+    <div class="card"><h3>🧩 Patrón de piezas</h3><p>Tesis en el cuadro 0, prueba social con cifra, "N piezas" anunciadas, índice visible, método numerado, prueba, salvedad, máxima después de un silencio y "comenta PALAVRA".</p></div>
+    <div class="card"><h3>✅ Tres revisiones</h3><p>El validador exige la regla; un crítico (<code>claude -p</code>) califica el guion; QA mide duración, ritmo, volumen, cambios por minuto, silencio, tarjeta final y el amarillo.</p></div>
+  </div>
+</div></section>
+
+<section id="formato"><div class="wrap">
+  <span class="chip">El formato</span>
+  <h2>Los nueve bloques del estándar rtex</h2>
+  <p class="sub">En este orden. El comando <code>checar</code> rechaza el guion si falta un bloque obligatorio o está fuera de lugar.</p>
+  <div class="grid g2">
+    <div class="card"><ol class="esq">
+      <li><b>tese</b> (tesis): escrita en el cuadro 0 (hasta 9 palabras, la palabra gancho destacada), con algo en movimiento durante el primer segundo.</li>
+      <li><b>autoridade</b> (autoridad): prueba social con una cifra; el contador se detiene en el valor de la fuente.</li>
+      <li><b>problema</b>: el dolor se muestra con un objeto (en el ejemplo, un chat tachado).</li>
+      <li><b>virada</b> (giro): se anuncian las "N piezas"; el índice 01–N aparece antes del primer elemento y luego se convierte en píldoras en la parte superior.</li>
+      <li><b>metodo</b> (método): los elementos numerados, un objeto por elemento, etiqueta "0N / NOME".</li>
+    </ol></div>
+    <div class="card"><ol class="esq" start="6">
+      <li><b>prova</b> (prueba): un hecho con fuente que confirma lo anterior.</li>
+      <li><b>ressalva</b> (salvedad): las limitaciones, expresadas y legibles, convertidas en instrucciones.</li>
+      <li><b>maxima</b> (máxima): una antítesis breve, después de 0,6–0,75 s de silencio (desaparecen la voz y la música).</li>
+      <li><b>cta</b> (llamada a la acción): "comenta PALAVRA", la misma palabra de la tesis; la tarjeta permanece 9 s después de la última palabra.</li>
+    </ol></div>
+  </div>
+  <h3 style="margin:34px 0 12px">Glosario rápido</h3>
+  <div class="grid g3">
+    <div class="card"><h3>Palabra gancho</h3><p>La palabra que el video pide comentar (aquí, PASTA). Está en la tesis, aparece en el cuadro 0 y es la única píldora amarilla del video.</p></div>
+    <div class="card"><h3>Máxima</h3><p>La frase que resume el final, en forma de antítesis (&quot;Não é a IA que é burra. É a pasta que está vazia.&quot; —«No es la IA la que es tonta. La carpeta está vacía.»), después de un breve silencio.</p></div>
+    <div class="card"><h3>Escenario</h3><p>La página <code>motor/palco.html</code> que dibuja las pantallas. El render graba esa página a 30 cuadros por segundo.</p></div>
+    <div class="card"><h3>HeyGen y el estudio</h3><p>HeyGen es el servicio que genera el video del avatar hablando. rtex usa el estudio (el sitio web, con la suscripción), en un navegador abierto en la pantalla virtual <code>:99</code>.</p></div>
+    <div class="card"><h3>Subtítulos karaoke</h3><p>Los subtítulos resaltan palabra por palabra al ritmo de la voz, con las palabras clave en color.</p></div>
+    <div class="card"><h3>LUFS</h3><p>Medida del volumen percibido. −14 LUFS es el volumen que las redes usan como estándar.</p></div>
+    <div class="card"><h3>CTA</h3><p>&quot;Llamada a la acción&quot;: el pedido final del video. Aquí hay uno solo: &quot;comenta PALAVRA&quot; (comenta PALABRA).</p></div>
+    <div class="card"><h3>Whisper y Playwright</h3><p>Whisper transcribe la voz y marca el tiempo de cada palabra. Playwright abre el escenario en un navegador y graba cada cuadro.</p></div>
+    <div class="card"><h3>Crítico y revisor</h3><p>El crítico es un <code>claude -p</code> que califica cada bloque del guion. El revisor independiente es otra sesión que solo evalúa el resultado.</p></div>
+  </div>
+</div></section>
+
+<section id="r7ex"><div class="wrap">
+  <span class="chip">rtex × r7ex</span>
+  <h2>Qué cambia con respecto a r7ex</h2>
+  <p class="sub">rtex parte del motor r7ex v1.1.0 (copiado, no importado: modificar uno no afecta al otro). Se conserva la máquina; cambian el guion y la pantalla.</p>
+  <div class="tbl"><table class="cmp">
+    <tr><th></th><th>r7ex</th><th>rtex</th></tr>
+    <tr><td>Guion</td><td>7 etapas de gatillo: gancho con cifra → miedo → deseo → facilidad → descubrimiento → beneficio → comentario</td><td class="new">9 bloques de piezas: tesis → autoridad → problema → giro → método → prueba → salvedad → máxima → cta</td></tr>
+    <tr><td>Apertura</td><td>título dibujado en la imagen de apertura</td><td class="new">la tesis escrita en el cuadro 0, con la palabra gancho destacada</td></tr>
+    <tr><td>Avatar</td><td>media pantalla abajo durante el gancho, luego en una esquina</td><td class="new">en el tercio inferior durante todo el reel; los 2/3 de arriba son para el contenido</td></tr>
+    <tr><td>Estructura en pantalla</td><td>paneles al ritmo de la voz, contador</td><td class="new">índice 01–N que se convierte en píldoras en la parte superior, etiqueta "0N / NOME" en cada pieza</td></tr>
+    <tr><td>Honestidad</td><td>—</td><td class="new">salvedad obligatoria antes de la máxima; toda cifra con fuente verificada hace ≤ 7 días</td></tr>
+    <tr><td>Cierre</td><td>comentario "tá tudo no inema.club"</td><td class="new">silencio, máxima en antítesis, "comenta PALAVRA" (la palabra = la tesis), tarjeta de 9 s</td></tr>
+    <tr><td>Color</td><td>negro + amarillo de noticiero</td><td class="new">negro INEMA con amarillo dosificado: una sola superficie amarilla, la píldora del gancho (QA la cuenta)</td></tr>
+    <tr><td>Se mantiene</td><td colspan="2">avatar mediante el estudio de HeyGen, subtítulos karaoke, ritmo de la voz, Whisper, crítico + revisor independiente, cola con temporizador y envío al bot</td></tr>
+  </table></div>
+</div></section>
+
+<section id="fluxo"><div class="wrap">
+  <span class="chip">Cómo funciona</span>
+  <h2>Del guion a video.mp4</h2>
+  <p class="sub"><code>rtex.py</code> ejecuta cada paso. El avatar es la parte lenta: el estudio puede tardar de minutos a horas en entregar el video.</p>
+  <div class="flow">
+    <span>roteiro.json</span><span class="arr">→</span>
+    <span>checar</span><span class="arr">→</span>
+    <span>critico</span><span class="arr">→</span>
+    <span>avatar-enviar (HeyGen)</span><span class="arr">→</span>
+    <span>prints</span><span class="arr">→</span>
+    <span>avatar + Whisper</span><span class="arr">→</span>
+    <span>cena</span><span class="arr">→</span>
+    <span>render (30 fps, −14 LUFS)</span><span class="arr">→</span>
+    <span>qa</span><span class="arr">→</span>
+    <span>video.mp4</span>
+  </div>
+  <div class="grid g3" style="margin-top:26px">
+    <div class="card"><span class="num">1</span><h3>Guion revisado</h3><p><code>checar</code> exige el orden de los bloques, índice = método, diálogo sin cifras ni "!", fuente para cada cifra, gancho = tesis y duración estimada de 60–90 s. <code>critico</code> da la calificación.</p></div>
+    <div class="card"><span class="num">2</span><h3>Avatar y ritmo</h3><p>El diálogo se envía al estudio; el video regresa, Whisper marca las palabras, se acelera la voz hasta ~182 palabras/min (un máximo de 12 %) y se agrega el silencio antes de la máxima.</p></div>
+    <div class="card"><span class="num">3</span><h3>Escena, render y QA</h3><p><code>cena</code> vincula cada pantalla con una palabra del diálogo; <code>render</code> graba el escenario, coloca el avatar abajo y agrega la música; <code>qa</code> mide todo y arma la hoja.</p></div>
+  </div>
+</div></section>
+
+<section id="pre"><div class="wrap">
+  <span class="chip">Requisitos previos</span>
+  <h2>Qué debe estar instalado en la máquina</h2>
+  <p class="sub">El motor se creó para la máquina de Nei (Linux). Las rutas de abajo están en el código; en otra máquina, usa las variables indicadas o ajusta el archivo.</p>
+  <div class="grid g3">
+    <div class="card"><h3>Avatar: HeyGen desde el estudio</h3><p>Una cuenta de HeyGen con tu avatar y tu voz, y un proyecto modelo en el estudio (<code>RTEX_HEYGEN_TEMPLATE</code>, predeterminado <code>TEMPLATE-AVATAR16</code>). El navegador se abre en la pantalla virtual <code>:99</code> con un perfil que ya inició sesión (<code>RTEX_HEYGEN_PERFIL</code>). La descarga lee <code>HEYGEN_API_KEY</code> de <code>~/projetos/openpcbotv2/.env</code> (solo consulta de estado y descarga). Si el video del avatar ya existe, usa <code>avatar --de &lt;mp4&gt;</code> y omite el estudio.</p></div>
+    <div class="card"><h3>Whisper (inemavox)</h3><p><a href="https://github.com/inematds/inemavox" target="_blank" rel="noopener">inematds/inemavox</a> en <code>~/projetos/inemavox</code> (o <code>CS_INEMAVOX</code>). rtex intenta usar Whisper residente en el puerto 7871 (Python en <code>CS_WHISPER_PY</code>) y, si no está disponible, ejecuta el <code>transcrever_v1.py</code> de inemavox con large-v3 (unos 10 GB en la GPU NVIDIA).</p></div>
+    <div class="card"><h3>Node, ffmpeg, Python</h3><p>Node 18+, ffmpeg con ffprobe, Python 3, un servidor X virtual en la pantalla <code>:99</code> (por ejemplo, Xvfb) para el render y la CLI <code>claude</code> con sesión iniciada para el crítico.</p><pre><span class="k">git clone</span> <span class="s">https://github.com/inematds/rtex</span>
+<span class="k">cd</span> rtex
+<span class="k">npm i</span>
+<span class="k">npx playwright install</span> chromium
+<span class="k">Xvfb</span> :99 -screen 0 1920x1080x24 &amp;   <span class="c"># si aún no existe</span></pre></div>
+  </div>
+  <div class="note" style="margin-top:18px"><b>Opcionales:</b> <code>enviar</code> manda el video al bot de Telegram de Nei (<code>bin/enviar_bot_v3.mjs</code>) y <code>fila</code> agrega el video a la cola de publicación de r7ex (<code>~/projetos/r7ex/fila/fila.py</code>, o <code>RTEX_FILA</code>). Fuera de la máquina de Nei, detente en <code>qa</code> y publica como prefieras.</div>
+</div></section>
+
+<section id="guia"><div class="wrap">
+  <span class="chip">Guía de uso · paso a paso</span>
+  <h2>Del tema al video revisado</h2>
+  <p class="sub">Cada edición está en <code>edicoes/&lt;data&gt;-&lt;slug&gt;/</code>. El atajo <code>fazer</code> (paso 9) ejecuta checar, prints, avatar, cena, render y qa de una vez.</p>
+
+  <div class="step"><div class="b">1</div><div>
+    <h3>Crea la edición <span class="who">tú</span></h3>
+    <p>Copia el guion modelo (la primera edición) a una carpeta nueva con la fecha de hoy.</p>
+<pre><span class="k">python3 rtex.py novo</span> minha-edicao   <span class="c"># -> edicoes/AAAA-MM-DD-minha-edicao/roteiro.json</span></pre>
+  </div></div>
+
+  <div class="step"><div class="b">2</div><div>
+    <h3>Escribe el guion con las fuentes <span class="who">tú</span></h3>
+    <p>Verifica cada cifra en su fuente el mismo día y anótala en <code>fontes[]</code> con <code>valor</code> y <code>verificado_em</code>. Luego escribe los bloques (formato en <a href="#roteiro">"O roteiro.json"</a>), el diálogo completo y el gancho.</p>
+  </div></div>
+
+  <div class="step"><div class="b">3</div><div>
+    <h3>Valida y pásalo por el crítico</h3>
+    <p><code>checar</code> aplica reglas estrictas. <code>critico</code> pide una calificación a un <code>claude -p</code> con la suscripción: pasa sin bloqueos, tesis ≥ 8, promedio ≥ 7,5 y ningún bloque por debajo de 6. Guarda <code>critica.json</code>.</p>
+<pre><span class="k">python3 rtex.py checar</span>  edicoes/AAAA-MM-DD-minha-edicao
+<span class="k">python3 rtex.py critico</span> edicoes/AAAA-MM-DD-minha-edicao</pre>
+  </div></div>
+
+  <div class="step"><div class="b">4</div><div>
+    <h3>Autoriza y envía el avatar <span class="who">tú</span></h3>
+    <p>El envío solo se hace con una aprobación por escrito para esta producción en <code>avatar/APROVADO_HEYGEN</code> (un avatar por reel). Después del envío, el diálogo queda congelado: los errores de texto se corrigen en los subtítulos (<code>trocas</code>), no con un segundo avatar.</p>
+<pre><span class="k">mkdir -p</span> edicoes/AAAA-MM-DD-minha-edicao/avatar
+<span class="k">echo</span> <span class="s">"ok para este reel"</span> &gt; edicoes/AAAA-MM-DD-minha-edicao/avatar/APROVADO_HEYGEN
+<span class="k">python3 rtex.py avatar-enviar</span> edicoes/AAAA-MM-DD-minha-edicao   <span class="c"># grava avatar/video_id.txt</span></pre>
+  </div></div>
+
+  <div class="step"><div class="b">5</div><div>
+    <h3>Toma capturas de las páginas</h3>
+    <p>Capturas reales de las páginas de GitHub citadas y los logos. Abre y lee las capturas antes de continuar.</p>
+<pre><span class="k">python3 rtex.py prints</span> edicoes/AAAA-MM-DD-minha-edicao</pre>
+  </div></div>
+
+  <div class="step"><div class="b">6</div><div>
+    <h3>Vista previa sin avatar <span class="who">opcional</span></h3>
+    <p>Mientras trabaja el estudio, en una copia de la carpeta: tiempos sintéticos, escena y algunos cuadros sueltos (en segundos). Permite detectar errores de diseño antes de que llegue el avatar.</p>
+<pre><span class="k">cp -r</span> edicoes/AAAA-MM-DD-minha-edicao /tmp/previa
+<span class="k">python3 ferramentas/tempos_sinteticos.py</span> /tmp/previa
+<span class="k">python3 rtex.py cena</span> /tmp/previa
+<span class="k">node motor/render.mjs</span> /tmp/previa --quadros 1,10,20</pre>
+  </div></div>
+
+  <div class="step"><div class="b">7</div><div>
+    <h3>Descarga el avatar y ajusta el ritmo</h3>
+    <p><code>avatar-conferir</code> hace una consulta (listo o en proceso). <code>avatar</code> espera, descarga, marca las palabras con Whisper, acelera la voz hasta ~182 palabras/min, agrega el silencio antes de la máxima y los 9 s de la tarjeta.</p>
+<pre><span class="k">python3 rtex.py avatar-conferir</span> edicoes/AAAA-MM-DD-minha-edicao
+<span class="k">python3 rtex.py avatar</span> edicoes/AAAA-MM-DD-minha-edicao
+<span class="k">python3 rtex.py avatar</span> edicoes/AAAA-MM-DD-minha-edicao --de avatar.mp4   <span class="c"># reutilizar un mp4</span></pre>
+  </div></div>
+
+  <div class="step"><div class="b">8</div><div>
+    <h3>Escena, render y QA</h3>
+    <p>El escenario a 30 fps, el avatar en el tercio inferior, la música y −14 LUFS en dos pasadas; QA guarda <code>build/qa.json</code> y la hoja <code>build/folha.jpg</code> con 16 cuadros.</p>
+<pre><span class="k">python3 rtex.py cena</span>   edicoes/AAAA-MM-DD-minha-edicao
+<span class="k">python3 rtex.py render</span> edicoes/AAAA-MM-DD-minha-edicao   <span class="c"># -> video.mp4</span>
+<span class="k">python3 rtex.py qa</span>     edicoes/AAAA-MM-DD-minha-edicao</pre>
+  </div></div>
+
+  <div class="step"><div class="b">9</div><div>
+    <h3>O ejecuta todo de una vez</h3>
+    <p>checar → prints + avatar → cena → render → qa (el envío al estudio, paso 4, va antes).</p>
+<pre><span class="k">python3 rtex.py fazer</span> edicoes/AAAA-MM-DD-minha-edicao</pre>
+  </div></div>
+
+  <div class="step"><div class="b">10</div><div>
+    <h3>Revisa y entrega <span class="who">tú</span></h3>
+    <p>Lee la hoja y el <code>qa.json</code>; pide una revisión a alguien que no haya escrito el guion. Lo que promete el gancho debe existir ese día. En la máquina de Nei, <code>enviar</code> lo manda al bot y <code>fila</code> lo agrega a la cola del canal (nunca lo subas directamente).</p>
+<pre><span class="k">python3 rtex.py enviar</span> edicoes/AAAA-MM-DD-minha-edicao
+<span class="k">python3 rtex.py fila</span>   edicoes/AAAA-MM-DD-minha-edicao</pre>
+  </div></div>
+</div></section>
+
+<section id="roteiro"><div class="wrap">
+  <span class="chip">O roteiro.json</span>
+  <h2>El formato del guion, en una pantalla</h2>
+  <p class="sub">Fragmento real de la primera edición, abreviado (las líneas <code>//</code> no son JSON válido; el archivo completo está en <code>modelo/roteiro.json</code>).</p>
+<pre>{
+  <span class="s">"versao"</span>: <span class="s">"rtex/1"</span>, <span class="s">"tema"</span>: <span class="s">"5 piezas de IA del mes — la mejor es una carpeta"</span>,
+  <span class="s">"isca"</span>: { <span class="s">"palavra"</span>: <span class="s">"PASTA"</span>, <span class="s">"entregavel"</span>: <span class="s">"los 5 enlaces y el curso de inema.club..."</span> },
+  <span class="s">"fontes"</span>: [ { <span class="s">"id"</span>: <span class="s">"ecc"</span>, <span class="s">"url"</span>: <span class="s">"https://github.com/affaan-m/ECC"</span>, <span class="s">"valor"</span>: <span class="s">"291 mil"</span>, <span class="s">"verificado_em"</span>: <span class="s">"2026-10-28"</span> } ],
+  <span class="s">"trocas"</span>: { <span class="s">"é cê cê"</span>: <span class="s">"ECC"</span>, <span class="s">"cinco peças"</span>: <span class="s">"5 peças"</span> },
+  <span class="s">"blocos"</span>: [
+    { <span class="s">"tipo"</span>: <span class="s">"tese"</span>, <span class="s">"fala"</span>: <span class="s">"La mejor pieza de IA de este mes es solo una carpeta. Y la cuarta ni siquiera es de IA."</span>,
+      <span class="s">"tela"</span>: { <span class="s">"linhas"</span>: [<span class="s">"5 PIEZAS DEL MES."</span>, <span class="s">"LA MEJOR ES UNA CARPETA."</span>], <span class="s">"destaque"</span>: <span class="s">"PASTA"</span> },
+      <span class="s">"objeto"</span>: { <span class="s">"comp"</span>: <span class="s">"tese"</span> } },
+    <span class="c">// ... autoridad, problema, virada ...</span>
+    { <span class="s">"tipo"</span>: <span class="s">"metodo"</span>, <span class="s">"n"</span>: 1, <span class="s">"nome"</span>: <span class="s">"PASTA"</span>, <span class="s">"fonte"</span>: <span class="s">"skills"</span>,
+      <span class="s">"fala"</span>: <span class="s">"Uno: las Skills de Claude. Una carpeta por tarea, con el proceso, los modelos y la lista de verificación."</span>,
+      <span class="s">"objeto"</span>: { <span class="s">"comp"</span>: <span class="s">"pasta"</span>, <span class="s">"params"</span>: { <span class="s">"titulo"</span>: <span class="s">"Skills de Claude"</span> } } },
+    <span class="c">// ... metodo 2–5, prova, ressalva ...</span>
+    { <span class="s">"tipo"</span>: <span class="s">"maxima"</span>, <span class="s">"fala"</span>: <span class="s">"No es la IA la que es tonta. La carpeta está vacía."</span>, <span class="s">"objeto"</span>: { <span class="s">"comp"</span>: <span class="s">"maxima"</span> } },
+    { <span class="s">"tipo"</span>: <span class="s">"cta"</span>, <span class="s">"fala"</span>: <span class="s">"Comenta pasta y te mando los cinco enlaces, con el curso de inema punto club."</span>,
+      <span class="s">"objeto"</span>: { <span class="s">"comp"</span>: <span class="s">"isca"</span>, <span class="s">"params"</span>: { <span class="s">"palavra"</span>: <span class="s">"PASTA"</span> } } }
+  ]
+}</pre>
+  <div class="grid g2" style="margin-top:18px">
+    <div class="card"><h3>Campos principales</h3><p><code>tipo</code> (el orden de los nueve bloques) · <code>fala</code> (en palabras, sin cifras ni "!") · <code>tela</code> (texto grande y destacado) · <code>objeto.comp</code> + <code>objeto.params</code> (lo que dibuja el escenario) · <code>n</code> y <code>nome</code> en los elementos del método (iguales al índice del giro) · <code>fonte</code> (id en <code>fontes</code>). En la parte superior: <code>trocas</code> (cómo aparece el diálogo en los subtítulos), <code>cores</code> (palabras de color), <code>ritmo</code> y <code>publicar</code> (título, descripción, canal de la cola).</p></div>
+    <div class="card"><h3>Componentes del escenario (<code>objeto.comp</code>)</h3><p><code>tese</code>, <code>contador</code>, <code>chat_riscado</code>, <code>indice</code> (con las píldoras de progreso), <code>pasta</code>, <code>repo</code> (captura real + estrellas), <code>manchete</code>, <code>selo_prova</code>, <code>ressalva</code>, <code>maxima</code> (destello tipográfico) e <code>isca</code> (la píldora amarilla con el cuadro de comentarios).</p></div>
+  </div>
+</div></section>
+
+<section id="exemplos"><div class="wrap">
+  <span class="chip">Ejemplo real</span>
+  <h2>"5 novedades de IA del mes: la más útil es una carpeta"</h2>
+  <p class="sub">La primera edición, producida íntegramente con el motor y publicada en YouTube. Gancho: <span class="amb">PASTA</span>. Guion en <code>edicoes/2026-10-28-cinco-pecas-ia/roteiro.json</code>.</p>
+  <div class="video">
+    <div class="yt"><iframe src="https://www.youtube-nocookie.com/embed/vLOgLCVs7gg" title="Reel de ejemplo de rtex en YouTube" loading="lazy" allow="accelerometer; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe></div>
+    <div>
+      <h3 style="margin-bottom:.6em">Qué midió QA</h3>
+      <table class="qa">
+        <tr><td>Duración</td><td>81,1 s</td></tr>
+        <tr><td>Resolución</td><td>1080×1920 · 30 fps</td></tr>
+        <tr><td>Ritmo de la voz</td><td>180 palabras/min</td></tr>
+        <tr><td>Volumen</td><td>−14,0 LUFS</td></tr>
+        <tr><td>Cambios visuales</td><td>36 por minuto</td></tr>
+        <tr><td>Mayor tramo sin cambios</td><td>3,5 s</td></tr>
+        <tr><td>Silencio antes de la máxima</td><td>0,58 s</td></tr>
+        <tr><td>Tarjeta final</td><td>9,0 s</td></tr>
+        <tr><td>Superficies amarillas</td><td>1 (el gancho)</td></tr>
+      </table>
+      <p class="mut" style="margin-top:1em"><a href="https://www.youtube.com/watch?v=vLOgLCVs7gg" target="_blank" rel="noopener">Abrir en YouTube</a></p>
+    </div>
+  </div>
+
+  <h3 style="margin:46px 0 16px">Cuadro por cuadro</h3>
+  <div class="ex">
+    <figure><img src="../assets/q-10_8.jpg" width="540" height="960" loading="lazy" alt="Contador de estrellas de GitHub detenido en 558,7 mil, con ponytail en 179 mil y Understand Anything en 88,7 mil, y la línea de fuente abajo"><figcaption>Autoridad: el contador se detiene en la cifra de la fuente.</figcaption></figure>
+    <figure><img src="../assets/q-15_5.jpg" width="540" height="960" loading="lazy" alt="Chat con la IA en el que la respuesta &quot;não, assim não&quot; (no, así no) aparece tachada en rojo"><figcaption>Problema: el dolor se muestra con un objeto.</figcaption></figure>
+    <figure><img src="../assets/q-20_2.jpg" width="540" height="960" loading="lazy" alt="Índice de las 5 piezas: 01 PASTA, 02 PONYTAIL, 03 MAPA, 04 ROADSTER, 05 TIME"><figcaption>Giro: el índice aparece antes de la primera pieza.</figcaption></figure>
+    <figure><img src="../assets/q-23_0.jpg" width="540" height="960" loading="lazy" alt="Pieza 01, Skills de Claude: una carpeta con proceso, modelos y lista de verificación, y las píldoras 01–05 arriba"><figcaption>Pieza 01, con las píldoras de progreso arriba.</figcaption></figure>
+    <figure><img src="../assets/q-28_0.jpg" width="540" height="960" loading="lazy" alt="Pieza 02: captura real de la página de ponytail en GitHub y 179 mil estrellas"><figcaption>Pieza 02: captura real de la página y las estrellas.</figcaption></figure>
+    <figure><img src="../assets/q-39_0.jpg" width="540" height="960" loading="lazy" alt="Pieza 04: titular &quot;Tesla Roadster com propulsores&quot; (Tesla Roadster con propulsores) marcado como curiosidad, con la fuente abajo"><figcaption>Pieza 04: titular con fuente y fecha.</figcaption></figure>
+    <figure><img src="../assets/q-51_8.jpg" width="540" height="960" loading="lazy" alt="Sello con trofeo: &quot;Venceu o hackathon, Anthropic × Forum Ventures&quot; (Ganó el hackathon, Anthropic × Forum Ventures), con la fuente"><figcaption>Prueba: el hecho con su fuente.</figcaption></figure>
+    <figure><img src="../assets/q-62_5.jpg" width="540" height="960" loading="lazy" alt="Tarjeta &quot;Atenção&quot; (Atención) con dos limitaciones y la instrucción &quot;comece pela peça 1: uma pasta só&quot; (empieza por la pieza 1: solo una carpeta)"><figcaption>Salvedad: una limitación convertida en instrucción.</figcaption></figure>
+    <figure><img src="../assets/q-67_5.jpg" width="540" height="960" loading="lazy" alt="Máxima: &quot;Não é a IA que é burra. É a pasta que está vazia.&quot; (No es la IA la que es tonta. La carpeta está vacía.)"><figcaption>La máxima, después del silencio.</figcaption></figure>
+    <figure><img src="../assets/q-80_9.jpg" width="540" height="960" loading="lazy" alt="Tarjeta final: &quot;Comenta PASTA&quot; en la píldora amarilla y el cuadro de comentarios con PASTA publicado"><figcaption>CTA: la única píldora amarilla del video.</figcaption></figure>
+    <figure><img src="../assets/q-46_6.jpg" width="540" height="960" loading="lazy" alt="Pieza 05: captura real de la página de ECC en GitHub y 291 mil estrellas"><figcaption>Pieza 05: ECC, 291 mil estrellas.</figcaption></figure>
+    <figure><img src="../assets/q-01_5.jpg" width="540" height="960" loading="lazy" alt="Cuadro de apertura: la tesis escrita con PASTA en amarillo"><figcaption>Tesis: escrita en el cuadro 0.</figcaption></figure>
+  </div>
+
+  <h3 style="margin:46px 0 16px">La hoja que genera QA</h3>
+  <figure class="wide"><img src="../assets/folha.jpg" width="1000" height="444" loading="lazy" alt="Hoja de QA del reel de ejemplo: 16 cuadros desde el comienzo hasta la tarjeta final, con el tiempo de cada uno"></figure>
+</div></section>
+
+<section id="estado"><div class="wrap">
+  <span class="chip">Estado</span>
+  <h2>En qué estado está el proyecto</h2>
+  <p class="sub">Lo que existe hoy en el repositorio y lo que queda para después.</p>
+  <div class="phase"><div class="tag">v1.0.0</div><div class="d"><strong>Motor completo</strong><span>Validador, crítico, estudio de HeyGen, capturas, escena, render, QA, envío y cola.</span></div></div>
+  <div class="phase"><div class="tag">1ª edición</div><div class="d"><strong>Publicado "5 peças de IA do mês" (5 piezas de IA del mes)</strong><span>81,1 s, todos los elementos de QA en verde, revisor independiente: 8/10.</span></div></div>
+  <div class="phase"><div class="tag">después</div><div class="d"><strong>Próximos pasos</strong><span>Producción sin sesión (temporizador), skill <code>/rtex</code>, modo largo (110–135 s), versión clara y entrega automática del gancho.</span></div></div>
+  <div class="note" style="margin-top:18px"><b>Regla antes de publicar:</b> lo que promete &quot;comenta PALAVRA&quot; (en portugués: «comenta PALABRA»; enlaces, curso, material) debe estar disponible el día en que se publique el video.</div>
+</div></section>
+</main>
+
+<footer>
+  <div class="wrap">
+    <div class="pill">Python</div><div class="pill">Playwright</div><div class="pill">ffmpeg</div><div class="pill">HeyGen (estudio)</div><div class="pill">Whisper large-v3</div><div class="pill">claude -p</div>
+    <p style="margin-top:18px">rtex · el reel de "N piezas" de INEMA ·
+      <a href="https://github.com/inematds/rtex">inematds/rtex</a> ·
+      <a href="https://inema.club">INEMA.CLUB</a></p>
+  </div>
+</footer>
+
+<script>
+  (function(){
+    var KEY='rtex-theme';
+    var b=document.body, t=document.getElementById('themeToggle');
+    try{ if(localStorage.getItem(KEY)==='light'){ b.classList.add('light'); t.textContent='☀️'; } }catch(e){}
+    t.addEventListener('click',function(){
+      var light=b.classList.toggle('light');
+      t.textContent=light?'☀️':'🌙';
+      try{ localStorage.setItem(KEY, light?'light':'dark'); }catch(e){}
+    });
+  })();
+</script>
+</body>
+</html>
