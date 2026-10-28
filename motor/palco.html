@@ -176,14 +176,14 @@ const COMP={
    ${p.linhas.map((x,i)=>`<div class="ln ${i===p.linhas.length-1?'d':''}" style="${dim(t,x.t-.15)}">${x.txt}</div>`).join('')}</div>`;},
  selo_prova(b,t){const p=b.p,k=prog(t,p.em-.15,.45);
   return `<div class="cx prova"><div class="tr" style="opacity:${.45+.55*k};transform:scale(${.85+.15*k})">🏆</div>
-   <div class="tt" style="opacity:${.25+.75*k}">${realce(p.titulo,t>=p.em-.15?'VENCEU':'')}</div><div class="sb" style="${ent(t,b.ini+.2,20)}">${p.sub}</div></div>`;},
+   <div class="tt" style="${ent(t,b.ini+.3)}">${realce(p.titulo,t>=p.em-.15?'VENCEU':'')}</div><div class="sb" style="${ent(t,b.ini+.2,20)}">${p.sub}</div></div>`;},
  ressalva(b,t){const p=b.p;
   return `<div class="cx"><div class="res" style="${ent(t,b.ini+.05)}"><div class="hd">⚠ ATENÇÃO</div>
    ${p.itens.map(x=>`<div class="it" style="${dim(t,x.t-.2)}">${x.txt}</div>`).join('')}
    <div class="dc" style="${dim(t,p.dica.t-.15)}"><b>→</b> ${p.dica.txt}</div></div></div>`;},
  maxima(b,t){const p=b.p;
   return `<div class="cx max"><div class="a" style="${ent(t,b.ini+.1,20,.35)}">${p.linha1}</div><div class="b" style="${ent(t,p.linha2_em-.25,30,.35)}">${realce(p.linha2,p.destaque)}</div></div>`;},
- isca(b,t){const p=b.p,k=prog(t,p.em-.2,.4);
+ isca(b,t){const p={...b.p,em:Math.max(b.p.em,b.ini+.2)},k=prog(t,p.em-.2,.4);
   return `<div class="cx isca"><div class="a" style="${ent(t,p.em-.2)}">${p.antes}</div>
    <div class="pill" style="opacity:${k};transform:scale(${.85+.15*k})">${p.palavra}</div><div class="c" style="${ent(t,p.em+.6)}">${p.depois}</div>
    <div class="club" style="${ent(t,p.em+1.2,20)}">inema.club</div></div>`;}

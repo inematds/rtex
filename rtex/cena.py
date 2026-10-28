@@ -117,6 +117,13 @@ def montar(pasta, r, falas):
             if isinstance(v, dict) and "t" in v:
                 eventos.append(v["t"])
 
+    # a máxima fica inteira ~1,3 s depois da última palavra dela antes de o cartão do CTA entrar (revisor, 28/10/2026)
+    if "maxima" in tipos and tipos[-1] == "cta":
+        km = tipos.index("maxima")
+        seg = round(min(1.3, (blocos[-1]["fim"] - blocos[-1]["ini"]) / 4), 3)
+        blocos[km]["fim"] += seg; blocos[-1]["ini"] += seg
+        eventos.append(blocos[-1]["ini"])
+
     # índice persistente no topo: da virada até a máxima; peça ativa = bloco de método da vez
     vi = tipos.index("virada")
     nomes = r["blocos"][vi]["objeto"]["params"]["itens"]
