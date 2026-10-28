@@ -217,6 +217,9 @@
     <div class="card"><h3>CTA</h3><p>"Chamada para ação": o pedido final do vídeo. Aqui é um só, "comenta PALAVRA".</p></div>
     <div class="card"><h3>Whisper e Playwright</h3><p>Whisper transcreve a voz e dá o tempo de cada palavra. Playwright abre o palco num navegador e filma cada quadro.</p></div>
     <div class="card"><h3>Crítico e revisor</h3><p>O crítico é um <code>claude -p</code> que dá nota a cada bloco do roteiro. O revisor independente é outra sessão, que só olha o resultado.</p></div>
+    <div class="card"><h3>QA e folha</h3><p>QA ("controle de qualidade") é o comando que mede o vídeo pronto. A folha é a imagem que ele monta com 16 quadros do vídeo, para conferir tudo de uma vez.</p></div>
+    <div class="card"><h3>Pílula</h3><p>Etiqueta de cantos redondos. As pílulas 01–05 no topo mostram em que peça o vídeo está; a pílula amarela é a da palavra-isca.</p></div>
+    <div class="card"><h3>Bot e fila</h3><p>Só na máquina do Nei: o bot é o robô do Telegram que recebe o vídeo para ele assistir; a fila publica um vídeo a cada 2 h no canal do YouTube indicado no roteiro.</p></div>
   </div>
 </div></section>
 
@@ -265,20 +268,21 @@
   <h2>O que precisa estar na máquina</h2>
   <p class="sub">O motor foi feito para a máquina do Nei (Linux). Os caminhos abaixo estão no código; numa máquina diferente, use as variáveis citadas ou ajuste o arquivo.</p>
   <div class="grid g3">
-    <div class="card"><h3>Avatar: HeyGen pelo estúdio</h3><p>Uma conta HeyGen com o seu avatar e a sua voz. Uma vez só: (1) faça login num perfil do navegador do Playwright; (2) no estúdio, crie um projeto de vídeo com o nome exato <code>TEMPLATE-AVATAR16</code> (ou outro em <code>RTEX_HEYGEN_TEMPLATE</code>), com o seu avatar e a sua voz: o motor abre esse projeto, faz "editar como novo" e troca a fala; (3) ponha a sua chave da API do HeyGen no arquivo que o download lê (caminho fixo no <code>heygen/heygen-estudio-baixar.mjs</code>; ela só consulta o status e baixa o vídeo).</p><pre><span class="k">npx playwright open</span> --user-data-dir ~/.cache/inemaccbot/perfil-heygen <span class="s">https://app.heygen.com</span>   <span class="c"># login; ou outro dir em RTEX_HEYGEN_PERFIL</span>
+    <div class="card"><h3>Avatar: HeyGen pelo estúdio</h3><p>Uma conta HeyGen com o seu avatar e a sua voz. O estúdio abre num navegador com janela, por isso precisa de uma tela: a tela virtual <code>:99</code> (Xvfb). Uma vez só: (1) faça login num perfil do navegador do Playwright; (2) no estúdio, crie um projeto de vídeo com o nome exato <code>TEMPLATE-AVATAR16</code> (ou outro em <code>RTEX_HEYGEN_TEMPLATE</code>), com o seu avatar e a sua voz: o motor abre esse projeto, faz "editar como novo" e troca a fala; (3) ponha a sua chave da API do HeyGen no arquivo que o download lê (caminho fixo no <code>heygen/heygen-estudio-baixar.mjs</code>; ela só consulta o status e baixa o vídeo).</p><pre><span class="k">npx playwright open</span> --user-data-dir ~/.cache/inemaccbot/perfil-heygen <span class="s">https://app.heygen.com</span>   <span class="c"># login; ou outro dir em RTEX_HEYGEN_PERFIL</span>
 <span class="k">mkdir -p</span> ~/projetos/openpcbotv2
 <span class="k">echo</span> <span class="s">"HEYGEN_API_KEY=sua-chave"</span> &gt;&gt; ~/projetos/openpcbotv2/.env</pre></div>
     <div class="card"><h3>Whisper (inemavox)</h3><p>O <a href="https://github.com/inematds/inemavox" target="_blank" rel="noopener">inematds/inemavox</a> em <code>~/projetos/inemavox</code> (ou outro caminho em <code>CS_INEMAVOX</code>). O rtex tenta o Whisper residente na porta 7871 e, sem ele, roda o <code>transcrever_v1.py</code> do inemavox com o large-v3 (cerca de 10 GB na placa de vídeo NVIDIA). O Python do Whisper residente vem de <code>CS_WHISPER_PY</code>; o padrão aponta para um ambiente conda <code>chatterbox</code> da máquina do Nei, então aponte para o seu.</p><pre><span class="k">git clone</span> <span class="s">https://github.com/inematds/inemavox</span> ~/projetos/inemavox
 <span class="c"># dependências: ver o README do inemavox</span>
 <span class="k">export</span> CS_WHISPER_PY=<span class="s">/caminho/do/seu/python3</span></pre></div>
-    <div class="card"><h3>Node, ffmpeg, Python</h3><p>Node 18+, ffmpeg com ffprobe, Python 3 com Pillow e numpy, um servidor X virtual na tela <code>:99</code> (ex.: Xvfb) para o render, e a CLI <code>claude</code> logada para o crítico.</p><pre><span class="k">git clone</span> <span class="s">https://github.com/inematds/rtex</span>
+    <div class="card"><h3>Node, ffmpeg, Python</h3><p>Node 18+, ffmpeg com ffprobe, Python 3 com Pillow, numpy e cairosvg, a fonte DejaVu (pacote <code>fonts-dejavu-core</code>, usada na etiqueta do nome) e a CLI <code>claude</code> logada para o crítico. Os logos dos produtos (ex.: o do Claude no roteiro modelo) vêm de um pacote aberto que o <code>ferramentas/logos.sh</code> baixa uma vez para <code>~/.cache/r7ex/lobe-icons</code>; sem ele, o passo <code>prints</code> para.</p><pre><span class="k">git clone</span> <span class="s">https://github.com/inematds/rtex</span>
 <span class="k">cd</span> rtex
 <span class="k">npm i</span>
 <span class="k">npx playwright install</span> chromium
-<span class="k">pip install --user</span> pillow numpy   <span class="c"># ou dentro de um venv</span>
-<span class="k">Xvfb</span> :99 -screen 0 1920x1080x24 &amp;   <span class="c"># se ainda não houver</span></pre></div>
+<span class="k">pip install --user</span> pillow numpy cairosvg   <span class="c"># ou dentro de um venv</span>
+<span class="k">bash ferramentas/logos.sh</span>                  <span class="c"># logos -> ~/.cache/r7ex/lobe-icons</span>
+<span class="k">Xvfb</span> :99 -screen 0 1920x1080x24 &amp;   <span class="c"># só para o estúdio do HeyGen</span></pre></div>
   </div>
-  <div class="note" style="margin-top:18px"><b>Caminho mais curto, sem o estúdio:</b> se você já tem um vídeo 16:9 (1920×1080) de você ou do seu avatar falando o roteiro, pule o HeyGen inteiro: <code>python3 rtex.py fazer &lt;pasta&gt; --de seu-video.mp4</code>. A fala do vídeo precisa bater com a do roteiro em pelo menos 85% (o motor confere com o Whisper).</div>
+  <div class="note" style="margin-top:18px"><b>Caminho mais curto, sem o estúdio:</b> se você já tem um vídeo 16:9 (1920×1080) de você ou do seu avatar falando o roteiro, pule o HeyGen inteiro: <code>python3 rtex.py fazer &lt;pasta&gt; --de seu-video.mp4</code>. A fala do vídeo precisa bater com a do roteiro em pelo menos 85% (o motor confere com o Whisper). Nesse caminho não precisa de HeyGen, chave nem Xvfb. O Whisper ouve em português; para um reel em outra língua, use <code>CS_LANG=en</code> ou <code>CS_LANG=es</code>.</div>
   <div class="note" style="margin-top:12px"><b>Opcionais:</b> <code>enviar</code> manda o vídeo ao bot do Telegram do Nei (<code>bin/enviar_bot_v3.mjs</code>) e <code>fila</code> põe o vídeo na fila de publicação do r7ex (<code>~/projetos/r7ex/fila/fila.py</code>, ou <code>RTEX_FILA</code>). Fora da máquina do Nei, pare no <code>qa</code> e publique como preferir.</div>
 </div></section>
 
@@ -289,7 +293,7 @@
 
   <div class="step"><div class="b">1</div><div>
     <h3>Crie a edição <span class="who">você</span></h3>
-    <p>Copia o roteiro modelo (a 1ª edição) para uma pasta nova com a data de hoje.</p>
+    <p>Copia o roteiro modelo (a 1ª edição) para uma pasta nova com a data de hoje. As fontes do modelo foram conferidas em 28/10/2026 e o <code>checar</code> recusa fonte com mais de 7 dias: troque-as pelas suas no passo 2.</p>
 <pre><span class="k">python3 rtex.py novo</span> minha-edicao   <span class="c"># -> edicoes/AAAA-MM-DD-minha-edicao/roteiro.json</span></pre>
   </div></div>
 
@@ -322,10 +326,10 @@
   <div class="step"><div class="b">6</div><div>
     <h3>Prévia sem avatar <span class="who">opcional</span></h3>
     <p>Enquanto o estúdio trabalha, numa cópia da pasta: tempos sintéticos, cena e alguns quadros soltos (em segundos). Acha erro de layout antes do avatar chegar. A prévia não chama o estúdio nem gasta outro avatar.</p>
-<pre><span class="k">cp -r</span> edicoes/AAAA-MM-DD-minha-edicao /tmp/previa
+<pre><span class="k">rm -rf</span> /tmp/previa && <span class="k">cp -r</span> edicoes/AAAA-MM-DD-minha-edicao /tmp/previa
 <span class="k">python3 ferramentas/tempos_sinteticos.py</span> /tmp/previa
 <span class="k">python3 rtex.py cena</span> /tmp/previa
-<span class="k">node motor/render.mjs</span> /tmp/previa --quadros 1,10,20</pre>
+<span class="k">node motor/render.mjs</span> /tmp/previa --quadros 1,10,20   <span class="c"># -> /tmp/previa/q_1.jpg, q_10.jpg, q_20.jpg</span></pre>
   </div></div>
 
   <div class="step"><div class="b">7</div><div>
@@ -346,8 +350,9 @@
 
   <div class="step"><div class="b">9</div><div>
     <h3>Ou tudo de uma vez</h3>
-    <p>checar → prints + avatar → cena → render → qa (o envio ao estúdio, passo 4, vem antes).</p>
-<pre><span class="k">python3 rtex.py fazer</span> edicoes/AAAA-MM-DD-minha-edicao</pre>
+    <p>checar → prints → avatar → cena → render → qa. Não roda o <code>critico</code> (passo 3). Sem <code>--de</code> e sem avatar pronto, ele mesmo envia ao estúdio e espera até ~290 min pelo HeyGen.</p>
+<pre><span class="k">python3 rtex.py fazer</span> edicoes/AAAA-MM-DD-minha-edicao
+<span class="k">python3 rtex.py fazer</span> edicoes/AAAA-MM-DD-minha-edicao --de seu-video.mp4   <span class="c"># sem o estúdio</span></pre>
   </div></div>
 
   <div class="step"><div class="b">10</div><div>
@@ -376,13 +381,13 @@
       <span class="s">"fala"</span>: <span class="s">"Um: as Skills do Claude. Uma pasta por tarefa, com o processo, os modelos e a checklist."</span>,
       <span class="s">"objeto"</span>: { <span class="s">"comp"</span>: <span class="s">"pasta"</span>, <span class="s">"params"</span>: { <span class="s">"titulo"</span>: <span class="s">"Skills do Claude"</span> } } },
     <span class="c">// ... metodo 2–5, prova, ressalva ...</span>
-    { <span class="s">"tipo"</span>: <span class="s">"maxima"</span>, <span class="s">"fala"</span>: <span class="s">"Não é a IA que é burra. É a pasta que está vazia."</span>, <span class="s">"objeto"</span>: { <span class="s">"comp"</span>: <span class="s">"maxima"</span> } },
+    { <span class="s">"tipo"</span>: <span class="s">"maxima"</span>, <span class="s">"fala"</span>: <span class="s">"Não é a IA que é burra. É a pasta que está vazia."</span>, <span class="s">"objeto"</span>: { <span class="s">"comp"</span>: <span class="s">"maxima"</span>, <span class="s">"params"</span>: { <span class="s">"linha1"</span>: <span class="s">"NÃO É A IA QUE É BURRA."</span>, <span class="s">"linha2"</span>: <span class="s">"É A PASTA QUE ESTÁ VAZIA."</span> } } },
     { <span class="s">"tipo"</span>: <span class="s">"cta"</span>, <span class="s">"fala"</span>: <span class="s">"Comenta pasta que eu te mando os cinco links, com o curso do inema ponto club."</span>,
       <span class="s">"objeto"</span>: { <span class="s">"comp"</span>: <span class="s">"isca"</span>, <span class="s">"params"</span>: { <span class="s">"palavra"</span>: <span class="s">"PASTA"</span> } } }
   ]
 }</pre>
   <div class="grid g2" style="margin-top:18px">
-    <div class="card"><h3>Campos principais</h3><p><code>tipo</code> (a ordem dos nove blocos) · <code>fala</code> (por extenso, sem algarismo nem "!") · <code>tela</code> (texto grande e destaque) · <code>objeto.comp</code> + <code>objeto.params</code> (o que o palco desenha) · <code>n</code> e <code>nome</code> nos itens do método (iguais ao índice da virada) · <code>fonte</code> (id em <code>fontes</code>). No topo: <code>trocas</code> (como a fala aparece na legenda), <code>cores</code> (palavras coloridas), <code>ritmo</code> e <code>publicar</code> (título, descrição, canal da fila).</p></div>
+    <div class="card"><h3>Campos principais</h3><p><code>tipo</code> (a ordem dos nove blocos) · <code>fala</code> (por extenso, sem algarismo nem "!") · <code>tela</code> (texto grande e destaque) · <code>objeto.comp</code> + <code>objeto.params</code> (o que o palco desenha) · <code>n</code> e <code>nome</code> nos itens do método (iguais ao índice da virada) · <code>fonte</code> (id em <code>fontes</code>). No topo: <code>trocas</code> (como a fala aparece na legenda), <code>cores</code> (palavras coloridas), <code>ritmo</code> e <code>publicar</code> (título, descrição, canal da fila). O <code>checar</code> também exige: na máxima, <code>linha1</code> e <code>linha2</code> com até 7 palavras cada; a palavra-isca dentro de <code>publicar.descricao</code>; fontes conferidas há no máximo 7 dias.</p></div>
     <div class="card"><h3>Componentes do palco (<code>objeto.comp</code>)</h3><p><code>tese</code>, <code>contador</code>, <code>chat_riscado</code>, <code>indice</code> (com as pílulas de progresso), <code>pasta</code>, <code>repo</code> (print real + estrelas), <code>manchete</code>, <code>selo_prova</code>, <code>ressalva</code>, <code>maxima</code> (flash tipográfico) e <code>isca</code> (a pílula amarela com a caixa de comentário).</p></div>
   </div>
 </div></section>
