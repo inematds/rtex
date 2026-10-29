@@ -2,6 +2,9 @@
 
 | data | o que quebrou | menor correção | prompt \| infra |
 |---|---|---|---|
+| 29/10/2026 | pílula da isca "APAGAR \| MANTER" a 100 px estourou a tela (x > 950, MANTER cortado) | fonte da pílula = min(100, 840/caracteres das opções) no palco | infra |
+| 29/10/2026 | loudness −14,6 LUFS (QA −14 ± 0,5): o 2º passe linear do loudnorm parou no teto de pico | alimiter −3 dBFS antes dos 2 passes no mix.sh → −14,3 | infra |
+| 29/10/2026 | `cena` parou: gatilho "oitenta"/"seis"/"três" não existe na fala depois das `trocas` (vira 80%/6/3) | gatilho `em`/linhas usa a forma da legenda (depois das trocas) | prompt |
 | 28/10/2026 | `qa` na prévia sintética: KeyError `wpm` (o `ritmo.json` de `tempos_sinteticos.py` não tinha o campo) | `tempos_sinteticos.py` grava `wpm` | infra |
 | 28/10/2026 | cartão de comentário com o "Publicar" em x 940–1020, na coluna dos ícones da rede (zona segura x > 950) | `#com` com `right:140px` (termina em x 940) | prompt |
 | 28/10/2026 | 1º render: rosto cortado na testa no terço de baixo (recorte 1350x800) e etiqueta "NEI MALDANER · INEM" (drawtext comeu a última letra do arquivo sem quebra de linha) | recorte 1620x960 do 1920x1080; `tag-nei.txt` com espaço + quebra de linha no fim | infra |
