@@ -179,7 +179,7 @@
 <section id="oque"><div class="wrap">
   <span class="chip">O que é</span>
   <h2>Um formato fixo, com o apresentador de verdade</h2>
-  <p class="sub">Dois terços de cima são do conteúdo, o terço de baixo é do Nei falando, o reel inteiro. Todo número tem fonte na tela, e o amarelo aparece como superfície uma única vez: na pílula com as opções da pergunta final.</p>
+  <p class="sub">Dois terços de cima são do conteúdo, o terço de baixo é do Nei falando, o reel inteiro. Todo número tem fonte na tela, e o amarelo aparece como superfície (um fundo amarelo) uma única vez: na pílula com as opções da pergunta final. Palavras destacadas em letra amarela, como AGENTE na manchete, não contam.</p>
   <figure class="wide" style="max-width:760px"><img src="assets/v11-triptico.jpg" width="900" height="356" loading="lazy" alt="Três quadros do roteiro modelo lado a lado: o gancho PARA DE CRIAR AGENTE com o fio arrebentado, o passo 01 O processo dentro de uma pasta, e o cartão final com a pergunta Um agente só ou um para cada tarefa? e a pílula amarela UM | VÁRIOS"><figcaption>Roteiro modelo da v1.1.0: gancho, passo 01 e cartão final. Prévia sem avatar, só os 2/3 de cima; no vídeo pronto, o Nei fala no terço de baixo.</figcaption></figure>
   <div class="grid g3">
     <div class="card"><h3>🎙️ Avatar real do Nei</h3><p>A fala vai ao estúdio do HeyGen pela assinatura; o vídeo do avatar volta, o Whisper marca o tempo de cada palavra e o motor encaixa telas e legenda nesse tempo.</p></div>
@@ -210,7 +210,7 @@
   <h3 style="margin:34px 0 12px">O gancho: quadro 0 e 3 primeiros segundos</h3>
   <div class="grid g2">
     <div class="card"><h3>Quatro tipos, e só eles</h3><p>Campo <code>gancho.tipo</code>: <b>contrario</b> (manda parar algo que todo mundo faz: "PARA DE CRIAR AGENTE"), <b>perda</b> (e se algo sumisse?), <b>estatistica_medo</b> (um número que assusta, com fonte na tela) ou <b>historia_terceiro</b> (o caso de outra pessoa, com número e fonte). Proibido: lista ("5 peças do mês", "N coisas…"), "você sabia que…" e "eu fiz…".</p></div>
-    <div class="card"><h3>Manchete mais forte que a voz</h3><p>A manchete do quadro 0 (<code>tela.linhas</code>) tem até 6 palavras, em caixa alta, com <b>uma</b> palavra amarela (<code>tela.destaque</code>). É mais agressiva que a fala: o texto segura quem rola o feed sem som, a voz suaviza e explica. Ela já está pronta no quadro 0, que serve de capa. Embaixo, um objeto-metáfora com dano (<code>objeto.params.metafora</code>, hoje <code>"fio"</code>) muda a cada ~1 s nos 3 primeiros segundos.</p></div>
+    <div class="card"><h3>Manchete mais forte que a voz</h3><p>A manchete do quadro 0 (<code>tela.linhas</code>) tem até 6 palavras, em caixa alta, com <b>uma</b> palavra amarela (<code>tela.destaque</code>). É mais agressiva que a fala: o texto segura quem rola o feed sem som, a voz suaviza e explica. Ela já está pronta no quadro 0, que serve de capa. Embaixo, um objeto-metáfora com dano (<code>objeto.params.metafora</code>; hoje o único valor aceito é <code>"fio"</code>) muda a cada ~1 s nos 3 primeiros segundos.</p></div>
   </div>
   <figure class="wide"><img src="assets/v11-gancho.jpg" width="1200" height="356" loading="lazy" alt="Quatro quadros do gancho do roteiro modelo, em 0,1 s, 1,2 s, 2,4 s e 3,4 s: a manchete PARA DE CRIAR AGENTE com AGENTE em amarelo; três agentes (e-mail, Instagram, propostas) ligados por um fio que fica vermelho, arrebenta com marcas de X e cai"><figcaption>O gancho do roteiro modelo em 0,1 s · 1,2 s · 2,4 s · 3,4 s: os agentes aparecem, o fio estica e fica vermelho, arrebenta, tudo cai. Prévia sem avatar, só os 2/3 de cima.</figcaption></figure>
   <h3 style="margin:34px 0 12px">A isca: uma pergunta de opinião</h3>
@@ -221,6 +221,7 @@
   <figure class="wide"><img src="assets/v11-cartao.jpg" width="1200" height="474" loading="lazy" alt="Três quadros do cartão final do roteiro modelo: a pergunta Um agente só ou um para cada tarefa?, a pílula amarela UM | VÁRIOS, a caixa de comentário com UM sendo digitado e depois publicado"><figcaption>O cartão final do roteiro modelo: pergunta, as opções numa pílula amarela só e a mão que digita UM e aperta Publicar; fica ~9 s na tela. A etiqueta inema.club é só a assinatura do canal, não uma promessa. Prévia sem avatar, só os 2/3 de cima.</figcaption></figure>
   <h3 style="margin:34px 0 12px">Glossário rápido</h3>
   <div class="grid g3">
+    <div class="card"><h3>Quadro 0</h3><p>O primeiro quadro do vídeo. Ele já mostra a manchete pronta e serve de capa.</p></div>
     <div class="card"><h3>Isca</h3><p>O pedido de comentário do fim. No rtex é uma pergunta de opinião (campo <code>isca</code> do roteiro); as opções aparecem na única pílula amarela do vídeo.</p></div>
     <div class="card"><h3>Máxima</h3><p>A frase-resumo do fim, em antítese ("Ela não é burra. Ela só não sabe o teu trabalho."), depois de um silêncio curto.</p></div>
     <div class="card"><h3>Palco</h3><p>A página <code>motor/palco.html</code> que desenha as telas. O render filma essa página a 30 quadros por segundo.</p></div>
@@ -231,7 +232,7 @@
     <div class="card"><h3>Whisper e Playwright</h3><p>Whisper transcreve a voz e dá o tempo de cada palavra. Playwright abre o palco num navegador e filma cada quadro.</p></div>
     <div class="card"><h3>Crítico e revisor</h3><p>O crítico é um <code>claude -p</code> que dá nota a cada bloco do roteiro. O revisor independente é outra sessão, que só olha o resultado.</p></div>
     <div class="card"><h3>QA e folha</h3><p>QA ("controle de qualidade") é o comando que mede o vídeo pronto. A folha é a imagem que ele monta com 16 quadros do vídeo, para conferir tudo de uma vez.</p></div>
-    <div class="card"><h3>Pílula</h3><p>Etiqueta de cantos redondos. As pílulas 01–05 no topo mostram em que peça o vídeo está; a pílula amarela é a das opções da pergunta final.</p></div>
+    <div class="card"><h3>Pílula</h3><p>Etiqueta de cantos redondos. As pílulas numeradas no topo (01–03 no roteiro modelo) mostram em que passo o vídeo está; a pílula amarela é a das opções da pergunta final.</p></div>
     <div class="card"><h3>Bot e fila</h3><p>Só na máquina do Nei: o bot é o robô do Telegram que recebe o vídeo para ele assistir; a fila publica um vídeo a cada 2 h no canal do YouTube indicado no roteiro.</p></div>
   </div>
 </div></section>
