@@ -23,6 +23,8 @@ for i, x in enumerate(T):
     x["fim"] = T[i + 1]["ini"] if i + 1 < len(T) else round(t + 9, 3)
 ult = T[-1]["palavras"][-1]["f"]
 (p / "avatar/tempos.json").write_text(json.dumps(T, ensure_ascii=False, indent=1))
+nw = sum(len(x["palavras"]) for x in T)
 (p / "avatar/ritmo.json").write_text(json.dumps({"versao": 1, "sintetico": True, "pausa": pausa, "ultima_palavra": ult,
+                                                  "wpm": round(nw / (ult - .3 - .75) * 60, 1),     # o QA lê (sem isso: KeyError)
                                                   "cauda": 9.0, "duracao": round(ult + 9, 3)}))
 print(f"sintético: {ult + 9:.1f} s")

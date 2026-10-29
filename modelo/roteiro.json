@@ -1,14 +1,23 @@
 {
- "id": "2026-10-28-cinco-pecas-ia",
+ "id": "modelo-um-agente-uma-pasta",
  "versao": "rtex/1",
- "tema": "5 peças de IA do mês — a melhor é uma pasta",
- "pedido": "Nei, 28/10/2026: 'quero um outro chamado rtex juntando o q temos com o q ele propõe ... e já crie um vídeo em cada uma das 3 com o conteúdo dos 5 cenários e mande para o v3 e no lives11'. Canal lives11. Conteúdo: as 5 pautas (~/projetos/output/tres-motores/pautas-5.md), números só os conferidos, com fonte na tela. Mesma pauta do r7ex 2026-10-28-cinco-coisas-ia, no formato rtex (tem de ficar diferente dele).",
+ "tema": "Para de criar agente: um agente só e uma pasta por tarefa",
+ "pedido": "Modelo do rtex v1.1.0 (28/10/2026): um tema por vídeo (pauta 1, 'um agente só + uma pasta por tarefa'), gancho contrário, isca de opinião. As N peças são os passos do método desse tema. Troque tudo pelo seu tema; as fontes têm de ser conferidas de novo (máx. 7 dias).",
  "canal": "lives11",
- "marca": "INEMA · 5 PEÇAS DO MÊS",
+ "marca": "INEMA · UM AGENTE SÓ",
+ "gancho": {
+  "tipo": "contrario",
+  "nota": "a manchete manda parar (mais agressiva); a fala suaviza e explica o porquê"
+ },
  "isca": {
-  "palavra": "PASTA",
-  "entregavel": "os 5 links (Agent Skills, ponytail, Understand Anything, ECC e a notícia do Roadster) e o curso do inema.club, mandados pelo Nei na resposta ao comentário ou no comentário fixado",
-  "destino": "https://inematds.github.io/claude-gestor-de-agentes-v72/"
+  "tipo": "opiniao",
+  "pergunta": "Um agente só ou um para cada tarefa?",
+  "opcoes": [
+   "UM",
+   "VÁRIOS"
+  ],
+  "lado": "um agente só, com uma pasta por tarefa (o Nei diz antes de perguntar)",
+  "tensao": "agente"
  },
  "fontes": [
   {
@@ -17,43 +26,6 @@
    "titulo": "Agent Skills (documentação da Anthropic)",
    "valor": "uma pasta por tarefa: SKILL.md + modelos + checklist",
    "verificado_em": "2026-10-28"
-  },
-  {
-   "id": "ponytail",
-   "url": "https://github.com/DietrichGebert/ponytail",
-   "titulo": "ponytail",
-   "valor": "179 mil",
-   "verificado_em": "2026-10-28"
-  },
-  {
-   "id": "ua",
-   "url": "https://github.com/Egonex-AI/Understand-Anything",
-   "titulo": "Understand Anything",
-   "valor": "88,7 mil",
-   "verificado_em": "2026-10-28"
-  },
-  {
-   "id": "ecc",
-   "url": "https://github.com/affaan-m/ECC",
-   "titulo": "ECC (Everything Claude Code)",
-   "valor": "291 mil",
-   "verificado_em": "2026-10-28"
-  },
-  {
-   "id": "soma",
-   "url": "https://github.com",
-   "titulo": "soma das estrelas dos 3 repositórios",
-   "valor": "558,7 mil",
-   "verificado_em": "2026-10-28",
-   "conta": "179 + 88,7 + 291"
-  },
-  {
-   "id": "roadster",
-   "url": "https://electrek.co/2026/10/15/tesla-unveils-cyberfied-new-roadster-kickflip/",
-   "titulo": "Tesla Roadster no campo de testes da SpaceX (McGregor, Texas)",
-   "valor": "15/10/2026 · propulsores de gás frio (cold-gas thrusters) · demonstração, sem preço nem data de produção",
-   "verificado_em": "2026-10-28",
-   "citacao": "Electrek, 15/10/2026 (e 13/10, 28/09); Motor1"
   },
   {
    "id": "hackathon",
@@ -65,97 +37,82 @@
  ],
  "ritmo": {
   "pausa_antes": {
-   "parte": 12,
-   "de": "Não"
+   "parte": 10,
+   "de": "Ela"
   }
  },
  "trocas": {
-  "quinhentas e cinquenta mil": "550 mil",
-  "cinco peças": "5 peças",
+  "três peças": "3 peças",
   "Um:": "1:",
   "Dois:": "2:",
   "Três:": "3:",
-  "Quatro,": "4,",
-  "E cinco:": "E 5:",
   "é cê cê": "ECC",
-  "inema ponto club": "inema.club",
-  "Comenta pasta": "Comenta PASTA",
-  "cinco links": "5 links",
-  "peça um": "peça 1"
+  "inema ponto club": "inema.club"
  },
  "cores": {
+  "agente": "#FACC15",
   "pasta": "#FACC15",
-  "5": "#FACC15",
-  "550": "#FACC15",
-  "github": "#FACC15",
-  "chat": "#ff2a1f",
+  "anthropic": "#FACC15",
+  "arrebentar": "#ff2a1f",
   "corrigindo": "#ff2a1f",
-  "ponytail": "#FACC15",
-  "mapa": "#FACC15",
-  "roadster": "#FACC15",
-  "ecc": "#FACC15",
+  "chat": "#ff2a1f",
+  "processo": "#FACC15",
+  "caixa": "#FACC15",
+  "prova": "#FACC15",
+  "falhar": "#ff2a1f",
   "hackathon": "#FACC15",
   "atenção": "#F2B45C",
-  "token": "#F2B45C",
-  "inglês": "#F2B45C",
-  "demonstração": "#F2B45C",
+  "pensa": "#F2B45C",
+  "trabalho": "#FACC15",
   "burra": "#ff2a1f",
-  "vazia": "#FACC15",
-  "inema.club": "#38bdf8",
-  "PASTA": "#FACC15"
+  "UM": "#FACC15",
+  "VÁRIOS": "#FACC15"
  },
  "blocos": [
   {
    "tipo": "tese",
-   "fala": "A melhor peça de IA deste mês é só uma pasta. E a quarta nem é de IA.",
+   "fala": "Se você cria um agente para cada tarefa, eu tenho uma má notícia: o fio que liga todos eles vai arrebentar.",
    "tela": {
     "linhas": [
-     "5 PEÇAS DO MÊS.",
-     "A MELHOR É UMA PASTA."
+     "PARA DE",
+     "CRIAR AGENTE."
     ],
-    "destaque": "PASTA",
-    "sub": "OUTUBRO · 2026"
+    "destaque": "AGENTE",
+    "sub": "UM PARA CADA TAREFA? O FIO ARREBENTA."
    },
    "objeto": {
     "comp": "tese",
     "params": {
-     "pasta_abre_em": "pasta"
+     "metafora": "fio",
+     "nos": [
+      "✉️ e-mail",
+      "📷 Instagram",
+      "📄 propostas"
+     ],
+     "quebra_em": "fio"
     }
    }
   },
   {
    "tipo": "autoridade",
-   "fala": "Três dessas ferramentas já somam mais de quinhentas e cinquenta mil estrelas no GitHub.",
+   "fala": "A própria Anthropic, que faz o Claude, organiza de outro jeito: um agente só e uma pasta por tarefa.",
    "objeto": {
-    "comp": "contador",
+    "comp": "selo_prova",
     "params": {
-     "de": 0,
-     "ate": 558.7,
-     "dec": 1,
-     "unid": "mil ⭐",
-     "em": "estrelas",
-     "rotulo": "ESTRELAS NO GITHUB · 3 REPOSITÓRIOS",
-     "parcelas": [
-      [
-       "ponytail",
-       "179 mil"
-      ],
-      [
-       "Understand Anything",
-       "88,7 mil"
-      ],
-      [
-       "ECC",
-       "291 mil"
-      ]
-     ]
+     "icone": "📁",
+     "titulo": "A ANTHROPIC FAZ ASSIM",
+     "destaque": "ASSIM",
+     "sub": "um agente · uma pasta por tarefa",
+     "em": "jeito",
+     "icone_em": "Claude",
+     "sub_em": "pasta"
     }
    },
-   "fonte": "soma"
+   "fonte": "skills"
   },
   {
    "tipo": "problema",
-   "fala": "E eu ainda vejo gente perdendo o dia corrigindo a IA no chat, toda vez a mesma coisa.",
+   "fala": "E se a IA erra toda hora e você vive corrigindo no chat, não é culpa sua: ninguém te deu a pasta.",
    "objeto": {
     "comp": "chat_riscado",
     "params": {
@@ -169,7 +126,7 @@
        "de novo? eu já falei"
       ],
       [
-       "mesma",
+       "culpa",
        "corrige isso, por favor"
       ]
      ]
@@ -178,18 +135,16 @@
   },
   {
    "tipo": "virada",
-   "fala": "Então anota, porque são cinco peças, e a primeira muda o seu dia.",
+   "fala": "Então anota, porque a pasta tem três peças, e a primeira é a que todo mundo pula.",
    "objeto": {
     "comp": "indice",
     "params": {
      "itens": [
-      "PASTA",
-      "PONYTAIL",
-      "MAPA",
-      "ROADSTER",
-      "TIME"
+      "PROCESSO",
+      "CAIXA",
+      "PROVA"
      ],
-     "em": "cinco",
+     "em": "três",
      "ativa_em": "primeira"
     }
    }
@@ -197,25 +152,25 @@
   {
    "tipo": "metodo",
    "n": 1,
-   "nome": "PASTA",
-   "fala": "Um: as Skills do Claude. Uma pasta por tarefa, com o processo, os modelos e a checklist.",
+   "nome": "PROCESSO",
+   "fala": "Um: o processo. Peça para a IA te entrevistar, uma pergunta por vez, até ela fazer sem você.",
    "objeto": {
     "comp": "pasta",
     "params": {
      "logo": "claude",
-     "titulo": "Skills do Claude",
+     "titulo": "O processo",
      "itens": [
       [
-       "processo",
-       "o processo, passo a passo"
+       "entrevistar",
+       "a IA te entrevista"
       ],
       [
-       "modelos",
-       "os modelos que deram certo"
+       "pergunta",
+       "uma pergunta por vez"
       ],
       [
-       "checklist",
-       "a checklist do que é pronto"
+       "sem",
+       "até fazer sem você"
       ]
      ]
     }
@@ -225,147 +180,115 @@
   {
    "tipo": "metodo",
    "n": 2,
-   "nome": "PONYTAIL",
-   "fala": "Dois: o ponytail. Ele lê o projeto antes e faz a IA escrever menos código.",
+   "nome": "CAIXA",
+   "fala": "Dois: a caixa. O que saiu certo uma vez fica guardado: o modelo, a planilha, o e-mail elogiado.",
    "objeto": {
-    "comp": "repo",
+    "comp": "manchete",
     "params": {
-     "repo": "DietrichGebert/ponytail",
-     "estrelas": "179 mil",
-     "frase": "lê o projeto antes · escreve menos código",
-     "marca_em": "menos"
+     "chapeu": "A CAIXA",
+     "icone": "📦",
+     "titulo": "O que deu certo fica guardado",
+     "linhas": [
+      [
+       "modelo",
+       "o modelo que funcionou"
+      ],
+      [
+       "planilha",
+       "a planilha certa"
+      ],
+      [
+       "elogiado",
+       "o e-mail que foi elogiado"
+      ]
+     ],
+     "titulo_em": "guardado"
     }
-   },
-   "fonte": "ponytail"
+   }
   },
   {
    "tipo": "metodo",
    "n": 3,
-   "nome": "MAPA",
-   "fala": "Três: o Understand Anything. Ele desenha o mapa do seu sistema, arquivo por arquivo.",
+   "nome": "PROVA",
+   "fala": "Três: a prova. Uma checklist do que é pronto, e cada item tem que poder falhar.",
    "objeto": {
-    "comp": "repo",
+    "comp": "pasta",
     "params": {
-     "repo": "Egonex-AI/Understand-Anything",
-     "estrelas": "88,7 mil",
-     "frase": "desenha o mapa do seu sistema",
-     "marca_em": "mapa"
-    }
-   },
-   "fonte": "ua"
-  },
-  {
-   "tipo": "metodo",
-   "n": 4,
-   "nome": "ROADSTER",
-   "fala": "Quatro, a curiosidade: o novo Roadster da Tesla, com propulsores, apresentado num campo de testes da SpaceX. Por ora, só demonstração.",
-   "objeto": {
-    "comp": "manchete",
-    "params": {
-     "chapeu": "CURIOSIDADE",
-     "titulo": "Tesla Roadster com propulsores",
-     "linhas": [
+     "titulo": "A prova",
+     "itens": [
       [
-       "propulsores",
-       "propulsores de gás frio"
+       "checklist",
+       "a checklist do que é pronto"
       ],
       [
-       "SpaceX",
-       "campo de testes da SpaceX · McGregor, Texas · 15/10/2026"
-      ],
-      [
-       "demonstração",
-       "por ora, só demonstração"
+       "falhar",
+       "cada item pode falhar"
       ]
      ]
     }
    },
-   "fonte": "roadster"
-  },
-  {
-   "tipo": "metodo",
-   "n": 5,
-   "nome": "TIME",
-   "fala": "E cinco: o é cê cê, um time pronto de agentes. Um planeja, outro revisa.",
-   "objeto": {
-    "comp": "repo",
-    "params": {
-     "repo": "affaan-m/ECC",
-     "estrelas": "291 mil",
-     "frase": "um time pronto de agentes",
-     "marca_em": "time",
-     "papeis": [
-      [
-       "planeja",
-       "🧭 planeja"
-      ],
-      [
-       "revisa",
-       "🔎 revisa"
-      ]
-     ]
-    }
-   },
-   "fonte": "ecc"
+   "fonte": "skills"
   },
   {
    "tipo": "prova",
-   "fala": "E não é promessa: o é cê cê, cheio dessas pastas, venceu um hackathon da Anthropic com a Forum Ventures.",
+   "fala": "E não é teoria: o é cê cê, um setup montado com essas pastas, venceu um hackathon da Anthropic com a Forum Ventures.",
    "objeto": {
     "comp": "selo_prova",
     "params": {
      "titulo": "VENCEU O HACKATHON",
      "sub": "Anthropic × Forum Ventures",
-     "em": "venceu"
+     "em": "venceu",
+     "icone_em": "setup",
+     "sub_em": "Forum"
     }
    },
    "fonte": "hackathon"
   },
   {
    "tipo": "ressalva",
-   "fala": "Mas atenção: o mapa gasta muito token na primeira leitura e explica em inglês. Por isso, comece pela peça um: uma pasta só.",
+   "fala": "Mas atenção: a pasta não pensa por você, e montar a primeira dá trabalho. Por isso, comece por uma tarefa só, a que mais te irrita.",
    "objeto": {
     "comp": "ressalva",
     "params": {
      "itens": [
       [
-       "token",
-       "a 1ª leitura do mapa gasta muito token"
+       "pensa",
+       "a pasta não pensa por você"
       ],
       [
-       "inglês",
-       "a explicação sai em inglês"
+       "trabalho",
+       "montar a 1ª pasta dá trabalho"
       ]
      ],
      "dica": [
       "comece",
-      "comece pela peça 1: uma pasta só"
+      "comece por uma tarefa só"
      ]
     }
    }
   },
   {
    "tipo": "maxima",
-   "fala": "Não é a IA que é burra. É a pasta que está vazia.",
+   "fala": "Ela não é burra. Ela só não sabe o teu trabalho.",
    "objeto": {
     "comp": "maxima",
     "params": {
-     "linha1": "NÃO É A IA QUE É BURRA.",
-     "linha2": "É A PASTA QUE ESTÁ VAZIA.",
-     "linha2_em": "pasta",
-     "destaque": "PASTA"
+     "linha1": "ELA NÃO É BURRA.",
+     "linha2": "ELA SÓ NÃO SABE O TEU TRABALHO.",
+     "linha2_em": "sabe",
+     "destaque": "TRABALHO"
     }
    }
   },
   {
    "tipo": "cta",
-   "fala": "Comenta pasta que eu te mando os cinco links, com o curso do inema ponto club.",
+   "fala": "Eu já escolhi o meu lado: um agente só. E você? Um agente só ou um para cada tarefa? Comenta um ou vários.",
    "objeto": {
     "comp": "isca",
     "params": {
-     "palavra": "PASTA",
-     "antes": "COMENTA",
-     "depois": "QUE EU TE MANDO OS 5 LINKS + O CURSO",
+     "lado_tela": "EU: UM AGENTE SÓ",
+     "lado_em": "lado",
+     "q_em": "você",
      "em": "Comenta"
     }
    }
@@ -373,10 +296,9 @@
  ],
  "publicar": {
   "fila": "lives11",
-  "titulo": "5 peças de IA deste mês (a mais útil é uma pasta) #shorts",
-  "descricao": "A melhor das 5 peças de IA que eu separei em outubro é uma pasta: uma pasta por tarefa (Agent Skills do Claude). Quando a IA errar, não é ela que é burra: é a pasta que está vazia. As 5 peças: 1) Skills do Claude; 2) ponytail (GitHub, ~179 mil estrelas em 28/10/2026); 3) Understand Anything (~88,7 mil); 4) o novo Tesla Roadster com propulsores, apresentado em 15/10/2026 num campo de testes da SpaceX — por enquanto só demonstração; 5) ECC, time pronto de agentes (~291 mil), que venceu um hackathon da Anthropic com a Forum Ventures. Ressalva: o Understand Anything gasta muito token na 1ª leitura e explica em inglês; comece por uma pasta só. Comenta PASTA que eu te mando os 5 links. Curso Claude como gestor de agentes, aberto e gratuito: https://inematds.github.io/claude-gestor-de-agentes-v72/ (inema.club). Qual das 5 você testa primeiro?",
-  "comentario_fixado": "Os 5 links 📁\n1) Agent Skills do Claude: https://docs.anthropic.com/en/docs/agents-and-tools/agent-skills\n2) ponytail: https://github.com/DietrichGebert/ponytail\n3) Understand Anything: https://github.com/Egonex-AI/Understand-Anything\n4) Tesla Roadster (notícia): https://electrek.co/2026/10/15/tesla-unveils-cyberfied-new-roadster-kickflip/\n5) ECC: https://github.com/affaan-m/ECC\nCurso aberto e gratuito Claude como gestor de agentes: https://inematds.github.io/claude-gestor-de-agentes-v72/",
-  "contexto": "Short vertical do INEMA.CLUB (Nei Maldaner), canal lives11: 5 peças de IA de outubro de 2026; a mais útil é uma pasta por tarefa (Agent Skills). Números só os conferidos (estrelas do GitHub em 28/10/2026). Não citar nenhum criador nem perfil de onde as ideias vieram. CTA: comente PASTA para receber os 5 links."
- },
- "critico_decisao": "Nei, 28/10/2026: as 5 pautas viram as 5 peças (o Roadster fica, assumido como 'a quarta nem é de IA' / 'curiosidade'). Crítico em 3 rodadas: bloqueios zerados na 2ª; média oscila 7,1–7,3 com o Roadster como único ponto recorrente — decisão da sessão: segue (FALHAS 28/10)."
+  "titulo": "Para de criar um agente para cada tarefa #shorts",
+  "descricao": "Um agente para o e-mail, outro para o Instagram, outro para as propostas: o fio que liga todos eles arrebenta. A própria Anthropic organiza de outro jeito, com Agent Skills: um agente só e uma pasta por tarefa. Dentro da pasta, três peças: o processo (a IA te entrevista, uma pergunta por vez), a caixa (o que deu certo fica guardado) e a prova (a checklist do que é pronto, e cada item pode falhar). Ressalva: a pasta não pensa por você e a primeira dá trabalho; comece por uma tarefa só. Curso aberto e gratuito no inema.club. Um agente só ou um para cada tarefa?",
+  "comentario_fixado": "Fontes: Agent Skills (Anthropic): https://docs.anthropic.com/en/docs/agents-and-tools/agent-skills · ECC: https://github.com/affaan-m/ECC · Curso aberto e gratuito Claude como gestor de agentes: https://inematds.github.io/claude-gestor-de-agentes-v72/",
+  "contexto": "Short vertical do INEMA.CLUB (Nei Maldaner), canal lives11: um tema só, 'um agente só + uma pasta por tarefa' (Agent Skills). Gancho contrário: para de criar um agente para cada tarefa. Não citar nenhum criador nem perfil de onde as ideias vieram. Isca de opinião: a descrição termina com a pergunta 'Um agente só ou um para cada tarefa?'; ninguém recebe nada por comentar."
+ }
 }

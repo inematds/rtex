@@ -98,6 +98,8 @@ def montar(pasta, r, falas):
             pr["dominio"] = f"github.com/{pr['repo']}"
         if o["comp"] == "pasta" and pr.get("logo"):
             pr["logo"] = f"prints/logo-{pr['logo']}.png"
+        if o["comp"] == "isca":            # o cartão mostra a pergunta e as opções da isca de opinião (fonte única: r["isca"])
+            pr["pergunta"] = r["isca"]["pergunta"]; pr["opcoes"] = r["isca"].get("opcoes") or []
         d = {"tipo": b["tipo"], "comp": o["comp"], "ini": ini, "fim": fim, "p": pr, "fonte": _fonte_linha(r, b)}
         if b["tipo"] == "tese":
             d["tela"] = b["tela"]
@@ -107,6 +109,8 @@ def montar(pasta, r, falas):
         eventos.append(ini)
         if o["comp"] == "repo":            # estrelas contando (ini+0,5) e a frase entrando (ini+1,6), além da palavra marcada
             eventos += [ini + .5, min(pr.get("marca_em", ini + 1.9) - .3, ini + 1.6)]
+        if o["comp"] == "tese" and pr.get("metafora"):   # objeto com dano: muda a cada ~1 s nos 3 primeiros s (palco.html)
+            eventos += [ini + 1.0, ini + 2.0, ini + 2.9]
         if o["comp"] == "contador":        # o número começa a correr 0,9 s antes da palavra e pousa nela
             eventos.append(pr["em"] - .9)
         for v in pr.values():
@@ -131,9 +135,11 @@ def montar(pasta, r, falas):
     pilulas = {"ini": blocos[vi + 1]["ini"], "fim": blocos[tipos.index("maxima")]["ini"], "nomes": nomes, "ativa": met}
 
     # cartão segurado: comentário digitado depois da última palavra
-    isca = r["isca"]["palavra"]
-    comenta = {"fala_fim": round(fala_fim, 3), "texto": isca} if DUR - fala_fim >= 4 else None
-    eventos += [fala_fim + .3, fala_fim + 1.0 + len(isca) / 8 + 1.0, fala_fim + 1.0 + len(isca) / 8 + 1.5] if comenta else []
+    # isca de opinião (v1.1.0): a mão digita uma das opções (a 1ª) ou, na pergunta aberta, o isca.exemplo
+    isca = r["isca"]["pergunta"]
+    resp = ((r["isca"].get("opcoes") or [None])[0] or r["isca"].get("exemplo") or "").strip()
+    comenta = {"fala_fim": round(fala_fim, 3), "texto": resp} if DUR - fala_fim >= 4 else None
+    eventos += [fala_fim + .3, fala_fim + 1.0 + len(resp) / 8 + 1.0, fala_fim + 1.0 + len(resp) / 8 + 1.5] if comenta else []
 
     cores = {n(k): v for k, v in (r.get("cores") or {}).items()}
     legenda = []

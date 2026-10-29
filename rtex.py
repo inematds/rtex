@@ -1,11 +1,12 @@
 #!/usr/bin/env python3
-"""rtex — reel 9:16 do INEMA no padrão rtex: tese escrita no quadro 0 → prova social com número e fonte → "N peças" com
-índice → método numerado → prova com fonte → ressalva honesta → máxima em antítese (silêncio antes) → CTA "comenta PALAVRA"
-com o cartão segurado. Avatar real do Nei (estúdio HeyGen) no terço de baixo, legenda karaokê, painéis no tempo da fala.
+"""rtex — reel 9:16 do INEMA no padrão rtex, um tema por vídeo: gancho no quadro 0 (contrário, perda, estatística de medo ou
+história de terceiro; manchete curta + objeto com dano) → prova com fonte ou autoridade até 20 s → problema com absolvição →
+"N peças" (os passos do método) com índice → método numerado → prova com fonte → ressalva honesta → máxima em antítese
+(silêncio antes) → CTA de OPINIÃO (pergunta com lado, sem entrega) com o cartão segurado. Avatar real do Nei (estúdio HeyGen) no terço de baixo, legenda karaokê, painéis no tempo da fala.
 Base copiada do r7ex v1.1.0 (ritmo, retempo, estúdio, render); composição própria (motor/palco.html). Ver README.md.
 
   python3 rtex.py novo <slug>             cria edicoes/<data>-<slug>/roteiro.json a partir de modelo/roteiro.json
-  python3 rtex.py checar <pasta>          validador do roteiro (estrutura, fala, isca, fontes, palavras-gatilho)
+  python3 rtex.py checar <pasta>          validador do roteiro (gancho, estrutura, fala, isca de opinião, fontes, gatilhos)
   python3 rtex.py critico <pasta>         crítico de viralidade (claude -p, assinatura): gancho ≥ 8, média ≥ 7,5, nenhuma < 6
   python3 rtex.py avatar-enviar <pasta>   manda a fala ao estúdio do HeyGen (precisa de avatar/APROVADO_HEYGEN)
   python3 rtex.py avatar-conferir <pasta> uma conferência no HeyGen (leitura): pronto | processando
@@ -26,13 +27,13 @@ R = Path(__file__).resolve().parent
 sys.path.insert(0, str(R))
 from rtex import cena as CENA, pecas, retempo as RT, ritmo as RITMO  # noqa: E402
 
-VERSAO = "1.0.0"
+VERSAO = "1.1.0"
 PERFIL = Path(os.environ.get("RTEX_HEYGEN_PERFIL", Path.home() / ".cache/inemaccbot/perfil-heygen"))   # perfil compartilhado (tem trava própria)
 TEMPLATE_HEYGEN = os.environ.get("RTEX_HEYGEN_TEMPLATE", "TEMPLATE-AVATAR16")
 HEYGEN_DIR = R / "heygen"
 TELA = ":99"                                    # nunca a tela do Nei
 ORDEM = ["tese", "autoridade", "problema", "virada", "metodo", "prova", "ressalva", "maxima", "cta"]
-OBRIGATORIOS = {"tese", "virada", "metodo", "prova", "ressalva", "maxima", "cta"}
+OBRIGATORIOS = {"tese", "problema", "virada", "metodo", "prova", "ressalva", "maxima", "cta"}
 COMPS = {"tese", "contador", "chat_riscado", "indice", "pasta", "repo", "manchete", "selo_prova", "ressalva", "maxima", "isca"}
 PROVA = {"contador", "repo", "selo_prova"}       # objeto que carrega número/print com fonte na tela
 DUR_MIN, DUR_MAX = 60, 90                        # alvo do rtex curto (s), cartão incluído
@@ -77,6 +78,131 @@ def gatilhos(b):
     return ws
 
 
+# ------------------------------------------------------------------ gancho e isca (v1.1.0, 28/10/2026)
+GANCHOS = {"contrario": "manda parar algo que todo mundo faz", "perda": "perda hipotética (e se X sumisse?)",
+           "estatistica_medo": "estatística de medo com fonte na tela", "historia_terceiro": "história de terceiro com número"}
+METAFORAS = {"fio"}                              # objeto-metáfora com dano no quadro 0 (motor/palco.html, comp tese)
+LISTA = re.compile(r"\b(\d+|dois|duas|tr[eê]s|quatro|cinco|seis|sete|oito|nove|dez|n)\s+(pe[cç]as|coisas|dicas|ferramentas|jeitos|"
+                   r"formas|novidades|apps|motivos|erros|truques|segredos)\b", re.I)
+GANCHO_PROIBIDO = re.compile(r"voc[eê]\s+sabia|\beu\s+fiz\b", re.I)
+PROMESSA = re.compile(r"\b(te|lhe|vos)\s+(mando|envio|passo|mandarei|enviarei|entrego)\b|\beu\s+(mando|envio|passo|entrego)\b|"
+                      r"\bmand[aoe]r?\s+o\s+link\b|\blink\s+na\s+bio\b|\bcomenta\s+\S+\s+que\b|\bcomente\s+\S+\s+que\b|"
+                      r"\b(para|pra)\s+(receber|ganhar)\b|\bno\s+privado\b|\bna\s+dm\b|\bno\s+direct\b", re.I)
+FIXADO = re.compile(r"\bfixad[oa]\b", re.I)          # na fala: "está no fixado" vira recompensa por comentar
+ABSOLVE = re.compile(r"n[aã]o\s+[eé]\s+(culpa|falha|defeito)\s+(sua|tua|seu|teu)|a\s+culpa\s+n[aã]o\s+[eé]\s+(sua|tua)|"
+                     r"n[aã]o\s+[eé]\s+(voc[eê]|tu)\b", re.I)
+OPCAO = re.compile(r"[A-ZÁÉÍÓÚÂÊÔÃÕÇ0-9]{2,14}")
+PROVA_ATE = 20                                   # s: número com fonte ou autoridade na tela até aqui
+
+
+def checar_gancho(r, bl, tipos, erros, avisos):
+    """quadro 0 + 3 primeiros segundos: tipo de gancho, manchete curta e agressiva, objeto-metáfora com dano, prova ≤ 20 s,
+    problema com absolvição logo depois, um tema por vídeo"""
+    g = (r.get("gancho") or {}).get("tipo")
+    if g not in GANCHOS:
+        erros.append("gancho.tipo: um de " + ", ".join(f"'{k}' ({v})" for k, v in GANCHOS.items()))
+    if not bl or bl[0].get("tipo") != "tese":
+        return
+    t0 = bl[0]; tela = t0.get("tela") or {}; linhas = tela.get("linhas") or []
+    manchete = " ".join(linhas)
+    if not linhas or len(manchete.split()) > 6:
+        erros.append(f"manchete do quadro 0 com {len(manchete.split())} palavras (máx. 6: ela é a capa e puxa quem rola sem som)")
+    if any(l != l.upper() for l in linhas):
+        erros.append("manchete do quadro 0 em CAIXA ALTA")
+    dest = tela.get("destaque") or ""
+    if not dest or " " in dest.strip() or CENA.n(dest) not in [CENA.n(w) for w in manchete.split()]:
+        erros.append("tela.destaque: UMA palavra da manchete (a única amarela do quadro 0)")
+    for txt, onde in ((manchete, "manchete"), (t0.get("fala") or "", "fala da tese")):
+        if LISTA.search(txt):
+            erros.append(f"{onde}: gancho de lista ('{LISTA.search(txt).group(0)}') — proibido; um tema por vídeo")
+        if GANCHO_PROIBIDO.search(txt):
+            erros.append(f"{onde}: '{GANCHO_PROIBIDO.search(txt).group(0)}' é gancho proibido")
+    if manchete and set(CENA.n(w) for w in manchete.split()) <= set(CENA.n(w) for w in (t0.get("fala") or "").split()):
+        avisos.append("a manchete só repete a fala: o texto tem de ser mais agressivo que a voz")
+    if g in ("estatistica_medo", "historia_terceiro") and not t0.get("fonte"):
+        erros.append(f"gancho '{g}' tem número: a tese precisa de 'fonte' (na tela já no quadro 0)")
+    mf = ((t0.get("objeto") or {}).get("params") or {}).get("metafora")
+    if mf not in METAFORAS:
+        erros.append(f"tese: objeto.params.metafora (objeto com dano no quadro 0, muda a cada ~1 s nos 3 primeiros s): {sorted(METAFORAS)}")
+    # prova até 20 s, problema com absolvição logo depois
+    wps = (WPM_MIN + WPM_MAX) / 2 / 60
+    k = next((i for i, b in enumerate(bl) if b.get("fonte") or b.get("tipo") == "autoridade"), None)
+    if k is None:
+        erros.append("falta prova (número com fonte ou autoridade) no começo")
+    else:
+        ini = sum(len((b.get("fala") or "").split()) for b in bl[:k]) / wps
+        if ini > PROVA_ATE:
+            erros.append(f"a 1ª prova começa em ~{ini:.0f} s (máx. {PROVA_ATE} s)")
+        if "problema" in tipos and tipos.index("problema") != k + 1:
+            erros.append("o problema do espectador vem logo depois da 1ª prova")
+    pb = next((b for b in bl if b.get("tipo") == "problema"), None)
+    if pb and not ABSOLVE.search(pb.get("fala") or ""):
+        erros.append("problema: absolva o espectador na fala ('não é culpa sua')")
+    fm = {b.get("fonte") for b in bl if b.get("tipo") == "metodo" and b.get("fonte")}
+    if len(fm) >= 3:
+        erros.append(f"método com {len(fm)} fontes diferentes = lista de temas; um tema por vídeo, as peças são os passos do método")
+
+
+def checar_isca(r, bl, erros, avisos):
+    """isca de OPINIÃO: pergunta forte, com lado, respondida com a própria opinião; nada é entregue a quem comenta"""
+    i = r.get("isca") or {}
+    if "palavra" in i:
+        erros.append("isca.palavra acabou (v1.1.0, 28/10/2026): a isca agora é de opinião — use isca.tipo 'opiniao' + pergunta + opcoes")
+    if "entregavel" in i:
+        erros.append("isca.entregavel acabou (v1.1.0): ninguém recebe nada por comentar (o Nei não responde comentário) — tire o campo")
+    if i.get("tipo") != "opiniao":
+        erros.append("isca.tipo: 'opiniao'")
+    perg = (i.get("pergunta") or "").strip()
+    if not perg.endswith("?") or len(perg) > 70:
+        erros.append(f"isca.pergunta: uma pergunta curta terminada em '?' (≤ 70 caracteres; tem {len(perg)})")
+    cta = bl[-1].get("fala") or "" if bl else ""
+    ctan = [CENA.n(w) for w in cta.split()]
+    op = i.get("opcoes")
+    if op is not None:
+        if not isinstance(op, list) or not 2 <= len(op) <= 3 or len({CENA.n(x) for x in op}) != len(op):
+            erros.append("isca.opcoes: 2 ou 3 opções diferentes")
+        else:
+            for x in op:
+                if not OPCAO.fullmatch(str(x)):
+                    erros.append(f"isca.opcoes: '{x}' tem de ser UMA palavra em CAIXA ALTA")
+                elif CENA.n(x) not in ctan:
+                    erros.append(f"a opção '{x}' tem de ser dita na fala do CTA")
+    else:
+        ex = (i.get("exemplo") or "").strip()
+        if not ex or len(ex) > 24:
+            erros.append("pergunta aberta (sem opcoes): isca.exemplo = a resposta curta que a mão digita no cartão (≤ 24 caracteres)")
+    pw = [CENA.n(w) for w in perg.split() if len(CENA.n(w)) >= 3]
+    if pw and sum(w in ctan for w in pw) / len(pw) < .8:
+        erros.append("a pergunta da tela tem de ser dita na fala do CTA (≥ 80% das palavras)")
+    if not (i.get("lado") or "").strip():
+        erros.append("isca.lado: a posição do Nei, dita antes da pergunta, para provocar")
+    ten = (i.get("tensao") or "").strip()
+    if not ten or " " in ten:
+        erros.append("isca.tensao: UMA palavra da pergunta plantada no quadro 0 (a tensão volta no fim)")
+    elif bl:
+        t0 = bl[0]
+        if CENA.n(ten) not in CENA.n(" ".join((t0.get("tela") or {}).get("linhas") or []) + " " + (t0.get("fala") or "")):
+            erros.append(f"a tensão '{ten}' tem de estar no quadro 0 (manchete ou fala da tese)")
+        if CENA.n(ten) not in CENA.n(perg):
+            erros.append(f"a tensão '{ten}' tem de estar na pergunta")
+        if not any(CENA.n(ten) in CENA.n(b.get("fala") or "") for b in bl if b.get("tipo") in ("maxima", "cta")):
+            erros.append(f"a tensão '{ten}' volta no fim (fala da máxima ou do CTA)")
+    pub = r.get("publicar") or {}
+    if perg and not CENA.n(pub.get("descricao", "")).endswith(CENA.n(perg)):
+        erros.append("publicar.descricao termina com a pergunta da isca")
+    # nada de promessa de entrega em lugar nenhum que o público lê ou ouve
+    textos = [(f"bloco {k}", b.get("fala") or "") for k, b in enumerate(bl, 1)]
+    textos += [("cta objeto", json.dumps((bl[-1].get("objeto") or {}).get("params") or {}, ensure_ascii=False) if bl else "")]
+    textos += [(f"isca.{k}", str(v)) for k, v in i.items()] + [(f"publicar.{k}", pub.get(k) or "") for k in ("titulo", "descricao", "contexto")]
+    for onde, txt in textos:
+        m = PROMESSA.search(txt)
+        if m:
+            erros.append(f"{onde}: '{m.group(0)}' promete entrega — a isca é de opinião, o Nei não responde ninguém")
+    for k, b in enumerate(bl, 1):
+        if FIXADO.search(b.get("fala") or ""):
+            erros.append(f"bloco {k}: a fala não manda ao comentário fixado (vira recompensa por comentar)")
+
+
 # ------------------------------------------------------------------ comandos
 def cmd_novo(slug):
     p = R / "edicoes" / f"{dt.date.today().isoformat()}-{slug}"
@@ -85,7 +211,7 @@ def cmd_novo(slug):
     (p / "avatar").mkdir(parents=True, exist_ok=True)
     m = json.loads((R / "modelo/roteiro.json").read_text()); m["id"] = p.name
     (p / "roteiro.json").write_text(json.dumps(m, ensure_ascii=False, indent=1))
-    log("criado", p / "roteiro.json", "— reescreva tema, isca, fontes e os blocos")
+    log("criado", p / "roteiro.json", "— reescreva tema, gancho, isca, fontes e os blocos")
 
 
 def cmd_checar(pasta):
@@ -102,7 +228,7 @@ def cmd_checar(pasta):
         erros.append("blocos fora da ordem: " + " → ".join(ORDEM))
     for t in OBRIGATORIOS - set(tipos):
         erros.append(f"falta o bloco '{t}'")
-    for t in ("autoridade", "problema"):
+    for t in ("autoridade",):
         if t not in tipos:
             avisos.append(f"sem bloco '{t}' (o padrão tem)")
     if tipos and tipos[0] != "tese":
@@ -169,25 +295,9 @@ def cmd_checar(pasta):
         erros.append(f"{palavras} palavras ≈ {estim:.0f} s com o cartão (alvo {DUR_MIN}–{DUR_MAX} s a ~175 palavras/min)")
     if not 150 <= palavras <= 215:
         avisos.append(f"{palavras} palavras (curto: 160–210)")
-    # isca = tese, plantada antes, dita no CTA, sozinha no amarelo sólido
-    isca = (r.get("isca") or {}).get("palavra", "")
-    if not isca or not re.fullmatch(r"[A-ZÁÉÍÓÚÂÊÔÃÕÇ0-9]{2,14}", isca):
-        erros.append("isca.palavra: UMA palavra em CAIXA ALTA, fácil de digitar")
-    else:
-        if CENA.n(isca) not in CENA.n(bl[-1]["fala"]):
-            erros.append(f"a isca '{isca}' tem de ser dita no CTA")
-        if not any(CENA.n(isca) in CENA.n(b["fala"]) for b in bl if b["tipo"] in ("tese", "virada", "maxima")):
-            erros.append(f"a isca '{isca}' é a tese: precisa estar na fala da tese, da virada ou da máxima")
-        tese = bl[0].get("tela") or {}
-        if CENA.n(isca) not in CENA.n(" ".join(tese.get("linhas") or [])):
-            erros.append(f"a isca '{isca}' tem de estar escrita no quadro 0 (plantada ≥ 10 s antes do CTA)")
-        if not (r.get("isca") or {}).get("entregavel"):
-            erros.append("isca.entregavel: o que chega para quem comenta (e existe hoje)")
-        if CENA.n(isca) not in CENA.n((r.get("publicar") or {}).get("descricao", "")):
-            erros.append("a isca tem de estar na descrição do post")
-    tese = bl[0].get("tela") or {} if bl else {}
-    if bl and len(" ".join(tese.get("linhas") or []).split()) > 9:
-        erros.append("tese do quadro 0 com mais de 9 palavras")
+    checar_gancho(r, bl, tipos, erros, avisos)
+    checar_isca(r, bl, erros, avisos)
+    isca = (r.get("isca") or {}).get("pergunta", "")
     mx = next((b for b in bl if b.get("tipo") == "maxima"), None)
     if mx:
         pr = mx["objeto"]["params"]
@@ -199,15 +309,18 @@ def cmd_checar(pasta):
             erros.append(f"ritmo.pausa_antes.parte tem de ser {k} (o bloco da máxima) — o padrão do ritmo.py cairia no lugar errado")
         elif CENA.n(pa.get("de", "")) not in CENA.n(mx["fala"].split()[0]):
             avisos.append("ritmo.pausa_antes.de não é a 1ª palavra da máxima")
-    if sum((b.get("objeto") or {}).get("comp") in PROVA for b in bl) * 3 < len(bl):
-        erros.append("menos de 1 em 3 objetos é prova com fonte (contador/repo/selo_prova)")
+    # v1.1.0: conta o bloco que mostra FONTE na tela (qualquer objeto com 'fonte'), não o tipo do objeto — com um tema só,
+    # os passos do método também citam a fonte (ex.: a documentação das Agent Skills na pasta)
+    if sum(bool(b.get("fonte")) for b in bl) * 3 < len(bl):
+        erros.append("menos de 1 em 3 blocos mostra fonte na tela ('fonte' em fontes[])")
     if not (r.get("publicar") or {}).get("fila"):
         erros.append("publicar.fila (canal) faltando")
     for a in avisos:
         log("aviso:", a)
     if erros:
         falha("\n  - " + "\n  - ".join(erros))
-    log(f"roteiro OK: {len(bl)} blocos, {len(met)} peças, {palavras} palavras (≈ {estim:.0f} s com o cartão), isca {isca}")
+    log(f"roteiro OK: {len(bl)} blocos, {len(met)} peças, {palavras} palavras (≈ {estim:.0f} s com o cartão), "
+        f"gancho {(r.get('gancho') or {}).get('tipo')}, isca de opinião: {isca}")
     return r
 
 

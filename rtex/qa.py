@@ -81,7 +81,7 @@ def medir(p, r):
     item("último quadro sem legenda", f"legenda some em {ult_leg:.1f} s (fim {d:.1f})", "sem legenda no fim", ult_leg < d - 2)
     css = (R / "motor/palco.html").read_text()
     amarelo = len(re.findall(r"background:(?:var\(--am\)|#FACC15)", css))
-    item("amarelo sólido só na isca", f"{amarelo} superfície(s)", "1 (a pílula da palavra)", amarelo == 1)
+    item("amarelo sólido só na isca", f"{amarelo} superfície(s)", "1 (a pílula única das opções da isca de opinião)", amarelo == 1)
     px = {k: int(re.search(sel + r"\{[^}]*?font:[^;}]*?(\d+)px", css).group(1)) for k, sel in
           (("ressalva", r"\.res \.it"), ("linha-fonte", r"#fonte"), ("legenda", r"#leg"))}
     item("legibilidade", f"ressalva {px['ressalva']} px · fonte {px['linha-fonte']} px · legenda {px['legenda']} px", "≥ 40 · ≥ 32 · ≥ 64",

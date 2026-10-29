@@ -4,7 +4,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>rtex — o reel de "N peças" do INEMA, com o avatar real do Nei</title>
-<meta name="description" content="rtex: motor de reels 9:16 do INEMA. Tese escrita no quadro 0, prova com fonte, N peças com índice, ressalva honesta, máxima e &quot;comenta PALAVRA&quot;, com o avatar real do Nei no HeyGen e legenda karaokê.">
+<meta name="description" content="rtex: motor de reels 9:16 do INEMA. Um tema por vídeo: gancho forte no quadro 0, prova com fonte, N passos com índice, ressalva honesta, máxima e uma pergunta de opinião no fim, com o avatar real do Nei no HeyGen e legenda karaokê.">
 <meta name="theme-color" content="#0c0c10">
 <meta property="og:title" content="rtex — o reel de &quot;N peças&quot; do INEMA">
 <meta property="og:description" content="Do roteiro.json ao reel vertical com o avatar real do Nei, conferido por validador, crítico e QA.">
@@ -120,6 +120,7 @@
   .tbl{overflow-x:auto;background:var(--card);border:1px solid var(--line);border-radius:14px;padding:6px 14px}
   .wide{margin:0 0 26px;border-radius:16px;overflow:hidden;border:1px solid var(--line);box-shadow:0 30px 80px -30px #000}
   .wide img{width:100%;height:auto;display:block}
+  .wide figcaption{padding:12px 14px;font-size:.88rem;color:var(--mut);background:var(--card)}
   ol.esq{margin:0;padding-left:1.3em} ol.esq li{margin:.35em 0;color:var(--mut)} ol.esq li b{color:var(--txt)}
   .note{background:var(--card);border:1px solid var(--line);border-left:3px solid var(--amb);border-radius:12px;padding:14px 16px;font-size:.95rem;color:var(--mut)}
   .note b{color:var(--txt)}
@@ -158,31 +159,31 @@
   <div class="glow"></div>
   <div class="wrap">
     <div>
-      <span class="chip">Motor de reels · v1.0.0 · avatar real</span>
+      <span class="chip">Motor de reels · v1.1.0 · avatar real</span>
       <h1>O reel de "N peças", com o <span class="amb">rosto real</span> do Nei</h1>
-      <p class="lead">Você escreve um <code>roteiro.json</code>; o rtex devolve um reel vertical 1080×1920: a tese escrita no quadro 0, as peças numeradas com índice, prova com fonte, a ressalva honesta e um único pedido, "comenta <span class="amb">PALAVRA</span>". Quem fala é o avatar do Nei no HeyGen.</p>
+      <p class="lead">Você escreve um <code>roteiro.json</code>; o rtex devolve um reel vertical 1080×1920 sobre um tema só: um gancho forte no quadro 0, os passos numerados com índice, prova com fonte, a ressalva honesta e, no fim, uma <span class="amb">pergunta de opinião</span> para o público responder. Quem fala é o avatar do Nei no HeyGen.</p>
       <div class="cta">
         <a class="btn" href="#guia">Começar o guia</a>
         <a class="btn ghost" href="#exemplos">Ver o vídeo exemplo</a>
       </div>
     </div>
-    <figure><img src="assets/q-01_5.jpg" width="540" height="960" alt="Quadro de abertura do reel exemplo: a tese escrita, &quot;5 peças do mês. A melhor é uma pasta.&quot;, com PASTA em amarelo, uma pasta desenhada e o Nei falando no terço de baixo"></figure>
+    <figure><img src="assets/q-01_5.jpg" width="540" height="960" alt="Quadro de abertura do reel exemplo publicado (formato v1.0.0): a tese escrita, &quot;5 peças do mês. A melhor é uma pasta.&quot;, com PASTA em amarelo, uma pasta desenhada e o Nei falando no terço de baixo"></figure>
   </div>
 </header>
 
 <section id="resumo" class="resumo"><div class="wrap">
   <span class="chip">Em resumo</span>
-  <p>O rtex é o motor que o Nei usa para fazer reels (vídeos curtos verticais) do INEMA com o próprio rosto: o avatar dele no HeyGen fala o roteiro, e o motor desenha por cima as telas, a legenda palavra por palavra e o cartão final. Cada vídeo segue um formato fixo de "N peças", do quadro de abertura com a tese até o pedido "comenta PALAVRA". Um validador, um crítico automático e um QA conferem o formato antes de publicar. O código é aberto para estudar e adaptar; para gerar o seu vídeo, você precisa do seu próprio avatar no HeyGen, além de Python, Node, ffmpeg e Whisper.</p>
+  <p>O rtex é o motor que o Nei usa para fazer reels (vídeos curtos verticais) do INEMA com o próprio rosto: o avatar dele no HeyGen fala o roteiro, e o motor desenha por cima as telas, a legenda palavra por palavra e o cartão final. Cada vídeo trata de um tema só, num formato fixo: um gancho forte no quadro de abertura, os passos do método em "N peças" e, no fim, uma pergunta de opinião para o público responder nos comentários. Um validador, um crítico automático e um QA conferem o formato antes de publicar. O código é aberto para estudar e adaptar; para gerar o seu vídeo, você precisa do seu próprio avatar no HeyGen, além de Python, Node, ffmpeg e Whisper.</p>
 </div></section>
 
 <section id="oque"><div class="wrap">
   <span class="chip">O que é</span>
   <h2>Um formato fixo, com o apresentador de verdade</h2>
-  <p class="sub">Dois terços de cima são do conteúdo, o terço de baixo é do Nei falando, o reel inteiro. Todo número tem fonte na tela, e o amarelo aparece como superfície uma única vez: na palavra que o vídeo pede para comentar.</p>
-  <figure class="wide" style="max-width:760px"><img src="assets/triptico.jpg" width="900" height="533" loading="lazy" alt="Três quadros do reel exemplo lado a lado: a tese de abertura, a peça 01 (Skills do Claude) e o cartão final &quot;Comenta PASTA&quot;, sempre com o Nei no terço de baixo"></figure>
+  <p class="sub">Dois terços de cima são do conteúdo, o terço de baixo é do Nei falando, o reel inteiro. Todo número tem fonte na tela, e o amarelo aparece como superfície uma única vez: na pílula com as opções da pergunta final.</p>
+  <figure class="wide" style="max-width:760px"><img src="assets/triptico.jpg" width="900" height="533" loading="lazy" alt="Três quadros do reel exemplo publicado (formato v1.0.0) lado a lado: a tese de abertura, a peça 01 (Skills do Claude) e o cartão final &quot;Comenta PASTA&quot;, sempre com o Nei no terço de baixo"><figcaption>Reel exemplo publicado, ainda no formato v1.0.0 (gancho de lista e "comenta PASTA"). O formato atual está em "O formato".</figcaption></figure>
   <div class="grid g3">
     <div class="card"><h3>🎙️ Avatar real do Nei</h3><p>A fala vai ao estúdio do HeyGen pela assinatura; o vídeo do avatar volta, o Whisper marca o tempo de cada palavra e o motor encaixa telas e legenda nesse tempo.</p></div>
-    <div class="card"><h3>🧩 Padrão de peças</h3><p>Tese no quadro 0, prova social com número, "N peças" com índice visível, método numerado, prova, ressalva, máxima depois de um silêncio e "comenta PALAVRA".</p></div>
+    <div class="card"><h3>🧩 Padrão de peças</h3><p>Um tema: gancho no quadro 0, prova até 20 s, o problema de quem assiste, "N peças" (os passos) com índice visível, prova, ressalva, máxima depois de um silêncio e uma pergunta de opinião.</p></div>
     <div class="card"><h3>✅ Três conferências</h3><p>O validador cobra a regra; um crítico (<code>claude -p</code>) dá nota ao roteiro; o QA mede duração, ritmo, volume, mudanças de tela por minuto, silêncio, cartão final e o amarelo.</p></div>
   </div>
 </div></section>
@@ -190,35 +191,47 @@
 <section id="formato"><div class="wrap">
   <span class="chip">O formato</span>
   <h2>Os nove blocos do padrão rtex</h2>
-  <p class="sub">Nesta ordem. O comando <code>checar</code> reprova o roteiro se um bloco obrigatório faltar ou vier fora do lugar.</p>
+  <p class="sub">Um tema por vídeo, nesta ordem. O comando <code>checar</code> reprova o roteiro se um bloco obrigatório faltar ou vier fora do lugar. Um vídeo com cinco assuntos diferentes (uma lista) não passa: as "N peças" são os passos do método de um tema só.</p>
   <div class="grid g2">
     <div class="card"><ol class="esq">
-      <li><b>tese</b>: escrita no quadro 0 (até 9 palavras, a palavra-isca em destaque), com algo se mexendo no 1º segundo.</li>
-      <li><b>autoridade</b>: prova social com número; o contador pousa no valor da fonte.</li>
-      <li><b>problema</b>: a dor mostrada com um objeto (no exemplo, um chat sendo riscado).</li>
-      <li><b>virada</b>: "N peças" anunciadas; o índice 01–N aparece antes do 1º item e vira pílulas no topo.</li>
-      <li><b>metodo</b>: os itens numerados, um objeto por item, rótulo "0N / NOME".</li>
+      <li><b>tese</b>: o gancho (quadro 0 e 3 primeiros segundos), detalhado abaixo.</li>
+      <li><b>autoridade</b>: prova na tela até 20 s: um número com fonte (o contador pousa no valor da fonte) ou uma autoridade, também com fonte.</li>
+      <li><b>problema</b>: a dor de quem assiste, logo depois da prova, com absolvição na fala ("não é culpa sua") e um objeto (no modelo, um chat sendo riscado).</li>
+      <li><b>virada</b>: "N peças" anunciadas; o índice 01–N aparece antes do 1º passo e vira pílulas no topo.</li>
+      <li><b>metodo</b>: os passos numerados, um objeto por passo, rótulo "0N / NOME".</li>
     </ol></div>
     <div class="card"><ol class="esq" start="6">
       <li><b>prova</b>: um fato com fonte que confirma o que veio antes.</li>
       <li><b>ressalva</b>: as limitações, faladas e legíveis, viradas em instrução.</li>
       <li><b>maxima</b>: antítese curta, depois de 0,5–0,9 s de silêncio (voz e trilha somem).</li>
-      <li><b>cta</b>: "comenta PALAVRA", a mesma palavra da tese; o cartão fica 9 s depois da última palavra.</li>
+      <li><b>cta</b>: a pergunta de opinião (abaixo); o cartão fica 9 s depois da última palavra.</li>
     </ol></div>
   </div>
+  <h3 style="margin:34px 0 12px">O gancho: quadro 0 e 3 primeiros segundos</h3>
+  <div class="grid g2">
+    <div class="card"><h3>Quatro tipos, e só eles</h3><p>Campo <code>gancho.tipo</code>: <b>contrario</b> (manda parar algo que todo mundo faz: "PARA DE CRIAR AGENTE"), <b>perda</b> (e se algo sumisse?), <b>estatistica_medo</b> (um número que assusta, com fonte na tela) ou <b>historia_terceiro</b> (o caso de outra pessoa, com número e fonte). Proibido: lista ("5 peças do mês", "N coisas…"), "você sabia que…" e "eu fiz…".</p></div>
+    <div class="card"><h3>Manchete mais forte que a voz</h3><p>A manchete do quadro 0 (<code>tela.linhas</code>) tem até 6 palavras, em caixa alta, com <b>uma</b> palavra amarela (<code>tela.destaque</code>). É mais agressiva que a fala: o texto segura quem rola o feed sem som, a voz suaviza e explica. Ela já está pronta no quadro 0, que serve de capa. Embaixo, um objeto-metáfora com dano (<code>objeto.params.metafora</code>, hoje <code>"fio"</code>) muda a cada ~1 s nos 3 primeiros segundos.</p></div>
+  </div>
+  <figure class="wide"><img src="assets/v11-gancho.jpg" width="1200" height="356" loading="lazy" alt="Quatro quadros do gancho do roteiro modelo, em 0,1 s, 1,2 s, 2,4 s e 3,4 s: a manchete PARA DE CRIAR AGENTE com AGENTE em amarelo; três agentes (e-mail, Instagram, propostas) ligados por um fio que fica vermelho, arrebenta com marcas de X e cai"><figcaption>O gancho do roteiro modelo em 0,1 s · 1,2 s · 2,4 s · 3,4 s: os agentes aparecem, o fio estica e fica vermelho, arrebenta, tudo cai. Prévia sem avatar, só os 2/3 de cima.</figcaption></figure>
+  <h3 style="margin:34px 0 12px">A isca: uma pergunta de opinião</h3>
+  <div class="grid g2">
+    <div class="card"><h3>O que é</h3><p>O fim do vídeo é uma pergunta forte, emocional e com lado, ligada à tese, que a pessoa responde com a própria opinião: escolhendo uma de duas ou três palavras ("UM ou VÁRIOS?") ou contando a própria experiência. O Nei diz o lado dele antes, para provocar. A tensão da pergunta já aparece no quadro 0 e volta no fim.</p></div>
+    <div class="card"><h3>O que não pode</h3><p>Prometer qualquer coisa a quem comenta. Nada de "te mando", "eu envio", "manda o link", "link na bio", "comenta X que…" nem "está no comentário fixado". Ninguém espera resposta, então o Nei não precisa responder ninguém. Links e fontes podem ficar parados no comentário fixado do post.</p></div>
+  </div>
+  <figure class="wide"><img src="assets/v11-cartao.jpg" width="1200" height="474" loading="lazy" alt="Três quadros do cartão final do roteiro modelo: a pergunta Um agente só ou um para cada tarefa?, a pílula amarela UM | VÁRIOS, a caixa de comentário com UM sendo digitado e depois publicado"><figcaption>O cartão final do roteiro modelo: pergunta, as opções numa pílula amarela só e a mão que digita UM e aperta Publicar; fica ~9 s na tela. Prévia sem avatar, só os 2/3 de cima.</figcaption></figure>
   <h3 style="margin:34px 0 12px">Glossário rápido</h3>
   <div class="grid g3">
-    <div class="card"><h3>Palavra-isca</h3><p>A palavra que o vídeo pede para comentar (aqui, PASTA). É a tese, aparece no quadro 0 e é a única pílula amarela do vídeo.</p></div>
-    <div class="card"><h3>Máxima</h3><p>A frase-resumo do fim, em antítese ("Não é a IA que é burra. É a pasta que está vazia."), depois de um silêncio curto.</p></div>
+    <div class="card"><h3>Isca</h3><p>O pedido de comentário do fim. No rtex é uma pergunta de opinião (campo <code>isca</code> do roteiro); as opções aparecem na única pílula amarela do vídeo.</p></div>
+    <div class="card"><h3>Máxima</h3><p>A frase-resumo do fim, em antítese ("Ela não é burra. Ela só não sabe o teu trabalho."), depois de um silêncio curto.</p></div>
     <div class="card"><h3>Palco</h3><p>A página <code>motor/palco.html</code> que desenha as telas. O render filma essa página a 30 quadros por segundo.</p></div>
     <div class="card"><h3>HeyGen e estúdio</h3><p>HeyGen é o serviço que gera o vídeo do avatar falando. O rtex usa o estúdio (o site, pela assinatura), num navegador aberto na tela virtual <code>:99</code>.</p></div>
     <div class="card"><h3>Legenda karaokê</h3><p>A legenda acende palavra por palavra no tempo da fala, com as palavras-chave coloridas.</p></div>
     <div class="card"><h3>LUFS</h3><p>Medida de volume percebido. −14 LUFS é o volume que as redes usam como padrão.</p></div>
-    <div class="card"><h3>CTA</h3><p>"Chamada para ação": o pedido final do vídeo. Aqui é um só, "comenta PALAVRA".</p></div>
+    <div class="card"><h3>CTA</h3><p>"Chamada para ação": o pedido final do vídeo. Aqui é um só: a pergunta de opinião.</p></div>
     <div class="card"><h3>Whisper e Playwright</h3><p>Whisper transcreve a voz e dá o tempo de cada palavra. Playwright abre o palco num navegador e filma cada quadro.</p></div>
     <div class="card"><h3>Crítico e revisor</h3><p>O crítico é um <code>claude -p</code> que dá nota a cada bloco do roteiro. O revisor independente é outra sessão, que só olha o resultado.</p></div>
     <div class="card"><h3>QA e folha</h3><p>QA ("controle de qualidade") é o comando que mede o vídeo pronto. A folha é a imagem que ele monta com 16 quadros do vídeo, para conferir tudo de uma vez.</p></div>
-    <div class="card"><h3>Pílula</h3><p>Etiqueta de cantos redondos. As pílulas 01–05 no topo mostram em que peça o vídeo está; a pílula amarela é a da palavra-isca.</p></div>
+    <div class="card"><h3>Pílula</h3><p>Etiqueta de cantos redondos. As pílulas 01–05 no topo mostram em que peça o vídeo está; a pílula amarela é a das opções da pergunta final.</p></div>
     <div class="card"><h3>Bot e fila</h3><p>Só na máquina do Nei: o bot é o robô do Telegram que recebe o vídeo para ele assistir; a fila publica um vídeo a cada 2 h no canal do YouTube indicado no roteiro.</p></div>
   </div>
 </div></section>
@@ -230,12 +243,12 @@
   <div class="tbl"><table class="cmp">
     <tr><th></th><th>r7ex</th><th>rtex</th></tr>
     <tr><td>Roteiro</td><td>7 etapas de gatilho: gancho com número → medo → desejo → facilidade → descoberta → benefício → comentário</td><td class="new">9 blocos de peças: tese → autoridade → problema → virada → método → prova → ressalva → máxima → cta</td></tr>
-    <tr><td>Abertura</td><td>título desenhado na imagem de abertura</td><td class="new">a tese escrita no quadro 0, com a palavra-isca em destaque</td></tr>
+    <tr><td>Abertura</td><td>título desenhado na imagem de abertura</td><td class="new">manchete de até 6 palavras no quadro 0 (gancho contrário, perda, estatística de medo ou história de terceiro) e um objeto que se quebra nos 3 primeiros segundos</td></tr>
     <tr><td>Avatar</td><td>meia tela embaixo no gancho, depois no canto</td><td class="new">no terço de baixo o reel inteiro; os 2/3 de cima são do conteúdo</td></tr>
     <tr><td>Estrutura na tela</td><td>painéis no tempo da fala, contador</td><td class="new">índice 01–N que vira pílulas no topo, rótulo "0N / NOME" em cada peça</td></tr>
     <tr><td>Honestidade</td><td>—</td><td class="new">ressalva obrigatória antes da máxima; todo número com fonte conferida há ≤ 7 dias</td></tr>
-    <tr><td>Fecho</td><td>comentário "tá tudo no inema.club"</td><td class="new">silêncio, máxima em antítese, "comenta PALAVRA" (a palavra = a tese), cartão de 9 s</td></tr>
-    <tr><td>Cor</td><td>preto + amarelo de telejornal</td><td class="new">preto INEMA com amarelo racionado: uma única superfície amarela, a pílula da isca (o QA conta)</td></tr>
+    <tr><td>Fecho</td><td>comentário "tá tudo no inema.club"</td><td class="new">silêncio, máxima em antítese, pergunta de opinião com lado (sem nada a entregar), cartão de 9 s</td></tr>
+    <tr><td>Cor</td><td>preto + amarelo de telejornal</td><td class="new">preto INEMA com amarelo racionado: uma única superfície amarela, a pílula das opções da pergunta (o QA conta)</td></tr>
     <tr><td>Mantido</td><td colspan="2">avatar pelo estúdio do HeyGen, legenda karaokê, ritmo da fala, Whisper, crítico + revisor independente, fila de publicação com timer e envio ao bot do Telegram (esses dois, só na máquina do Nei)</td></tr>
   </table></div>
 </div></section>
@@ -257,7 +270,7 @@
     <span>video.mp4</span>
   </div>
   <div class="grid g3" style="margin-top:26px">
-    <div class="card"><span class="num">1</span><h3>Roteiro conferido</h3><p><code>checar</code> cobra ordem dos blocos, índice = método, fala sem algarismo nem "!", fonte em todo número, isca = tese e duração estimada de 60–90 s. <code>critico</code> dá a nota.</p></div>
+    <div class="card"><span class="num">1</span><h3>Roteiro conferido</h3><p><code>checar</code> cobra o gancho, a prova até 20 s, um tema só, ordem dos blocos, índice = método, fala sem algarismo nem "!", fonte em todo número, a pergunta de opinião sem promessa e duração estimada de 60–90 s. <code>critico</code> dá a nota.</p></div>
     <div class="card"><span class="num">2</span><h3>Avatar e tempo</h3><p>A fala vai ao estúdio; o vídeo volta, o Whisper marca as palavras, a fala (o HeyGen fala rápido) é esticada até ~182 palavras/min (no máximo 12%) e entra o silêncio antes da máxima.</p></div>
     <div class="card"><span class="num">3</span><h3>Cena, render e QA</h3><p><code>cena</code> liga cada tela a uma palavra da fala; <code>render</code> filma o palco, põe o avatar embaixo e a trilha; <code>qa</code> mede tudo e monta a folha.</p></div>
   </div>
@@ -293,13 +306,13 @@
 
   <div class="step"><div class="b">1</div><div>
     <h3>Crie a edição <span class="who">você</span></h3>
-    <p>Copia o roteiro modelo (a 1ª edição) para uma pasta nova com a data de hoje. As fontes do modelo foram conferidas em 28/10/2026 e o <code>checar</code> recusa fonte com mais de 7 dias: troque-as pelas suas no passo 2.</p>
+    <p>Copia o roteiro modelo (um tema: "um agente só e uma pasta por tarefa") para uma pasta nova com a data de hoje. As fontes do modelo foram conferidas em 28/10/2026 e o <code>checar</code> recusa fonte com mais de 7 dias: troque-as pelas suas no passo 2.</p>
 <pre><span class="k">python3 rtex.py novo</span> minha-edicao   <span class="c"># -> edicoes/AAAA-MM-DD-minha-edicao/roteiro.json</span></pre>
   </div></div>
 
   <div class="step"><div class="b">2</div><div>
     <h3>Escreva o roteiro, com as fontes <span class="who">você</span></h3>
-    <p>Confira cada número na fonte no dia e anote em <code>fontes[]</code> com <code>valor</code> e <code>verificado_em</code>. Depois escreva os blocos (formato em <a href="#roteiro">"O roteiro.json"</a>), a fala por extenso e a isca.</p>
+    <p>Confira cada número na fonte no dia e anote em <code>fontes[]</code> com <code>valor</code> e <code>verificado_em</code>. Depois escreva o gancho, os blocos (formato em <a href="#roteiro">"O roteiro.json"</a>), a fala por extenso e a pergunta da isca.</p>
   </div></div>
 
   <div class="step"><div class="b">3</div><div>
@@ -357,7 +370,7 @@
 
   <div class="step"><div class="b">10</div><div>
     <h3>Olhe, revise e entregue <span class="who">você</span></h3>
-    <p>Leia a folha e o <code>qa.json</code>; peça uma revisão a quem não escreveu o roteiro. O que a isca promete tem de existir no dia. Na máquina do Nei, <code>enviar</code> manda ao bot e <code>fila</code> põe na fila do canal (nunca upload direto).</p>
+    <p>Leia a folha e o <code>qa.json</code>; peça uma revisão a quem não escreveu o roteiro. A isca não promete nada, então não há o que preparar para quem comentar. Na máquina do Nei, <code>enviar</code> manda ao bot e <code>fila</code> põe na fila do canal (nunca upload direto).</p>
 <pre><span class="k">python3 rtex.py enviar</span> edicoes/AAAA-MM-DD-minha-edicao
 <span class="k">python3 rtex.py fila</span>   edicoes/AAAA-MM-DD-minha-edicao</pre>
   </div></div>
@@ -366,36 +379,38 @@
 <section id="roteiro"><div class="wrap">
   <span class="chip">O roteiro.json</span>
   <h2>O formato do roteiro, em uma tela</h2>
-  <p class="sub">Trecho real da 1ª edição, encurtado (as linhas <code>//</code> não são JSON válido; o arquivo completo está em <code>modelo/roteiro.json</code>).</p>
+  <p class="sub">Trecho do roteiro modelo, encurtado (as linhas <code>//</code> não são JSON válido; o arquivo completo está em <code>modelo/roteiro.json</code>).</p>
 <pre>{
-  <span class="s">"versao"</span>: <span class="s">"rtex/1"</span>, <span class="s">"tema"</span>: <span class="s">"5 peças de IA do mês — a melhor é uma pasta"</span>,
-  <span class="s">"isca"</span>: { <span class="s">"palavra"</span>: <span class="s">"PASTA"</span>, <span class="s">"entregavel"</span>: <span class="s">"os 5 links e o curso do inema.club..."</span> },
-  <span class="s">"fontes"</span>: [ { <span class="s">"id"</span>: <span class="s">"ecc"</span>, <span class="s">"url"</span>: <span class="s">"https://github.com/affaan-m/ECC"</span>, <span class="s">"valor"</span>: <span class="s">"291 mil"</span>, <span class="s">"verificado_em"</span>: <span class="s">"2026-10-28"</span> } ],
-  <span class="s">"trocas"</span>: { <span class="s">"é cê cê"</span>: <span class="s">"ECC"</span>, <span class="s">"cinco peças"</span>: <span class="s">"5 peças"</span> },
+  <span class="s">"versao"</span>: <span class="s">"rtex/1"</span>, <span class="s">"tema"</span>: <span class="s">"Para de criar agente: um agente só e uma pasta por tarefa"</span>,
+  <span class="s">"gancho"</span>: { <span class="s">"tipo"</span>: <span class="s">"contrario"</span> },
+  <span class="s">"isca"</span>: { <span class="s">"tipo"</span>: <span class="s">"opiniao"</span>, <span class="s">"pergunta"</span>: <span class="s">"Um agente só ou um para cada tarefa?"</span>,
+            <span class="s">"opcoes"</span>: [<span class="s">"UM"</span>, <span class="s">"VÁRIOS"</span>], <span class="s">"lado"</span>: <span class="s">"um agente só"</span>, <span class="s">"tensao"</span>: <span class="s">"agente"</span> },
+  <span class="s">"fontes"</span>: [ { <span class="s">"id"</span>: <span class="s">"skills"</span>, <span class="s">"url"</span>: <span class="s">"https://docs.anthropic.com/en/docs/agents-and-tools/agent-skills"</span>, <span class="s">"valor"</span>: <span class="s">"uma pasta por tarefa"</span>, <span class="s">"verificado_em"</span>: <span class="s">"2026-10-28"</span> } ],
+  <span class="s">"trocas"</span>: { <span class="s">"é cê cê"</span>: <span class="s">"ECC"</span>, <span class="s">"três peças"</span>: <span class="s">"3 peças"</span> },
   <span class="s">"blocos"</span>: [
-    { <span class="s">"tipo"</span>: <span class="s">"tese"</span>, <span class="s">"fala"</span>: <span class="s">"A melhor peça de IA deste mês é só uma pasta. E a quarta nem é de IA."</span>,
-      <span class="s">"tela"</span>: { <span class="s">"linhas"</span>: [<span class="s">"5 PEÇAS DO MÊS."</span>, <span class="s">"A MELHOR É UMA PASTA."</span>], <span class="s">"destaque"</span>: <span class="s">"PASTA"</span> },
-      <span class="s">"objeto"</span>: { <span class="s">"comp"</span>: <span class="s">"tese"</span> } },
-    <span class="c">// ... autoridade, problema, virada ...</span>
-    { <span class="s">"tipo"</span>: <span class="s">"metodo"</span>, <span class="s">"n"</span>: 1, <span class="s">"nome"</span>: <span class="s">"PASTA"</span>, <span class="s">"fonte"</span>: <span class="s">"skills"</span>,
-      <span class="s">"fala"</span>: <span class="s">"Um: as Skills do Claude. Uma pasta por tarefa, com o processo, os modelos e a checklist."</span>,
-      <span class="s">"objeto"</span>: { <span class="s">"comp"</span>: <span class="s">"pasta"</span>, <span class="s">"params"</span>: { <span class="s">"titulo"</span>: <span class="s">"Skills do Claude"</span> } } },
-    <span class="c">// ... metodo 2–5, prova, ressalva ...</span>
-    { <span class="s">"tipo"</span>: <span class="s">"maxima"</span>, <span class="s">"fala"</span>: <span class="s">"Não é a IA que é burra. É a pasta que está vazia."</span>, <span class="s">"objeto"</span>: { <span class="s">"comp"</span>: <span class="s">"maxima"</span>, <span class="s">"params"</span>: { <span class="s">"linha1"</span>: <span class="s">"NÃO É A IA QUE É BURRA."</span>, <span class="s">"linha2"</span>: <span class="s">"É A PASTA QUE ESTÁ VAZIA."</span> } } },
-    { <span class="s">"tipo"</span>: <span class="s">"cta"</span>, <span class="s">"fala"</span>: <span class="s">"Comenta pasta que eu te mando os cinco links, com o curso do inema ponto club."</span>,
-      <span class="s">"objeto"</span>: { <span class="s">"comp"</span>: <span class="s">"isca"</span>, <span class="s">"params"</span>: { <span class="s">"palavra"</span>: <span class="s">"PASTA"</span> } } }
-  ]
+    { <span class="s">"tipo"</span>: <span class="s">"tese"</span>, <span class="s">"fala"</span>: <span class="s">"Se você cria um agente para cada tarefa, eu tenho uma má notícia: o fio que liga todos eles vai arrebentar."</span>,
+      <span class="s">"tela"</span>: { <span class="s">"linhas"</span>: [<span class="s">"PARA DE"</span>, <span class="s">"CRIAR AGENTE."</span>], <span class="s">"destaque"</span>: <span class="s">"AGENTE"</span> },
+      <span class="s">"objeto"</span>: { <span class="s">"comp"</span>: <span class="s">"tese"</span>, <span class="s">"params"</span>: { <span class="s">"metafora"</span>: <span class="s">"fio"</span>, <span class="s">"nos"</span>: [<span class="s">"✉️ e-mail"</span>, <span class="s">"📷 Instagram"</span>, <span class="s">"📄 propostas"</span>] } } },
+    <span class="c">// ... autoridade (fonte: skills), problema ("não é culpa sua"), virada ...</span>
+    { <span class="s">"tipo"</span>: <span class="s">"metodo"</span>, <span class="s">"n"</span>: 1, <span class="s">"nome"</span>: <span class="s">"PROCESSO"</span>, <span class="s">"fonte"</span>: <span class="s">"skills"</span>,
+      <span class="s">"fala"</span>: <span class="s">"Um: o processo. Peça para a IA te entrevistar, uma pergunta por vez, até ela fazer sem você."</span>,
+      <span class="s">"objeto"</span>: { <span class="s">"comp"</span>: <span class="s">"pasta"</span>, <span class="s">"params"</span>: { <span class="s">"titulo"</span>: <span class="s">"O processo"</span> } } },
+    <span class="c">// ... metodo 2–3, prova, ressalva, maxima ...</span>
+    { <span class="s">"tipo"</span>: <span class="s">"cta"</span>, <span class="s">"fala"</span>: <span class="s">"Eu já escolhi o meu lado: um agente só. E você? Um agente só ou um para cada tarefa? Comenta um ou vários."</span>,
+      <span class="s">"objeto"</span>: { <span class="s">"comp"</span>: <span class="s">"isca"</span>, <span class="s">"params"</span>: { <span class="s">"em"</span>: <span class="s">"Comenta"</span> } } }
+  ],
+  <span class="s">"publicar"</span>: { <span class="s">"descricao"</span>: <span class="s">"... Um agente só ou um para cada tarefa?"</span> }
 }</pre>
   <div class="grid g2" style="margin-top:18px">
-    <div class="card"><h3>Campos principais</h3><p><code>tipo</code> (a ordem dos nove blocos) · <code>fala</code> (por extenso, sem algarismo nem "!") · <code>tela</code> (texto grande e destaque) · <code>objeto.comp</code> + <code>objeto.params</code> (o que o palco desenha) · <code>n</code> e <code>nome</code> nos itens do método (iguais ao índice da virada) · <code>fonte</code> (id em <code>fontes</code>). No topo: <code>trocas</code> (como a fala aparece na legenda), <code>cores</code> (palavras coloridas), <code>ritmo</code> e <code>publicar</code> (título, descrição, canal da fila). O <code>checar</code> também exige: na máxima, <code>linha1</code> e <code>linha2</code> com até 7 palavras cada; a palavra-isca dentro de <code>publicar.descricao</code>; fontes conferidas há no máximo 7 dias.</p></div>
-    <div class="card"><h3>Componentes do palco (<code>objeto.comp</code>)</h3><p><code>tese</code>, <code>contador</code>, <code>chat_riscado</code>, <code>indice</code> (com as pílulas de progresso), <code>pasta</code>, <code>repo</code> (print real + estrelas), <code>manchete</code>, <code>selo_prova</code>, <code>ressalva</code>, <code>maxima</code> (flash tipográfico) e <code>isca</code> (a pílula amarela com a caixa de comentário).</p></div>
+    <div class="card"><h3>Campos principais</h3><p><code>tipo</code> (a ordem dos nove blocos) · <code>fala</code> (por extenso, sem algarismo nem "!") · <code>tela</code> (texto grande e destaque) · <code>objeto.comp</code> + <code>objeto.params</code> (o que o palco desenha) · <code>n</code> e <code>nome</code> nos itens do método (iguais ao índice da virada) · <code>fonte</code> (id em <code>fontes</code>). No topo: <code>trocas</code> (como a fala aparece na legenda), <code>cores</code> (palavras coloridas), <code>ritmo</code> e <code>publicar</code> (título, descrição, canal da fila). O <code>checar</code> também exige: <code>gancho.tipo</code> válido e a manchete do quadro 0 com até 6 palavras em caixa alta; <code>objeto.params.metafora</code> na tese; na máxima, <code>linha1</code> e <code>linha2</code> com até 7 palavras cada; fontes conferidas há no máximo 7 dias; e, na <code>isca</code>: <code>pergunta</code> terminada em "?" (até 70 caracteres) e dita no CTA, 2 ou 3 <code>opcoes</code> de uma palavra em caixa alta, ditas no CTA (pergunta aberta: <code>exemplo</code>, a resposta que a mão digita), <code>lado</code>, <code>tensao</code> (uma palavra da pergunta que está no quadro 0 e volta no fim) e <code>publicar.descricao</code> terminando com a pergunta. Os campos antigos <code>isca.palavra</code> e <code>isca.entregavel</code> dão erro.</p></div>
+    <div class="card"><h3>Componentes do palco (<code>objeto.comp</code>)</h3><p><code>tese</code>, <code>contador</code>, <code>chat_riscado</code>, <code>indice</code> (com as pílulas de progresso), <code>pasta</code>, <code>repo</code> (print real + estrelas), <code>manchete</code>, <code>selo_prova</code>, <code>ressalva</code>, <code>maxima</code> (flash tipográfico) e <code>isca</code> (a pergunta, a pílula amarela com as opções e a caixa de comentário). A <code>tese</code> com <code>metafora: "fio"</code> desenha o objeto que se quebra no quadro 0.</p></div>
   </div>
 </div></section>
 
 <section id="exemplos"><div class="wrap">
   <span class="chip">Exemplo real</span>
   <h2>"5 novidades de IA do mês: a mais útil é uma pasta"</h2>
-  <p class="sub">A primeira edição, feita inteira com o motor e publicada no YouTube. Isca: <span class="amb">PASTA</span>. Roteiro em <code>edicoes/2026-10-28-cinco-pecas-ia/roteiro.json</code>.</p>
+  <p class="sub">A primeira edição, feita inteira com o motor e publicada no YouTube. Ela é do <b>formato v1.0.0</b>: gancho de lista, cinco temas e "comenta PASTA" com links prometidos a quem comentasse. A v1.1.0 trocou isso pelo gancho forte, um tema por vídeo e a pergunta de opinião; o <code>checar</code> atual reprova este roteiro de propósito. Roteiro em <code>edicoes/2026-10-28-cinco-pecas-ia/roteiro.json</code> e propostas de pergunta e manchete para a próxima em <code>PROPOSTA-ISCA.md</code>, na mesma pasta.</p>
   <div class="video">
     <div class="yt"><iframe src="https://www.youtube-nocookie.com/embed/vLOgLCVs7gg" title="Reel exemplo do rtex no YouTube" loading="lazy" allow="accelerometer; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe></div>
     <div>
@@ -426,7 +441,7 @@
     <figure><img src="assets/q-51_8.jpg" width="540" height="960" loading="lazy" alt="Selo com troféu: &quot;Venceu o hackathon, Anthropic × Forum Ventures&quot;, com a fonte"><figcaption>Prova: o fato com fonte.</figcaption></figure>
     <figure><img src="assets/q-62_5.jpg" width="540" height="960" loading="lazy" alt="Cartão &quot;Atenção&quot; com duas limitações e a instrução &quot;comece pela peça 1: uma pasta só&quot;"><figcaption>Ressalva: limitação virada em instrução.</figcaption></figure>
     <figure><img src="assets/q-67_5.jpg" width="540" height="960" loading="lazy" alt="Máxima: &quot;Não é a IA que é burra. É a pasta que está vazia.&quot;"><figcaption>A máxima, depois do silêncio.</figcaption></figure>
-    <figure><img src="assets/q-80_9.jpg" width="540" height="960" loading="lazy" alt="Cartão final: &quot;Comenta PASTA&quot; na pílula amarela e a caixa de comentário com PASTA publicado"><figcaption>CTA: a única pílula amarela do vídeo.</figcaption></figure>
+    <figure><img src="assets/q-80_9.jpg" width="540" height="960" loading="lazy" alt="Cartão final: &quot;Comenta PASTA&quot; na pílula amarela e a caixa de comentário com PASTA publicado"><figcaption>CTA no formato v1.0.0 ("comenta PASTA"); na v1.1.0 o cartão traz a pergunta de opinião.</figcaption></figure>
     <figure><img src="assets/q-46_6.jpg" width="540" height="960" loading="lazy" alt="Peça 05: print real da página do ECC no GitHub e 291 mil estrelas"><figcaption>Peça 05: o ECC, 291 mil estrelas.</figcaption></figure>
     <figure><img src="assets/q-01_5.jpg" width="540" height="960" loading="lazy" alt="Quadro de abertura: a tese escrita com PASTA em amarelo"><figcaption>Tese: escrita no quadro 0.</figcaption></figure>
   </div>
@@ -440,9 +455,10 @@
   <h2>Onde o projeto está</h2>
   <p class="sub">O que existe hoje no repositório e o que fica para depois.</p>
   <div class="phase"><div class="tag">v1.0.0</div><div class="d"><strong>Motor completo</strong><span>Validador, crítico, estúdio do HeyGen, prints, cena, render, QA, envio e fila.</span></div></div>
+  <div class="phase"><div class="tag">v1.1.0</div><div class="d"><strong>Gancho, um tema e isca de opinião</strong><span>Quatro tipos de gancho com manchete curta e objeto que se quebra no quadro 0, prova até 20 s, problema com "não é culpa sua", um tema por vídeo e a pergunta de opinião no fim, sem nada a entregar.</span></div></div>
   <div class="phase"><div class="tag">1ª edição</div><div class="d"><strong>"5 peças de IA do mês" publicada</strong><span>81,1 s, todos os itens do QA verdes, revisor independente 8/10.</span></div></div>
-  <div class="phase"><div class="tag">depois</div><div class="d"><strong>Próximos passos</strong><span>Produção sem sessão (timer), skill <code>/rtex</code>, modo longo (110–135 s), versão clara e entrega automática da isca.</span></div></div>
-  <div class="note" style="margin-top:18px"><b>Regra antes de publicar:</b> o que o "comenta PALAVRA" promete (links, curso, material) precisa existir no dia em que o vídeo sai.</div>
+  <div class="phase"><div class="tag">depois</div><div class="d"><strong>Próximos passos</strong><span>Produção sem sessão (timer), skill <code>/rtex</code>, modo longo (110–135 s) e versão clara.</span></div></div>
+  <div class="note" style="margin-top:18px"><b>Regra antes de publicar:</b> a pergunta do fim não promete nada a quem comenta. Se quiser deixar links e fontes, ponha no comentário fixado, sem dizer no vídeo que eles são o prêmio por comentar.</div>
 </div></section>
 </main>
 

@@ -2,6 +2,8 @@
 
 | data | o que quebrou | menor correção | prompt \| infra |
 |---|---|---|---|
+| 28/10/2026 | `qa` na prévia sintética: KeyError `wpm` (o `ritmo.json` de `tempos_sinteticos.py` não tinha o campo) | `tempos_sinteticos.py` grava `wpm` | infra |
+| 28/10/2026 | cartão de comentário com o "Publicar" em x 940–1020, na coluna dos ícones da rede (zona segura x > 950) | `#com` com `right:140px` (termina em x 940) | prompt |
 | 28/10/2026 | 1º render: rosto cortado na testa no terço de baixo (recorte 1350x800) e etiqueta "NEI MALDANER · INEM" (drawtext comeu a última letra do arquivo sem quebra de linha) | recorte 1620x960 do 1920x1080; `tag-nei.txt` com espaço + quebra de linha no fim | infra |
 | 28/10/2026 | QA: maior trecho parado 4,7 s (bloco do ponytail) e contador parado em "0,0" por 2 s | frase do repo entra em ini+1,6 s; contador corre desde o início do bloco e pousa na palavra; animações internas contadas como eventos | prompt |
 | 28/10/2026 | QA de legibilidade lia `left:60px` como tamanho de letra | regex procura o px dentro de `font:` | prompt |

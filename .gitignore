@@ -12,3 +12,4 @@ fila/.lock
 fila/fila.log
 fila/fila.json
 *.envio-v3.json
+edicoes/_teste*/
