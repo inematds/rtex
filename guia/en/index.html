@@ -147,7 +147,7 @@
     <a class="sec" href="#oque">What it is</a>
     <a class="sec" href="#r7ex">rtex × r7ex</a>
     <a class="sec" href="#guia">User guide</a>
-    <a class="sec" href="#exemplos">Example</a>
+    <a class="sec" href="#exemplo-v11">Example</a>
     <span class="lang"><a href="../">PT</a><a class="on" href="./">EN</a><a href="../es/">ES</a></span>
     <button class="tgl" id="themeToggle" aria-label="Toggle theme" title="Toggle theme">🌙</button>
     <a class="btn" href="https://github.com/inematds/rtex" target="_blank" rel="noopener">GitHub</a>
@@ -164,7 +164,7 @@
       <p class="lead">You write a <code>roteiro.json</code>; rtex returns a 1080×1920 vertical reel about a single topic: a strong hook in frame 0, numbered steps with an index, sourced evidence, an honest caveat, and, at the end, an <span class="amb">opinion question</span> for the audience to answer. Nei’s HeyGen avatar does the talking.</p>
       <div class="cta">
         <a class="btn" href="#guia">Start the guide</a>
-        <a class="btn ghost" href="#exemplos">Watch the example video (v1.0.0)</a>
+        <a class="btn ghost" href="#exemplo-v11">Watch the example video (v1.1.0)</a>
       </div>
     </div>
     <figure><img src="../assets/v11-hero.jpg" width="540" height="640" alt="Frame from the sample script hook: the headline STOP CREATING AGENTS, with AGENTS in yellow, and three agents (email, Instagram, proposals) with their connecting thread snapped, marked with red Xs"><figcaption style="padding:10px 12px;font-size:.82rem;color:var(--mut);background:var(--card)">Sample script hook (v1.1.0), at 2.4 s. Preview without avatar.</figcaption></figure>
@@ -405,6 +405,20 @@
   <div class="grid g2" style="margin-top:18px">
     <div class="card"><h3>Main fields</h3><p><code>tipo</code> (the order of the nine blocks) · <code>fala</code> (spelled out, no numerals or “!”) · <code>tela</code> (large text and highlight) · <code>objeto.comp</code> + <code>objeto.params</code> (what the stage draws) · <code>n</code> and <code>nome</code> in method items (matching the turn index) · <code>fonte</code> (an id in <code>fontes</code>). At the top level: <code>trocas</code> (how speech appears in captions), <code>cores</code> (colored words), <code>ritmo</code>, and <code>publicar</code> (title, description, queue channel). <code>checar</code> also requires: a valid <code>gancho.tipo</code> and a frame 0 headline of up to 6 uppercase words; <code>objeto.params.metafora</code> in the thesis; for the maxim, <code>linha1</code> and <code>linha2</code> with up to 7 words each; sources checked no more than 7 days ago; and in <code>isca</code>: a <code>pergunta</code> ending in “?” (up to 70 characters) and spoken in the CTA, 2 or 3 one-word uppercase <code>opcoes</code> spoken in the CTA (for an open-ended question: <code>exemplo</code>, the answer the hand types), <code>lado</code>, <code>tensao</code> (a word from the question that appears in frame 0 and returns at the end), and <code>publicar.descricao</code> ending with the question. The old fields <code>isca.palavra</code> and <code>isca.entregavel</code> cause an error.</p></div>
     <div class="card"><h3>Stage components (<code>objeto.comp</code>)</h3><p><code>tese</code>, <code>contador</code>, <code>chat_riscado</code>, <code>indice</code> (with progress pills), <code>pasta</code>, <code>repo</code> (real screenshot + stars), <code>manchete</code>, <code>selo_prova</code>, <code>ressalva</code>, <code>maxima</code> (typographic flash), and <code>isca</code> (the question, yellow pill with options, and comment box). The <code>tese</code> with <code>metafora: "fio"</code> draws the object that breaks in frame 0.</p></div>
+  </div>
+</div></section>
+
+<section id="exemplo-v11"><div class="wrap">
+  <span class="chip">Example v1.1.0</span>
+  <h2>“Stop using skills”</h2>
+  <p class="sub">The first edition in the current format: contrarian hook, one topic (delete <code>CLAUDE.md</code>, skills and hooks, and bring back only what the model gets wrong again), three steps and the opinion question at the end. The video is in Portuguese. Script in <code>edicoes/2026-10-28-pare-de-usar-skills/roteiro.json</code>.</p>
+  <div class="video">
+    <div class="yt"><video src="../assets/v11-pare-de-usar-skills.mp4" poster="../assets/v11-pare-de-usar-skills.jpg" controls playsinline preload="none" aria-label="“Stop using skills” reel made with rtex" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover"></video></div>
+    <div>
+      <h3 style="margin-bottom:.6em">What QA measured</h3>
+      <table class="qa"><tr><td>Length</td><td>76.1 s</td></tr><tr><td>Speech pace</td><td>188 words/min</td></tr><tr><td>Loudness</td><td>−14.3 LUFS</td></tr><tr><td>Screen changes</td><td>38 per minute</td></tr><tr><td>Longest static stretch</td><td>3.5 s</td></tr><tr><td>Silence before the maxim</td><td>0.52 s</td></tr><tr><td>End card</td><td>9.0 s</td></tr><tr><td>Independent reviewer</td><td>approved, 8/10</td></tr></table>
+      <p class="mut" style="margin-top:1em">It goes live on the INEMA channel (lives3) through the publishing queue. Audit kit for the topic: <a href="https://inematds.github.io/audit-ablacaocc/guia/en/" target="_blank" rel="noopener">audit-ablacaocc</a>.</p>
+    </div>
   </div>
 </div></section>
 

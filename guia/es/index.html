@@ -147,7 +147,7 @@
     <a class="sec" href="#oque">Qué es</a>
     <a class="sec" href="#r7ex">rtex × r7ex</a>
     <a class="sec" href="#guia">Guía de uso</a>
-    <a class="sec" href="#exemplos">Ejemplo</a>
+    <a class="sec" href="#exemplo-v11">Ejemplo</a>
     <span class="lang"><a href="../">PT</a><a href="../en/">EN</a><a class="on" href="./">ES</a></span>
     <button class="tgl" id="themeToggle" aria-label="Cambiar tema" title="Cambiar tema">🌙</button>
     <a class="btn" href="https://github.com/inematds/rtex" target="_blank" rel="noopener">GitHub</a>
@@ -164,7 +164,7 @@
       <p class="lead">Escribes un <code>roteiro.json</code>; rtex te devuelve un reel vertical de 1080×1920 sobre un solo tema: un gancho fuerte en el cuadro 0, los pasos numerados con índice, prueba con fuente, una salvedad honesta y, al final, una <span class="amb">pregunta de opinión</span> para que el público responda. Quien habla es el avatar de Nei en HeyGen.</p>
       <div class="cta">
         <a class="btn" href="#guia">Empezar la guía</a>
-        <a class="btn ghost" href="#exemplos">Ver el video de ejemplo (v1.0.0)</a>
+        <a class="btn ghost" href="#exemplo-v11">Ver el video de ejemplo (v1.1.0)</a>
       </div>
     </div>
     <figure><img src="../assets/v11-hero.jpg" width="540" height="640" alt="Cuadro del gancho del guion modelo: el titular PARA DE CRIAR AGENTE (DEJA DE CREAR AGENTES), con AGENTE en amarillo, y tres agentes (correo, Instagram, propuestas) con el hilo que los une cortado y marcado con X rojas"><figcaption style="padding:10px 12px;font-size:.82rem;color:var(--mut);background:var(--card)">Gancho del guion modelo (v1.1.0), a los 2,4 s. Vista previa sin avatar.</figcaption></figure>
@@ -405,6 +405,20 @@
   <div class="grid g2" style="margin-top:18px">
     <div class="card"><h3>Campos principales</h3><p><code>tipo</code> (el orden de los nueve bloques) · <code>fala</code> (texto completo, sin cifras ni «!») · <code>tela</code> (texto grande y palabra destacada) · <code>objeto.comp</code> + <code>objeto.params</code> (lo que dibuja el escenario) · <code>n</code> y <code>nome</code> en los elementos del método (iguales al índice del giro) · <code>fonte</code> (id en <code>fontes</code>). En la parte superior: <code>trocas</code> (cómo aparece la voz en los subtítulos), <code>cores</code> (palabras en color), <code>ritmo</code> y <code>publicar</code> (título, descripción, canal de la cola). <code>checar</code> también exige: <code>gancho.tipo</code> válido y un titular en el cuadro 0 de hasta 6 palabras en mayúsculas; <code>objeto.params.metafora</code> en la tesis; en la máxima, <code>linha1</code> y <code>linha2</code> con hasta 7 palabras cada una; fuentes revisadas hace no más de 7 días; y, en <code>isca</code>: <code>pergunta</code> terminada en «?» (hasta 70 caracteres) y dicha en el CTA, 2 o 3 <code>opcoes</code> de una palabra en mayúsculas, dichas en el CTA (pregunta abierta: <code>exemplo</code>, la respuesta que escribe la mano), <code>lado</code>, <code>tensao</code> (una palabra de la pregunta que aparece en el cuadro 0 y vuelve al final) y <code>publicar.descricao</code> terminada con la pregunta. Los campos antiguos <code>isca.palavra</code> e <code>isca.entregavel</code> dan error.</p></div>
     <div class="card"><h3>Componentes del escenario (<code>objeto.comp</code>)</h3><p><code>tese</code>, <code>contador</code>, <code>chat_riscado</code>, <code>indice</code> (con las píldoras de progreso), <code>pasta</code>, <code>repo</code> (captura real + estrellas), <code>manchete</code>, <code>selo_prova</code>, <code>ressalva</code>, <code>maxima</code> (destello tipográfico) e <code>isca</code> (la pregunta, la píldora amarilla con las opciones y el cuadro de comentario). La <code>tese</code> con <code>metafora: "fio"</code> dibuja el objeto que se rompe en el cuadro 0.</p></div>
+  </div>
+</div></section>
+
+<section id="exemplo-v11"><div class="wrap">
+  <span class="chip">Ejemplo v1.1.0</span>
+  <h2>«Deja de usar skills»</h2>
+  <p class="sub">La primera edición en el formato actual: gancho contrario, un solo tema (borrar <code>CLAUDE.md</code>, skills y hooks, y devolver solo lo que el modelo vuelva a fallar), tres pasos y la pregunta de opinión al final. El video está en portugués. Guion en <code>edicoes/2026-10-28-pare-de-usar-skills/roteiro.json</code>.</p>
+  <div class="video">
+    <div class="yt"><video src="../assets/v11-pare-de-usar-skills.mp4" poster="../assets/v11-pare-de-usar-skills.jpg" controls playsinline preload="none" aria-label="Reel «Deja de usar skills» hecho con rtex" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover"></video></div>
+    <div>
+      <h3 style="margin-bottom:.6em">Lo que midió el QA</h3>
+      <table class="qa"><tr><td>Duración</td><td>76,1 s</td></tr><tr><td>Ritmo del habla</td><td>188 palabras/min</td></tr><tr><td>Volumen</td><td>−14,3 LUFS</td></tr><tr><td>Cambios de pantalla</td><td>38 por minuto</td></tr><tr><td>Tramo quieto más largo</td><td>3,5 s</td></tr><tr><td>Silencio antes de la máxima</td><td>0,52 s</td></tr><tr><td>Tarjeta final</td><td>9,0 s</td></tr><tr><td>Revisor independiente</td><td>aprobado, 8/10</td></tr></table>
+      <p class="mut" style="margin-top:1em">Sale en el canal INEMA (lives3) por la cola de publicación. Kit de auditoría del tema: <a href="https://inematds.github.io/audit-ablacaocc/guia/es/" target="_blank" rel="noopener">audit-ablacaocc</a>.</p>
+    </div>
   </div>
 </div></section>
 

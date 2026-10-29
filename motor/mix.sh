@@ -29,7 +29,9 @@ ffmpeg -v error -y -i "$E/build/palco.mp4" -i "$A" -stream_loop -1 -i "$MUSICA" 
    [m][sc]sidechaincompress=threshold=0.03:ratio=8:attack=20:release=300,afade=t=out:st=$FADE:d=1.6[md];
    [voz][md]amix=inputs=2:duration=first:normalize=0[a]" \
   -map "[v]" -map "[a]" -c:v libx264 -crf 21 -preset slow -maxrate 5M -bufsize 10M -pix_fmt yuv420p -c:a pcm_s16le -t "$D" "$E/build/mix1.mkv"
-J=$(ffmpeg -nostats -i "$E/build/mix1.mkv" -af loudnorm=I=-14:TP=-1.5:LRA=11:print_format=json -f null - 2>&1 | sed -n '/^{/,/^}/p')
+# limitador leve antes do loudnorm linear: sem ele o teto de pico segurava o ganho e o reel ficava em −14,6 LUFS (29/10/2026)
+LIM="alimiter=limit=0.708:attack=5:release=50:level=0"
+J=$(ffmpeg -nostats -i "$E/build/mix1.mkv" -af $LIM,loudnorm=I=-14:TP=-1.5:LRA=11:print_format=json -f null - 2>&1 | sed -n '/^{/,/^}/p')
 LN=$(python3 -c "import json,sys;j=json.loads(sys.argv[1]);print(f\"loudnorm=I=-14:TP=-1.5:LRA=11:measured_I={j['input_i']}:measured_TP={j['input_tp']}:measured_LRA={j['input_lra']}:measured_thresh={j['input_thresh']}:offset={j['target_offset']}:linear=true\")" "$J")
-ffmpeg -v error -y -i "$E/build/mix1.mkv" -c:v copy -af "$LN,aresample=48000" -c:a aac -b:a 192k -movflags +faststart "$SAIDA"
+ffmpeg -v error -y -i "$E/build/mix1.mkv" -c:v copy -af "$LIM,$LN,aresample=48000" -c:a aac -b:a 192k -movflags +faststart "$SAIDA"
 echo "ok $SAIDA ($(du -h "$SAIDA" | cut -f1))"

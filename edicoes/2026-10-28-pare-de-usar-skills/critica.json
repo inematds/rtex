@@ -1,0 +1,72 @@
+{
+ "blocos": [
+  {
+   "n": 1,
+   "nota": 8,
+   "porque": "A manchete 'PARE DE USAR SKILLS.' segue a regra: 4 palavras, caixa alta, SKILLS em amarelo, tipo contrário. Ela manda parar algo que quem usa Claude Code faz todo dia, e a metáfora do fio com dano ('arrebentar') reforça o perigo. A tensão 'skills' fica plantada para o fim.",
+   "melhorar": "A fala não suaviza a tela, como a própria nota do gancho pede ('a pilha de instrução velha pode estar segurando o modelo'). 'Vai arrebentar' é tão agressivo quanto a manchete e não explica nada. Sugestão: 'Cada skill nova é mais um peso no fio. Regra velha pode estar segurando o seu Claude.' Para o público geral que usa IA no trabalho, 'skills' pode não dizer nada a quem rola sem som. Vale testar o sub 'CADA REGRA NOVA É MAIS PESO.' com mais destaque, ou trocar por 'SUAS REGRAS DE IA'."
+  },
+  {
+   "n": 2,
+   "nota": 9,
+   "porque": "A prova é forte e contraintuitiva: a própria equipe do Claude Code apagou mais de 80% do prompt. Ela entra cedo, por volta dos 5 s, tem fonte ('oitenta'), e o contador vai a 80 sem passar do que a voz diz.",
+   "melhorar": "A fonte é um agregador (biggo). Se existir, troque por um link primário, como o vídeo ou o post do Y Combinator."
+  },
+  {
+   "n": 3,
+   "nota": 8,
+   "porque": "A dor é reconhecível: escrever a mesma regra pela terceira vez e o modelo errar igual. A absolvição vem logo em seguida e é explícita ('não é culpa sua: ninguém te contou que regra envelhece'). O chat riscado com 'SEMPRE!!' mostra bem a frustração.",
+   "melhorar": ""
+  },
+  {
+   "n": 4,
+   "nota": 8,
+   "porque": "'Três peças' são os passos de um único método (apagar, observar, devolver), e o índice APAGUE/OBSERVE/DEVOLVA bate com os 3 passos. A frase 'a primeira dá medo de fazer' cria curiosidade antes do item 1.",
+   "melhorar": ""
+  },
+  {
+   "n": 5,
+   "nota": 7,
+   "porque": "Os 3 passos estão numerados, cada um com seu objeto, e são acionáveis. O passo 1 tem fonte ('seis_meses'), e o 'anota, mas não conserta ainda' do passo 2 é um detalhe que gera confiança.",
+   "melhorar": "O método ocupa cerca de 60 de ~198 palavras, uns 30%, no limite de baixo. Dá para tirar palavras da ressalva ou da prova e dar ao passo 3 um exemplo concreto ('a regra do teste só volta se ele esquecer de novo'), fechando o laço com o passo 2."
+  },
+  {
+   "n": 6,
+   "nota": 7,
+   "porque": "O fato tem fonte, é honesto ('um pouco mais inteligente', sem inflar) e a tela acompanha ('UM POUCO MAIS ESPERTO').",
+   "melhorar": "'Um pouco mais' é fraco como prova e convence pouco o desconhecido. O fato de apoio pode vir mais concreto, ou mais curto, para não perder ritmo antes da ressalva. A variável CLAUDE_CODE_SIMPLE=1 não diz nada ao público geral."
+  },
+  {
+   "n": 7,
+   "nota": 7,
+   "porque": "A ressalva é honesta e vira instrução: segurança e permissão ficam, e se começa por uma skill só, 'aquela que você nem lembra para que serve', que é ótimo e cria identificação.",
+   "melhorar": "A tela mostra 'teste numa cópia, nunca no original' (ancorada em 'permissão'), mas a voz nunca fala em cópia, e 'cópia' está até na tabela de cores. Ou ponha 'numa cópia' na fala, ou tire da tela, para a tela não dizer o que a voz não diz."
+  },
+  {
+   "n": 8,
+   "nota": 9,
+   "porque": "A antítese é curta e memorável ('Regra velha não te protege. Ela te prende.'), fecha a tese e é boa para print.",
+   "melhorar": "Confira o índice de 'ritmo.pausa_antes.parte: 10'. Se a contagem começa em 0, a parte 10 é o CTA, que não contém 'Regra', e o silêncio cairia no lugar errado. A máxima é a parte 9 em base 0."
+  },
+  {
+   "n": 9,
+   "nota": 7,
+   "porque": "É uma isca de opinião limpa: o Nei diz o lado antes ('já escolhi o meu lado: apagar'), 'teria coragem?' põe emoção, a resposta é uma palavra (APAGAR/MANTER), a tensão 'skills' volta do quadro 0, e nada é prometido nem entregue.",
+   "melhorar": "A pergunta divide pouco quem não usa skills, então o público geral fica de fora. Uma versão mais emocional e com lado ligaria melhor: 'Você confia mais nas suas regras ou na IA?', ou 'Teria coragem de apagar tudo?'. 'Comenta apagar ou manter' repete a pergunta. Pode sair, para fechar na pergunta com a pílula na tela."
+  }
+ ],
+ "bloqueios": [],
+ "resumo": "O roteiro está sólido e na ordem, com um tema só, gancho contrário forte, números com fonte, índice batendo com o método e isca sem promessa. Os ajustes são de estilo: a fala do gancho suavizar e explicar, alinhar 'cópia' entre tela e voz, conferir o índice da pausa da máxima e abrir a pergunta final para além de quem usa skills.",
+ "notas": [
+  8,
+  9,
+  8,
+  8,
+  7,
+  7,
+  7,
+  9,
+  7
+ ],
+ "hash": "eb71eb1b98d4e92bcf2eda8911474c1eca41a20e"
+}

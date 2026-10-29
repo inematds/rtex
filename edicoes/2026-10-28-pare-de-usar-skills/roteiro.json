@@ -1,0 +1,330 @@
+{
+ "id": "2026-10-28-pare-de-usar-skills",
+ "versao": "rtex/1",
+ "tema": "Pare de usar skills: apague a config e devolva só o que falhar",
+ "pedido": "Nei, 28/10/2026: 'faca mais um video e colqoue no guia, https://inematds.github.io/rtex/guia/ para de usar skills (pode buscar sobre este assunto) lives3 e inema.agentes v3'. Canal lives3, tópico no INEMA.AGENTES, envio ao v3, vídeo na seção de exemplos do guia do rtex. Tema: a equipe do Claude Code apagou mais de 80% do prompt de sistema no Opus 5; a cada ~6 meses apague CLAUDE.md, skills e hooks e devolva só o que o modelo errar de novo (ablação). Kit do INEMA: audit-ablacaocc.",
+ "canal": "lives3",
+ "marca": "INEMA · PARE DE USAR SKILLS",
+ "gancho": {
+  "tipo": "contrario",
+  "nota": "a manchete manda parar de usar skills (mais agressiva); a fala suaviza: a pilha de instrução velha pode estar segurando o modelo"
+ },
+ "isca": {
+  "tipo": "opiniao",
+  "pergunta": "Apagar suas skills ou manter?",
+  "opcoes": [
+   "APAGAR",
+   "MANTER"
+  ],
+  "lado": "apagar e devolver só o que o modelo errar de novo (o Nei diz antes de perguntar)",
+  "tensao": "skills"
+ },
+ "fontes": [
+  {
+   "id": "oitenta",
+   "url": "https://finance.biggo.com/news/7df48019614f68c0",
+   "titulo": "Boris Cherny (Claude Code, Anthropic) no Y Combinator: mais de 80% do prompt de sistema apagado para o Opus 5",
+   "valor": "mais de 80% do prompt de sistema apagado · Opus 5 (julho/2026)",
+   "verificado_em": "2026-10-28"
+  },
+  {
+   "id": "seis_meses",
+   "url": "https://www.thelostoffer.com/2026/08/should-you-delete-your-claude-skills.html",
+   "titulo": "Startup School 2026 (Y Combinator): a cada 6 meses, apague CLAUDE.md, skills e hooks e veja o que o modelo faz",
+   "valor": "a cada 6 meses · CLAUDE.md, skills e hooks",
+   "verificado_em": "2026-10-28"
+  },
+  {
+   "id": "simples",
+   "url": "https://finance.biggo.com/news/7df48019614f68c0",
+   "titulo": "Modo simples do Claude Code (CLAUDE_CODE_SIMPLE=1): sem os prompts, o modelo fica um pouco mais inteligente",
+   "valor": "CLAUDE_CODE_SIMPLE=1 · um pouco mais inteligente sem os prompts",
+   "verificado_em": "2026-10-28"
+  }
+ ],
+ "ritmo": {
+  "pausa_antes": {
+   "parte": 10,
+   "de": "Regra"
+  }
+ },
+ "trocas": {
+  "oitenta por cento": "80%",
+  "Opus cinco": "Opus 5",
+  "três peças": "3 peças",
+  "seis meses": "6 meses",
+  "Um:": "1:",
+  "Dois:": "2:",
+  "Três:": "3:",
+  "Claude ponto m d": "CLAUDE.md",
+  "Claude ponto MD": "CLAUDE.md",
+  "cloud ponto md": "CLAUDE.md",
+  "Cloud Code": "Claude Code",
+  "Comenta apagar ou manter": "Comenta APAGAR ou MANTER"
+ },
+ "cores": {
+  "skills": "#FACC15",
+  "skill": "#FACC15",
+  "arrebentar": "#ff2a1f",
+  "apagou": "#FACC15",
+  "remendando": "#ff2a1f",
+  "envelhece": "#ff2a1f",
+  "apague": "#FACC15",
+  "observe": "#FACC15",
+  "devolva": "#FACC15",
+  "tropeça": "#ff2a1f",
+  "errar": "#ff2a1f",
+  "inteligente": "#FACC15",
+  "atenção": "#F2B45C",
+  "segurança": "#F2B45C",
+  "cópia": "#F2B45C",
+  "prende": "#ff2a1f",
+  "APAGAR": "#FACC15",
+  "MANTER": "#FACC15",
+  "80%": "#FACC15"
+ },
+ "blocos": [
+  {
+   "tipo": "tese",
+   "fala": "Cada skill nova é mais um peso no fio que segura o seu Claude. E esse fio vai arrebentar.",
+   "tela": {
+    "linhas": [
+     "PARE DE USAR",
+     "SKILLS."
+    ],
+    "destaque": "SKILLS",
+    "sub": "CADA REGRA NOVA É MAIS PESO."
+   },
+   "objeto": {
+    "comp": "tese",
+    "params": {
+     "metafora": "fio",
+     "nos": [
+      "📄 CLAUDE.md",
+      "🧩 skills",
+      "🪝 hooks"
+     ],
+     "quebra_em": "arrebentar"
+    }
+   }
+  },
+  {
+   "tipo": "autoridade",
+   "fala": "A própria equipe do Claude Code apagou mais de oitenta por cento do prompt de sistema quando saiu o Opus cinco.",
+   "objeto": {
+    "comp": "contador",
+    "params": {
+     "de": 0,
+     "ate": 80,
+     "dec": 0,
+     "unid": "%+ apagado",
+     "em": "80%",
+     "rotulo": "PROMPT DO CLAUDE CODE · OPUS 5",
+     "parcelas": []
+    }
+   },
+   "fonte": "oitenta"
+  },
+  {
+   "tipo": "problema",
+   "fala": "E se você escreve a mesma regra pela terceira vez e ele erra igual, não é culpa sua: ninguém te contou que regra envelhece.",
+   "objeto": {
+    "comp": "chat_riscado",
+    "params": {
+     "msgs": [
+      [
+       "escreve",
+       "regra: sempre rode o teste"
+      ],
+      [
+       "igual",
+       "regra: SEMPRE rode o teste!!"
+      ],
+      [
+       "envelhece",
+       "regra de um modelo antigo"
+      ]
+     ]
+    }
+   }
+  },
+  {
+   "tipo": "virada",
+   "fala": "Então anota, porque são três peças, e a primeira dá medo de fazer.",
+   "objeto": {
+    "comp": "indice",
+    "params": {
+     "itens": [
+      "APAGUE",
+      "OBSERVE",
+      "DEVOLVA"
+     ],
+     "em": "3",
+     "ativa_em": "primeira"
+    }
+   }
+  },
+  {
+   "tipo": "metodo",
+   "n": 1,
+   "nome": "APAGUE",
+   "fala": "Um: apague. A cada seis meses, tire o arquivo de regras, as skills e os hooks, e veja o que ele faz sozinho.",
+   "objeto": {
+    "comp": "manchete",
+    "params": {
+     "chapeu": "APAGUE",
+     "icone": "🗑️",
+     "titulo": "Tire tudo, sem dó",
+     "linhas": [
+      [
+       "6",
+       "a cada 6 meses"
+      ],
+      [
+       "regras",
+       "CLAUDE.md · skills · hooks (guarde cópia)"
+      ],
+      [
+       "sozinho",
+       "veja o que ele faz sozinho"
+      ]
+     ],
+     "titulo_em": "apague"
+    }
+   },
+   "fonte": "seis_meses"
+  },
+  {
+   "tipo": "metodo",
+   "n": 2,
+   "nome": "OBSERVE",
+   "fala": "Dois: observe. Use no trabalho de verdade e anote onde ele tropeça. Esqueceu de rodar o teste? Anota, mas não conserta ainda.",
+   "objeto": {
+    "comp": "manchete",
+    "params": {
+     "chapeu": "OBSERVE",
+     "icone": "👀",
+     "titulo": "Trabalho real, não teste",
+     "linhas": [
+      [
+       "verdade",
+       "no trabalho de verdade"
+      ],
+      [
+       "tropeça",
+       "anote onde ele tropeça"
+      ],
+      [
+       "conserta",
+       "não conserte nada ainda"
+      ]
+     ],
+     "titulo_em": "observe"
+    }
+   },
+   "fonte": "seis_meses"
+  },
+  {
+   "tipo": "metodo",
+   "n": 3,
+   "nome": "DEVOLVA",
+   "fala": "Três: devolva, uma regra por vez. Ela só volta depois que você viu ele errar a mesma coisa de novo.",
+   "objeto": {
+    "comp": "manchete",
+    "params": {
+     "chapeu": "DEVOLVA",
+     "icone": "↩️",
+     "titulo": "Uma regra por vez",
+     "linhas": [
+      [
+       "vez",
+       "uma regra por vez"
+      ],
+      [
+       "errar",
+       "só depois de ver o erro"
+      ],
+      [
+       "novo",
+       "o mesmo erro, de novo"
+      ]
+     ],
+     "titulo_em": "devolva"
+    }
+   }
+  },
+  {
+   "tipo": "prova",
+   "fala": "E tem prova: no modo simples do Claude Code, que tira os prompts, o modelo fica um pouco mais inteligente.",
+   "objeto": {
+    "comp": "selo_prova",
+    "params": {
+     "icone": "🧪",
+     "titulo": "UM POUCO MAIS ESPERTO",
+     "destaque": "ESPERTO",
+     "sub": "CLAUDE_CODE_SIMPLE=1 · sem os prompts",
+     "em": "inteligente",
+     "icone_em": "simples",
+     "sub_em": "prompts"
+    }
+   },
+   "fonte": "simples"
+  },
+  {
+   "tipo": "ressalva",
+   "fala": "Mas atenção: segurança e permissão nunca saem. Comece apagando uma skill só, aquela que você nem lembra para que serve.",
+   "objeto": {
+    "comp": "ressalva",
+    "params": {
+     "itens": [
+      [
+       "segurança",
+       "segurança e permissões ficam"
+      ],
+      [
+       "Comece",
+       "guarde uma cópia antes de apagar"
+      ]
+     ],
+     "dica": [
+      "lembra",
+      "comece pela skill que você nem lembra"
+     ]
+    }
+   }
+  },
+  {
+   "tipo": "maxima",
+   "fala": "Regra velha não te protege. Ela te prende.",
+   "objeto": {
+    "comp": "maxima",
+    "params": {
+     "linha1": "REGRA VELHA NÃO TE PROTEGE.",
+     "linha2": "ELA TE PRENDE.",
+     "linha2_em": "prende",
+     "destaque": "PRENDE"
+    }
+   }
+  },
+  {
+   "tipo": "cta",
+   "fala": "Eu já escolhi o meu lado: apagar. E você, teria coragem? Apagar suas skills ou manter? Comenta apagar ou manter.",
+   "objeto": {
+    "comp": "isca",
+    "params": {
+     "lado_tela": "EU: APAGAR",
+     "lado_em": "lado",
+     "q_em": "você",
+     "em": "Comenta"
+    }
+   }
+  }
+ ],
+ "publicar": {
+  "fila": "lives3",
+  "titulo": "Pare de usar skills: a Anthropic apagou 80% do prompt #shorts",
+  "descricao": "Mais regra e mais skill não deixam a IA melhor. A equipe do Claude Code, na Anthropic, apagou mais de 80% do prompt de sistema quando saiu o Opus 5. O método tem três peças: apague (a cada 6 meses, tire o CLAUDE.md, as skills e os hooks e veja o que ele faz sozinho), observe (use no trabalho de verdade e anote onde ele tropeça) e devolva (uma regra por vez, só depois de ver o mesmo erro de novo). Ressalva: segurança e permissões ficam, e faça numa cópia. Kit aberto e gratuito no inema.club. Apagar suas skills ou manter?",
+  "comentario_fixado": "Fontes: Y Combinator, conversa sobre o Claude Code e o Opus 5 (mais de 80% do prompt apagado, modo simples): https://finance.biggo.com/news/7df48019614f68c0 · Startup School 2026, apagar CLAUDE.md, skills e hooks a cada 6 meses: https://www.thelostoffer.com/2026/08/should-you-delete-your-claude-skills.html · Kit aberto e gratuito de auditoria de ablação (só leitura): https://inematds.github.io/audit-ablacaocc/guia/",
+  "contexto": "Short vertical do INEMA.CLUB (Nei Maldaner), canal lives3: um tema só, 'pare de usar skills' — apagar CLAUDE.md, skills e hooks e devolver só o que o modelo errar de novo (a equipe do Claude Code apagou mais de 80% do prompt de sistema no Opus 5). Gancho contrário. Kit gratuito: audit-ablacaocc. Isca de opinião: a descrição termina com a pergunta 'Apagar suas skills ou manter?'; ninguém recebe nada por comentar."
+ }
+}
