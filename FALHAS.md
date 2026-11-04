@@ -2,6 +2,7 @@
 
 | data | o que quebrou | menor correção | prompt \| infra |
 |---|---|---|---|
+| 2026-11-04 | Whisper pulou 53→62 s do avatar (claude-code-2): "fala f10 não achada"; o _tapa_buracos (buraco > 8 s) retranscreveu e não achou nada | `~/projetos/wifi/longrun/2026-11-01-claude-code-2/tools/retempo_pedacos.py` (pedaços de 20 s + 2 s) e depois `rtex.py avatar`; proteção que falta: retempo cair sozinho para pedaços quando uma fala some | infra |
 | 2026-11-04 | rtex: legenda de 21 letras cortou "EMPRESA MOSTRANDO QUE" na borda; linhas pendentes a 20% ilegíveis | MAX_LEG 19, dim .45; chat com hd/ia por parâmetro | infra |
 | 2026-11-01 | Whisper large-v3 pulou ~20 s do avatar inteiro (comece-por-tres): "fala f7/f8 não achada" no retempo | transcrever em pedaços de 20 s (+2 s de sobra) e montar o tempos.json; retempo reaproveita | infra |
 | 29/10/2026 | pílula da isca "APAGAR \| MANTER" a 100 px estourou a tela (x > 950, MANTER cortado) | fonte da pílula = min(100, 840/caracteres das opções) no palco | infra |
