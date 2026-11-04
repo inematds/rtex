@@ -2,6 +2,8 @@
 
 | data | o que quebrou | menor correção | prompt \| infra |
 |---|---|---|---|
+| 2026-11-04 | rtex: legenda de 21 letras cortou "EMPRESA MOSTRANDO QUE" na borda; linhas pendentes a 20% ilegíveis | MAX_LEG 19, dim .45; chat com hd/ia por parâmetro | infra |
+| 2026-11-01 | Whisper large-v3 pulou ~20 s do avatar inteiro (comece-por-tres): "fala f7/f8 não achada" no retempo | transcrever em pedaços de 20 s (+2 s de sobra) e montar o tempos.json; retempo reaproveita | infra |
 | 29/10/2026 | pílula da isca "APAGAR \| MANTER" a 100 px estourou a tela (x > 950, MANTER cortado) | fonte da pílula = min(100, 840/caracteres das opções) no palco | infra |
 | 29/10/2026 | loudness −14,6 LUFS (QA −14 ± 0,5): o 2º passe linear do loudnorm parou no teto de pico | alimiter −3 dBFS antes dos 2 passes no mix.sh → −14,3 | infra |
 | 29/10/2026 | `cena` parou: gatilho "oitenta"/"seis"/"três" não existe na fala depois das `trocas` (vira 80%/6/3) | gatilho `em`/linhas usa a forma da legenda (depois das trocas) | prompt |
