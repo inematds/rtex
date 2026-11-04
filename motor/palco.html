@@ -160,14 +160,14 @@ function fio(b,t){const p=b.p,L=b.tela.linhas,N=(p.nos||[]).slice(0,3),P=[[170,8
  const kq=p.quebra_em?prog(t,p.quebra_em-.1,.2)*(1-prog(t,p.quebra_em+.35,.5)):0;   // a fala diz "arrebentar": os ✗ pulsam
  const cor=`rgb(${Math.round(lerp(250,255,kt))},${Math.round(lerp(204,42,kt))},${Math.round(lerp(21,31,kt))})`;
  const fios=[[0,1],[0,2],[1,2]].slice(0,Math.max(0,N.length*(N.length-1)/2)).map(([i,j])=>{const a=P[i],c=P[j],m=[(a[0]+c[0])/2,(a[1]+c[1])/2+jit],
-  r=1-.42*ks,q=(u,v)=>[lerp(u[0],m[0],r),lerp(u[1],m[1],r)],e1=q(a),e2=q(c),kd=prog(t,.25+i*.1,.5);
+  r=1-.42*ks,q=(u,v)=>[lerp(u[0],m[0],r),lerp(u[1],m[1],r)],e1=q(a),e2=q(c),kd=.65+.35*prog(t,.05+i*.1,.45);   // quadro 0 já mostra o fio (revisor 04/11/2026)
   return {m,l:`<line x1="${a[0]}" y1="${a[1]}" x2="${lerp(a[0],e1[0],kd)}" y2="${lerp(a[1],e1[1],kd)}" stroke="${cor}" stroke-width="${6+3*kt}" stroke-linecap="round"/>
    <line x1="${c[0]}" y1="${c[1]}" x2="${lerp(c[0],e2[0],kd)}" y2="${lerp(c[1],e2[1],kd)}" stroke="${cor}" stroke-width="${6+3*kt}" stroke-linecap="round"/>`};});
  return `<div class="cx tese" style="padding-top:40px">${L.map(l=>`<div class="l">${realce(l,b.tela.destaque)}</div>`).join('')}
   <div class="sub">${b.tela.sub||''}</div>
   <div class="fio" style="opacity:${1-.55*kf}"><svg viewBox="0 0 820 440">${fios.map(f=>f.l).join('')}</svg>
   ${fios.map(f=>`<div class="x" style="left:${f.m[0]}px;top:${f.m[1]}px;opacity:${ks};transform:scale(${.6+.4*ks+.7*kq});text-shadow:0 0 ${40*kq}px #ff2a1f">✗</div>`).join('')}
-  ${N.map((x,i)=>`<div class="no" style="left:${P[i][0]}px;top:${P[i][1]}px;opacity:${prog(t,.02+i*.12,.3)*(1-.4*kf)};
+  ${N.map((x,i)=>`<div class="no" style="left:${P[i][0]}px;top:${P[i][1]}px;opacity:${(1-.4*kf)};
    transform:translateY(${70*kf*(1+i*.3)}px) rotate(${(i%2?1:-1)*9*kf}deg);border-color:${kt>0&&ks<1?`rgba(255,42,31,${.7*kt})`:'var(--line)'}">${x}</div>`).join('')}</div></div>`;}
 
 const COMP={
