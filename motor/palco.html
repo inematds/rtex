@@ -147,7 +147,7 @@ const vis=(t,a,b,d=.3)=>(t<a||t>b)?0:Math.min(a<=0?1:clamp((t-a)/d),clamp((b-t)/
 const lerp=(a,b,k)=>a+(b-a)*k;
 const fmt=(v,dec)=>v.toLocaleString('pt-BR',{minimumFractionDigits:dec,maximumFractionDigits:dec});
 const ent=(t,a,dy=34,d=.4)=>{const k=prog(t,a,d);return `opacity:${k};transform:translateY(${(1-k)*dy}px)`;};
-const dim=(t,a,dx=-24,d=.35)=>{const k=prog(t,a,d);return `opacity:${.2+.8*k};transform:translateX(${(1-k)*dx}px)`;};
+const dim=(t,a,dx=-24,d=.35)=>{const k=prog(t,a,d);return `opacity:${.45+.55*k};transform:translateX(${(1-k)*dx}px)`;};
 const realce=(txt,w)=>w?txt.replace(new RegExp(`(${w})`,'i'),'<em>$1</em>'):txt;
 document.getElementById('marca').textContent=C.marca;
 const IMGS=[];C.blocos.forEach(b=>{if(b.p.img)IMGS.push(b.p.img);if(b.p.logo)IMGS.push(b.p.logo);});
@@ -186,10 +186,10 @@ const COMP={
   return `<div class="cx cont" style="${ent(t,b.ini+.05)}"><div class="k">${p.rotulo}</div><div class="n">${fmt(v,p.dec)}</div><div class="u">${p.unid}</div>
    <div class="pc">${p.parcelas.map((x,i)=>`<div style="${ent(t,p.em+.25+i*.3,20)}"><span>${x[0]}</span><b>${x[1]} ⭐</b></div>`).join('')}</div></div>`;},
  chat_riscado(b,t){const p=b.p;
-  return `<div class="cx card chat" style="${ent(t,b.ini+.05)}"><div class="hd">● CHAT COM A IA</div><div class="ia">pronto! fiz do meu jeito 🙂</div>
+  return `<div class="cx card chat" style="${ent(t,b.ini+.05)}"><div class="hd">● ${p.hd||'CHAT COM A IA'}</div><div class="ia">${p.ia||'pronto! fiz do meu jeito 🙂'}</div>
    ${p.msgs.map((m,i)=>{if(t<m.t-.2)return'';const kr=prog(t,m.t+.45,.3);return `<div class="m" style="${ent(t,m.t-.2,24,.3)}"><span class="x" style="opacity:${kr}">✗</span><s>${m.txt}<i class="r" style="transform:scaleX(${kr})"></i></s></div>`;}).join('')}</div>`;},
  indice(b,t){const p=b.p;
-  return `<div class="cx ind"><div class="k" style="${ent(t,b.ini+.05)}">AS ${p.itens.length} PEÇAS</div>
+  return `<div class="cx ind"><div class="k" style="${ent(t,b.ini+.05)}">${p.k||('AS '+p.itens.length+' PEÇAS')}</div>
    ${p.itens.map((x,i)=>{const k=prog(t,p.em-.15+i*.12,.3);return `<div class="r ${p.ativa_em&&t>=p.ativa_em&&i===0?'at':''}" style="opacity:${.18+.82*k};transform:translateX(${(1-k)*-30}px)"><b>${String(i+1).padStart(2,'0')}</b><span>${x}</span></div>`;}).join('')}</div>`;},
  pasta(b,t){const p=b.p;
   return `<div class="cx pasta"><div class="hd" style="${ent(t,b.ini+.05)}">${p.logo?`<img src="${p.logo}">`:''}<span>${p.titulo}</span></div>

@@ -5,7 +5,7 @@ import difflib, json, re, unicodedata
 from pathlib import Path
 
 NUM = re.compile(r"\d")
-MAX_LEG = 21
+MAX_LEG = 19   # 21 cortou "EMPRESA MOSTRANDO QUE" na borda (prospeccao-por-sinal, 04/11/2026)
 EXTENSO = {"um": "1", "dois": "2", "tres": "3", "quatro": "4", "cinco": "5", "seis": "6"}                          # letras por bloco de legenda (r7ex: 23 já encosta na borda)
 
 
@@ -44,7 +44,7 @@ def _fonte_linha(r, b):
         return None
     d = fo["verificado_em"].split("-")
     data = f"{d[2]}/{d[1]}/{d[0]}"
-    txt = {"soma": f"GITHUB · {fo.get('conta', '')} MIL · {data}",
+    txt = fo.get("linha") or {"soma": f"GITHUB · {fo.get('conta', '')} MIL · {data}",
            "roadster": "ELECTREK · 15/10/2026 · E MOTOR1",
            "hackathon": f"README DO ECC · GITHUB · {data}",
            "skills": "DOCUMENTAÇÃO DA ANTHROPIC · AGENT SKILLS"}.get(fo["id"])
