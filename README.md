@@ -41,7 +41,7 @@ Versão **1.1.0** (28/10/2026). Repo: `inematds/rtex`.
 | 11 | Cena e render | `python3 rtex.py cena <pasta>` + `python3 rtex.py render <pasta>`: palco (`motor/palco.html`) a 30 fps + avatar no terço de baixo + trilha, −14 LUFS em 2 passadas | ⚙️ |
 | 12 | QA | `python3 rtex.py qa <pasta>` → `build/qa.json` + `build/folha.jpg` (16 quadros); LER a folha | ⚙️ |
 | 13 | Revisor independente | `Agent` general-purpose novo (nunca fork) ou `claude -p` com `~/.claude/runbooks/revisor-independente.md`: lê só a folha + `qa.json` + este README; nota em `~/projetos/wifi/scripts/revisor-nota.py` | 🤖 |
-| 14 | Entregar | `python3 rtex.py enviar <pasta>` (bot v3) e `python3 rtex.py fila <pasta>` (fila com timer do r7ex, canal em `publicar.fila`) | ⚙️ |
+| 14 | Entregar | `python3 rtex.py enviar <pasta>` (bot v3) e `python3 rtex.py fila <pasta>` (fila com timer do r7ex, canal em `publicar.fila`). Precisa do link do YouTube (portal, tópico)? Publicar direto com o yt-pubx e marcar o item da fila `feito` (regra do Nei, 05/11/2026); senão o portal pode entrar antes e ganhar o link depois | ⚙️ |
 | 15 | Comentários | nada a fazer: a isca é de opinião e ninguém espera resposta. Ler os comentários é opcional (bom para a próxima pauta). Links/fontes, se quiser, vão parados no `publicar.comentario_fixado` | Nei (opcional) |
 
 Atalho: `python3 rtex.py fazer <pasta>` = passos 4, 8, 10, 11 e 12 em sequência.
@@ -116,7 +116,7 @@ Atalho: `python3 rtex.py fazer <pasta>` = passos 4, 8, 10, 11 e 12 em sequência
 
 ## Pendências
 
-- **Comando `/rtex` do inemaccbot:** hoje é apelido do `/r7ex` e já vale como OK do avatar. **Não foi mexido.** Repontar para este motor
+- **Comando `/rtex` do inemaccbot:** rtex e r7ex são duas coisas (Nei, 05/11/2026), mas o comando ainda é apelido do `/r7ex` e já vale como OK do avatar. **Não foi mexido.** Repontar para este motor
   (ou criar outro comando) só com o Nei sabendo.
 - Registrar as decisões do rtex no kit `inema-design` (`DECISOES.md`/`HISTORICO.md`) — o orquestrador decide o número (o D18 já está duplicado lá).
 - Produção sem sessão (timer como o `producao/` do r7ex) e skill `/rtex`.
