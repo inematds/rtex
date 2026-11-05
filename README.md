@@ -18,7 +18,7 @@ Um reel vertical (9:16, 60–90 s), um tema por vídeo, com o avatar real do Nei
 (com "não é culpa sua"), "N peças" (os passos do método) com índice, uma prova com fonte, a ressalva honesta, a máxima em
 antítese depois de um silêncio e o fecho com uma **pergunta de opinião** com o cartão segurado. Objetivo: levar gente ao inema.club.
 
-Versão **1.1.0** (28/10/2026). Repo: `inematds/rtex`.
+Versão **1.2.0** (05/11/2026: `/rtex` no inemaccbot + produção sem sessão). Versão 1.1.0 em 28/10/2026. Repo: `inematds/rtex`.
 
 ---
 
@@ -45,6 +45,18 @@ Versão **1.1.0** (28/10/2026). Repo: `inematds/rtex`.
 | 15 | Comentários | nada a fazer: a isca é de opinião e ninguém espera resposta. Ler os comentários é opcional (bom para a próxima pauta). Links/fontes, se quiser, vão parados no `publicar.comentario_fixado` | Nei (opcional) |
 
 Atalho: `python3 rtex.py fazer <pasta>` = passos 4, 8, 10, 11 e 12 em sequência.
+
+**Pelo bot, sem sessão nenhuma (05/11/2026): `/rtex <tema>` no inemaccbot** (prefixo `RT`; antes era apelido do `/r7ex`).
+O comando vale como OK do avatar daquele pedido.
+
+| # | Passo | Comando / o que acontece | Quem |
+|---|---|---|---|
+| B1 | Pedido | `/rtex <tema ou tese>` no Telegram (canal e "agora" no texto; sem canal → lives11) | Nei |
+| B2 | Roteiro + portões | fase `ficha` (`prompts/bot-ficha.md`): passos 2–6 acima (checar + crítico, teto de 5 rodadas), `APROVADO_HEYGEN`, `producao/producao.py --add`; mostra o `BOT-RESUMO.md` | 🤖 |
+| B3 | Produção | timer `rtex-producao` (5 em 5 min, `producao/producao.py`): estúdio → espera o HeyGen (teto 6 h) → `fazer` (prints, avatar, cena, render, QA) → revisor `claude -p` (`producao/revisor.md`) → v3 + fila do canal; reprovou/falhou → `parado` + "Falhou" no v3; depois de corrigir: `producao.py --retomar <pasta>` | ⚙️ + 🤖 |
+| B4 | Fim no bot | fase `producao`: `producao/esperar.py <pasta>` espera `na_fila` e mostra o `BOT-FIM.md` | ⚙️ |
+
+Teste da produção sem HeyGen nem Telegram: `python3 producao/teste_producao.py`. Estado: `python3 producao/producao.py --status`.
 
 ---
 
@@ -116,10 +128,8 @@ Atalho: `python3 rtex.py fazer <pasta>` = passos 4, 8, 10, 11 e 12 em sequência
 
 ## Pendências
 
-- **Comando `/rtex` do inemaccbot:** rtex e r7ex são duas coisas (Nei, 05/11/2026), mas o comando ainda é apelido do `/r7ex` e já vale como OK do avatar. **Não foi mexido.** Repontar para este motor
-  (ou criar outro comando) só com o Nei sabendo.
 - Registrar as decisões do rtex no kit `inema-design` (`DECISOES.md`/`HISTORICO.md`) — o orquestrador decide o número (o D18 já está duplicado lá).
-- Produção sem sessão (timer como o `producao/` do r7ex) e skill `/rtex`.
+- Skill `/rtex` no terminal (a produção sem sessão e o `/rtex` do bot saíram em 05/11/2026).
 - Modo longo (110–135 s), skin claro (`papel`) e composição em HyperFrames ficam para a v2.
 - A edição publicada `2026-10-28-cinco-pecas-ia` é do formato antigo (isca PASTA + entregável, lista de 5 temas); propostas de
   pergunta e manchete para a próxima em `edicoes/2026-10-28-cinco-pecas-ia/PROPOSTA-ISCA.md` (não re-renderizar sem o OK do Nei).

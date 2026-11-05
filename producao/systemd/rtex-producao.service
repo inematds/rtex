@@ -1,0 +1,10 @@
+[Unit]
+Description=Produção do rtex: espera o avatar do HeyGen, monta, revisa (claude -p) e põe na fila do canal
+
+[Service]
+Type=oneshot
+WorkingDirectory=%h/projetos/rtex
+Environment=PATH=%h/.npm-global/bin:%h/.local/bin:/usr/local/bin:/usr/bin:/bin
+ExecStart=/usr/bin/python3 %h/projetos/rtex/producao/producao.py
+TimeoutStartSec=4h
+MemoryMax=12G
