@@ -3,7 +3,8 @@ Leia `roteiro.json` nesta pasta (só ele). Não escreva arquivo nenhum. Responda
 
 O padrão rtex (v1.1.0), um tema por vídeo, bloco a bloco:
 1. tese — o GANCHO (quadro 0 + 3 primeiros segundos). `gancho.tipo` é um de: contrario (manda parar algo que todo mundo faz),
-   perda (e se X sumisse?), estatistica_medo (com fonte na tela) ou historia_terceiro (com número). A manchete do quadro 0
+   perda (e se X sumisse?), estatistica_medo (com fonte na tela) ou historia_terceiro (com número), promessa (o ganho com garantia verdadeira, em "você") ou
+   acusacao (revela o que acontece com a pessoa, em "você"). A manchete do quadro 0
    (`tela.linhas`) tem até 6 palavras, caixa alta, uma palavra amarela (`tela.destaque`) e é MAIS AGRESSIVA que a fala: o texto puxa
    quem rola sem som, a voz suaviza e explica. Um objeto-metáfora com dano (`objeto.params.metafora`) muda a cada ~1 s nos 3 primeiros s.
    Proibido: gancho de lista ("5 peças do mês", "N coisas…"), "você sabia que…", "eu fiz…".
@@ -21,6 +22,13 @@ O padrão rtex (v1.1.0), um tema por vídeo, bloco a bloco:
 
 Regras INEMA: emoção primeiro, a verdade confirma; número só com fonte (nada inventado, nada inflado pela voz); "grátis" só se a página diz;
 público geral que usa IA no trabalho; ritmo 160–190 palavras/min; uma ideia (um tema) por reel.
+
+Teste dos 15 s (D20, Nei 12/11/2026: "não adianta estar claro e correto se não chama atenção, não mexe na dor ou desejo"):
+ouvindo só tese + autoridade + problema, um desconhecido sabe qual é o problema, que é COM ELE, por que importa e o NOME do
+método (o método do bloco 5 tem nome, dito na virada e de novo no fim)? Não → nota da tese ≤ 6 e `melhorar` com a abertura
+reescrita. Passo do método com rótulo de engenharia sem a frase comum ao lado perde nota. CTA: além da pergunta, diz que está
+tudo no inema ponto club (grátis, direto na internet, se for verdade); nunca pede palavra nem link.
+Regra única: `~/projetos/inema-design/regras/chamada.md`.
 
 Nota 0–10 por bloco: "um desconhecido rolando o feed continua aqui?" No bloco 1, nota o gancho: a manchete sozinha, sem som, faz parar?
 No bloco 9: a pergunta divide as pessoas e dá vontade de responder, mesmo sem ganhar nada?

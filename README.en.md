@@ -18,7 +18,7 @@ One vertical reel (9:16, 60–90 s), one topic per video, with Nei’s real avat
 (with “não é culpa sua” (“it’s not your fault”)), “N pieces” (the method’s steps) with an index, proof with a source, an honest caveat, the maxim in
 antithesis after a silence, and a close with an **opinion question** and the card held on screen. Goal: bring people to inema.club.
 
-Version **1.1.0** (28/10/2026). Repo: `inematds/rtex`.
+Version **1.3.0** (12/11/2026: `promessa` and `acusacao` hooks, the viewer’s pain or desire addressed as “you,” and a critic that runs the 15 s test; rule `inema-design/regras/chamada.md`). Version 1.2.0 on 05/11/2026 (`/rtex` in inemaccbot + production without a session). Version 1.1.0 on 28/10/2026. Repo: `inematds/rtex`.
 
 ---
 

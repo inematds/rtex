@@ -18,7 +18,7 @@ Un reel vertical (9:16, 60–90 s), un tema por video, con el avatar real de Nei
 (con «não é culpa sua» («no es culpa tuya»)), «N piezas» (los pasos del método) con índice, una prueba con fuente, la salvedad honesta, la máxima en
 antítesis después de un silencio y el cierre con una **pregunta de opinión** y la tarjeta sostenida. Objetivo: llevar gente a inema.club.
 
-Versión **1.1.0** (28/10/2026). Repo: `inematds/rtex`.
+Versión **1.3.0** (12/11/2026: ganchos `promessa` y `acusacao`, el dolor o deseo de quien ve, dirigido a «tú», y crítico con la prueba de los 15 s; regla `inema-design/regras/chamada.md`). Versión 1.2.0 el 05/11/2026 (`/rtex` en inemaccbot + producción sin sesión). Versión 1.1.0 el 28/10/2026. Repo: `inematds/rtex`.
 
 ---
 

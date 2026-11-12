@@ -27,7 +27,7 @@ R = Path(__file__).resolve().parent
 sys.path.insert(0, str(R))
 from rtex import cena as CENA, pecas, retempo as RT, ritmo as RITMO  # noqa: E402
 
-VERSAO = "1.2.0"
+VERSAO = "1.3.0"   # 1.3.0 = chamada D20: ganchos promessa/acusacao + crítico com teste dos 15 s (12/11/2026)
 PERFIL = Path(os.environ.get("RTEX_HEYGEN_PERFIL", Path.home() / ".cache/inemaccbot/perfil-heygen"))   # perfil compartilhado (tem trava própria)
 TEMPLATE_HEYGEN = os.environ.get("RTEX_HEYGEN_TEMPLATE", "TEMPLATE-AVATAR16")
 HEYGEN_DIR = R / "heygen"
@@ -80,7 +80,11 @@ def gatilhos(b):
 
 # ------------------------------------------------------------------ gancho e isca (v1.1.0, 28/10/2026)
 GANCHOS = {"contrario": "manda parar algo que todo mundo faz", "perda": "perda hipotética (e se X sumisse?)",
-           "estatistica_medo": "estatística de medo com fonte na tela", "historia_terceiro": "história de terceiro com número"}
+           "estatistica_medo": "estatística de medo com fonte na tela", "historia_terceiro": "história de terceiro com número",
+           # 1.3.0 (D20, Nei 12/11/2026: "não adianta estar claro e correto se não chama atenção, não mexe na dor ou desejo")
+           "promessa": "o ganho com a garantia verdadeira, em 'você' (seu agente nunca mais diz pronto sem prova)",
+           "acusacao": "revela o que está acontecendo com a pessoa, em 'você' (seu agente mente pra você)"}
+VOCE = re.compile(r"\b(voc[eê]s?|seus?|suas?|te|teu|tua)\b", re.I)
 METAFORAS = {"fio"}                              # objeto-metáfora com dano no quadro 0 (motor/palco.html, comp tese)
 LISTA = re.compile(r"\b(\d+|dois|duas|tr[eê]s|quatro|cinco|seis|sete|oito|nove|dez|n)\s+(pe[cç]as|coisas|dicas|ferramentas|jeitos|"
                    r"formas|novidades|apps|motivos|erros|truques|segredos)\b", re.I)
@@ -119,6 +123,8 @@ def checar_gancho(r, bl, tipos, erros, avisos):
             erros.append(f"{onde}: '{GANCHO_PROIBIDO.search(txt).group(0)}' é gancho proibido")
     if manchete and set(CENA.n(w) for w in manchete.split()) <= set(CENA.n(w) for w in (t0.get("fala") or "").split()):
         avisos.append("a manchete só repete a fala: o texto tem de ser mais agressivo que a voz")
+    if g in ("promessa", "acusacao") and not VOCE.search(re.split(r"(?<=[.!?])\s", t0.get("fala") or "")[0]):
+        erros.append(f"gancho '{g}' sem 'você/seu/sua' na 1ª frase da tese: fale da dor/desejo da pessoa (inema-design/regras/chamada.md)")
     if g in ("estatistica_medo", "historia_terceiro") and not t0.get("fonte"):
         erros.append(f"gancho '{g}' tem número: a tese precisa de 'fonte' (na tela já no quadro 0)")
     mf = ((t0.get("objeto") or {}).get("params") or {}).get("metafora")
