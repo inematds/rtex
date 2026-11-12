@@ -73,7 +73,7 @@ Teste da produção sem HeyGen nem Telegram: `python3 producao/teste_producao.py
   passos do método desse tema. O `checar` reprova método com 3 ou mais fontes diferentes.
 - **Estrutura (o padrão rtex), no lugar das 7 etapas do r7ex:**
   1. `tese` — o **gancho** (quadro 0 + 3 primeiros segundos), com `gancho.tipo` = `contrario` (manda parar algo que todo mundo
-     faz), `perda` (e se X sumisse?), `estatistica_medo` (com fonte na tela) ou `historia_terceiro` (com número). Proibido: lista
+     faz), `perda` (e se X sumisse?), `estatistica_medo` (com fonte na tela) `historia_terceiro` (com número), `promessa` ou `acusacao` (1.3.0: a dor ou o desejo de quem assiste, em "você"). Proibido: lista
      ("5 peças do mês", "N coisas…"), "você sabia que…", "eu fiz…". A manchete (`tela.linhas`) tem até 6 palavras, caixa alta,
      **uma** palavra amarela (`tela.destaque`) e é mais agressiva que a fala (o texto puxa quem rola sem som, a voz suaviza); já
      está pronta no quadro 0, que serve de capa. Um objeto-metáfora com dano (`objeto.params.metafora`, hoje `"fio"`: agentes ligados

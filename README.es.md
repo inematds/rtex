@@ -61,7 +61,7 @@ Atajo: `python3 rtex.py fazer <pasta>` = pasos 4, 8, 10, 11 y 12 en secuencia.
   pasos del método de ese tema. `checar` rechaza un método con 3 o más fuentes diferentes.
 - **Estructura (el estándar rtex), en lugar de las 7 etapas de r7ex:**
   1. `tese` — el **gancho** (cuadro 0 + 3 primeros segundos), con `gancho.tipo` = `contrario` (ordena dejar de hacer algo que todo el mundo
-     hace), `perda` (¿y si desapareciera X?), `estatistica_medo` (con fuente en pantalla) o `historia_terceiro` (con un número). Prohibido: lista
+     hace), `perda` (¿y si desapareciera X?), `estatistica_medo` (con fuente en pantalla), `historia_terceiro` (con número), `promessa` o `acusacao` (1.3.0: el dolor o el deseo de quien mira, expresado en segunda persona). Prohibido: lista
      («5 piezas del mes», «N cosas…»), «¿sabías que…?», «yo hice…». El titular (`tela.linhas`) tiene hasta 6 palabras, va en mayúsculas,
      **una** palabra amarilla (`tela.destaque`) y es más agresivo que el texto hablado (el texto atrae a quien desliza sin sonido, la voz suaviza); ya
      está listo en el cuadro 0, que sirve de portada. Un objeto-metáfora con daño (`objeto.params.metafora`, hoy `"fio"`: agentes conectados

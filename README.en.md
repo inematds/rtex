@@ -61,7 +61,7 @@ Shortcut: `python3 rtex.py fazer <pasta>` = steps 4, 8, 10, 11, and 12 in sequen
   method’s steps for that topic. `checar` rejects a method with 3 or more different sources.
 - **Structure (the rtex standard), replacing r7ex’s 7 steps:**
   1. `tese` — the **hook** (frame 0 + first 3 seconds), with `gancho.tipo` = `contrario` (tells people to stop doing something everyone
-     does), `perda` (what if X disappeared?), `estatistica_medo` (with source on screen), or `historia_terceiro` (with a number). Forbidden: lists
+     does), `perda` (what if X disappeared?), `estatistica_medo` (with source on screen), or `historia_terceiro` (with a number), `promessa` or `acusacao` (1.3.0: the pain or desire of the person watching, phrased as “you”). Forbidden: lists
      (“5 pieces of the month,” “N things…”), “did you know…,” “I did…”. The headline (`tela.linhas`) has up to 6 words, uppercase,
      **one** yellow word (`tela.destaque`), and is more aggressive than the spoken line (the text grabs people scrolling without sound, the voice softens it); it is
      already ready in frame 0, which serves as the cover. A metaphor object with damage (`objeto.params.metafora`, today `"fio"`: agents connected
