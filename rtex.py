@@ -82,7 +82,7 @@ def gatilhos(b):
 GANCHOS = {"contrario": "manda parar algo que todo mundo faz", "perda": "perda hipotética (e se X sumisse?)",
            "estatistica_medo": "estatística de medo com fonte na tela", "historia_terceiro": "história de terceiro com número",
            # 1.3.0 (D20, Nei 12/11/2026: "não adianta estar claro e correto se não chama atenção, não mexe na dor ou desejo")
-           "promessa": "o ganho com a garantia verdadeira, em 'você' (seu agente nunca mais diz pronto sem prova)",
+           "promessa": "o ganho com a garantia verdadeira, em 'você' (o seu agente nunca mais vai dizer pronto se não tiver provado; é isso que este método faz)",
            "acusacao": "revela o que está acontecendo com a pessoa, em 'você' (seu agente mente pra você)"}
 VOCE = re.compile(r"\b(voc[eê]s?|seus?|suas?|te|teu|tua)\b", re.I)
 METAFORAS = {"fio"}                              # objeto-metáfora com dano no quadro 0 (motor/palco.html, comp tese)

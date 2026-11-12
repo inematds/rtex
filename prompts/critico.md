@@ -28,6 +28,7 @@ ouvindo só tese + autoridade + problema, um desconhecido sabe qual é o problem
 método (o método do bloco 5 tem nome, dito na virada e de novo no fim)? Não → nota da tese ≤ 6 e `melhorar` com a abertura
 reescrita. Passo do método com rótulo de engenharia sem a frase comum ao lado perde nota. CTA: além da pergunta, diz que está
 tudo no inema ponto club (grátis, direto na internet, se for verdade); nunca pede palavra nem link.
+Frase de cartaz comprimida ("nunca mais diz pronto sem prova"), sem sujeito ou com substantivo no lugar do verbo, perde nota: a fala é frase completa de gente ("o seu agente nunca mais vai dizer pronto se não tiver provado"), com ponte ("é isso que este método faz") e convite ("vou explicar como").
 Regra única: `~/projetos/inema-design/regras/chamada.md`.
 
 Nota 0–10 por bloco: "um desconhecido rolando o feed continua aqui?" No bloco 1, nota o gancho: a manchete sozinha, sem som, faz parar?
