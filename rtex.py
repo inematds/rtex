@@ -109,8 +109,10 @@ def checar_gancho(r, bl, tipos, erros, avisos):
         return
     t0 = bl[0]; tela = t0.get("tela") or {}; linhas = tela.get("linhas") or []
     manchete = " ".join(linhas)
-    if not linhas or len(manchete.split()) > 6:
-        erros.append(f"manchete do quadro 0 com {len(manchete.split())} palavras (máx. 6: ela é a capa e puxa quem rola sem som)")
+    if not linhas or len(manchete.split()) > 9:   # 1.3.0 (Nei 12/11/2026): clara e completa; era ≤ 6
+        erros.append(f"manchete do quadro 0 com {len(manchete.split())} palavras (máx. 9: a informação inteira, clara, entendida sem som)")
+    elif len(manchete.split()) > 6:
+        avisos.append(f"manchete com {len(manchete.split())} palavras: confira na folha se cabe no quadro 0")
     if any(l != l.upper() for l in linhas):
         erros.append("manchete do quadro 0 em CAIXA ALTA")
     dest = tela.get("destaque") or ""
