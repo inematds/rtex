@@ -7,7 +7,29 @@
  "marca": "INEMA · UM AGENTE SÓ",
  "gancho": {
   "tipo": "contrario",
-  "nota": "a manchete manda parar (mais agressiva); a fala suaviza e explica o porquê"
+  "nota": "a manchete manda parar (mais agressiva); a fala suaviza e explica o porquê",
+  "loop": "a autoridade promete 'no fim eu te conto por que a IA erra'; a máxima fecha ('ela não é burra, só não sabe o teu trabalho')",
+  "referencias": [
+   {
+    "canal": "<canal 1 (views)>",
+    "titulo": "<título do vídeo>",
+    "abertura": "<1ª fala, 0–35 s, pela legenda automática>",
+    "gatilho": "número antes/depois"
+   },
+   {
+    "canal": "<canal 2>",
+    "titulo": "<título>",
+    "abertura": "<1ª fala>",
+    "gatilho": "perda concreta"
+   },
+   {
+    "canal": "<canal 3>",
+    "titulo": "<título>",
+    "abertura": "abre pedindo like (fraco)",
+    "gatilho": "nenhum"
+   }
+  ],
+  "referencias_nota": "1.4.0 (Retenção): 3–5 vídeos de quem fala do tema no YouTube (yt-dlp --flat-playlist \"ytsearch15:<termo>\" + legenda automática). Régua do crítico; número de terceiro não entra no roteiro."
  },
  "isca": {
   "tipo": "opiniao",
@@ -95,7 +117,7 @@
   },
   {
    "tipo": "autoridade",
-   "fala": "A própria Anthropic, que faz o Claude, organiza de outro jeito: um agente só e uma pasta por tarefa.",
+   "fala": "A própria Anthropic, que faz o Claude, organiza de outro jeito: um agente só e uma pasta por tarefa. No fim eu te conto por que a IA erra.",
    "objeto": {
     "comp": "selo_prova",
     "params": {
@@ -246,7 +268,7 @@
   },
   {
    "tipo": "ressalva",
-   "fala": "Mas atenção: a pasta não pensa por você, e montar a primeira dá trabalho. Por isso, comece por uma tarefa só, a que mais te irrita.",
+   "fala": "Mas atenção: a pasta não pensa por você, e montar a primeira dá trabalho. Comece por uma tarefa só, a que mais te irrita.",
    "objeto": {
     "comp": "ressalva",
     "params": {
@@ -282,7 +304,7 @@
   },
   {
    "tipo": "cta",
-   "fala": "Eu já escolhi o meu lado: um agente só. E você? Um agente só ou um para cada tarefa? Comenta um ou vários.",
+   "fala": "Toda semana tem kit novo, grátis, no inema ponto club. Eu já escolhi o meu lado: um agente só. E você? Um agente só ou um para cada tarefa? Comenta um ou vários.",
    "objeto": {
     "comp": "isca",
     "params": {

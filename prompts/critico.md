@@ -19,6 +19,17 @@ O padrão rtex (v1.1.0), um tema por vídeo, bloco a bloco:
    (`isca.tensao`) está plantada no quadro 0 e volta no fim. Nada é entregue a quem comenta: nada de "te mando", "link na bio",
    "comenta X que…", nem "está no fixado" como recompensa. O Nei não precisa responder ninguém.
 
+Retenção (1.4.0, Nei 13/11/2026: "aplica"):
+- **Régua das referências:** `gancho.referencias` (quando houver) são 3–5 vídeos de quem fala do tema no YouTube, com
+  `titulo`, `abertura` (1ª fala, 0–35 s) e `gatilho`. Ache a mais forte e diga se o nosso gancho (manchete + fala da tese)
+  é PELO MENOS TÃO FORTE quanto ela. Mais fraco → nota da tese ≤ 7 e `melhorar` com qual referência ganha, por quê e uma
+  abertura nossa melhor. Copiar fala ou número de terceiro não é melhorar: número de terceiro não entra no roteiro. Diga no
+  `resumo` se o gancho ganha ou perde da melhor referência. Sem `referencias`, julgue sem a régua (não é bloqueio).
+- **Loop do fim:** a tese ou a autoridade prometem o que a máxima entrega ("no fim eu te conto…"), e a máxima cumpre. Sem
+  promessa → nota da autoridade ≤ 7 e `melhorar` com a frase; promessa que a máxima não cumpre → nota da máxima ≤ 6.
+- **CTA de pertencimento:** antes da isca, uma frase curta de comunidade com o inema ponto club ("toda semana tem kit
+  novo, grátis, no inema ponto club"); a isca de opinião continua depois. Sem ela → nota do CTA ≤ 7.
+
 Regras INEMA: emoção primeiro, a verdade confirma; número só com fonte (nada inventado, nada inflado pela voz); "grátis" só se a página diz;
 público geral que usa IA no trabalho; ritmo 160–190 palavras/min; uma ideia (um tema) por reel.
 

@@ -18,7 +18,7 @@ Um reel vertical (9:16, 60–90 s), um tema por vídeo, com o avatar real do Nei
 (com "não é culpa sua"), "N peças" (os passos do método) com índice, uma prova com fonte, a ressalva honesta, a máxima em
 antítese depois de um silêncio e o fecho com uma **pergunta de opinião** com o cartão segurado. Objetivo: levar gente ao inema.club.
 
-Versão **1.3.0** (12/11/2026: ganchos `promessa` e `acusacao`, a dor ou o desejo de quem assiste em "você", e crítico com o teste dos 15 s; regra `inema-design/regras/chamada.md`). Versão 1.2.0 em 05/11/2026 (`/rtex` no inemaccbot + produção sem sessão). Versão 1.1.0 em 28/10/2026. Repo: `inematds/rtex`.
+Versão **1.4.0** (13/11/2026: retenção — pesquisa de ganchos no YouTube em `gancho.referencias`, CTA de pertencimento antes da isca e loop do fim avaliado pelo crítico). Versão 1.3.0 (12/11/2026: ganchos `promessa` e `acusacao`, a dor ou o desejo de quem assiste em "você", e crítico com o teste dos 15 s; regra `inema-design/regras/chamada.md`). Versão 1.2.0 em 05/11/2026 (`/rtex` no inemaccbot + produção sem sessão). Versão 1.1.0 em 28/10/2026. Repo: `inematds/rtex`.
 
 ---
 
@@ -29,10 +29,10 @@ Versão **1.3.0** (12/11/2026: ganchos `promessa` e `acusacao`, a dor ou o desej
 | # | Passo | Comando / o que acontece | Quem |
 |---|---|---|---|
 | 1 | Pedido | o Nei diz o tema (ou as pautas), a página do inema.club e o canal | Nei |
-| 2 | Pesquisa e fontes | conferir cada número na fonte (estrelas do GitHub no dia, matéria com data) e anotar em `fontes[]` com `valor` e `verificado_em` | 🧠 |
+| 2 | Pesquisa e fontes | conferir cada número na fonte (estrelas do GitHub no dia, matéria com data) e anotar em `fontes[]` com `valor` e `verificado_em`; **ganchos de quem fala do tema** (1.4.0): títulos com `yt-dlp --flat-playlist "ytsearch15:<termo>"` e a 1ª fala (0–35 s) pela legenda automática → `gancho.referencias` (3–5 `{canal, titulo, abertura, gatilho}`; número de terceiro não entra no roteiro, só serve de régua) | 🧠 |
 | 3 | Roteiro | `python3 rtex.py novo <slug>` e escrever `roteiro.json`: um tema, o `gancho`, os blocos do padrão (abaixo), a fala por extenso, o objeto de cada bloco, a `isca` de opinião | 🧠 |
-| 4 | Validador | `python3 rtex.py checar <pasta>`: gancho (tipo, manchete ≤ 6 palavras em caixa alta com 1 palavra amarela, sem lista/"você sabia"/"eu fiz", objeto-metáfora), prova ≤ 20 s, problema com absolvição logo depois, um tema (método sem 3+ fontes diferentes), ordem dos blocos, índice = método, fala sem algarismo nem "!", ≥ 8 palavras por bloco, gatilhos na fala, fonte em todo número, isca de opinião (abaixo), duração estimada 60–90 s | ⚙️ |
-| 5 | Crítico | `python3 rtex.py critico <pasta>` (`prompts/critico.md`): nota por bloco + bloqueios; passa sem bloqueio, tese ≥ 8, média ≥ 7,5, nenhum < 6 | 🤖 |
+| 4 | Validador | `python3 rtex.py checar <pasta>`: gancho (tipo, manchete ≤ 6 palavras em caixa alta com 1 palavra amarela, sem lista/"você sabia"/"eu fiz", objeto-metáfora), prova ≤ 20 s, problema com absolvição logo depois, um tema (método sem 3+ fontes diferentes), ordem dos blocos, índice = método, fala sem algarismo nem "!", ≥ 8 palavras por bloco, gatilhos na fala, fonte em todo número, isca de opinião (abaixo), duração estimada 60–90 s; **avisos** 1.4.0: sem `gancho.referencias` (3–5) e CTA sem "inema ponto club" ou sem frase de comunidade antes da pergunta | ⚙️ |
+| 5 | Crítico | `python3 rtex.py critico <pasta>` (`prompts/critico.md`): nota por bloco + bloqueios; passa sem bloqueio, tese ≥ 8, média ≥ 7,5, nenhum < 6; compara o gancho com a melhor referência, cobra o loop do fim (tese/autoridade prometem o que a máxima entrega) e a frase de comunidade no CTA (1.4.0) | 🤖 |
 | 6 | OK do avatar | `avatar/APROVADO_HEYGEN` com a frase do Nei para ESTA produção (um avatar por reel) | 🧠 |
 | 7 | Estúdio | `python3 rtex.py avatar-enviar <pasta>`: a fala vai ao estúdio do HeyGen (assinatura, tela `:99`), grava `avatar/video_id.txt` | ⚙️ |
 | 8 | Prints | `python3 rtex.py prints <pasta>`: prints reais das páginas do GitHub (`ferramentas/print.mjs`) e logos; LER os prints | ⚙️ |
@@ -85,10 +85,15 @@ Teste da produção sem HeyGen nem Telegram: `python3 producao/teste_producao.py
   6. `prova` — um fato com fonte que confirma;
   7. `ressalva` — limitações honestas faladas, legíveis (≥ 40 px), convertidas em instrução;
   8. `maxima` — antítese curta, com ~0,6–0,75 s de silêncio antes (voz e trilha somem);
-  9. `cta` — **isca de opinião** (v1.1.0, pedido do Nei em 28/10/2026: a isca não pode obrigar o Nei a responder cada comentário):
+  9. `cta` — primeiro uma frase de **comunidade** (1.4.0: "Toda semana tem kit novo, grátis, no inema ponto club."), depois a **isca de opinião** (v1.1.0, pedido do Nei em 28/10/2026: a isca não pode obrigar o Nei a responder cada comentário):
      uma pergunta forte, emocional e com lado, ligada à tese, que a pessoa responde com a própria opinião. O Nei diz o lado dele
      antes, para provocar. O cartão fica 9 s depois da última palavra com a pergunta, as opções e o gesto de comentar encenado
      (a mão digita uma opção e aperta Publicar). **Nada é entregue a quem comenta.**
+- **Loop do fim (1.4.0):** a `tese` ou a `autoridade` prometem o que a `maxima` entrega ("no fim eu te conto por que a IA
+  erra" → "ela não é burra, só não sabe o teu trabalho"). Quem promete segura até o fim; o crítico avalia.
+- **Pesquisa de ganchos (1.4.0):** `gancho.referencias` = 3–5 `{canal, titulo, abertura, gatilho}` de quem fala do tema no
+  YouTube. É a régua do crítico (o nosso gancho tem de ser pelo menos tão forte quanto o melhor) e fica só no `roteiro.json`:
+  número e nome de terceiro não vão para fala, título ou descrição.
 - **A isca no `roteiro.json`:**
   ```json
   "isca": {"tipo": "opiniao", "pergunta": "Um agente só ou um para cada tarefa?", "opcoes": ["UM", "VÁRIOS"],

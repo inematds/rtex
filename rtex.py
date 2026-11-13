@@ -6,7 +6,8 @@ história de terceiro; manchete curta + objeto com dano) → prova com fonte ou 
 Base copiada do r7ex v1.1.0 (ritmo, retempo, estúdio, render); composição própria (motor/palco.html). Ver README.md.
 
   python3 rtex.py novo <slug>             cria edicoes/<data>-<slug>/roteiro.json a partir de modelo/roteiro.json
-  python3 rtex.py checar <pasta>          validador do roteiro (gancho, estrutura, fala, isca de opinião, fontes, gatilhos)
+  python3 rtex.py checar <pasta>          validador do roteiro (gancho, estrutura, fala, isca de opinião, fontes, gatilhos;
+                                          avisa sem gancho.referencias e sem frase de comunidade no CTA, 1.4.0)
   python3 rtex.py critico <pasta>         crítico de viralidade (claude -p, assinatura): gancho ≥ 8, média ≥ 7,5, nenhuma < 6
   python3 rtex.py avatar-enviar <pasta>   manda a fala ao estúdio do HeyGen (precisa de avatar/APROVADO_HEYGEN)
   python3 rtex.py avatar-conferir <pasta> uma conferência no HeyGen (leitura): pronto | processando
@@ -27,7 +28,7 @@ R = Path(__file__).resolve().parent
 sys.path.insert(0, str(R))
 from rtex import cena as CENA, pecas, retempo as RT, ritmo as RITMO  # noqa: E402
 
-VERSAO = "1.3.0"   # 1.3.0 = chamada D20: ganchos promessa/acusacao + crítico com teste dos 15 s (12/11/2026)
+VERSAO = "1.4.0"   # 1.4.0 = retenção: gancho.referencias + CTA de pertencimento (avisos) + loop do fim no crítico (13/11/2026); 1.3.0 = chamada D20: ganchos promessa/acusacao + crítico com teste dos 15 s (12/11/2026)
 PERFIL = Path(os.environ.get("RTEX_HEYGEN_PERFIL", Path.home() / ".cache/inemaccbot/perfil-heygen"))   # perfil compartilhado (tem trava própria)
 TEMPLATE_HEYGEN = os.environ.get("RTEX_HEYGEN_TEMPLATE", "TEMPLATE-AVATAR16")
 HEYGEN_DIR = R / "heygen"
@@ -211,6 +212,32 @@ def checar_isca(r, bl, erros, avisos):
             erros.append(f"bloco {k}: a fala não manda ao comentário fixado (vira recompensa por comentar)")
 
 
+# ------------------------------------------------------------------ retenção (1.4.0, Nei 13/11/2026: "aplica")
+REF_CAMPOS = ("canal", "titulo", "abertura", "gatilho")
+PERTENCE = re.compile(r"\btoda\s+semana\b|\bcomunidade\b|\ba\s+gente\b|\bjunt[oa]s?\b|\bfaz\s+parte\b", re.I)
+
+
+def checar_retencao(r, bl, avisos):
+    """só AVISA. gancho.referencias = 3–5 {canal, titulo, abertura, gatilho} de quem fala do tema no YouTube (régua do
+    crítico; número de terceiro não entra no roteiro). CTA: frase de comunidade com o inema ponto club ANTES da isca."""
+    refs = (r.get("gancho") or {}).get("referencias")
+    if not refs:
+        avisos.append("gancho sem 'referencias' (3–5 {canal, titulo, abertura, gatilho} de quem fala do tema no YouTube: "
+                      "yt-dlp --flat-playlist \"ytsearch15:<termo>\" + legenda automática 0–35 s; README passo 2)")
+    elif not isinstance(refs, list) or len(refs) < 3:
+        avisos.append(f"gancho.referencias com {len(refs) if isinstance(refs, list) else 0} item(ns): levante 3–5")
+    else:
+        for i, x in enumerate(refs, 1):
+            falta = [k for k in REF_CAMPOS if not (isinstance(x, dict) and str(x.get(k) or "").strip())]
+            if falta:
+                avisos.append(f"gancho.referencias[{i}] sem {', '.join(falta)}")
+    cta = (bl[-1].get("fala") or "") if bl else ""
+    if "inema ponto club" not in cta:
+        avisos.append("CTA sem 'inema ponto club' (frase de comunidade antes da isca: 'toda semana tem kit novo, grátis, no inema ponto club')")
+    elif not PERTENCE.search(cta.split("?")[0]):
+        avisos.append("CTA sem frase de comunidade antes da pergunta ('toda semana tem kit novo, grátis, no inema ponto club')")
+
+
 # ------------------------------------------------------------------ comandos
 def cmd_novo(slug):
     p = R / "edicoes" / f"{dt.date.today().isoformat()}-{slug}"
@@ -305,6 +332,7 @@ def cmd_checar(pasta):
         avisos.append(f"{palavras} palavras (curto: 160–210)")
     checar_gancho(r, bl, tipos, erros, avisos)
     checar_isca(r, bl, erros, avisos)
+    checar_retencao(r, bl, avisos)
     isca = (r.get("isca") or {}).get("pergunta", "")
     mx = next((b for b in bl if b.get("tipo") == "maxima"), None)
     if mx:

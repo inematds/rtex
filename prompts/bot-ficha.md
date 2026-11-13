@@ -31,6 +31,13 @@ exemplo, aprovado) e as linhas de `FALHAS.md` (o que já quebrou).
 1. **Plano:** quem assiste, o que quer, o gancho com número/fato e fonte, a página de destino no inema.club.
    Confira cada número na fonte, no dia, e anote em `fontes[]` com `valor` e `verificado_em` (data de hoje).
    Nunca invente número; "grátis" só se a página disser.
+   **Pesquisa de ganchos (1.4.0, Retenção):** antes do gancho, levante quem fala do tema no YouTube:
+   `yt-dlp --flat-playlist --print "%(channel)s | %(view_count)s | %(title)s | %(id)s" "ytsearch15:<termo>"` (PT e EN)
+   e, nos 3–5 mais vistos e próximos do tema, a 1ª fala (0–35 s) pela legenda automática
+   (`yt-dlp --skip-download --write-auto-subs --sub-langs "pt.*,en.*" --sub-format vtt -o "/tmp/rtex-ganchos/%(id)s" <url>`).
+   Grave em `gancho.referencias` (3–5 `{canal, titulo, abertura, gatilho}`). O nosso gancho tem de ser pelo menos tão
+   forte quanto o melhor. Número de terceiro NÃO entra no roteiro (é só régua); o nome do canal fica só nesse campo,
+   nunca em fala, título, descrição ou contexto.
    **Um tema por vídeo.** Se o pedido trouxer vários temas, faça a edição só do mais forte e, no resumo,
    proponha os outros (um `/rtex` para cada, com a manchete sugerida).
 2. `python3 rtex.py novo <slug>` → `edicoes/<data>-<slug>`. O slug é curto e SEM data (o comando já põe a
@@ -38,7 +45,9 @@ exemplo, aprovado) e as linhas de `FALHAS.md` (o que já quebrou).
 3. Reescreva o `roteiro.json` inteiro no padrão do modelo: `tema`, `gancho` (tipo `contrario` | `perda` |
    `estatistica_medo` | `historia_terceiro` | `promessa` | `acusacao` — estes dois com a dor/desejo da pessoa em "você" na 1ª frase; regra `~/projetos/inema-design/regras/chamada.md`: nos 15 s o problema, que é com ela, por que importa e o NOME do método), `isca` de opinião (pergunta com lado, opções de 1 palavra,
    nenhuma promessa de entrega), `fontes`, `trocas` (grafia de nomes e números na legenda), `ritmo.pausa_antes`
-   (parte 1-based do bloco da máxima) e os blocos do padrão. Fala por extenso, sem algarismo (o avatar lê errado).
+   (parte 1-based do bloco da máxima) e os blocos do padrão. **Loop do fim:** a tese ou a autoridade prometem o que a
+   máxima entrega ("no fim eu te conto…"). **CTA:** primeiro a frase de comunidade ("Toda semana tem kit novo, grátis,
+   no inema ponto club.", grátis só se for verdade), depois o lado do Nei e a isca de opinião. Fala por extenso, sem algarismo (o avatar lê errado).
    Em `pedido` ponha o texto do Nei com a data: `'Nei, <dd/mm/aaaa> pelo /rtex no bot ({{ref}}): "<pedido>"'`.
 4. **Canal e prazo** (bloco `publicar`, mais `canal` no topo com o mesmo valor):
    - `publicar.fila` = o canal que o pedido nomear (`lives1`, `lives4`…; nomes como "INEMA TDS" ou
