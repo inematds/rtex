@@ -1,3 +1,7 @@
+## 1.6.1 — 17/11/2026
+
+Crítico pelo `producao/ia.yaml` (etapa `critico`, Claude opus-5-5/low com reserva Codex gpt-6.1-sol/medium), sem `claude -p` fixo. Trava de cota compartilhada no `ia_motor.py` (mesmo executor do r7ex 1.7.6): revisor sem cota espera sem contar erro; chamadas automáticas sem sessão no disco. 10 contratos de IA e 16 conferências passaram; crítico real no Claude.
+
 ## 1.5.1 — 15/11/2026
 
 Isolar a variável de configuração por projeto e remover chaves herdadas dos CLIs; a seleção por etapa continua explícita. Versões dos manifestos alinhadas.

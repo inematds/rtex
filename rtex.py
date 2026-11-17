@@ -8,7 +8,7 @@ Base copiada do r7ex v1.1.0 (ritmo, retempo, estúdio, render); composição pr�
   python3 rtex.py novo <slug>             cria edicoes/<data>-<slug>/roteiro.json a partir de modelo/roteiro.json
   python3 rtex.py checar <pasta>          validador do roteiro (gancho, estrutura, fala, isca de opinião, fontes, gatilhos;
                                           avisa sem gancho.referencias e sem frase de comunidade no CTA, 1.4.0)
-  python3 rtex.py critico <pasta>         crítico de viralidade (claude -p, assinatura): gancho ≥ 8, média ≥ 7,5, nenhuma < 6
+  python3 rtex.py critico <pasta>         crítico de viralidade (producao/ia.yaml): gancho ≥ 8, média ≥ 7,5, nenhuma < 6
   python3 rtex.py avatar-enviar <pasta>   manda a fala ao estúdio do HeyGen (precisa de avatar/APROVADO_HEYGEN)
   python3 rtex.py avatar-conferir <pasta> uma conferência no HeyGen (leitura): pronto | processando
   python3 rtex.py avatar <pasta> [--de <mp4>]   espera/baixa o avatar (ou reaproveita um mp4) + tempos + ritmo
@@ -28,7 +28,7 @@ R = Path(__file__).resolve().parent
 sys.path.insert(0, str(R))
 from rtex import cena as CENA, pecas, retempo as RT, ritmo as RITMO  # noqa: E402
 
-VERSAO = "1.5.1"   # 1.4.0 = retenção: gancho.referencias + CTA de pertencimento (avisos) + loop do fim no crítico (13/11/2026); 1.3.0 = chamada D20: ganchos promessa/acusacao + crítico com teste dos 15 s (12/11/2026)
+VERSAO = "1.6.1"   # 1.6.1 = crítico pelo ia.yaml + trava de cota (17/11/2026); 1.4.0 = retenção: gancho.referencias + CTA de pertencimento (avisos) + loop do fim no crítico (13/11/2026); 1.3.0 = chamada D20: ganchos promessa/acusacao + crítico com teste dos 15 s (12/11/2026)
 PERFIL = Path(os.environ.get("RTEX_HEYGEN_PERFIL", Path.home() / ".cache/inemaccbot/perfil-heygen"))   # perfil compartilhado (tem trava própria)
 TEMPLATE_HEYGEN = os.environ.get("RTEX_HEYGEN_TEMPLATE", "TEMPLATE-AVATAR16")
 HEYGEN_DIR = R / "heygen"
@@ -361,22 +361,30 @@ def cmd_checar(pasta):
 
 
 def cmd_critico(pasta):
-    """crítico de viralidade (claude -p pela assinatura): nota por bloco + bloqueios; grava critica.json"""
+    """crítico de viralidade (producao/ia.yaml, etapa critico): nota por bloco + bloqueios; grava critica.json"""
     import hashlib
     p, r = roteiro(pasta)
     h = hashlib.sha1((p / "roteiro.json").read_bytes()).hexdigest()
     arq = p / "critica.json"
     c = json.loads(arq.read_text()) if arq.exists() else {}
     if c.get("hash") != h:
+        # 17/11/2026: motor/modelo/esforço de producao/ia.yaml (etapa critico), com trava de cota e reserva declarada.
+        sys.path.insert(0, str(R / "producao"))
+        from ia_motor import executar, CotaEsgotada
         pedido = (R / "prompts/critico.md").read_text()
-        res = subprocess.run(["claude", "-p", "--output-format", "json", "--allowedTools", "Read", "--", pedido],
-                             cwd=p, capture_output=True, text=True, timeout=900, stdin=subprocess.DEVNULL)
+        regra = Path.home() / "projetos/inema-design/regras/chamada.md"
+        anexos = [p / "roteiro.json"] + ([regra] if regra.is_file() else [])
         try:
-            txt = json.loads(res.stdout)["result"].strip()
+            txt = executar("critico", pedido, p, arquivos=anexos)
+        except CotaEsgotada as e:
+            falha(f"crítico sem cota: {e}. NÃO reescreva o roteiro: ele não foi julgado; rode de novo depois.")
+        except Exception as e:
+            falha(f"crítico não rodou: {str(e)[:200]}")
+        try:
             c = json.loads(txt[txt.index("{"): txt.rindex("}") + 1])
             c["notas"] = [int(x["nota"]) for x in sorted(c["blocos"], key=lambda x: x["n"])]
         except Exception as e:
-            falha(f"crítico não respondeu direito: {str(e)[:200]} {res.stderr[-200:]}")
+            falha(f"crítico não respondeu direito: {str(e)[:200]}")
         c["hash"] = h
         arq.write_text(json.dumps(c, ensure_ascii=False, indent=1))
     n = c["notas"]

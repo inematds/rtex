@@ -37,3 +37,14 @@ etapas:
     capacidade: visao
     timeout: 900
     max_tokens: 12000
+  # critico: nota de viralidade do roteiro (rtex.py critico). Texto: o roteiro.json vai anexado ao pedido.
+  # Principal = o que o crítico usava por herança (Claude, opus, low). alternativa: SÓ com cota do principal esgotada.
+  critico:
+    tipo: assinatura
+    motor: claude
+    modelo: claude-opus-5-5
+    esforco: low
+    capacidade: texto
+    timeout: 900
+    max_tokens: 12000
+    alternativa: {motor: codex, modelo: gpt-6.1-sol, esforco: medium}
