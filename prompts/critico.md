@@ -41,6 +41,15 @@ tudo no inema ponto club (grátis, direto na internet, se for verdade); nunca pe
 Frase de cartaz comprimida ("nunca mais diz pronto sem prova"), sem sujeito ou com substantivo no lugar do verbo, perde nota: a fala é frase completa de gente ("o seu agente nunca mais vai dizer pronto se não tiver provado"), com ponte ("é isso que este método faz") e convite ("vou explicar como").
 Regra única: `~/projetos/inema-design/regras/chamada.md`.
 
+Fluência e explicação (D26, Nei 17/11/2026: "parece não tem fluência, não parece natural eu falando"; "explicação tem
+que ser impactante. imagem também"):
+- **Fala de gente:** leia em voz alta. Frase telegráfica ("Cada agente lê tudo, fala, refaz."), lista de palavras soltas
+  por vírgula ou frase de cartaz = nota da peça ≤ 6 e `melhorar` com a frase ligada, do jeito que o Nei fala. Caber no
+  tamanho não justifica fala picotada.
+- **Explicação que se vê:** a peça que explica traz uma comparação do dia a dia que um gestor sem IA entende ("dez
+  pessoas na mesma reunião lendo o mesmo relatório") e uma tela que a mostra. Abstração sem exemplo = nota ≤ 6; imagem
+  decorativa ou metáfora que pede para pensar = nota ≤ 7 (teste do leigo vale para toda imagem).
+
 Nunca calmo (D25, Nei 17/11/2026: "nenhum vídeo tem que sair calmo; r7ex ou rtex não são vídeos calmos, são provocativos,
 são virais e têm que ter gancho, fonte de imagem e de narração"):
 - **Pressão na voz:** leia a fala da tese em voz alta. Ela MANDA, ACUSA ou CONTRADIZ com a convicção do Nei? Tom de notícia

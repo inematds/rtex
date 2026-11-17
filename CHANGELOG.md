@@ -1,3 +1,7 @@
+## 1.9.2 — 17/11/2026
+
+Fluência (D26, Nei 17/11/2026: "parece não tem fluência, não parece natural eu falando"; "explicação tem que ser impactante. imagem também"). Caso: r7ex do enxame v2 (lives4), com avatar esticado 7%, quadro congelado e fala telegráfica. `rtex/ritmo.py` v2: k = 1 (velocidade natural do HeyGen), sem pausa inserida (`ritmo.pausa_congelada: true` religa); `motor/mix.sh`: o rosto sai 0,5 s depois da última palavra e o terço de baixo vira o fecho da marca ("inema.club · toda semana tem kit novo"), em vez de 9 s de rosto parado. Crítico: fala de gente (frase telegráfica ≤ 6) e explicação com comparação concreta + tela que a mostra. Revisor: fecho sem o rosto é o padrão. Testado: remix de `2026-11-12-nivel-escada` com o fecho novo conferido no quadro.
+
 ## 1.8.2 — 17/11/2026
 
 Nunca calmo (D25, Nei 17/11/2026: "nenhum vídeo tem que sair calmo; r7ex ou rtex não são vídeos calmos, são provocativos, são virais e têm que ter gancho, fonte de imagem e de narração"). Caso: r7ex do enxame (lives4) abriu com "Você pensou em montar um enxame de agentes? A Anthropic mediu…" e passou com 8 no crítico. `checar_tom`: abertura morna reprova; `posicao` (opinião do Nei) exige gancho contrario/acusacao e tese afirmativa; aviso sem `posicao`; roteiro com avatar gravado só recebe aviso. Capa com teste do leigo no pedido ao Codex; crítico com nota de pressão e teste do leigo; revisor com "nunca calmo" como sugestão. Regra comum: `inema-design/regras/chamada.md` §2b.

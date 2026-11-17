@@ -21,10 +21,20 @@ a, b = z.get("ini"), z.get("fim")
 print("0.2" if a is None else f"'0.2*clip(max(({a:.3f}-t)/0.08,(t-{b:.3f})/0.08),0,1)':eval=frame")
 PY
 )
+# D26 (17/11/2026): rosto nunca congelado — some 0,5 s depois da última palavra (a cauda do ritmo é quadro parado)
+OCULTA=$(python3 - "$E/avatar/ritmo.json" <<'PY'
+import json, sys, os
+r = json.load(open(sys.argv[1])) if os.path.exists(sys.argv[1]) else {}
+print(f"{r['ultima_palavra'] + .5:.3f}" if r.get("cauda", 0) > 1.5 and r.get("ultima_palavra") else "")
+PY
+)
+EN=""; [ -n "$OCULTA" ] && EN=":enable='lte(t,$OCULTA)'"
+# no lugar do rosto, o terço de baixo vira o fecho da marca (sem ele ficava um bloco preto)
+FIM=""; [ -n "$OCULTA" ] && FIM=",drawbox=x=0:y=1280:w=1080:h=640:color=0x0c0c10@1:t=fill:enable='gt(t,$OCULTA)',drawbox=x=440:y=1470:w=200:h=8:color=0xFACC15@1:t=fill:enable='gt(t,$OCULTA)',drawtext=fontfile=$FONTE:text='inema.club':x=(w-text_w)/2:y=1520:fontsize=104:fontcolor=0xFACC15:enable='gt(t,$OCULTA)',drawtext=fontfile=$FONTE:text='toda semana tem kit novo':x=(w-text_w)/2:y=1660:fontsize=42:fontcolor=0xe9e9ee:enable='gt(t,$OCULTA)'"
 # rosto: recorte 1620x960 (cabeça inteira; 1350x800 cortava a testa, 28/10/2026) do 1920x1080 (cabeça e ombros), escala 1080x640
 ffmpeg -v error -y -i "$E/build/palco.mp4" -i "$A" -stream_loop -1 -i "$MUSICA" -filter_complex \
-  "[1:v]crop=1620:960:150:0,scale=1080:640,setsar=1,fps=30[av];[0:v][av]overlay=0:1280:shortest=1,
-   drawbox=x=40:y=1846:w=470:h=46:color=0x0c0c10@0.85:t=fill,drawtext=fontfile=$FONTE:textfile=$TAG:x=58:y=1858:fontsize=22:fontcolor=0xe9e9ee[v];
+  "[1:v]crop=1620:960:150:0,scale=1080:640,setsar=1,fps=30[av];[0:v][av]overlay=0:1280:shortest=1$EN,
+   drawbox=x=40:y=1846:w=470:h=46:color=0x0c0c10@0.85:t=fill$EN,drawtext=fontfile=$FONTE:textfile=$TAG:x=58:y=1858:fontsize=22:fontcolor=0xe9e9ee$EN$FIM[v];
    [1:a]aresample=48000,loudnorm=I=-14:TP=-1.5:LRA=11,aresample=48000,asplit=2[voz][sc];[2:a]volume=$VOLM,aresample=48000[m];
    [m][sc]sidechaincompress=threshold=0.03:ratio=8:attack=20:release=300,afade=t=out:st=$FADE:d=1.6[md];
    [voz][md]amix=inputs=2:duration=first:normalize=0[a]" \

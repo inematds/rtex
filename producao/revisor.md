@@ -35,8 +35,8 @@ SUGESTÃO (o vídeo segue; liste em `sugestoes`, uma frase cada com o quadro/tem
   dizendo o quadro mais morno e o que faltou.
 
 NÃO reprove por:
-- Os últimos ~9 s parados no cartão da isca, sem legenda, com a mão digitando uma opção e publicando: é o fecho segurado.
-- Um silêncio curto (~0,6–0,9 s) antes da máxima, com o quadro parado: é a pausa de propósito.
+- Os últimos ~9 s no cartão da isca, sem legenda, com a mão digitando uma opção e publicando, e o terço de baixo com
+  "inema.club" no lugar do rosto (D26, 17/11/2026: o rosto sai 0,5 s depois da última palavra): é o fecho segurado.
 - A pílula amarela das opções da isca: é a única superfície amarela permitida.
 - Itens do índice em cinza que acendem um a um (é a animação), legenda mostrando só parte da frase (karaokê).
 - Gosto pessoal de cor ou enquadramento que segue o padrão (preto, amarelo racionado, vermelho só no erro).

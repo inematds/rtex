@@ -29,7 +29,7 @@ R = Path(__file__).resolve().parent
 sys.path.insert(0, str(R))
 from rtex import cena as CENA, pecas, retempo as RT, ritmo as RITMO  # noqa: E402
 
-VERSAO = "1.8.2"   # 1.8.2 = nunca calmo D25: abertura morna reprova, posicao do Nei, teste do leigo na capa e no crítico (17/11/2026); 1.7.2 = cena da capa em 36–58%, acima da legenda (17/11/2026); 1.7.1 = capa chocante do Codex no quadro 0, com prova e trava no render (17/11/2026); 1.6.1 = crítico pelo ia.yaml + trava de cota (17/11/2026); 1.4.0 = retenção: gancho.referencias + CTA de pertencimento (avisos) + loop do fim no crítico (13/11/2026); 1.3.0 = chamada D20: ganchos promessa/acusacao + crítico com teste dos 15 s (12/11/2026)
+VERSAO = "1.9.2"   # 1.9.2 = D26 fluência: ritmo sem esticar nem congelar, rosto sai após a última palavra (fecho da marca no terço de baixo), crítico com fala de gente + explicação concreta (17/11/2026); 1.8.2 = nunca calmo D25: abertura morna reprova, posicao do Nei, teste do leigo na capa e no crítico (17/11/2026); 1.7.2 = cena da capa em 36–58%, acima da legenda (17/11/2026); 1.7.1 = capa chocante do Codex no quadro 0, com prova e trava no render (17/11/2026); 1.6.1 = crítico pelo ia.yaml + trava de cota (17/11/2026); 1.4.0 = retenção: gancho.referencias + CTA de pertencimento (avisos) + loop do fim no crítico (13/11/2026); 1.3.0 = chamada D20: ganchos promessa/acusacao + crítico com teste dos 15 s (12/11/2026)
 PERFIL = Path(os.environ.get("RTEX_HEYGEN_PERFIL", Path.home() / ".cache/inemaccbot/perfil-heygen"))   # perfil compartilhado (tem trava própria)
 TEMPLATE_HEYGEN = os.environ.get("RTEX_HEYGEN_TEMPLATE", "TEMPLATE-AVATAR16")
 HEYGEN_DIR = R / "heygen"

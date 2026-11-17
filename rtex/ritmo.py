@@ -15,11 +15,11 @@ import json, os, shutil, subprocess, wave
 from pathlib import Path
 
 ALVO_WPM = 182          # meio da faixa 160–190 pedida pelo Nei
-K_MAX = 1.12            # esticar mais que 12% começa a soar arrastado
+K_MAX = 1.0             # D26 (Nei 17/11/2026, "não parece natural eu falando"): nunca esticar; era 1.12
 PAUSA = 0.75            # silêncio total antes da máxima (vão natural + inserido), dentro de 0,5–0,9 s
 PAUSA_MIN = 0.5         # o inserido nunca é menor que isto (o vão natural do HeyGen tem respiração, não é silêncio)
 CAUDA = 9.0             # segundos de cartão depois da última palavra (Nei: 8–10 s)
-VERSAO = 1
+VERSAO = 2              # 2 = D26: sem esticar, sem pausa congelada (o rosto sai depois da última palavra no mix.sh)
 
 
 def _dur(f):
@@ -83,7 +83,7 @@ def aplicar(pasta, ficha=None, refazer=False):
     k = round(min(K_MAX, max(1.0, wpm0 / ALVO_WPM)), 4)
 
     corte, P, pi = None, 0.0, _pausa_idx(T, ficha)
-    if pi:
+    if pi and ((ficha or {}).get("ritmo") or {}).get("pausa_congelada"):   # D26: só se a ficha pedir
         fk, j = pi
         b = T[fk]["palavras"][j]["t"]
         a = T[fk]["palavras"][j - 1]["f"] if j else T[fk - 1]["palavras"][-1]["f"]
