@@ -41,6 +41,17 @@ tudo no inema ponto club (grátis, direto na internet, se for verdade); nunca pe
 Frase de cartaz comprimida ("nunca mais diz pronto sem prova"), sem sujeito ou com substantivo no lugar do verbo, perde nota: a fala é frase completa de gente ("o seu agente nunca mais vai dizer pronto se não tiver provado"), com ponte ("é isso que este método faz") e convite ("vou explicar como").
 Regra única: `~/projetos/inema-design/regras/chamada.md`.
 
+Nunca calmo (D25, Nei 17/11/2026: "nenhum vídeo tem que sair calmo; r7ex ou rtex não são vídeos calmos, são provocativos,
+são virais e têm que ter gancho, fonte de imagem e de narração"):
+- **Pressão na voz:** leia a fala da tese em voz alta. Ela MANDA, ACUSA ou CONTRADIZ com a convicção do Nei? Tom de notícia
+  neutra, pergunta morna ("Você pensou em…?", "Já imaginou…?") ou explicação calma = nota da tese ≤ 6, mesmo com número e
+  fonte certos. Com `posicao` (opinião do Nei), a tese abre com ELA, em 1ª pessoa ("faz um ano que eu falo disso…"); a
+  estatística vira prova logo depois. Caso: r7ex "Você pensou em montar um enxame de agentes? A Anthropic mediu…" levou 8
+  e o Nei reprovou ("a linguagem é muito calma, sem pressão").
+- **Teste do leigo na imagem:** `gancho.capa` mostra uma cena que um gestor sem conhecimento de IA entende em 1 segundo
+  (taxímetro girando em R$, fatura, sala de reunião)? Metáfora que pede para pensar (prédio devorado por robôs, formigas,
+  hologramas) = nota da tese ≤ 7 e `melhorar` com uma cena concreta.
+
 Nota 0–10 por bloco: "um desconhecido rolando o feed continua aqui?" No bloco 1, nota o gancho: a manchete sozinha, sem som, faz parar?
 No bloco 9: a pergunta divide as pessoas e dá vontade de responder, mesmo sem ganhar nada?
 Bloqueio = defeito objetivo (número sem fonte, voz que infla a tela, gancho de lista ou proibido, mais de um tema no vídeo, CTA que promete

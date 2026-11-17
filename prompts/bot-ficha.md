@@ -31,6 +31,11 @@ exemplo, aprovado) e as linhas de `FALHAS.md` (o que já quebrou).
 1. **Plano:** quem assiste, o que quer, o gancho com número/fato e fonte, a página de destino no inema.club.
    Confira cada número na fonte, no dia, e anote em `fontes[]` com `valor` e `verificado_em` (data de hoje).
    Nunca invente número; "grátis" só se a página disser.
+   **Nunca calmo (D25, Nei 17/11/2026: "nenhum vídeo tem que sair calmo; r7ex ou rtex são provocativos, virais, têm que ter
+   gancho, fonte de imagem e de narração"):** diga quem assiste e quanto sabe de IA; quando a tese é opinião do Nei, grave
+   `posicao` com as palavras dele em 1ª pessoa e use gancho `contrario` ou `acusacao` com a posição na fala da tese ("Esqueça
+   os enxames. Faz um ano que eu falo disso…"); o número vira prova logo depois. A 1ª frase AFIRMA com pressão: nunca
+   "Você pensou em…?", "Já imaginou…?". `gancho.capa` passa no teste do leigo (cena concreta que um gestor entende em 1 s).
    **Pesquisa de ganchos (1.4.0, Retenção):** antes do gancho, levante quem fala do tema no YouTube:
    `yt-dlp --flat-playlist --print "%(channel)s | %(view_count)s | %(title)s | %(id)s" "ytsearch15:<termo>"` (PT e EN)
    e, nos 3–5 mais vistos e próximos do tema, a 1ª fala (0–35 s) pela legenda automática

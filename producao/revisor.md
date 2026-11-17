@@ -28,6 +28,9 @@ SUGESTÃO (o vídeo segue; liste em `sugestoes`, uma frase cada com o quadro/tem
 - Elementos encostando/sobrepondo de leve sem impedir a leitura.
 - Quadro 0 sem a palavra `tela.destaque` em amarelo ou sem o objeto com dano visível.
 - Trecho que parece parado demais (qa.json já mede > 4 s; só comente se a folha mostrar algo pior).
+- NUNCA CALMO (D25, Nei 17/11/2026: "nenhum vídeo tem que sair calmo"): no quadro 0, um gestor que não sabe nada de IA
+  entende a cena em 1 s e a manchete manda, acusa ou contradiz? Metáfora que pede para pensar, manchete de aviso morno ou
+  capa calma = sugestão com o que trocar, e o impacto não passa de 6.
 - IMPACTO: dê nota 0–10 para "um desconhecido rolando o feed para e assiste até o fim?". Abaixo de 7, sugestão
   dizendo o quadro mais morno e o que faltou.
 

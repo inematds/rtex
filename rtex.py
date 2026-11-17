@@ -29,7 +29,7 @@ R = Path(__file__).resolve().parent
 sys.path.insert(0, str(R))
 from rtex import cena as CENA, pecas, retempo as RT, ritmo as RITMO  # noqa: E402
 
-VERSAO = "1.7.2"   # 1.7.2 = cena da capa em 36–58%, acima da legenda (17/11/2026); 1.7.1 = capa chocante do Codex no quadro 0, com prova e trava no render (17/11/2026); 1.6.1 = crítico pelo ia.yaml + trava de cota (17/11/2026); 1.4.0 = retenção: gancho.referencias + CTA de pertencimento (avisos) + loop do fim no crítico (13/11/2026); 1.3.0 = chamada D20: ganchos promessa/acusacao + crítico com teste dos 15 s (12/11/2026)
+VERSAO = "1.8.2"   # 1.8.2 = nunca calmo D25: abertura morna reprova, posicao do Nei, teste do leigo na capa e no crítico (17/11/2026); 1.7.2 = cena da capa em 36–58%, acima da legenda (17/11/2026); 1.7.1 = capa chocante do Codex no quadro 0, com prova e trava no render (17/11/2026); 1.6.1 = crítico pelo ia.yaml + trava de cota (17/11/2026); 1.4.0 = retenção: gancho.referencias + CTA de pertencimento (avisos) + loop do fim no crítico (13/11/2026); 1.3.0 = chamada D20: ganchos promessa/acusacao + crítico com teste dos 15 s (12/11/2026)
 PERFIL = Path(os.environ.get("RTEX_HEYGEN_PERFIL", Path.home() / ".cache/inemaccbot/perfil-heygen"))   # perfil compartilhado (tem trava própria)
 TEMPLATE_HEYGEN = os.environ.get("RTEX_HEYGEN_TEMPLATE", "TEMPLATE-AVATAR16")
 HEYGEN_DIR = R / "heygen"
@@ -99,6 +99,31 @@ ABSOLVE = re.compile(r"n[aã]o\s+[eé]\s+(culpa|falha|defeito)\s+(sua|tua|seu|te
                      r"n[aã]o\s+[eé]\s+(voc[eê]|tu)\b", re.I)
 OPCAO = re.compile(r"[A-ZÁÉÍÓÚÂÊÔÃÕÇ0-9]{2,14}")
 PROVA_ATE = 20                                   # s: número com fonte ou autoridade na tela até aqui
+
+
+# D25 (Nei 17/11/2026): "nenhum vídeo tem que sair calmo; r7ex ou rtex não são vídeos calmos, são provocativos, são virais e
+# têm que ter gancho, fonte de imagem e de narração". Mesma regra do r7ex 1.9.7 (inema-design/regras/chamada.md §2b).
+MORNA = re.compile(r"^\W*(e\s+)?(voc[eê]s?\s+(j[aá]\s+)?(pensou|pensaram|imaginou|ouviu\s+falar|conhece|quer\s+saber|gostaria)|"
+                   r"j[aá]\s+(pensou|imaginou|ouviu)|imagin[ae]\b|pense\s+n|neste\s+v[ií]deo|hoje\s+(vamos|eu\s+vou)|vamos\s+falar)", re.I)
+TIPOS_POSICAO = ("contrario", "acusacao")
+
+
+def checar_tom(r, bl, erros, avisos):
+    """D25: a 1ª frase da tese afirma com pressão; com `posicao` (opinião do Nei) o gancho é contrario/acusacao, sem pergunta."""
+    if not bl:
+        return
+    frase1 = re.split(r"(?<=[.!?])\s", (bl[0].get("fala") or "").strip())[0]
+    if MORNA.search(frase1):
+        erros.append(f"abertura morna ('{frase1[:60]}'): a 1ª frase afirma com pressão — manda, acusa ou contradiz (D25)")
+    pos = str(r.get("posicao") or "").strip()
+    if not pos:
+        avisos.append("sem 'posicao': se a tese é opinião do Nei, escreva-a com as palavras dele em 1ª pessoa (D25)")
+        return
+    g = (r.get("gancho") or {}).get("tipo")
+    if g not in TIPOS_POSICAO:
+        erros.append(f"'posicao' (opinião do Nei) com gancho '{g}': use {' ou '.join(TIPOS_POSICAO)}; o número vira prova logo depois (D25)")
+    if frase1.rstrip().endswith("?"):
+        erros.append(f"'posicao' com tese em pergunta ('{frase1[:60]}'): afirme a posição do Nei (D25)")
 
 
 def checar_gancho(r, bl, tipos, erros, avisos):
@@ -335,6 +360,7 @@ def cmd_checar(pasta):
     if not 150 <= palavras <= 215:
         avisos.append(f"{palavras} palavras (curto: 160–210)")
     checar_gancho(r, bl, tipos, erros, avisos)
+    checar_tom(r, bl, avisos if (p / "avatar/avatar.mp4").exists() else erros, avisos)   # D25; avatar gravado: só aviso
     checar_isca(r, bl, erros, avisos)
     checar_retencao(r, bl, avisos)
     isca = (r.get("isca") or {}).get("pergunta", "")
@@ -529,7 +555,10 @@ CHOQUE = ("PADRÃO CAPA CHOCANTE: tem de parar o dedo num relance, como pôster 
           "arrumado). Luz dramática de cima ou contraluz, sombras profundas, contraste alto; luz vermelha #ff2a1f no perigo; fundo "
           "escuro #0c0c10. Sem mascote, sem robô fofo (robô = humanoide industrial estilo Tesla Optimus de visor preto), sem "
           "hologramas, sem logotipos, sem marca d'água, sem pessoa reconhecível (rosto de lado, na sombra ou fora do quadro). "
-          "Telas e papéis sem texto legível.")
+          "Telas e papéis sem texto legível. "
+          # D25 (Nei 17/11/2026): metáfora que pede para pensar não para o gestor; a cena tem de ser entendida num relance.
+          "TESTE DO LEIGO: quem não sabe nada de IA (um gestor, um dono de empresa) entende a cena em 1 segundo: uma situação "
+          "concreta do mundo dele (taxímetro girando em R$, fatura enorme, sala de reunião, celular travado), não metáfora abstrata.")
 GERADAS = [Path.home() / d / "generated_images" for d in (".codex", ".codex-2")]
 
 

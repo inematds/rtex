@@ -1,3 +1,7 @@
+## 1.8.2 — 17/11/2026
+
+Nunca calmo (D25, Nei 17/11/2026: "nenhum vídeo tem que sair calmo; r7ex ou rtex não são vídeos calmos, são provocativos, são virais e têm que ter gancho, fonte de imagem e de narração"). Caso: r7ex do enxame (lives4) abriu com "Você pensou em montar um enxame de agentes? A Anthropic mediu…" e passou com 8 no crítico. `checar_tom`: abertura morna reprova; `posicao` (opinião do Nei) exige gancho contrario/acusacao e tese afirmativa; aviso sem `posicao`; roteiro com avatar gravado só recebe aviso. Capa com teste do leigo no pedido ao Codex; crítico com nota de pressão e teste do leigo; revisor com "nunca calmo" como sugestão. Regra comum: `inema-design/regras/chamada.md` §2b.
+
 ## 1.7.2 — 17/11/2026
 
 Capa: a cena chocante fica entre 36% e 58% da altura e os 40% de baixo vazios; a legenda do palco começa perto de 60% e cobria a parte de baixo da cena (mesmo achado do r7ex 1.8.7).
