@@ -29,7 +29,7 @@ R = Path(__file__).resolve().parent
 sys.path.insert(0, str(R))
 from rtex import cena as CENA, pecas, retempo as RT, ritmo as RITMO  # noqa: E402
 
-VERSAO = "1.7.1"   # 1.7.1 = capa chocante do Codex no quadro 0, com prova e trava no render (17/11/2026); 1.6.1 = crítico pelo ia.yaml + trava de cota (17/11/2026); 1.4.0 = retenção: gancho.referencias + CTA de pertencimento (avisos) + loop do fim no crítico (13/11/2026); 1.3.0 = chamada D20: ganchos promessa/acusacao + crítico com teste dos 15 s (12/11/2026)
+VERSAO = "1.7.2"   # 1.7.2 = cena da capa em 36–58%, acima da legenda (17/11/2026); 1.7.1 = capa chocante do Codex no quadro 0, com prova e trava no render (17/11/2026); 1.6.1 = crítico pelo ia.yaml + trava de cota (17/11/2026); 1.4.0 = retenção: gancho.referencias + CTA de pertencimento (avisos) + loop do fim no crítico (13/11/2026); 1.3.0 = chamada D20: ganchos promessa/acusacao + crítico com teste dos 15 s (12/11/2026)
 PERFIL = Path(os.environ.get("RTEX_HEYGEN_PERFIL", Path.home() / ".cache/inemaccbot/perfil-heygen"))   # perfil compartilhado (tem trava própria)
 TEMPLATE_HEYGEN = os.environ.get("RTEX_HEYGEN_TEMPLATE", "TEMPLATE-AVATAR16")
 HEYGEN_DIR = R / "heygen"
@@ -563,9 +563,9 @@ def cmd_capa(pasta):
               f"\"{manchete}\" — tudo em branco, MENOS \"{dest}\", em amarelo #FACC15. A manchete fica entre 9% e 40% da altura, "
               f"margem de 7% à esquerda e de 13% à direita (nada encosta na borda). Contraste alto, legível em miniatura. Confira a "
               f"grafia exata, com acentos; nenhuma outra palavra na imagem.\n"
-              f"Cena, entre 38% e 64% da altura, ligada à manchete: {cena}\n"
-              f"Os 34% de baixo da imagem: só continuação escura e lisa do cenário, sem texto e sem objeto importante (ali entra o "
-              f"rosto do apresentador).\n\nNão mexa em nenhum outro arquivo da pasta. Ao final, diga o caminho original em "
+              f"Cena chocante inteira, compacta, entre 36% e 58% da altura, ligada à manchete: {cena}\n"
+              f"Os 40% de baixo da imagem: só continuação escura e lisa do cenário, sem texto e sem objeto importante (ali entram a "
+              f"legenda e o rosto do apresentador).\n\nNão mexa em nenhum outro arquivo da pasta. Ao final, diga o caminho original em "
               f"generated_images de onde a abertura.png foi copiada.\n")
     (capa / "pedido.txt").write_text(pedido)
     a.unlink(missing_ok=True)

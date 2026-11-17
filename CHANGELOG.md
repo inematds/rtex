@@ -1,3 +1,7 @@
+## 1.7.2 — 17/11/2026
+
+Capa: a cena chocante fica entre 36% e 58% da altura e os 40% de baixo vazios; a legenda do palco começa perto de 60% e cobria a parte de baixo da cena (mesmo achado do r7ex 1.8.7).
+
 ## 1.7.1 — 17/11/2026
 
 Capa chocante no quadro 0 (D24, Nei 17/11/2026: "se não tem este padrão vamos criar este padrão para o r7ex e o rtex"). Novo `rtex.py capa`: o Codex image_gen desenha a capa 9:16 com a manchete da tese dentro e a cena de `gancho.capa` (momento da perda/quebra, nunca anúncio calmo); prova `capa/abertura.codex.json` (sha256 igual a um arquivo do `generated_images`). O palco mostra a capa no bloco da tese com cortes 1,00 → 1,03 → 1,06 a cada ~1 s e esconde a manchete em HTML; `checar` exige `gancho.capa`; `render` recusa sem a prova (edição antiga: `RTEX_CAPA_ANTIGA=1`); `fazer` roda a capa depois dos prints.
