@@ -159,8 +159,13 @@ def montar(pasta, r, falas):
     if legenda:
         legenda[-1]["fim"] = min(legenda[-1]["fim"], fala_fim + .2)   # último quadro sem legenda
 
+    capa = None   # 1.7.1: capa chocante do Codex no quadro 0 (manchete desenhada na arte), cortes 1,00 → 1,03 → 1,06 a cada ~1 s
+    if (pasta / "capa/abertura.codex.json").exists() and (pasta / "capa/abertura.png").exists():
+        capa = {"src": "capa/abertura.png"}
+        b0 = blocos[0]
+        eventos += [b0["ini"], b0["ini"] + 1.0, b0["ini"] + 2.0]
     eventos = sorted({round(x, 2) for x in eventos if 0 <= x <= DUR})
     C = {"duracao": DUR, "marca": r["marca"], "isca": isca, "blocos": blocos, "pilulas": pilulas, "comenta": comenta,
-         "legenda": legenda, "eventos": eventos, "pausa": (ritmo or {}).get("pausa")}
+         "legenda": legenda, "eventos": eventos, "pausa": (ritmo or {}).get("pausa"), "capa": capa}
     (pasta / "cena.js").write_text("window.CENA=" + json.dumps(C, ensure_ascii=False) + ";")
     return DUR, len(eventos) + len(legenda) * 0

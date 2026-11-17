@@ -130,6 +130,7 @@ html,body{width:1080px;height:1920px;overflow:hidden;background:var(--bg);color:
 </style></head>
 <body>
 <div id="fundo"></div>
+<div id="capa" style="position:absolute;left:0;top:0;width:1080px;height:1280px;overflow:hidden;opacity:0"><img id="capaimg" style="width:1080px;height:1920px;display:block;transform-origin:50% 30%"></div>
 <div id="topo"><div id="marca"></div><div id="pil"></div></div>
 <div id="rot"></div>
 <div id="flash"></div>
@@ -151,6 +152,7 @@ const dim=(t,a,dx=-24,d=.35)=>{const k=prog(t,a,d);return `opacity:${.45+.55*k};
 const realce=(txt,w)=>w?txt.replace(new RegExp(`(${w})`,'i'),'<em>$1</em>'):txt;
 document.getElementById('marca').textContent=C.marca;
 const IMGS=[];C.blocos.forEach(b=>{if(b.p.img)IMGS.push(b.p.img);if(b.p.logo)IMGS.push(b.p.logo);});
+if(C.capa){IMGS.push(C.capa.src);document.getElementById('capaimg').src=C.capa.src;}
 const pre=IMGS.map(s=>{const im=new Image();im.src=s;return im.decode().catch(()=>null);});
 
 // quadro 0 v1.1.0: manchete pronta no quadro 0 (é a capa) + "fio" — os agentes aparecem (0 s), o fio estica e fica vermelho (1 s),
@@ -172,6 +174,7 @@ function fio(b,t){const p=b.p,L=b.tela.linhas,N=(p.nos||[]).slice(0,3),P=[[170,8
 
 const COMP={
  tese(b,t){const p=b.p,L=b.tela.linhas;
+  if(C.capa)return '';                                 // 1.7.1: a manchete já está desenhada na capa do Codex
   if(p.metafora==='fio')return fio(b,t);
   const dots=[0,1,2,3,4].map(i=>`<i style="background:${t>=.12+i*.14?'var(--am)':'transparent'}"></i>`).join('');   // algo se move no 1º segundo
   const k=p.pasta_abre_em?prog(t,p.pasta_abre_em-.1,.5):0;
@@ -237,6 +240,9 @@ function comenta(t){const c=C.comenta,CM=document.getElementById('com');
 function render_(t){
  const b=C.blocos.find(x=>t>=x.ini&&t<x.fim)||C.blocos[C.blocos.length-1];
  const O=document.getElementById('obj');O.innerHTML=COMP[b.comp](b,t);
+ const CP=document.getElementById('capa');
+ if(C.capa&&b.tipo==='tese'){const d=t-b.ini;CP.style.opacity=1-prog(t,b.fim-.25,.25);
+  document.getElementById('capaimg').style.transform=`scale(${d<1?1:(d<2?1.03:1.06)})`;}   // 1,10 encostava a manchete na borda (teste 17/11) else CP.style.opacity=0;
  document.getElementById('flash').style.opacity=b.tipo==='maxima'?.92*prog(t,b.ini,.3):0;
  const R=document.getElementById('rot');R.textContent=b.rotulo||'';R.style.opacity=b.rotulo?prog(t,b.ini,.3):0;
  const F=document.getElementById('fonte');F.textContent=b.fonte||'';F.style.opacity=b.fonte?prog(t,b.ini+.3,.4):0;

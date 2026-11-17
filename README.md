@@ -36,6 +36,7 @@ Versão **1.4.0** (13/11/2026: retenção — pesquisa de ganchos no YouTube em 
 | 6 | OK do avatar | `avatar/APROVADO_HEYGEN` com a frase do Nei para ESTA produção (um avatar por reel) | 🧠 |
 | 7 | Estúdio | `python3 rtex.py avatar-enviar <pasta>`: a fala vai ao estúdio do HeyGen (assinatura, tela `:99`), grava `avatar/video_id.txt` | ⚙️ |
 | 8 | Prints | `python3 rtex.py prints <pasta>`: prints reais das páginas do GitHub (`ferramentas/print.mjs`) e logos; LER os prints | ⚙️ |
+| 8b | Capa chocante | `python3 rtex.py capa <pasta>`: o Codex desenha a capa do quadro 0 (manchete da tese + cena de `gancho.capa`, o momento da perda/quebra) e grava a prova `capa/abertura.codex.json`; LER a capa. O `render` recusa sem ela (D24, 1.7.1) | ⚙️ |
 | 9 | Prévia sem avatar (opcional) | numa cópia da pasta: `python3 ferramentas/tempos_sinteticos.py <cópia>` + `rtex.py cena` + `node motor/render.mjs <cópia> --quadros 1,10,20` — acha bug de layout antes do HeyGen | ⚙️ |
 | 10 | Avatar e ritmo | `python3 rtex.py avatar-conferir <pasta>` (leitura) até `pronto`; `python3 rtex.py avatar <pasta>`: tempo de cada palavra (Whisper), fala esticada até ~182 palavras/min (máx. 12%), silêncio antes da máxima, 9 s de cartão. **Minutos a horas** — espera longa vai para o vigia `continua` | ⚙️ |
 | 11 | Cena e render | `python3 rtex.py cena <pasta>` + `python3 rtex.py render <pasta>`: palco (`motor/palco.html`) a 30 fps + avatar no terço de baixo + trilha, −14 LUFS em 2 passadas | ⚙️ |

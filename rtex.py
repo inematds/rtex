@@ -13,6 +13,7 @@ Base copiada do r7ex v1.1.0 (ritmo, retempo, estúdio, render); composição pr�
   python3 rtex.py avatar-conferir <pasta> uma conferência no HeyGen (leitura): pronto | processando
   python3 rtex.py avatar <pasta> [--de <mp4>]   espera/baixa o avatar (ou reaproveita um mp4) + tempos + ritmo
   python3 rtex.py prints <pasta>          prints reais das páginas citadas (GitHub) + logos
+  python3 rtex.py capa <pasta>            Codex desenha a capa chocante do quadro 0 (gancho.capa + manchete da tese), com prova
   python3 rtex.py cena <pasta>            roteiro + tempos → cena.js (motor/palco.html)
   python3 rtex.py render <pasta>          palco (tela :99) + avatar no terço de baixo + trilha → <pasta>/video.mp4
   python3 rtex.py qa <pasta>              medições (duração, wpm, LUFS, silêncio, trocas/min, cartão, fonte) → build/qa.json + folha
@@ -28,7 +29,7 @@ R = Path(__file__).resolve().parent
 sys.path.insert(0, str(R))
 from rtex import cena as CENA, pecas, retempo as RT, ritmo as RITMO  # noqa: E402
 
-VERSAO = "1.6.1"   # 1.6.1 = crítico pelo ia.yaml + trava de cota (17/11/2026); 1.4.0 = retenção: gancho.referencias + CTA de pertencimento (avisos) + loop do fim no crítico (13/11/2026); 1.3.0 = chamada D20: ganchos promessa/acusacao + crítico com teste dos 15 s (12/11/2026)
+VERSAO = "1.7.1"   # 1.7.1 = capa chocante do Codex no quadro 0, com prova e trava no render (17/11/2026); 1.6.1 = crítico pelo ia.yaml + trava de cota (17/11/2026); 1.4.0 = retenção: gancho.referencias + CTA de pertencimento (avisos) + loop do fim no crítico (13/11/2026); 1.3.0 = chamada D20: ganchos promessa/acusacao + crítico com teste dos 15 s (12/11/2026)
 PERFIL = Path(os.environ.get("RTEX_HEYGEN_PERFIL", Path.home() / ".cache/inemaccbot/perfil-heygen"))   # perfil compartilhado (tem trava própria)
 TEMPLATE_HEYGEN = os.environ.get("RTEX_HEYGEN_TEMPLATE", "TEMPLATE-AVATAR16")
 HEYGEN_DIR = R / "heygen"
@@ -133,6 +134,9 @@ def checar_gancho(r, bl, tipos, erros, avisos):
     mf = ((t0.get("objeto") or {}).get("params") or {}).get("metafora")
     if mf not in METAFORAS:
         erros.append(f"tese: objeto.params.metafora (objeto com dano no quadro 0, muda a cada ~1 s nos 3 primeiros s): {sorted(METAFORAS)}")
+    if not (r.get("gancho") or {}).get("capa"):   # 1.7.1: capa chocante do Codex no quadro 0
+        erros.append("gancho.capa: descreva a cena chocante do quadro 0 (momento da perda/quebra ligado à manchete); "
+                     "`rtex.py capa` pede ao Codex")
     # prova até 20 s, problema com absolvição logo depois
     wps = (WPM_MIN + WPM_MAX) / 2 / 60
     k = next((i for i, b in enumerate(bl) if b.get("fonte") or b.get("tipo") == "autoridade"), None)
@@ -481,6 +485,8 @@ def cmd_cena(pasta):
 
 def cmd_render(pasta):
     p, r = roteiro(pasta)
+    if not (p / "capa/abertura.codex.json").exists() and os.environ.get("RTEX_CAPA_ANTIGA") != "1":
+        falha("quadro 0 sem capa do Codex (capa/abertura.codex.json): rode `rtex.py capa` (1.7.1). Edição antiga: RTEX_CAPA_ANTIGA=1")
     env = dict(os.environ, DISPLAY=TELA, MUSICA=str(R / "assets/trilha.mp3"))
     with open(p / "build-render.log", "w") as lg:
         res = subprocess.run(["bash", R / "motor/mix.sh", p, p / "video.mp4"], cwd=R, env=env, stdout=lg, stderr=subprocess.STDOUT,
@@ -514,8 +520,69 @@ def cmd_fila(pasta):
                     "--contexto", pub["contexto"], "--canal", pub.get("fila", "lives11")], check=True)
 
 
+# Capa chocante (1.7.1, Nei 17/11/2026: "se não tem este padrão vamos criar este padrão para o r7ex e o rtex"). O quadro 0 era só
+# HTML (manchete + metáfora "fio"); agora a capa é uma arte do Codex image_gen com a manchete desenhada dentro, mostrando o momento
+# da perda/quebra ou o "depois" chocante. O render recusa roteiro sem capa/abertura.codex.json (prova byte a byte do generated_images).
+CHOQUE = ("PADRÃO CAPA CHOCANTE: tem de parar o dedo num relance, como pôster de filme de suspense. Foto cinematográfica realista, "
+          "UMA cena só, mostrando o MOMENTO da perda, da quebra ou o \"depois\" chocante (o que dá errado se nada mudar), nunca a "
+          "solução pronta, nunca anúncio calmo de produto (nada de mão apertando botão, documentos com check verde, escritório "
+          "arrumado). Luz dramática de cima ou contraluz, sombras profundas, contraste alto; luz vermelha #ff2a1f no perigo; fundo "
+          "escuro #0c0c10. Sem mascote, sem robô fofo (robô = humanoide industrial estilo Tesla Optimus de visor preto), sem "
+          "hologramas, sem logotipos, sem marca d'água, sem pessoa reconhecível (rosto de lado, na sombra ou fora do quadro). "
+          "Telas e papéis sem texto legível.")
+GERADAS = [Path.home() / d / "generated_images" for d in (".codex", ".codex-2")]
+
+
+def prova_codex(arq, pedido):
+    """Grava <arq>.codex.json se o arquivo é cópia byte a byte de uma imagem do image_gen (antes de qualquer ajuste)."""
+    import hashlib
+    h = hashlib.sha256(arq.read_bytes()).hexdigest()
+    for g in GERADAS:
+        for c in (g.rglob("*.png") if g.exists() else []):
+            if c.stat().st_size == arq.stat().st_size and hashlib.sha256(c.read_bytes()).hexdigest() == h:
+                arq.with_suffix(".codex.json").write_text(json.dumps(
+                    {"arquivo": arq.name, "sha256_gerada": h, "origem": str(c), "gerador": "Codex image_gen · assinatura",
+                     "data": dt.datetime.now().isoformat(timespec="seconds"), "pedido": pedido}, ensure_ascii=False, indent=1))
+                return True
+    return False
+
+
+def cmd_capa(pasta):
+    p, r = roteiro(pasta)
+    tese = r["blocos"][0]
+    cena = (r.get("gancho") or {}).get("capa")
+    if not cena:
+        falha("gancho.capa vazio: descreva a cena chocante do quadro 0 (o momento da perda/quebra ligado à manchete)")
+    capa = p / "capa"; capa.mkdir(exist_ok=True); a = capa / "abertura.png"
+    if (capa / "abertura.codex.json").exists() and a.exists():
+        log("capa/abertura.png já tem prova do Codex; para refazer, apague capa/abertura.png e capa/abertura.codex.json"); return
+    manchete = " ".join(tese["tela"]["linhas"]); dest = tese["tela"].get("destaque") or ""
+    pedido = (f"Gere 1 imagem com a ferramenta de geração de imagem (image_gen) e salve nesta pasta como abertura.png, PNG, RETRATO 9:16 "
+              f"(o maior tamanho vertical disponível). {CHOQUE}\n\n"
+              f"Manchete ESCRITA DENTRO da arte, em português, CAIXA ALTA, fonte sem serifa extra bold enorme, em 2 a 3 linhas: "
+              f"\"{manchete}\" — tudo em branco, MENOS \"{dest}\", em amarelo #FACC15. A manchete fica entre 9% e 40% da altura, "
+              f"margem de 7% à esquerda e de 13% à direita (nada encosta na borda). Contraste alto, legível em miniatura. Confira a "
+              f"grafia exata, com acentos; nenhuma outra palavra na imagem.\n"
+              f"Cena, entre 38% e 64% da altura, ligada à manchete: {cena}\n"
+              f"Os 34% de baixo da imagem: só continuação escura e lisa do cenário, sem texto e sem objeto importante (ali entra o "
+              f"rosto do apresentador).\n\nNão mexa em nenhum outro arquivo da pasta. Ao final, diga o caminho original em "
+              f"generated_images de onde a abertura.png foi copiada.\n")
+    (capa / "pedido.txt").write_text(pedido)
+    a.unlink(missing_ok=True)
+    log("Codex: capa chocante…")
+    with open(capa / "codex.log", "w") as lg:
+        subprocess.run(["codex", "exec", "--skip-git-repo-check", "--dangerously-bypass-approvals-and-sandbox"], input=pedido, text=True,
+                       cwd=capa, stdout=lg, stderr=subprocess.STDOUT, timeout=1800)
+    if not a.exists():
+        falha("o Codex não gerou capa/abertura.png (capa/codex.log); não usar outro gerador sem o OK do Nei")
+    if not prova_codex(a, pedido):
+        falha("capa/abertura.png não é cópia de uma imagem do Codex image_gen (generated_images)")
+    pecas.vertical(a)                                    # 1080x1920; a prova guarda o sha da imagem gerada, antes do ajuste
+    log("capa/abertura.png ok (prova em capa/abertura.codex.json) — LEIA a imagem antes do render")
+
+
 def cmd_fazer(pasta, de=None):
-    cmd_checar(pasta); cmd_prints(pasta); cmd_avatar(pasta, de); cmd_cena(pasta); cmd_render(pasta); cmd_qa(pasta)
+    cmd_checar(pasta); cmd_prints(pasta); cmd_capa(pasta); cmd_avatar(pasta, de); cmd_cena(pasta); cmd_render(pasta); cmd_qa(pasta)
     log("Terminei: reel pronto — leia build/folha.jpg; depois `enviar` e `fila`")
 
 
@@ -523,7 +590,7 @@ def main(a):
     if len(a) < 2:
         sys.exit(__doc__)
     de = a[a.index("--de") + 1] if "--de" in a else None
-    c = {"novo": cmd_novo, "checar": cmd_checar, "critico": cmd_critico, "prints": cmd_prints, "cena": cmd_cena,
+    c = {"novo": cmd_novo, "checar": cmd_checar, "critico": cmd_critico, "prints": cmd_prints, "capa": cmd_capa, "cena": cmd_cena,
          "render": cmd_render, "qa": cmd_qa, "enviar": cmd_enviar, "fila": cmd_fila, "avatar-enviar": avatar_enviar}
     if a[0] == "avatar":
         cmd_avatar(a[1], de)

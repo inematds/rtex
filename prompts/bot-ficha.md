@@ -42,7 +42,7 @@ exemplo, aprovado) e as linhas de `FALHAS.md` (o que já quebrou).
    proponha os outros (um `/rtex` para cada, com a manchete sugerida).
 2. `python3 rtex.py novo <slug>` → `edicoes/<data>-<slug>`. O slug é curto e SEM data (o comando já põe a
    data na frente). Se a pasta já existir, escolha outro slug.
-3. Reescreva o `roteiro.json` inteiro no padrão do modelo: `tema`, `gancho` (tipo `contrario` | `perda` |
+3. Reescreva o `roteiro.json` inteiro no padrão do modelo: `tema`, `gancho` (com `gancho.capa` = a cena CHOCANTE do quadro 0 que o Codex desenha com a manchete — o momento da perda/quebra, nunca a solução nem anúncio calmo; D24, 1.7.1; tipo `contrario` | `perda` |
    `estatistica_medo` | `historia_terceiro` | `promessa` | `acusacao` — estes dois com a dor/desejo da pessoa em "você" na 1ª frase; regra `~/projetos/inema-design/regras/chamada.md`: nos 15 s o problema, que é com ela, por que importa e o NOME do método), `isca` de opinião (pergunta com lado, opções de 1 palavra,
    nenhuma promessa de entrega), `fontes`, `trocas` (grafia de nomes e números na legenda), `ritmo.pausa_antes`
    (parte 1-based do bloco da máxima) e os blocos do padrão. **Loop do fim:** a tese ou a autoridade prometem o que a
