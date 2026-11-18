@@ -1,0 +1,74 @@
+{
+ "blocos": [
+  {
+   "n": 1,
+   "nota": 6,
+   "porque": "A abertura tem pressão: manda parar, traz a posição do Nei em 1ª pessoa, e a manchete se entende sozinha, sem som. A capa da prova rasgada com a porta acorrentada passa no teste do leigo. Falha no teste dos 15 s: o nome 'era dos conceitos' só chega na virada, depois de 94 palavras (cerca de 32 s). O gancho também perde da melhor referência (Zac Rios), porque 'quatro diplomas e nenhum emprego' é uma dor concreta de uma pessoa, e o nosso ainda é mais tese do que cena.",
+   "melhorar": "Reescrever: 'Faz tempo que eu falo: pare de decorar o que a IA te entrega em segundos. Você paga anos de faculdade, tira nota alta, e a prova só mediu o que ela responde na hora. A era do conhecimento acabou. Agora é a era dos conceitos.' Mantém a ordem direta e ganha a cena concreta da nota alta, sem copiar a referência."
+  },
+  {
+   "n": 2,
+   "nota": 7,
+   "porque": "A escada MIT → China funciona, o número vem inteiro e com fonte antes de 20 s, e o loop 'no fim te conto' está plantado. Mas 'programas' solto não diz nada ao leigo, e colar China e IA na mesma frase sugere que a IA causou o corte, o que a fonte não afirma.",
+   "melhorar": "'O MIT chamou a IA de momento decisivo para o ensino superior. E a China, em cinco anos, cortou ou suspendeu doze mil e duzentos programas de graduação, num ajuste em que a IA é só parte da pressão. No fim eu te conto o que a IA nunca faz.'"
+  },
+  {
+   "n": 3,
+   "nota": 6,
+   "porque": "O contraste 'onde fica a aula, não o que você aprende' é forte e o número tem fonte. A primeira frase não tem verbo e soa telegráfica. O 'não é culpa sua' fica solto, porque não diz culpa de quê, e a dor passa a ser do MEC, não do espectador.",
+   "melhorar": "'E no Brasil? O MEC pôs cinco mil setecentos e treze cursos a distância em extinção, e a briga ainda é onde fica a aula, não o que você aprende. Se você passou a vida decorando, não é culpa sua: era isso que a escola cobrava.'"
+  },
+  {
+   "n": 4,
+   "nota": 7,
+   "porque": "É curta, anuncia duas peças que batem com o índice e o bolo gera curiosidade. Mas não diz quais são as peças, e o salto da faculdade para o bolo vem sem ponte.",
+   "melhorar": "'Agora vale outra coisa, e são só duas peças: conceito e projeto. Eu te mostro com um exemplo bem simples: um bolo.' Se o nome entrar na tese como proposto, aqui ele pode voltar: 'A era dos conceitos tem duas peças'."
+  },
+  {
+   "n": 5,
+   "nota": 7,
+   "porque": "O bolo é uma comparação do dia a dia que qualquer pessoa entende, e as falas soam naturais. Três fraquezas: o método ocupa só 49 de 233 palavras (21%, abaixo dos 30–60%); a tela é lista de texto com emoji, não mostra a conta; e na fala o entendimento fica com a IA, não com a pessoa, e o preço não se liga ao conceito.",
+   "melhorar": "Peça 1: 'Um: o conceito. Em vez de decorar a fórmula do lucro, você conta à IA quanto custa o seu bolo, ela mostra por que cada fatia dá prejuízo, e você entende o lucro de um jeito que não esquece mais.' Peça 2: 'Dois: o projeto. Você diz aonde quer chegar, vender esse bolo pela internet. A IA monta a loja, e quem decide o preço é você, porque agora entende a conta.' Na tela, mostrar a fatia com custo maior que o preço em R$ (valores marcados como exemplo). Encurtar tese e problema ajuda a chegar perto de 30%."
+  },
+  {
+   "n": 6,
+   "nota": 7,
+   "porque": "A fonte é real e confirma a peça do projeto. A fala fica genérica: 'muito mais ambiciosos' não dá para ver, e 'quem está na frente já aprende assim' não tem prova. Quem recomenda é um comitê do MIT, num relatório.",
+   "melhorar": "Usar o dado concreto da própria fonte: 'Um relatório do MIT pede mais ensino por projetos, porque com IA um aluno já consegue fazer, em um semestre, um software quase pronto para uso.'"
+  },
+  {
+   "n": 7,
+   "nota": 5,
+   "porque": "A limitação do básico é honesta e vira instrução. Mas a ressalva mais importante, a de que o corte chinês não foi só pela IA e que a China criou 10.200 programas, fica só na tela e não é falada. Ela ainda entra na palavra 'erra', que não tem relação com ela.",
+   "melhorar": "'Dois cuidados. A China também criou dez mil e duzentos programas, e o corte não foi só por causa da IA. E sem o básico você não vê quando a IA erra, então comece por um projeto pequeno, que você entende.' Sincronizar o item da China com a palavra 'China'."
+  },
+  {
+   "n": 8,
+   "nota": 9,
+   "porque": "A antítese é curta e memorável, tem silêncio antes e cumpre a promessa do bloco 2: o que a IA nunca faz é saber aonde chegar.",
+   "melhorar": ""
+  },
+  {
+   "n": 9,
+   "nota": 7,
+   "porque": "A pergunta é simples, volta à tensão do quadro 0 e divide, porque professor, médico e estudante vão discordar. Tem comunidade antes e não promete entrega. Faltam a volta do nome do método e o 'direto na internet', e 'Eu digo não' entra seco, antes da própria pergunta.",
+   "melhorar": "'A era dos conceitos a gente pratica há muito tempo no inema ponto club, com cursos e projetos grátis, direto na internet. Eu acho que decorar não vale mais. E você: decorar ainda vale alguma coisa? Sim ou não?'"
+  }
+ ],
+ "bloqueios": [
+  "A voz infla o fato da China: a fala liga a IA ao corte de 12.200 programas e nunca diz que 10.200 foram criados nem que a IA é só parte da causa. Essa correção aparece só na tela da ressalva e precisa ser falada."
+ ],
+ "resumo": "Tema forte e máxima excelente, mas o gancho perde da melhor referência (Zac Rios) por falta de cena concreta e do nome do método nos 15 s, o método está curto (21%) e a ressalva da China precisa ir para a fala.",
+ "notas": [
+  6,
+  7,
+  6,
+  7,
+  7,
+  7,
+  5,
+  9,
+  7
+ ],
+ "hash": "e1485d940613542539d2155da23e5ce6d8645f89"
+}

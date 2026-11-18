@@ -1,0 +1,372 @@
+{
+  "id": "2026-11-18-era-dos-conceitos",
+  "versao": "rtex/1",
+  "tema": "A era do conhecimento acabou, agora é a era dos conceitos: a China cortou ou suspendeu 12.200 programas de graduação, o MIT quer mais projetos, e no Brasil a discussão ainda é onde fica a aula (duas peças: conceito e projeto)",
+  "pedido": "Nei, 18/11/2026 no terminal (sessão nova-educacao): \"mais um video vamos fazer china fechou xxx cursos universitarios agora MIT tambem quer mudar, e no Brasil? crie um video rtex impactante, mudamos da era do conhecimento para uma era de conceitos pq isso é importante e para area de projetos, q é o q queremos construir ou onde chegar. mas ate as universidades se ajustar as pessoas avancadas ja o fazem e é o q fizemos a muito tempo no inema.club. publique no lives11\"",
+  "canal": "lives11",
+  "marca": "INEMA · ERA DOS CONCEITOS",
+  "pessoa": "quem estuda, ensina ou paga uma faculdade (pai, mãe, estudante, profissional de 25 a 50 anos), usa o ChatGPT de vez em quando e não sabe o que é um agente",
+  "posicao": "A era do conhecimento acabou: decorar informação a IA já faz. Agora é a era dos conceitos, porque é entendendo conceitos que a gente faz projetos, decide o que quer construir e aonde quer chegar. A universidade vai demorar para se ajustar; quem está na frente já faz isso, e é o que a gente faz há muito tempo no inema.club.",
+  "chamada": {
+    "dor_ou_desejo": "dor",
+    "quem": "você, que estuda, ensina ou paga uma faculdade",
+    "nucleo": "Decorar o que a IA já te entrega não vale mais nada: agora vale entender o conceito para fazer o seu projeto. A China e o MIT já se mexeram; vou te mostrar as duas peças.",
+    "por_que_importa": "você passa anos decorando matéria que a IA responde na hora, e o diploma continua medindo isso",
+    "metodo": "era dos conceitos (conceito e projeto)",
+    "formato": "contrario"
+  },
+  "gancho": {
+    "tipo": "contrario",
+    "nota": "a 1ª frase manda parar o que todo mundo faz (decorar) e já traz a posição do Nei; a escada vem logo depois: MIT (autoridade) → China com o número exato (ação). A manchete é mais dura que a fala.",
+    "loop": "a autoridade promete 'no fim te conto o que a IA nunca faz'; a máxima entrega ('Decorar, a IA faz. Saber aonde chegar, só você.')",
+    "capa": "em primeiro plano, uma prova de faculdade cheia de respostas decoradas rasgada ao meio no chão; atrás, a porta da sala de aula fechada com corrente e cadeado e a placa 'CURSO ENCERRADO' pregada torta, apostilas espalhadas pelo corredor vazio (o instante em que o curso acabou)",
+    "referencias": [
+      {
+        "canal": "CNBC (1,8 mi views)",
+        "titulo": "How AI Is Killing The Value Of A College Degree",
+        "abertura": "On May 16th, 2025, I woke up and was ready to get into my graduation gown... I was really on top of the world, super excited to finally have the diploma...",
+        "gatilho": "história de terceiro (a formatura antes da queda)"
+      },
+      {
+        "canal": "Zac Rios (1,2 mi views)",
+        "titulo": "This Is Why My College Degree is USELESS! People Regret Paying For School",
+        "abertura": "Can someone explain to me how I have four degrees and still can't get a job? ... You are studying the most pointless university degree ever.",
+        "gatilho": "acusação/perda em sequência de falas reais"
+      },
+      {
+        "canal": "The Economist (836 mil views)",
+        "titulo": "Is it still worth going to university?",
+        "abertura": "Earning a degree used to lead to a steady job with a good salary. But today, young graduates in the West are finding fewer employment opportunities. So, is it still worth going to university?",
+        "gatilho": "contraste antes/agora + pergunta-tese"
+      },
+      {
+        "canal": "Atila Iamarino (435 mil views)",
+        "titulo": "Inteligência Artificial vai destruir o futuro da educação",
+        "abertura": "Quando se fala sobre futuro da educação... computadores vão revolucionar a educação, a internet vai dar acesso a todo o conhecimento... e agora vem a onda da IA",
+        "gatilho": "promessa repetida que nunca veio (fraco nos 3 s)"
+      }
+    ],
+    "referencias_nota": "buscadas em 18/11/2026 (yt-dlp ytsearch15 em PT e EN + legenda automática 0–35 s); régua do crítico, não entram no roteiro"
+  },
+  "isca": {
+    "tipo": "opiniao",
+    "pergunta": "Decorar ainda vale alguma coisa?",
+    "opcoes": [
+      "SIM",
+      "NÃO"
+    ],
+    "lado": "não: decorar a IA já faz; vale entender o conceito e fazer o projeto (o Nei diz antes de perguntar)",
+    "tensao": "decorar"
+  },
+  "fontes": [
+    {
+      "id": "china",
+      "url": "https://english.news.cn/20260922/1af7ee5bd2724235a361c27d9d8c934c/c.html",
+      "titulo": "Xinhua, 22/09/2026, citando o Ministério da Educação da China: no 14º Plano Quinquenal (2021–2025) as universidades chinesas criaram 10.200 programas de graduação e cancelaram ou suspenderam 12.200; mais de 30% dos programas ajustados; ajuste por avanço tecnológico, indústrias novas e demanda de talentos, e a IA também remodela a demanda. Programa = oferta numa instituição, não profissão; não é tudo por causa da IA.",
+      "valor": "12200 programas de graduação cancelados ou suspensos e 10.200 criados (2021–2025)",
+      "verificado_em": "2026-11-18",
+      "linha": "MINISTÉRIO DA EDUCAÇÃO DA CHINA · 2021–2025 · XINHUA, 22/09/2026"
+    },
+    {
+      "id": "mit",
+      "url": "https://president.mit.edu/writing-speeches/ai-and-education-watershed-moment-mit",
+      "titulo": "MIT, carta da presidente Sally Kornbluth, 25/08/2026: a IA generativa é um 'watershed' (momento decisivo) para o MIT e para todo o ensino superior; pede rever o que os alunos precisam aprender, mudar avaliações e reforçar o aprendizado prático. O MIT NÃO anunciou o fim das notas nem da universidade.",
+      "valor": "momento decisivo (watershed) para todo o ensino superior",
+      "verificado_em": "2026-11-18"
+    },
+    {
+      "id": "mit_rel",
+      "url": "https://aiandeducation.mit.edu/report/",
+      "titulo": "Relatório do comitê de IA no ensino do MIT, 13/08/2026, recomendação 3.1.3 'Emphasize experiential and project-based learning': os professores devem aumentar o aprendizado por experiência e por projetos; com ferramentas de IA, os projetos podem ser 'much more ambitious' (software quase de produção num único semestre)",
+      "valor": "ampliar o aprendizado por projetos; com IA, projetos muito mais ambiciosos",
+      "verificado_em": "2026-11-18",
+      "linha": "MIT · RELATÓRIO IA E EDUCAÇÃO · 13/08/2026"
+    },
+    {
+      "id": "brasil",
+      "url": "https://www.gov.br/mec/pt-br/assuntos/noticias/2025/outubro/cc-pares-faz-balanco-da-nova-politica-de-ead",
+      "titulo": "MEC, 21/10/2025, balanço da Nova Política de EaD (Decreto nº 12.456, de 19/05/2025): 5.713 cursos de áreas vedadas para oferta a distância entraram em processo de extinção e 5.021 cursos semipresenciais foram criados; medicina, direito, enfermagem, odontologia e psicologia só presenciais; licenciaturas e saúde sem EaD. A regra trata do formato (onde e como a aula acontece), não de IA nem de currículo; a leitura 'discute onde fica a aula, não o que se aprende' é opinião do Nei.",
+      "valor": "5.713 cursos a distância em processo de extinção (balanço de 21/10/2025)",
+      "verificado_em": "2026-11-18",
+      "linha": "MEC · NOVA POLÍTICA DE EAD · BALANÇO DE 21/10/2025"
+    },
+    {
+      "id": "brasil_decreto",
+      "url": "https://www.gov.br/mec/pt-br/assuntos/noticias/2025/maio/assinado-decreto-que-institui-a-nova-politica-de-ead",
+      "titulo": "MEC, 19/05/2025: decreto da Nova Política de EaD cria o formato semipresencial; medicina, direito, enfermagem, odontologia e psicologia exclusivamente presenciais; demais cursos de saúde e licenciaturas só presencial ou semipresencial; dois anos de transição",
+      "valor": "formatos presencial, semipresencial e EaD; 5 cursos só presenciais",
+      "verificado_em": "2026-11-18"
+    },
+    {
+      "id": "inema",
+      "url": "https://inema.club",
+      "titulo": "inema.club (conferido em 18/11/2026): cursos práticos, projetos reais e trilhas; vários cursos e formações marcados como gratuitos e abertos (ex.: Curso Jarvis gratuito, formação gratuita em cinema com IA). Há também ofertas pagas (VIP/PRO, imersão): dizer 'cursos e projetos grátis', nunca 'tudo grátis'.",
+      "valor": "cursos e projetos abertos e grátis",
+      "verificado_em": "2026-11-18"
+    }
+  ],
+  "ritmo": {
+    "pausa_antes": {
+      "parte": 9,
+      "de": "Decorar"
+    },
+    "nota": "parte conta a partir de 1: parte 9 = a máxima, que começa com 'Decorar'"
+  },
+  "trocas": {
+    "doze mil e duzentos": "12.200",
+    "dez mil e duzentos": "10.200",
+    "cinco mil setecentos e treze": "5.713",
+    "Um:": "1:",
+    "Dois:": "2:",
+    "Três:": "3:",
+    "inema ponto club": "inema.club",
+    "Inema.club": "inema.club",
+    "MEC": "MEC",
+    "M I T": "MIT",
+    "emaitê": "MIT"
+  },
+  "cores": {
+    "ACABOU": "#FACC15",
+    "acabou": "#ff2a1f",
+    "conceitos": "#FACC15",
+    "CONCEITOS": "#FACC15",
+    "decorar": "#ff2a1f",
+    "MIT": "#FACC15",
+    "China": "#FACC15",
+    "fechando": "#ff2a1f",
+    "aula": "#F2B45C",
+    "aprende": "#FACC15",
+    "conceito": "#FACC15",
+    "fatura": "#FACC15",
+    "destino": "#FACC15",
+    "chegar": "#FACC15",
+    "projeto": "#FACC15",
+    "projetos": "#FACC15",
+    "ambiciosos": "#FACC15",
+    "atenção": "#F2B45C",
+    "básico": "#F2B45C",
+    "erra": "#ff2a1f",
+    "VOCÊ": "#FACC15",
+    "SIM": "#FACC15",
+    "NÃO": "#FACC15",
+    "NADA": "#FACC15"
+  },
+  "blocos": [
+    {
+      "tipo": "tese",
+      "fala": "Faz tempo que eu falo: pare de decorar o que a IA te entrega em segundos. Você paga anos de faculdade para a prova medir o que ela já faz. A era do conhecimento acabou.",
+      "tela": {
+        "linhas": [
+          "DECORAR NÃO",
+          "VALE MAIS NADA."
+        ],
+        "destaque": "NADA",
+        "sub": "A ERA DO CONHECIMENTO ACABOU."
+      },
+      "objeto": {
+        "comp": "tese",
+        "params": {
+          "metafora": "fio",
+          "nos": [
+            "📚 decorar",
+            "💸 anos de faculdade",
+            "📝 a prova mede o que a IA faz"
+          ],
+          "quebra_em": "prova"
+        }
+      }
+    },
+    {
+      "tipo": "autoridade",
+      "fala": "O MIT chamou a IA de momento decisivo, e a China cortou ou suspendeu doze mil e duzentos programas. No fim te conto o que a IA nunca faz.",
+      "objeto": {
+        "comp": "contador",
+        "params": {
+          "de": 0,
+          "ate": 12200,
+          "dec": 0,
+          "unid": "programas de graduação cancelados ou suspensos na China (2021–2025)",
+          "em": "programas",
+          "rotulo": "MIT, 25/08/2026: 'MOMENTO DECISIVO' · CHINA: MIN. DA EDUCAÇÃO VIA XINHUA, 22/09/2026",
+          "parcelas": []
+        }
+      },
+      "fonte": "china"
+    },
+    {
+      "tipo": "problema",
+      "fala": "E no Brasil, cinco mil setecentos e treze cursos a distância em extinção, e a briga é onde fica a aula, não o que você aprende. Não é culpa sua.",
+      "objeto": {
+        "comp": "chat_riscado",
+        "params": {
+          "hd": "E NO BRASIL?",
+          "ia": "🏫 a briga: onde fica a aula",
+          "msgs": [
+            [
+              "Brasil",
+              "🇧🇷 MEC · regra nova da EaD"
+            ],
+            [
+              "extinção",
+              "✗ 5.713 cursos a distância em extinção"
+            ],
+            [
+              "aprende",
+              "❓ e o que você aprende?"
+            ]
+          ]
+        }
+      },
+      "fonte": "brasil"
+    },
+    {
+      "tipo": "virada",
+      "fala": "Agora é a era dos conceitos, com duas peças. Eu te mostro com um bolo.",
+      "objeto": {
+        "comp": "indice",
+        "params": {
+          "k": "ERA DOS CONCEITOS",
+          "itens": [
+            "CONCEITO",
+            "PROJETO"
+          ],
+          "em": "duas",
+          "ativa_em": "bolo"
+        }
+      }
+    },
+    {
+      "tipo": "metodo",
+      "n": 1,
+      "nome": "CONCEITO",
+      "fala": "Um: o conceito. Em vez de decorar a fórmula do lucro, conte à IA o custo do bolo: ela mostra por que a fatia dá prejuízo.",
+      "objeto": {
+        "comp": "manchete",
+        "params": {
+          "chapeu": "01 · CONCEITO",
+          "icone": "💡",
+          "titulo": "Entenda o porquê",
+          "titulo_em": "conceito",
+          "linhas": [
+            [
+              "decorar",
+              "✗ decorar a fórmula do lucro"
+            ],
+            [
+              "custo",
+              "🎂 você conta o custo do bolo (exemplo)"
+            ],
+            [
+              "prejuízo",
+              "📉 a IA mostra por que a fatia dá prejuízo"
+            ]
+          ]
+        }
+      }
+    },
+    {
+      "tipo": "metodo",
+      "n": 2,
+      "nome": "PROJETO",
+      "fala": "Dois: o projeto. Você diz aonde quer chegar, vender o bolo pela internet. A IA monta a loja, e você decide o preço.",
+      "objeto": {
+        "comp": "manchete",
+        "params": {
+          "chapeu": "02 · PROJETO",
+          "icone": "🛠️",
+          "titulo": "Aonde você quer chegar",
+          "titulo_em": "projeto",
+          "linhas": [
+            [
+              "chegar",
+              "🎯 aonde quer chegar: vender pela internet"
+            ],
+            [
+              "loja",
+              "🛒 a IA monta a loja"
+            ],
+            [
+              "preço",
+              "🧠 você decide o preço, porque entende o lucro"
+            ]
+          ]
+        }
+      }
+    },
+    {
+      "tipo": "prova",
+      "fala": "Quem está na frente já aprende assim, e o MIT pede mais projetos, que com IA podem ser muito mais ambiciosos.",
+      "objeto": {
+        "comp": "selo_prova",
+        "params": {
+          "icone": "🎓",
+          "titulo": "O MIT PEDE: MAIS PROJETOS",
+          "destaque": "PROJETOS",
+          "sub": "relatório IA e educação · 13/08/2026 · com IA, projetos muito mais ambiciosos",
+          "icone_em": "frente",
+          "em": "MIT",
+          "sub_em": "ambiciosos"
+        }
+      },
+      "fonte": "mit_rel"
+    },
+    {
+      "tipo": "ressalva",
+      "fala": "Atenção: sem o básico, você não vê quando a IA erra. Comece por um projeto pequeno.",
+      "objeto": {
+        "comp": "ressalva",
+        "params": {
+          "itens": [
+            [
+              "básico",
+              "sem o básico, você não vê o erro da IA"
+            ],
+            [
+              "erra",
+              "e o corte chinês não foi só pela IA: a China também criou 10.200 programas"
+            ]
+          ],
+          "dica": [
+            "Comece",
+            "comece por um projeto pequeno, que você entende"
+          ]
+        }
+      },
+      "fonte": "china"
+    },
+    {
+      "tipo": "maxima",
+      "fala": "Decorar, a IA faz. Saber aonde chegar, só você.",
+      "objeto": {
+        "comp": "maxima",
+        "params": {
+          "linha1": "DECORAR, A IA FAZ.",
+          "linha2": "SABER AONDE CHEGAR, SÓ VOCÊ.",
+          "linha2_em": "chegar",
+          "destaque": "VOCÊ"
+        }
+      }
+    },
+    {
+      "tipo": "cta",
+      "fala": "A gente faz isso há muito tempo no inema ponto club, com cursos e projetos grátis. Eu digo não. E você: decorar ainda vale alguma coisa? Sim ou não?",
+      "objeto": {
+        "comp": "isca",
+        "params": {
+          "lado_tela": "EU: DECORAR NÃO VALE MAIS",
+          "lado_em": "digo",
+          "q_em": "você",
+          "em": "vale"
+        }
+      }
+    }
+  ],
+  "publicar": {
+    "fila": "lives11",
+    "titulo": "China cortou ou suspendeu 12.200 programas, o MIT quer mudar. E o Brasil? #shorts",
+    "descricao": "A era do conhecimento acabou: decorar o que a IA já entrega não vale mais nada; agora é a era dos conceitos. O MIT chamou a IA de momento decisivo para o ensino superior. A China cancelou ou suspendeu 12.200 programas de graduação entre 2021 e 2025 (e criou 10.200), num ajuste que tem a IA como parte da pressão, junto com indústria e demanda. E no Brasil? Com a Nova Política de EaD do MEC, 5.713 cursos a distância entraram em processo de extinção (balanço de outubro de 2025): a discussão ainda é onde fica a aula, não o que você aprende. Duas peças da era dos conceitos: 1) o conceito: em vez de decorar a fórmula, a IA explica o porquê com os números do seu próprio negócio; 2) o projeto: você diz aonde quer chegar (vender bolo pela internet), a IA monta a página e você decide o preço e aprende fazendo. O relatório do MIT recomenda mais ensino por projetos, que com IA podem ser muito mais ambiciosos. Ressalva: sem o básico você não vê quando a IA erra; comece por um projeto pequeno. E o corte na China não foi só por causa da IA. Cursos e projetos grátis no inema.club, direto na internet. Decorar ainda vale alguma coisa?",
+    "comentario_fixado": "Fontes: China, Ministério da Educação via Xinhua (22/09/2026): https://english.news.cn/20260922/1af7ee5bd2724235a361c27d9d8c934c/c.html · MIT (25/08/2026): https://president.mit.edu/writing-speeches/ai-and-education-watershed-moment-mit · relatório do MIT: https://aiandeducation.mit.edu/report/ · MEC, balanço da Nova Política de EaD (21/10/2025): https://www.gov.br/mec/pt-br/assuntos/noticias/2025/outubro/cc-pares-faz-balanco-da-nova-politica-de-ead · cursos e projetos grátis: https://inema.club",
+    "contexto": "Short vertical do INEMA.CLUB (Nei Maldaner, opinião em primeira pessoa), canal lives11: a era do conhecimento acabou, agora é a era dos conceitos (entender conceitos para fazer projetos: o que você quer construir ou aonde quer chegar). Escada: o MIT chamou a IA de momento decisivo; a China cancelou ou suspendeu 12.200 programas de graduação (2021–2025, e criou 10.200; programas, não profissões; não foi só pela IA); no Brasil, 5.713 cursos a distância em extinção pela regra do MEC, que trata do formato da aula, não do conteúdo. Método em duas peças: conceito e projeto (exemplo: vender bolo pela internet). Fecho: quem está na frente já aprende assim, e o inema.club faz isso há muito tempo com cursos e projetos grátis. Isca de opinião: a descrição termina com 'Decorar ainda vale alguma coisa?'; ninguém recebe nada por comentar. Não citar outros criadores nem vídeos de terceiros. O MIT não anunciou o fim das notas nem da universidade."
+  },
+  "critico_decisao": "NÃO aprovou em 5 rodadas (18/11/2026, sessão nova-educacao): médias 6,4 · 6,4 · 6,7 · 6,8 · 6,8; tese 6–7 (precisa 8). O crítico pede falas mais longas (método ≥ 30%, escada completa, ressalva da China falada) e o checar trava em 90 s (≤ ~233 palavras); último bloqueio: a ressalva da China (10.200 criados, IA só parte da causa) tem de ir para a fala. Sem avatar, sem produção. Nei, 18/11/2026 no terminal: \"publique no x3 assim mesmo\" = segue sem a aprovação do crítico, roteiro como está, canal lives11."
+}
