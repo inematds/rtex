@@ -1,3 +1,7 @@
+## 1.10.2 — 18/11/2026
+
+Tese longa com capa: `objeto.params.linhas` na tese tira a capa na primeira palavra marcada e segue com linhas no tempo da fala, evitando trecho parado. O QA deixa de exigir pausa antes da máxima quando o ritmo v2 (D26) não inseriu pausa.
+
 ## 1.9.2 — 17/11/2026
 
 Fluência (D26, Nei 17/11/2026: "parece não tem fluência, não parece natural eu falando"; "explicação tem que ser impactante. imagem também"). Caso: r7ex do enxame v2 (lives4), com avatar esticado 7%, quadro congelado e fala telegráfica. `rtex/ritmo.py` v2: k = 1 (velocidade natural do HeyGen), sem pausa inserida (`ritmo.pausa_congelada: true` religa); `motor/mix.sh`: o rosto sai 0,5 s depois da última palavra e o terço de baixo vira o fecho da marca ("inema.club · toda semana tem kit novo"), em vez de 9 s de rosto parado. Crítico: fala de gente (frase telegráfica ≤ 6) e explicação com comparação concreta + tela que a mostra. Revisor: fecho sem o rosto é o padrão. Testado: remix de `2026-11-12-nivel-escada` com o fecho novo conferido no quadro.

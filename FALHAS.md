@@ -1,7 +1,16 @@
 # FALHAS — rtex
 
+| 2026-11-09 | Kit Design com IA parou no QA por quadros sem mudança por 7,7s | distribuir entradas de texto e ícone por gatilhos reais da fala; novo QA: maior intervalo 3,6s | prompt |
+
 | data | o que quebrou | menor correção | prompt \| infra |
 |---|---|---|---|
+| 2026-11-18 | QA reprovou astra-placar: capa parada 15 s na tese longa e exigência de pausa que o ritmo D26 não cria | `tese.params.linhas` e QA ciente do ritmo v2 | infra |
+| 2026-11-18 | `cena` parou: gatilho do contador era `vinte`, mas a legenda virou `22%` pelas `trocas` (astra-placar) | `em: 22%`; proteção que falta: `checar` validar os gatilhos depois das `trocas` | prompt |
+| 2026-11-18 | ficha era-dos-conceitos: crítico reprovou 5 rodadas (6,4→6,8; tese 7) pedindo falas mais longas, enquanto o `checar` trava em 90 s (~233 palavras); tema com 3 fatos (China, MIT, Brasil) + método não cabe | proteção que falta: o crítico receber o teto de palavras do `checar` e sugerir só reescrita dentro dele (ou tema com 3 fatos ir para o modo longo) | prompt |
+| 2026-11-18 | Whisper perdeu a fala f9 do avatar (astra-placar) e a produção parou em `montar`: "fala f9 não achada" | `retempo_pedacos.py` + `producao.py --retomar`; proteção que falta: o retempo cair sozinho para pedaços (3ª vez) | infra |
+| 2026-11-05 | QA jarvis-local: trecho parado 5,5 s no bloco autoridade (contador de 8,8 s só gera 3 eventos: ini, em−0,9, em) | bloco virou `manchete` com linhas por palavra; proteção que falta: `checar` recusar contador em bloco > ~8 s | prompt |
+| 2026-11-04 | QA openduet: trecho parado 5,8 s na tese (fio só tinha quebra_em no fim da fala) e 4,2 s em autoridade/virada | deixas mais cedo: quebra_em "fila", contador em "tem", índice em "costas"; proteção que falta: `checar` prever os vãos > 4 s antes do render | prompt |
+| 2026-11-04 | crítico oscilou ±0,5 entre rodadas quase iguais (openduet: ~16 rodadas, aprovou 1× a 7,7 e depois deu 7,3 com sugestões contraditórias) | parar no 1º aprovado e registrar `critico_decisao`; proteção que falta: crítico com 2 amostras e média, ou teto de 5 rodadas | prompt |
 | 2026-11-04 | Whisper pulou 53→62 s do avatar (claude-code-2): "fala f10 não achada"; o _tapa_buracos (buraco > 8 s) retranscreveu e não achou nada | `~/projetos/wifi/longrun/2026-11-01-claude-code-2/tools/retempo_pedacos.py` (pedaços de 20 s + 2 s) e depois `rtex.py avatar`; proteção que falta: retempo cair sozinho para pedaços quando uma fala some | infra |
 | 2026-11-04 | rtex: legenda de 21 letras cortou "EMPRESA MOSTRANDO QUE" na borda; linhas pendentes a 20% ilegíveis | MAX_LEG 19, dim .45; chat com hd/ia por parâmetro | infra |
 | 2026-11-01 | Whisper large-v3 pulou ~20 s do avatar inteiro (comece-por-tres): "fala f7/f8 não achada" no retempo | transcrever em pedaços de 20 s (+2 s de sobra) e montar o tempos.json; retempo reaproveita | infra |

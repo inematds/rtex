@@ -174,7 +174,8 @@ function fio(b,t){const p=b.p,L=b.tela.linhas,N=(p.nos||[]).slice(0,3),P=[[170,8
 
 const COMP={
  tese(b,t){const p=b.p,L=b.tela.linhas;
-  if(C.capa)return '';                                 // 1.7.1: a manchete já está desenhada na capa do Codex
+  if(C.capa){if(!p.linhas)return '';                   // 1.7.1: a manchete já está desenhada na capa do Codex
+   return COMP.manchete({...b,p:{chapeu:'',icone:'⚠️',titulo:'',...p}},t);}   // 1.10.2: tese longa sai da capa e segue com linhas no tempo da fala
   if(p.metafora==='fio')return fio(b,t);
   const dots=[0,1,2,3,4].map(i=>`<i style="background:${t>=.12+i*.14?'var(--am)':'transparent'}"></i>`).join('');   // algo se move no 1º segundo
   const k=p.pasta_abre_em?prog(t,p.pasta_abre_em-.1,.5):0;
@@ -241,7 +242,7 @@ function render_(t){
  const b=C.blocos.find(x=>t>=x.ini&&t<x.fim)||C.blocos[C.blocos.length-1];
  const O=document.getElementById('obj');O.innerHTML=COMP[b.comp](b,t);
  const CP=document.getElementById('capa');
- if(C.capa&&b.tipo==='tese'){const d=t-b.ini;CP.style.opacity=1-prog(t,b.fim-.25,.25);
+ if(C.capa&&b.tipo==='tese'){const d=t-b.ini,fimC=b.p.linhas&&b.p.linhas.length?b.p.linhas[0].t:b.fim;CP.style.opacity=1-prog(t,fimC-.25,.25);
   document.getElementById('capaimg').style.transform=`scale(${d<1?1:(d<2?1.03:1.06)})`;}   // 1,10 encostava a manchete na borda (teste 17/11) else CP.style.opacity=0;
  document.getElementById('flash').style.opacity=b.tipo==='maxima'?.92*prog(t,b.ini,.3):0;
  const R=document.getElementById('rot');R.textContent=b.rotulo||'';R.style.opacity=b.rotulo?prog(t,b.ini,.3):0;

@@ -69,7 +69,10 @@ def medir(p, r):
     perto = [s for s in sil if pz.get("fim") and abs(s[1] - pz["fim"]) < .35]
     outros = [s for s in sil if s not in perto and s[1] - s[0] >= .5 and s[0] > 3]
     dur_p = round(perto[0][1] - perto[0][0], 2) if perto else 0
-    item("silêncio antes da máxima", f"{dur_p} s · outros ≥ 0,5 s: {len(outros)}", "1 silêncio 0,5–0,9 s, nenhum outro", perto and .5 <= dur_p <= .95 and not outros)
+    if rt.get("versao", 1) >= 2 and not pz.get("inserida"):   # D26: sem pausa congelada; a fala segue natural até a máxima
+        item("silêncio antes da máxima", f"sem pausa congelada · outros ≥ 0,5 s: {len(outros)}", "nenhum silêncio longo na fala (D26)", not outros)
+    else:
+        item("silêncio antes da máxima", f"{dur_p} s · outros ≥ 0,5 s: {len(outros)}", "1 silêncio 0,5–0,9 s, nenhum outro", perto and .5 <= dur_p <= .95 and not outros)
     ev = C["eventos"]
     gaps = [b - a for a, b in zip(ev, ev[1:] + [fala_fim])]
     lum, nq = trocas_luminancia(v)
