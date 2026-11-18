@@ -4,6 +4,7 @@
 
 | data | o que quebrou | menor correção | prompt \| infra |
 |---|---|---|---|
+| 2026-11-18 | `tese.params.linhas` desenhou o cartão por cima da capa desde o quadro 0 (o QA passou; o revisor barrou) | cartão só entra quando a capa sai | prompt |
 | 2026-11-18 | QA reprovou astra-placar: capa parada 15 s na tese longa e exigência de pausa que o ritmo D26 não cria | `tese.params.linhas` e QA ciente do ritmo v2 | infra |
 | 2026-11-18 | `cena` parou: gatilho do contador era `vinte`, mas a legenda virou `22%` pelas `trocas` (astra-placar) | `em: 22%`; proteção que falta: `checar` validar os gatilhos depois das `trocas` | prompt |
 | 2026-11-18 | ficha era-dos-conceitos: crítico reprovou 5 rodadas (6,4→6,8; tese 7) pedindo falas mais longas, enquanto o `checar` trava em 90 s (~233 palavras); tema com 3 fatos (China, MIT, Brasil) + método não cabe | proteção que falta: o crítico receber o teto de palavras do `checar` e sugerir só reescrita dentro dele (ou tema com 3 fatos ir para o modo longo) | prompt |

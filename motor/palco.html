@@ -175,7 +175,7 @@ function fio(b,t){const p=b.p,L=b.tela.linhas,N=(p.nos||[]).slice(0,3),P=[[170,8
 const COMP={
  tese(b,t){const p=b.p,L=b.tela.linhas;
   if(C.capa){if(!p.linhas)return '';                   // 1.7.1: a manchete já está desenhada na capa do Codex
-   return COMP.manchete({...b,p:{chapeu:'',icone:'⚠️',titulo:'',...p}},t);}   // 1.10.2: tese longa sai da capa e segue com linhas no tempo da fala
+   const t0=p.linhas[0].t-.25;if(t<t0)return '';return COMP.manchete({...b,ini:t0,p:{chapeu:'',icone:'⚠️',titulo:'',...p}},t);}   // 1.10.2: tese longa sai da capa e segue com linhas no tempo da fala
   if(p.metafora==='fio')return fio(b,t);
   const dots=[0,1,2,3,4].map(i=>`<i style="background:${t>=.12+i*.14?'var(--am)':'transparent'}"></i>`).join('');   // algo se move no 1º segundo
   const k=p.pasta_abre_em?prog(t,p.pasta_abre_em-.1,.5):0;
