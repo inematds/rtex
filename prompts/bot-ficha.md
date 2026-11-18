@@ -65,12 +65,13 @@ exemplo, aprovado) e as linhas de `FALHAS.md` (o que já quebrou).
    - `publicar.titulo` termina com ` #shorts`; `publicar.descricao` termina com a pergunta da isca;
      `publicar.contexto` explica o vídeo para quem escreve o título no YouTube (sem citar terceiros).
 5. `python3 rtex.py checar <pasta>` até passar (corrija o roteiro; até 5 tentativas).
-6. `python3 rtex.py critico <pasta>` (passa: sem bloqueio, tese ≥ 8, média ≥ 7,5, nenhum bloco < 6).
+6. `python3 rtex.py critico <pasta>` (passa: sem bloqueio, tese ≥ 8, média ≥ 7,2, nenhum bloco < 6; D29).
    Reprovou → leia as notas, melhore os blocos fracos e rode `checar` + `critico` de novo.
-   **Teto de 5 rodadas do crítico** (FALHAS.md, 04/11/2026: ele oscila ±0,5 e as sugestões se contradizem).
-   Pare no PRIMEIRO aprovado. Se depois do aprovado o `checar` pedir ajuste mecânico, faça e registre em
-   `critico_decisao` (texto curto: rodada em que aprovou, nota, o que mudou depois) sem rodar o crítico de novo.
-   Não aprovou em 5 → `ERRO: crítico reprovou: <resumo das notas>` e pare (sem avatar).
+   **O código para na 3ª rodada (D29):** sem bloqueio, tese ≥ 7, média ≥ 7,2 e nenhum bloco < 6, o roteiro segue marcado
+   como sugestão. Se ele indicar uma rodada anterior que cumpre isso, faça o `cp` indicado e rode de novo.
+   Pare no PRIMEIRO aprovado. Ajuste pequeno depois disso não volta ao crítico; registre em `critico_decisao`
+   (texto curto: rodada em que aprovou, nota, o que mudou depois).
+   Sem saída → `ERRO: crítico reprovou: <resumo das notas>` e pare (sem avatar). `CRITICO_RODADA_EXTRA=1` só com ordem do Nei.
 7. O `/rtex` no bot É o OK do Nei para gerar o avatar desta produção (Nei, 22/10/2026: "vale como OK";
    05/11/2026: "/rtex" é comando próprio). Grave `<pasta>/avatar/APROVADO_HEYGEN` com uma linha:
    `<aaaa-mm-dd> Nei pelo /rtex no inemaccbot ({{ref}}): "<pedido>"; o comando vale como OK do avatar desta produção.`
@@ -81,7 +82,7 @@ exemplo, aprovado) e as linhas de `FALHAS.md` (o que já quebrou).
    Canal: <livesN> · <na frente da fila | fim da fila>
    Gancho: <tipo> · "<manchete>" · <a fala do bloco 1>
    Isca: <pergunta> (<opções>)
-   Crítico: tese <n> · média <n> (rodada <k>)
+   Crítico: tese <n> · média <n> (rodada <k>; diga "segue com sugestões" se saiu assim)
    Fontes: <url curta de cada uma>
    Não fiz: <o que o pedido trouxe e esta fase não faz, ou "nada">
    Outros temas: <um por linha, "tema → manchete sugerida · /rtex <tema>", ou "nenhum">

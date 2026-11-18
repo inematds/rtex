@@ -22,8 +22,8 @@ O padrão rtex (v1.1.0), um tema por vídeo, bloco a bloco:
 Retenção (1.4.0, Nei 13/11/2026: "aplica"):
 - **Régua das referências:** `gancho.referencias` (quando houver) são 3–5 vídeos de quem fala do tema no YouTube, com
   `titulo`, `abertura` (1ª fala, 0–35 s) e `gatilho`. Ache a mais forte e diga se o nosso gancho (manchete + fala da tese)
-  é PELO MENOS TÃO FORTE quanto ela. Mais fraco → nota da tese ≤ 7 e `melhorar` com qual referência ganha, por quê e uma
-  abertura nossa melhor. Copiar fala ou número de terceiro não é melhorar: número de terceiro não entra no roteiro. Diga no
+  é PELO MENOS TÃO FORTE quanto ela. Mais fraco → é SUGESTÃO (D29, Nei 18/11/2026): NÃO baixe a nota por isso; a nota da
+  tese vem só das outras regras, e o `melhorar` diz qual referência ganha, por quê e traz uma abertura nossa melhor. Copiar fala ou número de terceiro não é melhorar: número de terceiro não entra no roteiro. Diga no
   `resumo` se o gancho ganha ou perde da melhor referência. Sem `referencias`, julgue sem a régua (não é bloqueio).
 - **Loop do fim:** a tese ou a autoridade prometem o que a máxima entrega ("no fim eu te conto…"), e a máxima cumpre. Sem
   promessa → nota da autoridade ≤ 7 e `melhorar` com a frase; promessa que a máxima não cumpre → nota da máxima ≤ 6.

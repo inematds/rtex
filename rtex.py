@@ -8,7 +8,7 @@ Base copiada do r7ex v1.1.0 (ritmo, retempo, estúdio, render); composição pr�
   python3 rtex.py novo <slug>             cria edicoes/<data>-<slug>/roteiro.json a partir de modelo/roteiro.json
   python3 rtex.py checar <pasta>          validador do roteiro (gancho, estrutura, fala, isca de opinião, fontes, gatilhos;
                                           avisa sem gancho.referencias e sem frase de comunidade no CTA, 1.4.0)
-  python3 rtex.py critico <pasta>         crítico de viralidade (producao/ia.yaml): gancho ≥ 8, média ≥ 7,5, nenhuma < 6
+  python3 rtex.py critico <pasta>         crítico de viralidade (producao/ia.yaml): gancho ≥ 8, média ≥ 7,2, nenhuma < 6; até 3 rodadas (D29)
   python3 rtex.py avatar-enviar <pasta>   manda a fala ao estúdio do HeyGen (precisa de avatar/APROVADO_HEYGEN)
   python3 rtex.py avatar-conferir <pasta> uma conferência no HeyGen (leitura): pronto | processando
   python3 rtex.py avatar <pasta> [--de <mp4>]   espera/baixa o avatar (ou reaproveita um mp4) + tempos + ritmo
@@ -29,7 +29,7 @@ R = Path(__file__).resolve().parent
 sys.path.insert(0, str(R))
 from rtex import cena as CENA, pecas, retempo as RT, ritmo as RITMO  # noqa: E402
 
-VERSAO = "1.10.2"   # 1.9.2 = D26 fluência: ritmo sem esticar nem congelar, rosto sai após a última palavra (fecho da marca no terço de baixo), crítico com fala de gente + explicação concreta (17/11/2026); 1.8.2 = nunca calmo D25: abertura morna reprova, posicao do Nei, teste do leigo na capa e no crítico (17/11/2026); 1.7.2 = cena da capa em 36–58%, acima da legenda (17/11/2026); 1.7.1 = capa chocante do Codex no quadro 0, com prova e trava no render (17/11/2026); 1.6.1 = crítico pelo ia.yaml + trava de cota (17/11/2026); 1.4.0 = retenção: gancho.referencias + CTA de pertencimento (avisos) + loop do fim no crítico (13/11/2026); 1.3.0 = chamada D20: ganchos promessa/acusacao + crítico com teste dos 15 s (12/11/2026)
+VERSAO = "1.11.2"   # 1.11.2 = D29: corte próprio do crítico, aprovado fica aprovado, teto de 3 rodadas com saída marcada;1.9.2 = D26 fluência: ritmo sem esticar nem congelar, rosto sai após a última palavra (fecho da marca no terço de baixo), crítico com fala de gente + explicação concreta (17/11/2026); 1.8.2 = nunca calmo D25: abertura morna reprova, posicao do Nei, teste do leigo na capa e no crítico (17/11/2026); 1.7.2 = cena da capa em 36–58%, acima da legenda (17/11/2026); 1.7.1 = capa chocante do Codex no quadro 0, com prova e trava no render (17/11/2026); 1.6.1 = crítico pelo ia.yaml + trava de cota (17/11/2026); 1.4.0 = retenção: gancho.referencias + CTA de pertencimento (avisos) + loop do fim no crítico (13/11/2026); 1.3.0 = chamada D20: ganchos promessa/acusacao + crítico com teste dos 15 s (12/11/2026)
 PERFIL = Path(os.environ.get("RTEX_HEYGEN_PERFIL", Path.home() / ".cache/inemaccbot/perfil-heygen"))   # perfil compartilhado (tem trava própria)
 TEMPLATE_HEYGEN = os.environ.get("RTEX_HEYGEN_TEMPLATE", "TEMPLATE-AVATAR16")
 HEYGEN_DIR = R / "heygen"
@@ -40,6 +40,7 @@ COMPS = {"tese", "contador", "chat_riscado", "indice", "pasta", "repo", "manchet
 PROVA = {"contador", "repo", "selo_prova"}       # objeto que carrega número/print com fonte na tela
 DUR_MIN, DUR_MAX = 60, 90                        # alvo do rtex curto (s), cartão incluído
 WPM_MIN, WPM_MAX = 160, 190
+CORTE_MEDIA = 7.2                                # D29: média mínima do crítico no rtex (r7ex: 7,5)
 
 
 def log(*a):
@@ -390,18 +391,38 @@ def cmd_checar(pasta):
     return r
 
 
+def critico_aprovado(c):
+    """D29 (Nei, 18/11/2026): corte próprio do rtex. Com 9 a 13 blocos a média fica abaixo da do r7ex (7 partes): nas 17
+    edições medidas, média ≥ 7,5 aprovava 4 em até 3 rodadas; média ≥ 7,2 aprova 10. A tese continua em 8."""
+    n = c["notas"]
+    return not c.get("bloqueios") and n[0] >= 8 and sum(n) / len(n) >= CORTE_MEDIA and min(n) >= 6
+
+
+def critico_serve(c):
+    """D29: depois de 3 rodadas segue, marcado como sugestão, o roteiro sem bloqueio com tese ≥ 7 e o resto no corte."""
+    n = c["notas"]
+    return not c.get("bloqueios") and n[0] >= 7 and sum(n) / len(n) >= CORTE_MEDIA and min(n) >= 6
+
+
+def orcamento_fala(r):
+    tot = sum(len((b.get("fala") or "").split()) for b in r["blocos"])
+    teto = int((DUR_MAX - 0.75 - RITMO.CAUDA) * (WPM_MIN + WPM_MAX) / 2 / 60); sobra = max(teto - tot, 0)
+    return (f"\n\nORÇAMENTO DE TAMANHO DESTE ROTEIRO: a fala soma {tot} palavras e o teto é {teto} (vídeo de até {DUR_MAX} s). "
+            f"Somando todas as reescritas de fala que você puser em `melhorar`, o acréscimo não pode passar de {sobra} "
+            "palavras. Sem folga, cada reescrita tem no máximo o tamanho da fala que troca.")
+
+
 def cmd_critico(pasta):
-    """crítico de viralidade (producao/ia.yaml, etapa critico): nota por bloco + bloqueios; grava critica.json"""
-    import hashlib
+    """crítico de viralidade (producao/ia.yaml, etapa critico): nota por bloco + bloqueios; grava critica.json.
+    D29: producao/rodadas_critico.py decide se há nova crítica (aprovado fica aprovado, teto de 3 rodadas, saída marcada)."""
     p, r = roteiro(pasta)
-    h = hashlib.sha1((p / "roteiro.json").read_bytes()).hexdigest()
-    arq = p / "critica.json"
-    c = json.loads(arq.read_text()) if arq.exists() else {}
-    if c.get("hash") != h:
+    sys.path.insert(0, str(R / "producao"))
+    import rodadas_critico as RC
+
+    def criticar():
         # 17/11/2026: motor/modelo/esforço de producao/ia.yaml (etapa critico), com trava de cota e reserva declarada.
-        sys.path.insert(0, str(R / "producao"))
         from ia_motor import executar, CotaEsgotada
-        pedido = (R / "prompts/critico.md").read_text()
+        pedido = (R / "prompts/critico.md").read_text() + orcamento_fala(r)
         regra = Path.home() / "projetos/inema-design/regras/chamada.md"
         anexos = [p / "roteiro.json"] + ([regra] if regra.is_file() else [])
         try:
@@ -415,11 +436,23 @@ def cmd_critico(pasta):
             c["notas"] = [int(x["nota"]) for x in sorted(c["blocos"], key=lambda x: x["n"])]
         except Exception as e:
             falha(f"crítico não respondeu direito: {str(e)[:200]}")
-        c["hash"] = h
-        arq.write_text(json.dumps(c, ensure_ascii=False, indent=1))
+        return c
+
+    textos = [json.dumps((b.get("objeto") or {}).get("params") or {}, ensure_ascii=False) for b in r["blocos"]]
+    nuc = RC.nucleo([b.get("fala") or "" for b in r["blocos"]], (r.get("gancho") or {}).get("manchete") or "", textos)
+    try:
+        c, notas = RC.portao(p / "roteiro.json", p / "critica.json", p / "criticas.jsonl", p / "critica-rodadas", nuc,
+                             critico_aprovado, critico_serve, criticar, extra=os.environ.get("CRITICO_RODADA_EXTRA") == "1")
+    except RC.Parado as e:
+        falha(f"crítico parado: {e}")
     n = c["notas"]
     log("crítico: " + " · ".join(f"{i + 1}:{x}" for i, x in enumerate(n)) + f" (média {sum(n) / len(n):.1f}) — {c.get('resumo', '')}")
-    if c.get("bloqueios") or n[0] < 8 or sum(n) / len(n) < 7.5 or min(n) < 6:
+    for nota in notas:
+        log("crítico:", nota)
+    if c.get("saida") == "sugestao":
+        log("crítico: SEGUE COM SUGESTÕES (D29): 3 rodadas sem aprovação, sem bloqueio e dentro da régua mínima")
+        return
+    if not critico_aprovado(c):
         falha("crítico reprovou:\n  - " + "\n  - ".join([f"BLOQUEIO: {b}" for b in c.get("bloqueios") or []] +
               [f"bloco {x['n']} ({x['nota']}): {x.get('melhorar')}" for x in c["blocos"] if x.get("melhorar")]))
     log("crítico aprovou")

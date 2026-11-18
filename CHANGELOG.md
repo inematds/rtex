@@ -1,3 +1,7 @@
+## 1.11.2 — 18/11/2026
+
+Crítico com corte próprio e memória de rodadas (D29, Nei 18/11/2026: "sim aprovado pode fazer"). Aprova com tese ≥ 8, média ≥ 7,2 e nenhum bloco < 6. Ajuste pequeno em roteiro aprovado não volta ao crítico; teto de 3 rodadas, com saída marcada para o roteiro sem bloqueio e tese ≥ 7. Referência mais forte vira sugestão e o crítico recebe o orçamento de palavras. Cada rodada fica em `criticas.jsonl`, e o roteiro julgado em `critica-rodadas/`.
+
 ## 1.10.2 — 18/11/2026
 
 Tese longa com capa: `objeto.params.linhas` na tese tira a capa na primeira palavra marcada e segue com linhas no tempo da fala, evitando trecho parado. O QA deixa de exigir pausa antes da máxima quando o ritmo v2 (D26) não inseriu pausa.

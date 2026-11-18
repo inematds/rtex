@@ -1,5 +1,6 @@
 # FALHAS — rtex
 
+| 2026-11-18 | Crítico: 1 de 17 aprovou na 1ª rodada, com o corte do r7ex em roteiros de 9 a 13 blocos | média mínima 7,2, teto de 3 rodadas com saída marcada e referência como sugestão (D29) | prompt, infra |
 | 2026-11-09 | Kit Design com IA parou no QA por quadros sem mudança por 7,7s | distribuir entradas de texto e ícone por gatilhos reais da fala; novo QA: maior intervalo 3,6s | prompt |
 
 | data | o que quebrou | menor correção | prompt \| infra |

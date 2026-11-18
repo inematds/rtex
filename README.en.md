@@ -32,7 +32,7 @@ Version **1.3.0** (12/11/2026: `promessa` and `acusacao` hooks, the viewer’s p
 | 2 | Research and sources | verify each number against the source (GitHub stars on the day, dated article) and record it in `fontes[]` with `valor` and `verificado_em` | 🧠 |
 | 3 | Script | `python3 rtex.py novo <slug>` and write `roteiro.json`: one topic, the `gancho`, the standard blocks (below), the full spoken text, the object for each block, the opinion `isca` | 🧠 |
 | 4 | Validator | `python3 rtex.py checar <pasta>`: hook (type, headline ≤ 6 words in uppercase with 1 yellow word, no list/“did you know”/“I did,” metaphor object), proof ≤ 20 s, problem followed immediately by absolution, one topic (method without 3+ different sources), block order, index = method, speech without numerals or “!”, ≥ 8 words per block, spoken triggers, source for every number, opinion hook (below), estimated duration 60–90 s | ⚙️ |
-| 5 | Critic | `python3 rtex.py critico <pasta>` (`prompts/critico.md`): score per block + blockers; passes with no blockers, thesis ≥ 8, average ≥ 7.5, none < 6 | 🤖 |
+| 5 | Critic | `python3 rtex.py critico <pasta>` (`prompts/critico.md`): score per block + blockers; passes with no blockers, thesis ≥ 8, average ≥ 7.2, none < 6; up to 3 rounds, then a version with no blockers and thesis ≥ 7 moves on flagged as a suggestion (D29) | 🤖 |
 | 6 | Avatar OK | `avatar/APROVADO_HEYGEN` with Nei’s phrase for THIS production (one avatar per reel) | 🧠 |
 | 7 | Studio | `python3 rtex.py avatar-enviar <pasta>`: speech goes to the HeyGen studio (subscription, screen `:99`), records `avatar/video_id.txt` | ⚙️ |
 | 8 | Screenshots | `python3 rtex.py prints <pasta>`: real screenshots of GitHub pages (`ferramentas/print.mjs`) and logos; READ the screenshots | ⚙️ |
