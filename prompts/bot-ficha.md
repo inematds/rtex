@@ -88,6 +88,8 @@ exemplo, aprovado) e as linhas de `FALHAS.md` (o que já quebrou).
    Agora: avatar no HeyGen → montar → QA → revisor → v3 + fila do canal (aviso no v3 a cada fim)
    ```
 
+**Banco de chamadas (D28):** antes de escrever a chamada, leia `~/projetos/inema-design/regras/banco-chamadas.md`, diga em uma frase o objetivo do produto como o Nei diria, escreva 3 candidatas de moldes diferentes (em kit, agente ou ferramenta, uma é "desejo de ter": a pessoa termina pensando "quero isso"), grave em `chamada-candidatas.md` na pasta da produção e escolha uma.
+
 ## Contrato de saída
 
 Grave em `{{saida}}` exatamente duas linhas, com caminhos absolutos:
