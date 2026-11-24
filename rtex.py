@@ -39,6 +39,12 @@ OBRIGATORIOS = {"tese", "problema", "virada", "metodo", "prova", "ressalva", "ma
 COMPS = {"tese", "contador", "chat_riscado", "indice", "pasta", "repo", "manchete", "selo_prova", "ressalva", "maxima", "isca"}
 PROVA = {"contador", "repo", "selo_prova"}       # objeto que carrega número/print com fonte na tela
 DUR_MIN, DUR_MAX = 60, 90                        # alvo do rtex curto (s), cartão incluído
+
+
+def dur_alvo(r):
+    """Duração alvo (s): o roteiro pode pedir outra com "duracao_alvo": [min, max] (Nei, 24/11/2026: reels de ~30 s)."""
+    d = r.get("duracao_alvo")
+    return (int(d[0]), int(d[1])) if isinstance(d, list) and len(d) == 2 else (DUR_MIN, DUR_MAX)
 WPM_MIN, WPM_MAX = 160, 190
 CORTE_MEDIA = 7.2                                # D29: média mínima do crítico no rtex (r7ex: 7,5)
 
@@ -356,9 +362,10 @@ def cmd_checar(pasta):
                 erros.append(f"contador termina em {alvo} e a fonte diz {fo.get('valor')} (o contador pousa no valor da fonte)")
     seg = palavras / ((WPM_MIN + WPM_MAX) / 2) * 60
     estim = seg + 0.75 + RITMO.CAUDA
-    if not DUR_MIN <= estim <= DUR_MAX:
-        erros.append(f"{palavras} palavras ≈ {estim:.0f} s com o cartão (alvo {DUR_MIN}–{DUR_MAX} s a ~175 palavras/min)")
-    if not 150 <= palavras <= 215:
+    dmin, dmax = dur_alvo(r)
+    if not dmin <= estim <= dmax:
+        erros.append(f"{palavras} palavras ≈ {estim:.0f} s com o cartão (alvo {dmin}–{dmax} s a ~175 palavras/min)")
+    if (dmin, dmax) == (DUR_MIN, DUR_MAX) and not 150 <= palavras <= 215:
         avisos.append(f"{palavras} palavras (curto: 160–210)")
     checar_gancho(r, bl, tipos, erros, avisos)
     checar_tom(r, bl, avisos if (p / "avatar/avatar.mp4").exists() else erros, avisos)   # D25; avatar gravado: só aviso
@@ -406,8 +413,9 @@ def critico_serve(c):
 
 def orcamento_fala(r):
     tot = sum(len((b.get("fala") or "").split()) for b in r["blocos"])
-    teto = int((DUR_MAX - 0.75 - RITMO.CAUDA) * (WPM_MIN + WPM_MAX) / 2 / 60); sobra = max(teto - tot, 0)
-    return (f"\n\nORÇAMENTO DE TAMANHO DESTE ROTEIRO: a fala soma {tot} palavras e o teto é {teto} (vídeo de até {DUR_MAX} s). "
+    dmax = dur_alvo(r)[1]
+    teto = int((dmax - 0.75 - RITMO.CAUDA) * (WPM_MIN + WPM_MAX) / 2 / 60); sobra = max(teto - tot, 0)
+    return (f"\n\nORÇAMENTO DE TAMANHO DESTE ROTEIRO: a fala soma {tot} palavras e o teto é {teto} (vídeo de até {dmax} s). "
             f"Somando todas as reescritas de fala que você puser em `melhorar`, o acréscimo não pode passar de {sobra} "
             "palavras. Sem folga, cada reescrita tem no máximo o tamanho da fala que troca.")
 
