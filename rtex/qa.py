@@ -56,7 +56,9 @@ def medir(p, r):
         it[k] = {"valor": valor, "alvo": alvo, "ok": bool(ok)}
 
     d = _dur(v)
-    item("duração", f"{d:.1f} s", "60–90 s", 60 <= d <= 90)
+    da = r.get("duracao_alvo") if isinstance(r, dict) else None          # roteiro pode pedir outra duração (Nei 24/11/2026)
+    dmin, dmax = (int(da[0]), int(da[1])) if isinstance(da, list) and len(da) == 2 else (60, 90)
+    item("duração", f"{d:.1f} s", f"{dmin}–{dmax} s", dmin <= d <= dmax)
     item("ritmo da fala", f"{rt['wpm']:.0f} palavras/min", "160–190", 160 <= rt["wpm"] <= 190)
     j = _ff("-i", v, "-af", "loudnorm=I=-14:TP=-1:LRA=11:print_format=json", "-f", "null", "-")
     j = json.loads(j[j.rindex("{"): j.rindex("}") + 1])
