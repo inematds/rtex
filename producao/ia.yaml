@@ -32,8 +32,8 @@ etapas:
   revisao_visual:
     tipo: assinatura
     motor: codex
-    modelo: gpt-6.1-sol
-    esforco: medium
+    modelo: EXECUTOR
+    esforco: EXECUTOR
     capacidade: visao
     timeout: 900
     max_tokens: 12000
@@ -47,4 +47,4 @@ etapas:
     capacidade: texto
     timeout: 900
     max_tokens: 12000
-    alternativa: {motor: codex, modelo: gpt-6.1-sol, esforco: medium}
+    alternativa: {motor: codex, modelo: EXECUTOR, esforco: EXECUTOR}
