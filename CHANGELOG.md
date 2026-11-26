@@ -1,3 +1,7 @@
+## 1.12.2 — 25/11/2026
+
+Capa com palavra gigante (Nei 25/11/2026: "a capa tenha palavra vigia em tamanho bem grande"): `tela.gigante` na tese (uma palavra da manchete) manda o Codex desenhar essa palavra sozinha na 1ª linha, ocupando a largura útil, com letra ≥ 3× as outras linhas. Sem o campo, a capa segue igual. Primeiro uso: `2026-11-25-vigia-lives3` e `-lives4`.
+
 ## 1.11.2 — 18/11/2026
 
 Crítico com corte próprio e memória de rodadas (D29, Nei 18/11/2026: "sim aprovado pode fazer"). Aprova com tese ≥ 8, média ≥ 7,2 e nenhum bloco < 6. Ajuste pequeno em roteiro aprovado não volta ao crítico; teto de 3 rodadas, com saída marcada para o roteiro sem bloqueio e tese ≥ 7. Referência mais forte vira sugestão e o crítico recebe o orçamento de palavras. Cada rodada fica em `criticas.jsonl`, e o roteiro julgado em `critica-rodadas/`.

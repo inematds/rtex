@@ -29,7 +29,7 @@ R = Path(__file__).resolve().parent
 sys.path.insert(0, str(R))
 from rtex import cena as CENA, pecas, retempo as RT, ritmo as RITMO  # noqa: E402
 
-VERSAO = "1.11.2"   # 1.11.2 = D29: corte próprio do crítico, aprovado fica aprovado, teto de 3 rodadas com saída marcada;1.9.2 = D26 fluência: ritmo sem esticar nem congelar, rosto sai após a última palavra (fecho da marca no terço de baixo), crítico com fala de gente + explicação concreta (17/11/2026); 1.8.2 = nunca calmo D25: abertura morna reprova, posicao do Nei, teste do leigo na capa e no crítico (17/11/2026); 1.7.2 = cena da capa em 36–58%, acima da legenda (17/11/2026); 1.7.1 = capa chocante do Codex no quadro 0, com prova e trava no render (17/11/2026); 1.6.1 = crítico pelo ia.yaml + trava de cota (17/11/2026); 1.4.0 = retenção: gancho.referencias + CTA de pertencimento (avisos) + loop do fim no crítico (13/11/2026); 1.3.0 = chamada D20: ganchos promessa/acusacao + crítico com teste dos 15 s (12/11/2026)
+VERSAO = "1.12.2"   # 1.12.2 = tela.gigante: palavra da capa em tamanho bem grande (Nei 25/11/2026); 1.11.2 = D29: corte próprio do crítico, aprovado fica aprovado, teto de 3 rodadas com saída marcada;1.9.2 = D26 fluência: ritmo sem esticar nem congelar, rosto sai após a última palavra (fecho da marca no terço de baixo), crítico com fala de gente + explicação concreta (17/11/2026); 1.8.2 = nunca calmo D25: abertura morna reprova, posicao do Nei, teste do leigo na capa e no crítico (17/11/2026); 1.7.2 = cena da capa em 36–58%, acima da legenda (17/11/2026); 1.7.1 = capa chocante do Codex no quadro 0, com prova e trava no render (17/11/2026); 1.6.1 = crítico pelo ia.yaml + trava de cota (17/11/2026); 1.4.0 = retenção: gancho.referencias + CTA de pertencimento (avisos) + loop do fim no crítico (13/11/2026); 1.3.0 = chamada D20: ganchos promessa/acusacao + crítico com teste dos 15 s (12/11/2026)
 PERFIL = Path(os.environ.get("RTEX_HEYGEN_PERFIL", Path.home() / ".cache/inemaccbot/perfil-heygen"))   # perfil compartilhado (tem trava própria)
 TEMPLATE_HEYGEN = os.environ.get("RTEX_HEYGEN_TEMPLATE", "TEMPLATE-AVATAR16")
 HEYGEN_DIR = R / "heygen"
@@ -633,7 +633,10 @@ def cmd_capa(pasta):
               f"\"{manchete}\" — tudo em branco, MENOS \"{dest}\", em amarelo #FACC15. A manchete fica entre 9% e 40% da altura, "
               f"margem de 7% à esquerda e de 13% à direita (nada encosta na borda). Contraste alto, legível em miniatura. Confira a "
               f"grafia exata, com acentos; nenhuma outra palavra na imagem.\n"
-              f"Cena chocante inteira, compacta, entre 36% e 58% da altura, ligada à manchete: {cena}\n"
+              + (f"A palavra \"{tese['tela']['gigante']}\" vem sozinha na 1ª linha, GIGANTE: ocupa a largura útil inteira, com "
+                 f"altura de letra pelo menos 3 vezes a das outras linhas, que vêm menores logo abaixo.\n"
+                 if tese["tela"].get("gigante") else "")   # 1.12.2 (Nei 25/11/2026): palavra da capa em tamanho bem grande
+              + f"Cena chocante inteira, compacta, entre 36% e 58% da altura, ligada à manchete: {cena}\n"
               f"Os 40% de baixo da imagem: só continuação escura e lisa do cenário, sem texto e sem objeto importante (ali entram a "
               f"legenda e o rosto do apresentador).\n\nNão mexa em nenhum outro arquivo da pasta. Ao final, diga o caminho original em "
               f"generated_images de onde a abertura.png foi copiada.\n")
