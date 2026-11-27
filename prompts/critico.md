@@ -4,7 +4,11 @@ Leia `roteiro.json` nesta pasta (só ele). Não escreva arquivo nenhum. Responda
 O padrão rtex (v1.1.0), um tema por vídeo, bloco a bloco:
 1. tese — o GANCHO (quadro 0 + 3 primeiros segundos). `gancho.tipo` é um de: contrario (manda parar algo que todo mundo faz),
    perda (e se X sumisse?), estatistica_medo (com fonte na tela) ou historia_terceiro (com número), promessa (o ganho com garantia verdadeira, em "você") ou
-   acusacao (revela o que acontece com a pessoa, em "você"). A manchete do quadro 0
+   acusacao (revela o que acontece com a pessoa, em "você"), fim_da_perda (o que a pessoa para de perder: "pare de perder
+   tokens") ou autoridade (quem de peso resolveu, com fonte). **D32 (Nei, 27/11/2026):** se o público já vive o assunto
+   (lives1, lives4, lives7 ou `gancho.publico_ja_sabe: sim`), a tese pega a dor pelo OUTRO LADO — parar de perder, jeito
+   antigo ou autoridade; abrir descrevendo o problema que ele já conhece = nota da tese ≤ 6, e o conselho reescreve pelo
+   outro lado (inema-design/regras/chamada.md §2f). A manchete do quadro 0
    (`tela.linhas`) tem até 9 palavras, caixa alta, uma palavra amarela (`tela.destaque`) e é CLARA E COMPLETA (Nei, 12/11/2026: "manchete tem que ser objetiva mas clara… uma informação clara e entendida, e aí vamos atrás de detalhes"): quem lê só ela entende o que acontece (quem + o quê; "SUA IA DIZ 'PRONTO' SEM TER FEITO"), nunca enigmática ("IA COM PROVA") nem slogan sem sujeito; a fala traz os detalhes. Um objeto-metáfora com dano (`objeto.params.metafora`) muda a cada ~1 s nos 3 primeiros s.
    Proibido: gancho de lista ("5 peças do mês", "N coisas…"), "você sabia que…", "eu fiz…".
 2. autoridade — prova (número com fonte ou autoridade) na tela até ~20 s.

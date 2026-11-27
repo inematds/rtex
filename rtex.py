@@ -29,7 +29,7 @@ R = Path(__file__).resolve().parent
 sys.path.insert(0, str(R))
 from rtex import cena as CENA, pecas, retempo as RT, ritmo as RITMO  # noqa: E402
 
-VERSAO = "1.12.2"   # 1.12.2 = tela.gigante: palavra da capa em tamanho bem grande (Nei 25/11/2026); 1.11.2 = D29: corte próprio do crítico, aprovado fica aprovado, teto de 3 rodadas com saída marcada;1.9.2 = D26 fluência: ritmo sem esticar nem congelar, rosto sai após a última palavra (fecho da marca no terço de baixo), crítico com fala de gente + explicação concreta (17/11/2026); 1.8.2 = nunca calmo D25: abertura morna reprova, posicao do Nei, teste do leigo na capa e no crítico (17/11/2026); 1.7.2 = cena da capa em 36–58%, acima da legenda (17/11/2026); 1.7.1 = capa chocante do Codex no quadro 0, com prova e trava no render (17/11/2026); 1.6.1 = crítico pelo ia.yaml + trava de cota (17/11/2026); 1.4.0 = retenção: gancho.referencias + CTA de pertencimento (avisos) + loop do fim no crítico (13/11/2026); 1.3.0 = chamada D20: ganchos promessa/acusacao + crítico com teste dos 15 s (12/11/2026)
+VERSAO = "1.13.2"   # 1.13.2 = D32: ganchos fim_da_perda e autoridade; quem já sabe do assunto não ouve a dor descrita (27/11/2026); 1.12.2 = tela.gigante: palavra da capa em tamanho bem grande (Nei 25/11/2026); 1.11.2 = D29: corte próprio do crítico, aprovado fica aprovado, teto de 3 rodadas com saída marcada;1.9.2 = D26 fluência: ritmo sem esticar nem congelar, rosto sai após a última palavra (fecho da marca no terço de baixo), crítico com fala de gente + explicação concreta (17/11/2026); 1.8.2 = nunca calmo D25: abertura morna reprova, posicao do Nei, teste do leigo na capa e no crítico (17/11/2026); 1.7.2 = cena da capa em 36–58%, acima da legenda (17/11/2026); 1.7.1 = capa chocante do Codex no quadro 0, com prova e trava no render (17/11/2026); 1.6.1 = crítico pelo ia.yaml + trava de cota (17/11/2026); 1.4.0 = retenção: gancho.referencias + CTA de pertencimento (avisos) + loop do fim no crítico (13/11/2026); 1.3.0 = chamada D20: ganchos promessa/acusacao + crítico com teste dos 15 s (12/11/2026)
 PERFIL = Path(os.environ.get("RTEX_HEYGEN_PERFIL", Path.home() / ".cache/inemaccbot/perfil-heygen"))   # perfil compartilhado (tem trava própria)
 TEMPLATE_HEYGEN = os.environ.get("RTEX_HEYGEN_TEMPLATE", "TEMPLATE-AVATAR16")
 HEYGEN_DIR = R / "heygen"
@@ -92,7 +92,14 @@ GANCHOS = {"contrario": "manda parar algo que todo mundo faz", "perda": "perda h
            "estatistica_medo": "estatística de medo com fonte na tela", "historia_terceiro": "história de terceiro com número",
            # 1.3.0 (D20, Nei 12/11/2026: "não adianta estar claro e correto se não chama atenção, não mexe na dor ou desejo")
            "promessa": "o ganho com a garantia verdadeira, em 'você' (o seu agente nunca mais vai dizer pronto se não tiver provado; é isso que este método faz)",
-           "acusacao": "revela o que está acontecendo com a pessoa, em 'você' (seu agente mente pra você)"}
+           "acusacao": "revela o que está acontecendo com a pessoa, em 'você' (seu agente mente pra você)",
+           # 1.13.2 (D32, D20 revista, Nei 27/11/2026: "como as pessoas já sabem do assunto, não é a dor que move, e sim
+           # o desejo, a provocação, a perda… 'para de perder tokens'… é a dor pelo outro lado"). chamada.md §2f.
+           "fim_da_perda": "a perda pelo outro lado: o que a pessoa para de perder (pare de perder tokens; nunca mais vai sentir falta dos seus tokens)",
+           "autoridade": "quem de peso resolveu + o feito, com fonte, e a promessa em 'você' (os engenheiros da Anthropic mostraram como reduzir a perda de tokens)"}
+SABE_CANAL = {"lives1": True, "lives4": True, "lives7": True,
+              "lives2": False, "lives8": False, "lives12": False, "lives24": False}   # D32; lives3/lives11: pelo assunto
+DOR_DESCRITA = ("acusacao", "perda")
 VOCE = re.compile(r"\b(voc[eê]s?|seus?|suas?|te|teu|tua)\b", re.I)
 METAFORAS = {"fio"}                              # objeto-metáfora com dano no quadro 0 (motor/palco.html, comp tese)
 LISTA = re.compile(r"\b(\d+|dois|duas|tr[eê]s|quatro|cinco|seis|sete|oito|nove|dez|n)\s+(pe[cç]as|coisas|dicas|ferramentas|jeitos|"
@@ -133,12 +140,23 @@ def checar_tom(r, bl, erros, avisos):
         erros.append(f"'posicao' com tese em pergunta ('{frase1[:60]}'): afirme a posição do Nei (D25)")
 
 
-def checar_gancho(r, bl, tipos, erros, avisos):
+def checar_gancho(r, bl, tipos, erros, avisos, gravado=False):
     """quadro 0 + 3 primeiros segundos: tipo de gancho, manchete curta e agressiva, objeto-metáfora com dano, prova ≤ 20 s,
     problema com absolvição logo depois, um tema por vídeo"""
     g = (r.get("gancho") or {}).get("tipo")
     if g not in GANCHOS:
         erros.append("gancho.tipo: um de " + ", ".join(f"'{k}' ({v})" for k, v in GANCHOS.items()))
+    gb = r.get("gancho") or {}
+    sv = str(gb.get("publico_ja_sabe") or "").strip().lower().replace("ã", "a")
+    canal = str((r.get("publicar") or {}).get("fila") or "")
+    if sv and sv not in ("sim", "nao"):
+        erros.append("gancho.publico_ja_sabe: 'sim' ou 'nao' (chamada.md §2f)")
+    if {"sim": True, "nao": False}.get(sv, SABE_CANAL.get(canal)) and g in DOR_DESCRITA \
+            and not str(gb.get("por_que_dor") or "").strip():
+        (avisos if gravado else erros).append(
+            f"gancho '{g}' descreve a dor para quem já vive o assunto ({canal or 'publico_ja_sabe: sim'}): pegue a dor pelo "
+            "outro lado — fim_da_perda ('pare de perder tokens'), contrario ('você ainda usa do jeito antigo') ou "
+            "autoridade — ou justifique em gancho.por_que_dor (chamada.md §2f, D32)")
     if not bl or bl[0].get("tipo") != "tese":
         return
     t0 = bl[0]; tela = t0.get("tela") or {}; linhas = tela.get("linhas") or []
@@ -159,9 +177,9 @@ def checar_gancho(r, bl, tipos, erros, avisos):
             erros.append(f"{onde}: '{GANCHO_PROIBIDO.search(txt).group(0)}' é gancho proibido")
     if manchete and set(CENA.n(w) for w in manchete.split()) <= set(CENA.n(w) for w in (t0.get("fala") or "").split()):
         avisos.append("a manchete só repete a fala: o texto tem de ser mais agressivo que a voz")
-    if g in ("promessa", "acusacao") and not VOCE.search(re.split(r"(?<=[.!?])\s", t0.get("fala") or "")[0]):
+    if g in ("promessa", "acusacao", "fim_da_perda") and not VOCE.search(re.split(r"(?<=[.!?])\s", t0.get("fala") or "")[0]):
         erros.append(f"gancho '{g}' sem 'você/seu/sua' na 1ª frase da tese: fale da dor/desejo da pessoa (inema-design/regras/chamada.md)")
-    if g in ("estatistica_medo", "historia_terceiro") and not t0.get("fonte"):
+    if g in ("estatistica_medo", "historia_terceiro", "autoridade") and not t0.get("fonte"):
         erros.append(f"gancho '{g}' tem número: a tese precisa de 'fonte' (na tela já no quadro 0)")
     mf = ((t0.get("objeto") or {}).get("params") or {}).get("metafora")
     if mf not in METAFORAS:
@@ -367,7 +385,7 @@ def cmd_checar(pasta):
         erros.append(f"{palavras} palavras ≈ {estim:.0f} s com o cartão (alvo {dmin}–{dmax} s a ~175 palavras/min)")
     if (dmin, dmax) == (DUR_MIN, DUR_MAX) and not 150 <= palavras <= 215:
         avisos.append(f"{palavras} palavras (curto: 160–210)")
-    checar_gancho(r, bl, tipos, erros, avisos)
+    checar_gancho(r, bl, tipos, erros, avisos, gravado=(p / "avatar/avatar.mp4").exists())   # D32: gravado só avisa
     checar_tom(r, bl, avisos if (p / "avatar/avatar.mp4").exists() else erros, avisos)   # D25; avatar gravado: só aviso
     checar_isca(r, bl, erros, avisos)
     checar_retencao(r, bl, avisos)

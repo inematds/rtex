@@ -1,3 +1,7 @@
+## 1.13.2 — 27/11/2026
+
+D32 (D20 revista, Nei 27/11/2026: "como as pessoas já sabem do assunto, não é a dor que move, e sim o desejo, a provocação, a perda… 'para de perder tokens'"). Ganchos novos `fim_da_perda` e `autoridade` (este com fonte na tese). Quando o público já vive o assunto (`gancho.publico_ja_sabe: sim`, ou o canal de `publicar.fila`: lives1/4/7), `acusacao`/`perda` só passam com `gancho.por_que_dor`; com avatar já gravado, só avisa. O crítico cobra a dor pelo outro lado. Regra: `inema-design/regras/chamada.md` §2f.
+
 ## 1.12.2 — 25/11/2026
 
 Capa com palavra gigante (Nei 25/11/2026: "a capa tenha palavra vigia em tamanho bem grande"): `tela.gigante` na tese (uma palavra da manchete) manda o Codex desenhar essa palavra sozinha na 1ª linha, ocupando a largura útil, com letra ≥ 3× as outras linhas. Sem o campo, a capa segue igual. Primeiro uso: `2026-11-25-vigia-lives3` e `-lives4`.
